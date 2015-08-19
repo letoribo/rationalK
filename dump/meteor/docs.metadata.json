@@ -1,0 +1,1 @@
+{"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"meteor.docs"},{"v":1,"key":{"_fts":"text","_ftsx":1},"name":"MyFullTextSearchIndex","ns":"meteor.docs","safe":true,"weights":{"full":1},"default_language":"english","language_override":"language","textIndexVersion":2}]}

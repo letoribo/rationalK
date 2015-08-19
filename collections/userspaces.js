@@ -55,6 +55,7 @@ Meteor.methods({
     return docId;
   },
   deleteAllDocFromUserSpaceByCategory: function (categoryId) {
+    check(categoryId,String);
     if (! this.userId) {
       throw new Meteor.Error("not-logged-in",
         "Must be logged in to remove a doc from your space.");

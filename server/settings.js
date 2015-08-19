@@ -1,5 +1,9 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
+    if (Meteor.settings.public.debug) {
+      console.log(process);
+    }
+
     //todo : pass this as option in the settings page
       var roles = [];
       var role = {};
