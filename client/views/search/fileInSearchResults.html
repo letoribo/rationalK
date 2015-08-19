@@ -1,0 +1,12 @@
+<template name="fileInSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<p><strong>{{_ "Filename"}} :</strong> {{filename}}</p>
+			<p><strong>{{_ "Path"}} :</strong> {{pathReplaced}}</p>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-success">{{_ "File"}}</span> <a href="{{fileLinkUrl}}" title="{{_ 'open_file'}}"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a> <a href="#" data-filelink ="{{pathReplaced}}" title="{{_ 'Convert into database document'}}" class="convertIntoDBDoc"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span></a><br/>
+			{{_ "Last modified on"}} {{mtime}}
+		</div>
+	</div>
+</template>

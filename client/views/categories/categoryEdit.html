@@ -1,0 +1,44 @@
+<template name="categoryEdit">
+	<div class="panel panel-default">
+    	<div class="panel-heading" style="position:relative">
+            <h3 class="panel-title">{{_ "Edit category"}}</h3>
+        </div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-8">
+					<form class="main" role="form">
+				        <div class="form-group">
+				            <label for="name">{{_ "Category Name"}}</label>
+				            <input class="form-control" name="name" type="text" value="{{name}}" placeholder="Name"/>
+				            <!-- Attach some data to the DOM to access them when the template is rendered -->
+				            <input class="form-control" id="selectedCategory" type="hidden" value="{{_id}}"/>
+				        </div>
+								<div class="form-group">
+				            <label for="name">Information</label>
+										<textarea name="info" placeholder="Some usefull information about this category" class="form-control" rows="3">{{info}}</textarea>
+				        </div>
+				        <div class="form-group">
+				            {{> viewEdit viewData}}
+				        </div>
+
+				        <div class="form-group">
+				            <input type="submit" value="Save" class="btn btn-primary"/>
+				        </div>
+				    </form>
+				</div>
+				<div class="col-md-4">
+					<h2>{{ _"Help"}}</h2>
+						<p>Fields are also known as attributes. They are the columns names of your database.</p>
+						<p>Instead of creating fields manually, you can also <a href={{pathFor "docImport"}} title="import files">import xlsx or csv files directly</a> !</p>
+						<p>You can re-order them by drag-and-dropping the <strong>::</strong> icon</p>
+						<p>Click the pencil icon to edit a field, do not forget to clic a second time to save your changes</p>
+						<h3>Field types</h3>
+							<p>Textarea can contains more characters that text</p>
+							<p>Tags allows to classify your documents and access them quickly</p>
+							<p>Url allows to add a link to a webpage</p>
+							<p>Filelink allows to add a link to a file on your intranet (ex : //server/folder/doc.ext, on Mac OS X : Users/username/Documents/doc.ext). Note that for File to open directly from your browser you need an extension : <a href ="http://rationalk.ch/downloads/rationalK_uri_addon.msi" target="_blank" title="Download">rationalK windows extension</a>.</p>
+	    		</div>
+			</div>
+		</div>
+	</div>
+</template>

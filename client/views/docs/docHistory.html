@@ -1,0 +1,10 @@
+<template name="docHistory">
+<div class="panel panel-default">
+    <div class="panel-heading" style="position:relative">
+        <h3 class="panel-title">{{_ "Logs"}}</h3>
+    </div>
+    <div class="panel-body">
+      {{> reactiveTable collection=docHistory settings=settingsDocHistory}}
+    </div>
+  </div>
+</template>

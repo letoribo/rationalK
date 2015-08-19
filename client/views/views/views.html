@@ -1,0 +1,34 @@
+<template name="viewList">
+	<code>#todo : This page should be visible only by admin</code>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="position:relative">
+            {{#if currentUser}}
+                <div class="control-group" style="position:absolute; top:3px; right:3px;">
+                    <a class="btn btn-success btn-sm submit" href="{{pathFor 'viewNew'}}">+</a>
+                </div>
+            {{/if}}
+
+            <h3 class="panel-title">
+                <a href="{{pathFor 'viewList'}}">Views</a>
+            </h3>
+        </div>
+        <div class="panel-body">
+            {{#each views}}
+                {{> view }}
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="view">
+    <div class="post">
+        <div class="post-content">
+            <a href="{{pathFor 'viewEdit'}}">
+                <div>{{name}}</div>
+            </a>
+            {{#each keysInOrder}}
+                {{> greenLabel .}}
+            {{/each}}
+        </div>
+    </div>
+</template>

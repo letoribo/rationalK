@@ -1,0 +1,110 @@
+<template name="discussions">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Discussions</h3>
+        		</div>
+				<div class="panel-body">
+					{{> createDiscussionForm}}
+					<div class="row">
+						<div class="col-md-12">
+							 <div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">Active discussions</h3>
+				        		</div>
+								<div class="panel-body">
+					    			{{#each Discussions}}
+					    				{{> discussionElementInTheList}}
+									{{else}}
+										<p>You should create a discussion.</p>	
+									{{/each}}
+								</div>
+							 </div>
+						</div>
+					</div>
+        		</div>
+    		</div>
+		</div>
+	</div>
+</template>
+
+<template name="discussionElementInTheList">
+	<div class="row">
+			<div class="col-md-12">
+				<div class="post">
+					{{subject}} - <a href="{{pathFor 'discussion'}}" title="Open this discussion">Messages <span class="badge">{{messageCount}}</span></a> (Discussion initiated by {{memberUsername who}} on {{createdAt}})
+				</div>
+			</div>
+	</div>
+</template>
+
+
+<template name="createDiscussionForm">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Initiate a discussion</h3>
+        		</div>
+				<div class="panel-body">
+					<form>
+					    <div class="form-group">
+						    <textarea class="form-control" rows="3" name="discussionSubject" placeholder="The subject or your question"></textarea>
+					    </div>
+					    <button type="submit" class="btn btn-primary">Initiate Discussion</button>
+				    </form>
+				</div>
+			 </div>
+		</div>
+	</div>
+</template>
+
+
+<template name="discussion">
+	<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Discussion : {{subject}}</h3>
+        		</div>
+				<div class="panel-body">
+					{{#each Messages}}
+						{{> messageElementInTheList}}
+					{{else}}
+						<p>There is no message in this discussion yet.</p>
+					{{/each}}
+					<hr/>
+					{{> addMessageToTheDiscussion}}
+        		</div>
+    		</div>
+			</div>
+	</div>
+</template>
+
+
+<template name="messageElementInTheList">
+	<div class="row">
+			<div class="col-md-12">
+				<div class="post">
+					<div class="row">
+						<div class="col-md-10">
+							{{message}}
+						</div>
+						<div class="col-md-2">
+							written on {{createdAt}} by {{memberUsername who}}
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</template>
+
+<template name="addMessageToTheDiscussion">
+    <form>
+        <div class="form-group">
+		    <textarea class="form-control" rows="3" name="discussionMessage" placeholder="Say something"></textarea>
+	    </div>
+	    <button type="submit" class="btn btn-primary">Contribute to this discussion</button>
+    </form>
+</template>

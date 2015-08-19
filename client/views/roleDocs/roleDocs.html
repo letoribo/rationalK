@@ -1,0 +1,10 @@
+<template name="listDocsForRoles">
+    <div class="panel panel-default">
+        <div class="panel-heading" style="position:relative">
+            <h3 class="panel-title">{{_ "Document for the role"}} : {{roleSlug}}</h3>
+        </div>
+        <div class="staffs panel-body">
+          {{> reactiveTable collection=docsForRole settings=settingsdocsForRole}}
+        </div>
+    </div>
+</template>

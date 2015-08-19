@@ -1,0 +1,15 @@
+<template name="member">
+    <div class="post">
+        <div class="post-content">
+            <a href="{{pathFor 'memberEdit'}}" title="Edit this member">{{profile.nickname}} - {{profile.name}} ({{email}})</a>
+            {{#each profile.roles}}
+                {{> role}}
+            {{/each}}
+            {{#if this.accountId}}
+            	<span class="label label-info">Invitation accepted</span>
+			      {{else}}
+				        <span class="label label-warning">Invitation pending</span>
+            {{/if}}
+        </div>
+    </div>
+</template>

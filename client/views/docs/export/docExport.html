@@ -1,0 +1,48 @@
+<template name="docExport">
+  <form role="form" class="main">
+    <div class="form-group">
+      <select id="selectedCategory" class="form-control">
+        <option value="">Choose a category</option>
+        {{#each categories}}
+        <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-inline">
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="delimiter" value=","/>comma
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="delimiter" value="."/>dot
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="delimiter" value=";"/>semicoma
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="delimiter" value="	" checked="checked"/>tab
+          </label>
+        </div>
+      </div>
+      <div class="form-group pull-right">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="quotes"/>With quotes
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <textarea id="csv" placeholder="Exported csv" class="form-control" rows="25"></textarea>
+    </div><br/>
+    <btn id="export" class="btn-success btn">{{_ "Export"}}</btn><br/>
+    <h2>{{progress}}</h2>
+  </form>
+</template>

@@ -1,0 +1,14 @@
+<template name="browse">
+  <div class="row">
+    	<div class="col-md-12">
+        	{{> categoriesSelector}}
+    	</div>
+  </div>
+  {{#if hasSelectedCategory}}
+  <div class="row">
+	   <div class="col-md-12">
+        	{{> docList}}
+    	</div>
+  </div>
+  {{/if}}
+</template>

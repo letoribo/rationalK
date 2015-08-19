@@ -1,0 +1,79 @@
+{
+	"public":{
+		"contact":"info@rationalk.ch",
+		"filelink_replacements":[
+            {"tobereplaced":"/mnt/share/","replacement":"J:/"},
+            {"tobereplaced":"C:/","replacement":"/Users/thomasdokithonon/Documents/"},
+						{"tobereplaced":"K:/","replacement":"/Users/thomasdokithonon/Downloads/"}
+		],
+		"filelink_replace":[
+            {"server":"/Users/thomasdokithonon/Downloads/","client":"J:/"},
+            {"server":"//Jesa-NetApp01b.xxxx.local/","client":"C:/"},
+						{"server":"//xxxx-NetApp01b.xxxx.local/xxxx/","client":"C:\\"}
+		],
+		"display_nickname_instead_of_name" : false,
+		"hide_in_main_nav":["processes","about","notes","experts","discussions","projects","dbrelationships","controlplan","erp"],
+		"hide_in_main_nav_default":["erp","processes","about","files","notes","experts","discussions","projects","dbrelationships","controlplan","gantts"],
+		"show_footer" : false,
+		"header_text":"rK",
+		"project_files_categories":["-","FAI","CS","Other"],
+		"display_upload" : false,
+		"display_search_score" : false,
+		"custom_function_file":"companyA.js",
+		"debug" : true
+	},
+	"rationalK_demo_mode" : false,
+	"rationalK_upload_dir" : "~/Dropbox/rationalK/uploads",
+	"rationalK_license_mode" : "offline",
+	"rationalK_license_url" : "http://rationalk.ch/api/?key",
+	"rationalK_license_owner":"admin@rationalk.ch",
+	"rationalK_license_key":"licenseJES01",
+	"rationalK_walk_cron":true,
+	"rationalK_walk_cron_interval":"every 4 hours",
+	"rationalK_filelink_check_cron_interval":"every 2 hours",
+	"rationalK_backups_out":"/Users/thomasdokithonon/Downloads/backups",
+	"rationalK_auto_update" : true,
+	"rationalK_auto_update_user" : "jesa",
+	"rationalK_auto_update_password" : "jesa2015km!",
+	"rationalK_home_dir" : "/Users/thomasdokithonon/Downloads",
+	"rationalK_deployment_dir" : "/home/dokithonon/my-meteor-deployment",
+	"discussions" : false,
+	"chokidar" : false,
+	"simple_search_behavior" : "and",
+	"forbiddenPaths":[
+					"Users/thomasdokithonon/Dropbox2",
+					"mnt/jesa/2.2_Engineering/2.2.0_Engineering Management/2.2.0.1 Lignes directrices",
+					"J:/2.2_Engineering/2.2.0_Engineering Management/2.2.0.1 Lignes directrices"
+	],
+	"forbiddenPaths_help":[
+					"Use forward slash. Do not add first slash and do not add trailing slash."
+	],
+	"external":{
+		"22IN06" :
+		{
+			"sourceFile" : "/Users/thomasdokithonon/rationalK/private/22IN06.xlsx",
+			"sheet_name" : "Liste_graisses",
+		  "table_begin_address_row" : "3",
+		  "table_end_address_row" : "431",
+		  "filter_col" : "AZ",
+		  "filter_on" : "Yes",
+		  "cols_to_display" : ["AU-AW","AX","AY"]
+		},
+		"22IN47" :
+		{
+				"sourceFile" : "J:/2.2_Engineering/2.2.4_Standards engineering/2.2.4.4 Documents - Normes internes ENG/3_Documents - Normes ENG/22IN47_Liste matières plastique JESA et aide au choix.xlsx",
+				"sheet_name" : "Choix Matière JESA",
+				"table_begin_address_col" : "A",
+				"table_begin_address_row" : "1",
+				"table_end_address_col" : "AD",
+				"table_end_address_row" : "196",
+				"filter_col" : "E",
+				"filter_on" : "1",
+				"cols_to_display" : ["A","B","C","D","E"]
+		}
+	},
+	"cse":{
+		"cx" : "012449131479502734190:lh3wkbg7sum",
+		"key" : "AIzaSyAwPqBKis1X5B-0-cm-mxSSaq7LpH_hj7k"
+	}
+}

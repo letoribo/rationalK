@@ -1,0 +1,17 @@
+<template name="externalInSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<!-- <p>{{full}}</p> -->
+			{{full}}
+		</div>
+		<div class="col-md-2">
+			<span class="label label-default">{{externalDocId}}</span>(published document)
+			<br/>
+			<a href={{pathFor "external" externalDocId=this.externalDocId}} title="{{_ 'View the published document'}}"><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></a>
+			<br/>
+			{{#if searchTypeIsFullTextSearch}}
+				<p>Search Score : {{textScore}}</p>
+			{{/if}}
+		</div>
+	</div>
+</template>

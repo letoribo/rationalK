@@ -1,0 +1,35 @@
+<template name="logs">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Help</h3>
+        		</div>
+				<div class="panel-body">
+					<p>This is where you can understand what people are looking for and how they use rationalK.</p>
+        		</div>
+    		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Logs</h3>
+        		</div>
+				<div class="panel-body">
+					    {{#each logs}}
+					    	<div class="post">
+							<p><small>{{prettyDate}}</small> <span class="label label-primary">by {{who}} (userId : {{userId}})</span>{{truncatedWhat}}</p>
+					    	</div>
+					    {{else}}
+					    	<p>There is nothing to show here for the moment</p>
+					    {{/each}}
+        		</div>
+    		</div>    		
+		</div>
+	</div>
+</template>
+
+
+

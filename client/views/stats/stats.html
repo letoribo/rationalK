@@ -1,0 +1,103 @@
+<template name="stats">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Statistics</h3>
+        		</div>
+				<div class="panel-body">
+					<!-- <p>Some interesting statistics. For custom statistics that match your needs, send us an email : <a href="mailto:info@rationalk.ch">info@rationalk.ch</a></p> -->
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">{{_ "Number of docs per category"}}</h3>
+				        </div>
+								<div class="panel-body">
+										{{docStats}}
+				        </div>
+				    	</div>
+						</div>
+						<div class="col-md-6">
+							<div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">Stats</h3>
+				        </div>
+								<div class="panel-body">
+										{{queriesStats}}
+				        </div>
+				    	</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							 <div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">Default Chart 1</h3>
+				        		</div>
+								<div class="panel-body">
+									{{> highchartsHelper chartId="chart1" chartWidth="100%" charHeight="100%" chartObject=categorydistributionChart}}
+				        		</div>
+				    		</div>
+						</div>
+						<div class="col-md-6">
+							 <div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">Default Chart 2</h3>
+				        		</div>
+								<div class="panel-body">
+									<!-- <form>
+										Show the last <input type="text" class="lastndays" id="lastndays" placeholder="5">days
+									</form>
+									-->
+										{{> highchartsHelper chartId="chart2" chartWidth="100%" charHeight="100%" chartObject=logsChart}}
+
+										<!-- Reactive chart should be defined this way :  -->
+										<!-- <div id="container-chart2-reactive" style="width: 100%; height: 100%"></div> -->
+				        		</div>
+				    		</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							 <div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">Search Queries</h3>
+				        </div>
+								<div class="panel-body">
+									{{> reactiveTable collection=SearchQueries settings=settingsSearchQueries}}
+				    		</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							 <div class="panel panel-default">
+							 	<div class="panel-heading" style="position:relative">
+							 		<h3 class="panel-title">Duplicate values</h3>
+				        		</div>
+								<div class="panel-body">
+									<p>rationalK helps you find duplicate data in your database. For the moment there is nothing to show here since everything looks fine.</p>
+				        		</div>
+				    		</div>
+						</div>
+					</div>
+
+
+				</div>
+    		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+					<div class="panel-heading" style="position:relative">
+						<h3 class="panel-title">{{_ "Tags"}} <a href="#" class="analyseTags pull-right" title="{{_ 'Analyse tags'}}"><span class="glyphicon glyphicon-refresh"></span></a></h3>
+						</div>
+				<div class="panel-body">
+					{{> reactiveTable collection=tags settings=settingsTags}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

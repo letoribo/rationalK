@@ -1,0 +1,37 @@
+<template name="update">
+	<div class="row">
+		<div class="col-md-6">
+			 <div class="panel panel-default">
+				 	<div class="panel-heading" style="position:relative">
+				 		<h3 class="panel-title">License</h3>
+	        </div>
+					<div class="panel-body">
+						<p>{{_ "You are using rationalK version"}} : {{version}}</p>
+						<p>{{_ "License valid until"}} : {{licenseExpDate}}</p>
+						<p>{{_ "License number"}} : {{licenseKey}}</p>
+						<p>{{_ "License owner"}} : {{licensedTo}}</p>
+						<p>{{_ "License number of users"}} : {{licenseNumberUsers}}</p>
+	        </div>
+    		</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">{{_ "Update"}}</h3>
+        		</div>
+				<div class="panel-body">
+					<p>{{internetConnection}}</p>
+					{{#if myVersionIsBehind}}
+						<p>{{_ "A new version is available, you should update !"}}</p>
+						<p>{{_ "The last version on the server is"}} : {{lastVersion}}</p>
+						<p>{{_ "New in this version"}} : {{newInThisVersion}}</p>
+					{{else}}
+						<p>{{_ "You have the latest version."}}</p>
+					{{/if}}
+					<p><a href="#" class="updateRationalK" id="updateRationalK" title="{{_ 'Update rationalK'}}">{{_ "Update rationalK"}}</a></p>
+          <p>{{updateInProgress}}</p>
+			 	</div>
+    		</div>
+		</div>
+	</div>
+</template>

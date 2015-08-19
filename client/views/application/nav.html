@@ -1,0 +1,107 @@
+<template name="nav">
+	{{updateLocale}}
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{pathFor 'dashboard'}}" title="{{_ 'Dashboard'}}">{{headerText}} <strong><span class="glyphicon glyphicon-home" aria-hidden="true"></span></strong></a>
+          	</div>
+
+		  	<div id="navbar" class="navbar-collapse collapse">
+					{{#if loggedIn}}
+		  		<ul class="nav navbar-nav">
+		            <li><a href="{{pathFor 'searchTpl'}}" title="{{_ 'Search'}}"><span><strong><span class="glyphicon glyphicon-search"></span></strong> {{_ 'Search'}}</span></a></li>
+		            <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><strong><span class="glyphicon glyphicon-hdd"></span></strong> {{_ 'DB'}} <span class="caret"></span></a>
+	                    <ul class="dropdown-menu" role="menu">
+		                    <li><a class="{{dontDisplayIfUserIsReadOnly}}" href="{{pathFor 'docCreate'}}" title="{{_ 'Create DB entry'}}">{{_ 'Create DB entry'}}</a></li>
+		                    <li><a href="{{pathFor 'browse'}}" title="{{_ 'Browse the DB'}}">{{_ 'Browse the DB'}}</a></li>
+		                    {{#if showDBrelationships}}
+		                    <li><a href="{{pathFor 'relationships'}}" title="DB Relationships">DB Relationships</a></li>
+		                    {{/if}}
+												{{#if categories}}
+												<li class="divider"></li>
+                				<li class="dropdown-header">{{_ 'Categories'}}</li>
+												{{#each categories}}
+                				<li><a href="{{pathFor 'browse' categorySlug=this.slug}}" data-catid="{{_id}}" data-slug="{{slug}}" class="selectCategory">{{name}}</a></li>
+												{{/each}}
+												{{/if}}
+	                    </ul>
+	                </li>
+	                {{#if showNotes}}
+		            <li><a href="{{pathFor 'notes'}}" title="My notes"><span><strong><span class="glyphicon glyphicon-pencil"></span></strong> Notes</span></a></li>
+		            {{/if}}
+								{{#if showGantts}}
+								<li><a href="{{pathFor 'gantts'}}" title="Gantts">Gantts</a></li>
+								{{/if}}
+		            {{#if showProjects}}
+		            <li><a href="{{pathFor 'projects'}}" title="Projects"><strong><span class="glyphicon glyphicon-briefcase"></span></strong> Projects</a></li>
+					{{/if}}
+					{{#if showDiscussions}}
+		            <li><a href="{{pathFor 'discussions'}}" title="Ban emails, start discussions !"><strong><span class="glyphicon glyphicon-comment"></span></strong> Discussions</a></li>
+					{{/if}}
+					{{#if showProjects}}
+					<li><a href="{{pathFor 'expert'}}" title="Experts"><strong><span class="glyphicon glyphicon-user"></span></strong> Experts</a></li>
+					{{/if}}
+					{{#if showProcesses}}
+		            <li><a href="{{pathFor 'processes'}}" title="Processes"><img height="16px" src="/images/1422715147_tree_structure.png"/> Processes</a></li>
+		            {{/if}}
+		            {{#if showERP}}
+		            <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ERP <span class="caret"></span></a>
+	                    <ul class="dropdown-menu" role="menu">
+		                    <li><a href="{{pathFor 'plan'}}" title="Manage categories">Planning</a></li>
+		                    <li><a href="{{pathFor 'stocks'}}" title="Manage members">Stocks</a></li>
+	                    </ul>
+	                </li>
+	                {{/if}}
+
+									{{#if showControlPlan}}
+									<li><a href="{{pathFor 'controlplan'}}" title="Control Plan">Control Plan</a></li>
+									{{/if}}
+
+		            {{#if isAdmin}}
+	                <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Config <span class="caret"></span></a>
+	                    <ul class="dropdown-menu" role="menu">
+		                    <li><a href="{{pathFor 'categoryList'}}" title="Manage categories">Categories</a></li>
+		                    <li><a href="{{pathFor 'members'}}" title="Manage members">Members</a></li>
+		                    <li><a href="{{pathFor 'predefinedtagsEdit'}}" title="Manage predefined tags">Manage tags</a></li>
+		                    <li><a href="{{pathFor 'synonyms'}}" title="Manage search synonyms">Manage search synonyms</a></li>
+		                    <li><a href="{{pathFor 'docImport'}}" title="Import CSV files">Import</a></li>
+		                    <li><a href="{{pathFor 'docExport'}}" title="Export CSV files">Export</a></li>
+		                    <li><a href="{{pathFor 'stats'}}" title="See statistics">Stats</a></li>
+		                    <li><a href="{{pathFor 'settingsTemplate'}}" title="Settings">Settings</a></li>
+												<li><a href="{{pathFor 'update'}}" title="Update">Update</a></li>
+		                    {{#if showAbout}}
+		                    <li><a href="{{pathFor 'about'}}" title="About">About</a></li>
+		                    {{/if}}
+	                    </ul>
+	                </li>
+		            {{/if}}
+        		</ul>
+						{{/if}} <!-- end of if loggedIn -->
+						{{#if onInvitationPage}}
+							<!-- Hide the sign-in button -->
+						{{else}}
+			        <ul class="nav navbar-nav navbar-right">
+				        {{#if onDemo}}
+				        	<!--No Change password button -->
+									<form id="logout-form" class="form-inline">{{username}} <button type="submit" class="btn btn-link" id="logout-button">Log out</button></form>
+				        {{else}}
+			            	<!-- {{> loginButtons}} -->
+										<li><a title="Log out" class="logout" href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+			            {{/if}}
+			        </ul>
+						{{/if}}
+			</div><!-- /.navbar-collapse -->
+		</div><!--/.container-fluid -->
+	</nav>
+
+
+</template>

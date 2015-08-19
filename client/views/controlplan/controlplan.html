@@ -1,0 +1,99 @@
+<template name="controlplan">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Control Plan for part xxx</h3>
+        </div>
+				<div class="panel-body">
+					<div id="myHandsonTableDiv"></div>
+					<br/>
+					<a href="#" class="reset">Reset</a>, <a href="#" class="load">Load</a>, <a href="#" class="save">Save</a>
+					<br/>
+					<p>Print CDMER Decolletage : <a href="/controlplan/gjsdkshd/decCDMER" title="Print CDMER Decolletage"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a>, Print CDMER Planage : <a href="/controlplan/gjsdkshd/planageCDMER" title="Print CDMER Planage"><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a></p>
+        </div>
+    	</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					{{>processFlow}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="decCDMER">
+	<div class="subpage">
+		<div class="row">
+			<div class="col-xs-4">
+				<center><p>JESA</p></center>
+			</div>
+			<div class="col-xs-4">
+				<center><p>Mise en Route - Décolletage</p></center>
+			</div>
+			<div class="col-xs-4">
+				<center><p>241FR03</p></center>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				{{> reactiveTable collection=tableDecCDMER settings=settingsDecCDMER}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<p>Acceptée</p>
+			</div>
+			<div class="col-xs-6">
+				<p>Refusée</p>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="planageCDMER">
+	<div class="subpage">
+		<div class="row">
+			<div class="col-xs-4">
+				<center><p>JESA</p></center>
+			</div>
+			<div class="col-xs-4">
+				<center><p>Mise en route - Planage</p></center>
+			</div>
+			<div class="col-xs-4">
+				<center><p>242FR02</p></center>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				{{> reactiveTable collection=tablePlanageCDMER settings=settingsPlanageCDMER}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				<center><p>Acceptée</p></center>
+			</div>
+			<div class="col-xs-6">
+				<center><p>Refusée</p></center>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="processFlow">
+	<div class="row">
+		<div class="col-md-12">
+			<center>BEGIN<br/><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></center>
+			{{#each processes}}
+				{{processStep}}
+			{{/each}}
+			<center>END</center>
+		</div>
+	</div>
+</template>

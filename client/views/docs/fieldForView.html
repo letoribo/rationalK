@@ -1,0 +1,53 @@
+<template name="fieldForView">
+  <form id="addField" role="form" class="form">
+    <div class="form-group">
+      <a href="#" class="edit editField"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+      <span class="handle">::</span>
+      <div class="input-group">
+        <label for="name">{{_ "Field name"}}</label>
+        <input id="newField" name="field" type="text" placeholder="Field" readonly="readonly" class="form-control" value="{{key}}"/>
+      </div>
+      <div class="input-group">
+        <label for="name">{{_ "Field type"}}</label>
+        <select id="newFieldType_{{key}}" readonly="readonly" class="form-control newFieldTypeClass" data-key="{{key}}">
+          {{#each fieldTypes}}
+            <option value="{{value}}" data-key="{{key}}" {{isSelected}}>{{text}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <br/>
+      <div class="input-group divMultipleChoice" id="divMultipleChoice_{{key}}" data-key="{{key}}" data-type="{{value.type}}">
+        <label for="name">{{_ "Multiple choices"}}</label>
+        <input id="fieldForView_multipleChoice" name="fieldForView_multipleChoice" type="text" placeholder="{{_ 'Choice A,Choice B'}}" readonly="readonly" class="form-control inputForMultipleChoices" value="{{value.multipleChoices}}"/>
+        <p class="help-block">Separate the allowed options with a comma (,)</p>
+      </div>
+
+      <div class="input-group">
+        <label for="name">{{_ "Field options"}}</label>
+        <div class="checkbox">
+          <label>
+            <input id="fieldAdd_mandatory" type="checkbox" name="fieldForView_mandatory" disabled="disabled" {{checkIfMandatory}}/>Mandatory
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input id="fieldAdd_unique" type="checkbox" name="fieldForView_unique" disabled="disabled" {{checkIfUnique}}/>Unique
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input id="fieldAdd_hideInTable" type="checkbox" name="fieldForView_hideInTable" disabled="disabled" {{checkIfHideInTable}}/>Hide in table
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input id="fieldAdd_hideInSearchResultsDisplay" type="checkbox" name="fieldForView_hideInSearchResultsDisplay" disabled="disabled" {{checkIfHideInSearchResultsDisplay}}/>Hide in search result page
+          </label>
+        </div>
+      </div>
+      <div class="input-group">
+        <a href="#" class="delete deleteField"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </form>
+</template>

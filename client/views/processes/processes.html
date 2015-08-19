@@ -1,0 +1,88 @@
+<template name="processes">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Processes</h3>
+        		</div>
+				<div class="panel-body">
+					{{#each Processes}}
+		        				<div class="post">
+			        				{{title}} (Filename : {{filename}}) <a href="{{pathFor 'process'}}" title="Open this process"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> <a class="delete" href="#" title="Delete this process"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+		        				</div>
+								{{else}}
+								<p>There is nothing to show for the moment.</p>
+		        			{{/each}}
+        		</div>
+    		</div>
+		</div>
+	</div>
+		<div class="row">
+		<div class="col-md-6">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Add a process</h3>
+        		</div>
+				<div class="panel-body">
+							<form class="addProcess">
+				        <div class="form-group">
+					        <div class="form-group">
+								<label for="processTitle">Title</label>
+								<input type="text" class="form-control" name="processTitle" id="processTitle" placeholder="Process Title">
+  							</div>
+							  <div class="form-group">
+							    <label for="processFilename">Filename</label>
+							    <input type="text" class="form-control" id="processFilename" name="processFilename" placeholder="diagram.bpmn">
+							    <p class="help-block">Be sure to place your bpmn file in /public/bpmn2_diagrams/</p>
+							  </div>
+					    </div>
+					    <button type="submit" class="btn btn-primary">Save</button>
+				    </form>
+        		</div>
+    		</div>
+		</div>
+		<div class="col-md-6">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Tips</h3>
+        		</div>
+				<div class="panel-body">
+					<p>To draw a process diagram, you can use your favorite process modeler</p>
+					<p>If you don't have one, use <a href="http://demo.bpmn.io/new">bpmn.io</a> and download your file as .bpmn. Another nice software is BonitaBPM.</p>
+        		</div>
+    		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">{{_ "Roles"}}</h3>
+        </div>
+				<div class="panel-body">
+					{{> reactiveTable collection=Roles settings=settingsRoles}}
+        </div>
+    	</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+			 <div class="panel-heading" style="position:relative">
+				 <h3 class="panel-title">Add a role</h3>
+				</div>
+			 <div class="panel-body">
+					<form class="addRole">
+						<div class="form-group">
+							<label for="role">Title</label>
+							<input type="text" class="form-control" name="role" id="role" placeholder="{{_ 'Role name'}}">
+						</div>
+						<button type="submit" class="btn btn-primary">{{_ "Add"}}</button>
+					</form>
+				</div>
+			</div>
+	</div>
+
+	</div>
+
+
+
+</template>

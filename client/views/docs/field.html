@@ -1,0 +1,10 @@
+<template name="field">
+    <div class="form-group">
+        <label for={{key}}>{{key}}{{is_mandatory}}</label>
+        {{#if isAdmin}}
+        <!-- <a class="delete pull-right deleteField" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> -->
+        {{/if}}
+        {{{inputForFieldType}}}
+        <div id="helperFor{{key}}"></div>
+    </div>
+</template>

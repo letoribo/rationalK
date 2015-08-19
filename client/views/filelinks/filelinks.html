@@ -1,0 +1,18 @@
+<template name="filelinks">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">{{_ "Filelinks"}}</h3>
+        </div>
+				<div class="panel-body">
+					<h4>{{_ "Settings"}}</h4>
+					<a href="{{pathFor 'settingsTemplate'}}" tite="{{_ 'Settings'}}">{{_ "Settings"}}</a>
+
+					<h4>{{_ "All filelinks"}}</h4>
+						{{> reactiveTable collection=Filelinks settings=settingsFilelinks}}
+        	</div>
+    		</div>
+		</div>
+	</div>
+</template>

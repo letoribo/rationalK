@@ -1,0 +1,40 @@
+Template.searchTpl.rendered = function () {var myHilitor;
+	Template.searchTpl.myHilitor = new Hilitor.highlight("resultsContent");
+	Template.searchTpl.myHilitor.setMatchType("left");
+};
+
+Template.searchTpl.helpers({
+	Docs: function () {
+		if (typeof Session.get("searchQuery")!== 'undefined'){
+			var searchQuery = Session.get("searchQuery");
+			return Docs.find({full: { $regex : searchQuery, $options:"i" } },{sort: {searchScore: -1}});
+		}
+		else {
+			return false;
+		}
+	},
+	searchQuery: function () {
+    	return Session.get("searchQuery");
+  	},
+  	lastRevision: function () {
+	  	if (typeof Revisions.findOne({docId: this._id },{sort: { revisionNumber: -1}})!== 'undefined'){
+			return Revisions.findOne({docId: this._id },{sort: { revisionNumber: -1}})._id;
+		}
+		else {
+			return false;
+		}
+	},
+	categoryName: function (){
+		var Category = Categories.findOne(this.categoryId);
+		return Category.name;
+	}
+});
+
+Template.searchTpl.events({
+	"keyup input.keywords": function (event, template) {
+    	Session.set("searchQuery",event.target.value);
+		Template.searchTpl.myHilitor.apply(event.target.value);
+  	}
+});
+
+

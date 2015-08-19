@@ -1,0 +1,8 @@
+{
+  "helper_email_login" : "This is the email on which you receive the invitation. Probably your company email.",
+  "helper_password_login" : "You define it yourself when you receive the invitation.",
+  "invitation_to_join" : "you have been invited to join rationalK. Please choose your password.",
+  "access_denied" : "Sorry but it seems that you don't have access to this page.",
+  "open_file" : "Open with your standard software",
+  "invitation_to_join_info_login" : "Your username will be your company email."
+}

@@ -1,0 +1,40 @@
+<template name="memberEdit">
+    <form class="main" role="form">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" name="email" type="text" value="{{email}}" placeholder="Email"/>
+        </div>
+
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input class="form-control" name="name" type="text" value="{{profile.name}}" placeholder="Name"/>
+        </div>
+
+        <div class="form-group">
+            <label for="nickname">Username</label>
+            <input class="form-control" name="nickname" type="text" value="{{profile.nickname}}" placeholder="Username"/>
+        </div>
+
+        <div class="form-group">
+        {{#if isInRole 'admin'}}
+			     <!-- Je suis admin donc je peux editer la liste des roles -->
+			  {{> roles }}
+		    {{else}}
+			     <!-- Je suis un simple utilisateur sans role donc je ne peux rien faire -->
+		    {{/if}}
+
+        </div>
+
+        <div class="form-group">
+            <label for="locale">Language (fr,de,en)</label>
+            <input class="form-control" name="locale" type="text" value="{{profile.locale}}" placeholder="en,de,fr"/>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary submit pull-right"/>
+            <a class="btn btn-danger delete" href="#">Delete member</a>
+        </div>
+
+    </form>
+</template>

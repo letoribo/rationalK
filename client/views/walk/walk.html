@@ -1,0 +1,23 @@
+<template name="walk">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Walk (i.e. to scan files in your folders) <span class="pull-right">{{walkThruFoldersStatus}}<img class="{{walkThruFoldersLoadingAnimation}}" src="/images/spinner.gif" height="20"/></span></h3>
+        		</div>
+				<div class="panel-body">
+					<form role="form" class="foldersToScanForm">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">Folders to scan</label>
+					    <textarea class="form-control" id="folders" name="folders" rows="3">{{foldersToScan}}</textarea>
+					    <p class="help-block">One folder per line. Use server paths (not client path). Backslash will be replaced by frontslash.</p>
+							<p class="help-block">Don't forget the first frontslah. Omit the trailing frontslash.</p>
+					  </div>
+					  <button type="submit" class="btn btn-primary">Submit</button>
+					  <p class="help-block">Wait for the automatic job to start. The walk frequency depends on your server settings. After that you can have a look at <a href="{{pathFor 'files'}}" title="See files">the files that rationalK has found</a>.</p>
+					</form>
+        		</div>
+    		</div>
+		</div>
+	</div>
+</template>

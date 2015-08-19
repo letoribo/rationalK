@@ -1,0 +1,20 @@
+<template name="accountList">
+    <div class="panel panel-default">
+        <div class="panel-heading" style="position:relative">
+            {{#if currentUser}}
+                <div class="control-group" style="position:absolute; top:3px; right:3px;">
+                        <a class="btn btn-success btn-sm submit" href="{{pathFor 'accountNew'}}">+</a>
+                </div>
+            {{/if}}
+
+            <h3 class="panel-title">
+                <a href="{{pathFor 'accountList'}}">Account</a>
+            </h3>
+        </div>
+        <div class="staffs panel-body">
+            {{#each accounts}}
+                {{> account}}
+            {{/each}}
+        </div>
+    </div>
+</template>

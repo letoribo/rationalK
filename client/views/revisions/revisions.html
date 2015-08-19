@@ -1,0 +1,12 @@
+<template name="revisions">
+    <div class="panel panel-default">
+        <div class="panel-heading" style="position:relative">
+            <h3 class="panel-title">
+                <a href="{{pathFor 'revisions'}}">Revisions</a>
+            </h3>
+        </div>
+        <div class="panel-body">
+            {{> reactiveTable collection=revisions settings=tableSettings}}
+        </div>
+    </div>
+</template>

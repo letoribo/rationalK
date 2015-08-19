@@ -1,0 +1,18 @@
+<template name="backup">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Backup</h3>
+        </div>
+				<div class="panel-body">
+					<p>Backups are automatically done every day, week and month</p>
+					<p>You can restore monthly backup, weekly, daily</p>
+					<p>To back call <code>Meteor.call("loadBackup","/Users/thomasdokithonon/Downloads/backups/rationalK")</code> from you meteor shell.</p>
+					<p>In the folder you should have file like <code>categories.bson</code>, ...</p>
+					<p>Your database will be completely emptied ! So don't do this if you don't know what you are doing.</p>
+        </div>
+    	</div>
+		</div>
+	</div>
+</template>

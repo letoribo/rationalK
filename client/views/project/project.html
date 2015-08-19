@@ -1,0 +1,61 @@
+<template name="project">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Project: {{title}}</h3>
+        		</div>
+				<div class="panel-body">
+					<a href="#" class="updateProjectFiles" title="Refresh projects files"><span class="glyphicon glyphicon-refresh"></span></a> {{>updateProject}}
+					<div class="row">
+						<div class="col-md-6">
+							<p>Project Documents from the database</p>
+							{{> reactiveTable collection=ProjectDocs settings=settingsProjectDocs}}
+						</div>
+						<div class="col-md-6">
+							{{>minisearchproject}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<p>project Files</p>
+							{{#each ProjectFiles}}
+								<div class="post" id="{{_id}}" data-fileId="{{_id}}">
+									<span class="glyphicon glyphicon-file"></span> {{filename}}
+									<select class="form-control">
+										{{categoryOptions}}
+									</select>
+								</div>
+							{{else}}
+								<p>There is nothing to show for the moment.</p>
+							{{/each}}	        			
+						</div>
+					</div>
+        		</div>
+    		</div>
+		</div>
+	</div>
+</template>
+
+<template name="updateProject">
+<a data-toggle="collapse" href="#edit_{{_id}}" title="Edit this project" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-pencil"></span></a>
+<div class="collapse" id="edit_{{_id}}">
+  			<div class="well">
+    				<form>
+				        <div class="form-group">
+					        <div class="form-group">
+								<label for="projectTitle">Project Title</label>
+								<input type="text" class="form-control" name="projectTitle" id="projectTitle" placeholder="Project Title" value="{{title}}">
+  							</div>
+					    </div>
+					    <div class="form-group">
+					        <div class="form-group">
+								<label for="projectTitle">Project folder path</label>
+								<input type="text" class="form-control" name="projectFolderPath" id="projectFolderPath" placeholder="//server/myproject" value="{{folderpath}}">
+  							</div>
+					    </div>
+					    <button type="submit" class="btn btn-primary">Update</button>
+				    </form>
+  </div>
+</div>
+</template>

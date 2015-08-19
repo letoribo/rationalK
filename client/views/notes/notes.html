@@ -1,0 +1,22 @@
+<template name="notes">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">My Notes</h3>
+        		</div>
+				<div class="panel-body">
+					<form>
+				        <div class="form-group">
+						    <textarea class="form-control" rows="8" name="content" placeholder="My Notes">{{noteContent}}</textarea>
+					    </div>
+					    <button type="submit" class="btn btn-primary">Save</button>
+					    <p class="help-block">Only you can see them. Use them as todo, reminders or whatever you want.</p>
+					    <p class="help-block">They will appear in search results (but only for you)</p>
+				    </form>        					
+        		</div>
+    		</div>
+		</div>
+	</div>
+</template>
+

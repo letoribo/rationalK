@@ -1,0 +1,31 @@
+<template name="fieldAdd">
+  <form id="addField" role="form" class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input id="newField" name="newField" type="text" placeholder="{{_'Title'}}" class="form-control"/>
+    </div>
+    <label>
+      <newFieldType>{{_ "Type"}} :</newFieldType>
+    </label>
+    <select id="newFieldType" class="form-control">
+      {{#each types}}
+      <option value="{{value}}">{{text}}</option>
+      {{/each}}
+    </select>
+
+    <div class="checkbox">
+      <label>
+        <input id="fieldAdd_mandatory" type="checkbox" name="fieldAdd_mandatory" title="Add"/>{{ _"Mandatory"}}
+      </label>
+    </div>
+    <!--
+    <div class="checkbox">
+      <label>
+        <input id="fieldAdd_unique" type="checkbox" name="fieldAdd_unique"/>Unique
+      </label>
+    </div>
+    -->
+    <input type="submit" value="+" class="btn btn-success btn-sm"/>
+  </div>
+</form>
+</template>

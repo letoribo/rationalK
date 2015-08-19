@@ -1,0 +1,28 @@
+<template name="dashboard">
+  {{#if myFavorites}}
+    <div class="row">
+  	  <div class="col-md-12">
+  		   <div class="panel panel-default">
+  		   		<div class="panel-heading" style="position:relative">
+  		   			<h3 class="panel-title">{{_ "My Space"}} - <span class='glyphicon glyphicon-star' aria-hidden='true'></span> <small>{{_ "Your favorite documents will appear here for quick access"}}</small></h3>
+          		</div>
+  				<div class="panel-body">
+  					{{> reactiveTable collection=myFavorites settings=settingsMyFavorites}}
+  				</div>
+  		   </div>
+  	  </div>
+    </div>
+    {{/if}}
+    <div class="row">
+  	  <div class="col-md-12">
+  		   <div class="panel panel-default">
+  		   		<div class="panel-heading" style="position:relative">
+  		   			<h3 class="panel-title">{{_ "Last Activity"}}</h3>
+          		</div>
+  				<div class="panel-body">
+  					{{> reactiveTable collection=lastActivity settings=settingsLastActivity}}
+  				</div>
+  		   </div>
+  	  </div>
+    </div>
+</template>

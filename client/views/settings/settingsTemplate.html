@@ -1,0 +1,62 @@
+<template name="settingsTemplate">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 		<div class="panel-heading" style="position:relative">
+						<h3 class="panel-title">{{_ "Settings"}}</h3>
+					</div>
+					<div class="panel-body">
+
+						<div class="post">
+								<h4>{{_ "Files"}}</h4>
+								<div class="row">
+									<div class="col-md-6">
+										<p><a href="#" class="walkThruFilelinks" title="Check filelinks">Check if windows filelinks are broken or not</a></p>
+										<p><a href="#" class="walkThruFolders" title="Scan all folders">Scan all folders</a></p>
+									</div>
+									<div class="col-md-6">
+										<h5>Quicklinks</h5>
+										<ul>
+											<li><a href="{{pathFor 'files'}}" title="{{_ 'Files'}}">{{_ 'Files'}}</a></li>
+											<li><a href="{{pathFor 'walk'}}" title="See folders and files">Walk</a></li>
+											<li><a href="{{pathFor 'filelinks'}}" title="Filelinks">Filelinks</a></li>
+										</ul>
+									</div>
+							</div>
+						</div>
+
+						<div class="post">
+							<h4>{{_ "Quality"}}</h4>
+							<div class="row">
+								<div class="col-md-12">
+									<form id="validatedFilesPathForm">
+										<div class="form-group">
+											<label for="validatedFilesPath">Folderpath of validated document</label>
+											<input type="text" class="form-control" id="validatedFilesPath" value="{{validatedFilesPath}}">
+											<p class="help-block">All files in this folder are validated by Quality department or by the process pilot. Choose a read-only clientpath i.e. J:/quality/readonly/. If you want to add more than one folder, please separate them with a vertical bar : | </p>
+										</div>
+									<button type="submit" class="btn btn-default">{{_ "Save"}}</button>
+									</form>
+								</div>
+							</div>
+						</div>
+
+						<div class="post">
+							<h4>Backup</h4>
+							<div class="row">
+								<div class="col-md-12">
+										<p>Backups are automatically done every day, week and month</p>
+										<p>You can restore monthly backup, weekly, daily</p>
+										<p>To back call <code>Meteor.call("loadBackup","/Users/thomasdokithonon/Downloads/backups/rationalK")</code> from you meteor shell.</p>
+										<p>In the folder you should have file like <code>categories.bson</code>, ...</p>
+										<p>Your database will be completely emptied ! So don't do this if you don't know what you are doing.</p>
+					      </div>
+					    </div>
+						</div>
+
+
+        	</div>
+    		</div>
+		</div>
+	</div>
+</template>

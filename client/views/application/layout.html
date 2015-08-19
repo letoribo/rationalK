@@ -1,0 +1,17 @@
+<template name="layout">
+    <div class="container-fluid">
+        {{> header}}
+        <div id="main" class="row-fluid">
+        {{#if validLicense}}
+              {{> yield}}
+        {{else}}
+            {{> licenseError}}
+        {{/if}}
+        </div>
+    		{{#if showFooter}}
+            {{#if currentUser}}
+            {{> footer}}
+            {{/if}}
+        {{/if}}
+    </div>
+</template>

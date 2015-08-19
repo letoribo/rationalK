@@ -1,0 +1,56 @@
+<template name="updateprocessdocuments">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Update information related to a task within a process</h3>
+        		</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Create a note that will be attached to the task</h3>
+        		</div>
+				<div class="panel-body">
+
+							<form>
+					        <div class="form-group">
+							    <textarea class="form-control" rows="3" id="myhtml" name="myhtml" placeholder="myhtml"></textarea>
+							    <p class="help-block">You can add document and file link using the panel at your right and by clicking on the <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> icon. You can also use html.</p>
+						    </div>
+						    <button type="submit" class="btn btn-primary">Add this note to the task</button>  <a href="{{pathFor 'process' _id=this._id}}" title="Back to the diagram">Back to the diagram</a>
+					    </form>
+				</div>
+							</div>
+
+						</div>
+						
+						<div class="col-md-6">
+							{{>minisearch}}
+						</div>
+						
+					</div>
+        		</div>
+    		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Existing notes and documents in this process</h3>
+        		</div>
+				<div class="panel-body">
+        			{{#each ProcessDocuments}}
+	        			<div class="post">
+		        			{{html}} <a class="delete" href="#" title="Delete this note"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+	        			</div>
+					{{else}}
+						<p>There is nothing to show for the moment.</p>
+	        		{{/each}}
+        		</div>
+    		</div>
+		</div>
+	</div>
+</template>

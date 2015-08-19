@@ -1,0 +1,14 @@
+<template name="account">
+    <div class="post">
+        <div class="post-content">
+            <a href="{{pathFor 'accountEdit'}}">
+                <h3>{{profile.nickname}} - {{profile.name}}{{#if isMe}}&larr;{{/if}}</h3>
+                <h3>{{email}} <small> {{{emailStatus}}} {{profile.orgId}}</small></h3>
+
+                {{#each roles}}
+                    {{> role}}
+                {{/each}}
+            </a>
+        </div>
+    </div>
+</template>

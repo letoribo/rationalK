@@ -1,0 +1,3 @@
+Template.member.helpers({
+	
+});

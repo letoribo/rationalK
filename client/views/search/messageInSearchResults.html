@@ -1,0 +1,15 @@
+<template name="messageInSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<p>{{message}}</p>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-success">Message</span><br/>
+			Posted by <span class="label label-default">{{memberUsername who}}</span>
+			<br/>
+			on {{formatTime createdAt}}
+			<br/>
+			in <a href={{pathFor "discussion" _id=discussionId}} title="Open the discussions">this discussion</a>.
+		</div>
+	</div>
+</template>

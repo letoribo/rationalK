@@ -1,0 +1,82 @@
+<template name="minisearch">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+			 	<div class="panel-heading" style="position:relative">
+			 		<h3 class="panel-title">Search</h3>
+        		</div>
+				<div class="panel-body">
+					<form class="form-inline searchForm" role="form">
+						<div class="form-group">
+							<div class="input-group">
+								<input id="keywords" name="searchQuery" class="form-control keywords" placeholder="Start typing something" size="24">
+							</div>
+						</div>
+						<div class="checkbox highlight-checkbox">
+							<label>
+								<input type="checkbox" checked="{{highlightResults}}"> Highlight results
+							</label>
+  						</div>
+  						<button type="submit" class="btn btn-primary search">Search</button>
+					</form>
+					<!-- <p>Search results for {{searchQuery}}</p> -->
+					<hr/>
+					<div id="resultsContent" class="results-wrapper">
+						{{#if Docs}}
+		        			{{#each Docs}}
+		        				<div class="post">
+			        				{{#if full}}
+			        					{{>docInMiniSearchResults}}
+			        				{{/if}}
+									{{#if path}}
+										{{>fileInSearchMiniResults}}
+									{{/if}}
+		        				</div>
+		        			{{/each}}
+	        			{{else}}
+	        				<p>Start typing some text in the input box. Results will appear here.</p>	
+	        			{{/if}}				
+        			</div>
+        		</div>
+    		</div>
+		</div>
+	</div>
+</template>
+
+
+<template name="docInMiniSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<p>{{full}}</p>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-default">{{categoryName}}</span>
+			<br/>
+			{{#if searchScore}}
+				<span class="label label-info"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Special search score : {{searchScore}}</span>
+			<a href="{{pathFor 'docEdit'}}" title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+			{{/if}}
+			{{#if lastRevision}}
+				<a href={{pathFor "revisionView" _id=lastRevision}} title="View"><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></a> <a href={{pathFor "revisions" docId=_id}} title="Revisions"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a>
+			{{/if}}
+			{{#if fileLink}}
+				<a href="file:///{{fileLink}}" title="Open file"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a> <a href="#" class="clip_button" data-clipboard-text="{{fileLink}}" title="Copy link to clip board"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span></a>					        					
+			{{/if}}
+			<a href="#" class="addDocumentLinkToNote" title="Add to my note"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+		</div>
+	</div>
+</template>
+
+
+<template name="fileInMiniSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<p>{{path}}</p>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-success">File</span><br/>
+			<a href="#" class="addFileLinkToNote" title="Add to my note"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+		</div>
+		
+	</div>
+</template>

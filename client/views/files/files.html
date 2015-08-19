@@ -1,0 +1,17 @@
+<template name="files">
+	<div class="row">
+		<div class="col-md-12">
+			 <div class="panel panel-default">
+				 	<div class="panel-heading" style="position:relative">
+				 		<h3 class="panel-title">{{_ "Files"}} <a class="pull-right" data-toggle="collapse" href="#helpFiles" title="{{_ 'Help'}}" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-info-sign"></span></a>  <span class="pull-right">{{walkThruFoldersStatus}}<img class="{{walkThruFoldersLoadingAnimation}}" src="/images/spinner.gif" height="20"/></span></h3>
+						<div class="collapse" id="helpFiles">
+	            <p><span class="glyphicon glyphicon-info-sign"></span> : Please wait after clicking the refresh button.</p>
+	          </div>
+	        </div>
+					<div class="panel-body">
+						{{> reactiveTable collection=Files settings=settingsFiles}}
+	        </div>
+	    	</div>
+		</div>
+	</div>
+</template>

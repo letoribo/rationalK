@@ -1,0 +1,93 @@
+<template name="docImport">
+  <div class="panel panel-default">
+      <div class="panel-heading" style="position:relative">
+          <h3 class="panel-title">{{_ "Import"}}</h3>
+      </div>
+      <div class="panel-body">
+        <form role="form" class="main">
+          <div class="form-group">
+            <p>Here you can copy-paste your existing Excel document index to import them directly.</p>
+            <p>Make sure that the first line of your Excel document contains your table headers.</p>
+          </div>
+          <div class="form-group">
+            <select id="selectedCategory" class="form-control">
+              <option value="">Choose a category</option>
+              {{#each categories}}
+              <option value="{{_id}}">{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-inline">
+            <div class="form-group">
+              <div class="radio">
+                <label>
+                  <input type="radio" name="delimiter" value="" checked="checked"/> autodetect
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="delimiter" value=","/> comma
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="delimiter" value="."/> dot
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="delimiter" value=";"/> semicoma
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="delimiter" value="	"/> tab
+                </label>
+              </div>
+            </div>
+            <div class="form-group pull-right">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="limitPreview" checked="checked"/> Limit preview
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="autocreatefields" checked="checked"/> Create fields on import
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea id="csv" placeholder="Header and Rows to import. Copy paste Excel" rows:40="rows:40" class="form-control"></textarea>
+          </div><br/>
+          <btn id="preview" class="btn-success btn">Preview</btn><br/>
+
+          <h2>{{progress}}</h2>
+          <div class="tableScroll">
+            <table class="table">
+              <tr>
+              {{#each headers}}
+                <th>{{.}}</th>
+              {{/each}}
+              </tr>
+              {{#each data}}
+              <tr>
+                {{#each keys}}
+                    {{> UI.contentBlock .}}
+                    <td>{{value}}</td>
+                {{/each}}
+              </tr>
+              {{/each}}
+            </table>
+          </div>
+
+          {{#if hasPreview}}
+          <btn id="cancel" class="btn-danger btn">Cancel</btn>
+          <btn id="import" class="btn-success btn">Import</btn>
+          {{/if}}
+
+        </form>
+      </div>
+    </div>
+</template>
