@@ -1,6 +1,4 @@
 Template.searchTpl.onCreated(function () {
-	//Session.set('searchQuery',undefined);
-	//Session.set('searchQuerySentToServer',undefined);
 	Session.setDefault("searchType","regexpSearch");
 });
 
