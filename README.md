@@ -22,6 +22,13 @@ You can run the application locally (like on your laptop) or on a server
 
 - Mup : https://github.com/arunoda/meteor-up
 - A web browser
+- A server :
+  - Linux Ubuntu Server 64 bit (for example)
+  - min 10 GB Hard Drive Disk
+  - min 512 MB Ram
+  - Open SSH server (included in Ubuntu Server)
+  - A linux user that is part of the sudoers group (you should be able to perform sudo command)
+  - Optional for the scan function : the server needs read access to your company shared folder
 
 ### Quick steps
 
@@ -33,6 +40,10 @@ You can run the application locally (like on your laptop) or on a server
 ## Login
 
 When login for the first time, the username is ```admin0@rationalk.ch``` and the password is ```admin0```
+
+## Openning files directly from rationalK
+
+You can open word, excel, pdf and many common file format directly without leaving your browser by using our add-on : http://rationalk.ch/downloads/rationalK_uri_addon.msi
 
 ## Backup and restore
 
