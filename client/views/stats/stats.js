@@ -98,7 +98,7 @@ Template.stats.helpers({
 					    {
 					        key: 'searchDate',
 					        label: 'Search Date',
-									sort: 'descending',
+									sortDirection: 'descending',
 									sortByValue : true,
 									fn: function (value, object) {
 											return moment(value).format('DD.MM.YY HH:mm');
@@ -143,7 +143,7 @@ Template.stats.helpers({
           {
             key: 'count',
             label: TAPi18n.__("Count"),
-            sort: 'descending'
+            sortDirection: 'descending'
           },
           {
             key: 'actions',

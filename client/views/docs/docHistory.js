@@ -24,7 +24,7 @@ Template.docHistory.helpers({
         {
           key: 'createdAt',
           label: 'Date',
-          sort: 'descending',
+          sortDirection: 'descending',
 					fn: function (value, object) {
 							return moment(value).format('DD.MM.YY HH:mm');
 					}

@@ -44,7 +44,7 @@ Template.tags.helpers({
           {
             key: 'count',
             label: TAPi18n.__("Count"),
-            sort: 'descending'
+            sortDirection: 'descending'
           },
           {
             key: 'actions',

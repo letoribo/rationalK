@@ -144,7 +144,7 @@ Template.dashboard.helpers({
 				{
 					key: 'createdAt',
 					label: 'Date',
-					sort: 'descending',
+					sortDirection: 'descending',
 					sortByValue: true,
 					fn: function (value) {
 						return moment(value).format('DD.MM.YY HH:mm');
