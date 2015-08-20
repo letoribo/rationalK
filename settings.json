@@ -39,6 +39,12 @@
 	"rationalK_deployment_dir" : "/home/dokithonon/my-meteor-deployment",
 	"discussions" : false,
 	"chokidar" : false,
+	"rationalK_mail" : {
+		"username" : "username",
+		"password" : "password",
+		"port" : 587,
+		"host" : "host"
+	},
 	"simple_search_behavior" : "and",
 	"forbiddenPaths":[
 		"Users/thomasdokithonon/Dropbox",

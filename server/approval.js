@@ -107,8 +107,8 @@ if (Meteor.isServer){
         host: 'mail.infomaniak.ch',
         port: 587,
         auth: {
-            user: 'server@rationalK.ch',
-            pass: 'server'
+            user: '***',
+            pass: '***'
         }
       });
 
