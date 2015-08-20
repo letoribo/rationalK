@@ -5,7 +5,7 @@ http://rationalk.ch
 
 ## Demo
 
-Try the online demo : http://demo.rationalk.ch or request a demo at dokithonon@gmail.com or +41768173346
+Try the online demo : http://demo.rationalk.ch or request a demo at dokithonon@gmail.com
 
 ## Install
 
@@ -47,15 +47,15 @@ You can open word, excel, pdf and many common file format directly without leavi
 
 ## Backup and restore
 
-### Mac OS X : 
-Terminal : 
-In your meteor folder type: 
+### Mac OS X :
+Terminal :
+In your meteor folder type:
 
 ```
 sudo meteor mongo
 ```
 
-It returns : 
+It returns :
 ```
 MongoDB shell version: 2.6.7
 connecting to: 127.0.0.1:3001/meteor
@@ -63,11 +63,11 @@ connecting to: 127.0.0.1:3001/meteor
 
 Then do :
 ```
-use meteor 
+use meteor
 ```
 (because it is the name of the db after the slash)
 
-then do : 
+then do :
 ```
 show collections
 ```
@@ -75,17 +75,17 @@ show collections
 
 Your app must be running, so start up your Meteor server.
 
-In a terminal window (NOT in the meteor mongo shell), 
-enter: 
+In a terminal window (NOT in the meteor mongo shell),
+enter:
 
-Mac : 
+Mac :
 ```
 sudo mongodump -h 127.0.0.1 --port 3001 --out /Users/thomasdokithonon/Dropbox/rationalk/dumps/20150819 --db meteor
 ```
 
 On a production server using mup :
 ```
-mongodump --db rationalK --out /home/jesa/tests/20150820
+mongodump --db rationalK --out /home/company/tests/20150820
 ```
 
 
@@ -93,7 +93,7 @@ mongodump --db rationalK --out /home/jesa/tests/20150820
 
 From a terminal window, enter:
 
-Mac : 
+Mac :
 ```
 mongorestore -h 127.0.0.1 --port 3001 --drop  /Users/thomasdokithonon/Dropbox/rationalK/dumps/20150821/
 ```

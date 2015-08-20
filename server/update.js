@@ -23,7 +23,6 @@ if (Meteor.isServer){
       //download and deploy
       // there is a download link on the page about that launch this method
       //the -N fetch only newer file
-      //dumpCommand = "wget -N --http-user=jesa --http-password=jesa2015km! http://rationalk.ch/downloads/pro/rationalK.tar.gz -P "+Meteor.settings.rationalK_home_dir;
       dumpCommand = "wget -N --http-user="+Meteor.settings.rationalK_auto_update_user+" --http-password="+Meteor.settings.rationalK_auto_update_password+" http://rationalk.ch/downloads/pro/rationalK.tar.gz -P "+Meteor.settings.rationalK_home_dir;
       console.log(dumpCommand)
       var child = exec(dumpCommand);

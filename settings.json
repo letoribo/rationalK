@@ -2,14 +2,14 @@
 	"public":{
 		"contact":"info@rationalk.ch",
 		"filelink_replacements":[
-            {"tobereplaced":"/mnt/share/","replacement":"J:/"},
-            {"tobereplaced":"C:/","replacement":"/Users/thomasdokithonon/Documents/"},
+      {"tobereplaced":"/mnt/share/","replacement":"J:/"},
+      {"tobereplaced":"C:/","replacement":"/Users/thomasdokithonon/Documents/"},
 			{"tobereplaced":"K:/","replacement":"/Users/thomasdokithonon/Downloads/"}
 		],
 		"filelink_replace":[
-            {"server":"/Users/thomasdokithonon/Downloads/","client":"J:/"},
-            {"server":"//Jesa-NetApp01b.xxxx.local/","client":"C:/"},
-			{"server":"//xxxx-NetApp01b.xxxx.local/xxxx/","client":"C:\\"}
+      {"server":"/Users/thomasdokithonon/Downloads/","client":"J:/"},
+      {"server":"//Company-NetApp01b.xxxx.local/","client":"C:/"},
+			{"server":"//Company-NetApp01b.xxxx.local/Company/","client":"C:\\"}
 		],
 		"display_nickname_instead_of_name" : false,
 		"hide_in_main_nav":["processes","about","notes","experts","discussions","projects","dbrelationships","controlplan","erp"],
@@ -41,12 +41,12 @@
 	"chokidar" : false,
 	"simple_search_behavior" : "and",
 	"forbiddenPaths":[
-					"Users/thomasdokithonon/Dropbox",
-					"mnt/company/anotherfolder",
-					"J:/folder"
+		"Users/thomasdokithonon/Dropbox",
+		"mnt/company/anotherfolder",
+		"J:/folder"
 	],
 	"forbiddenPaths_help":[
-					"Use forward slash. Do not add first slash and do not add trailing slash."
+		"Use forward slash. Do not add first slash and do not add trailing slash."
 	],
 	"external":{
 		"22IN06" :
