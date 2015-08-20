@@ -1,12 +1,38 @@
-# README #
+# rationalK #
 
-*Resources
-**Tags
-***http://timschlechter.github.io/bootstrap-tagsinput/examples/
-***https://github.com/mizzao/meteor-autocomplete
+Knowledge management software with powerful document and database management capabilities.
+http://rationalk.ch
 
-**Table
-***https://github.com/ecohealthalliance/reactive-table
+## Demo
+
+Try the online demo : http://demo.rationalk.ch or request a demo at dokithonon@gmail.com or +41768173346
+
+## Install
+
+### Prerequisites
+
+You can run the application locally (like on your laptop) or on a server
+
+#### Prerequisites for running rationalK locally
+
+- Meteor : http://meteor.com
+- A web browser
+
+#### Prerequisites for running rationalK on a server
+
+- Mup : https://github.com/arunoda/meteor-up
+- A web browser
+
+### Quick steps
+
+1. Download or clone this repository
+2. Edit the ````settings.json```` file to match your needs
+3. Start the application by entering in the console prompt : ```meteor --settings settings.json```
+4. Access the application at : http://localhost:3000 (can vary)
+
+## Login
+
+When login for the first time, the username is ```admin0@rationalk.ch``` and the password is ```admin0```
 
 ## Backup and restore
 
@@ -74,3 +100,12 @@ It return the name of the database : "meteor" so you can use it after the --db o
 ```
 "C:\Program Files\MongoDB\Server\3.0\bin\mongorestore.exe" -h 127.0.0.1 --port 3001 --db meteor --drop  C:/Users/doki/20150820/
 ```
+
+
+# Credit Resources
+**Tags
+***http://timschlechter.github.io/bootstrap-tagsinput/examples/
+***https://github.com/mizzao/meteor-autocomplete
+
+**Table
+***https://github.com/ecohealthalliance/reactive-table
