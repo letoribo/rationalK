@@ -8,7 +8,7 @@ if ((Meteor.isServer) && (process.env.NODE_ENV === "production")){
 	// var host = mongoUrl.hosts[0].host //not needed
 
 	// need to create the folder backups first and then change the owner :
-	// sudo chown -R :meteoruser /home/jesa/backups
+	// sudo chown -R :meteoruser /home/company/backups
 
 	var backupDaily = function (){
 

@@ -159,5 +159,7 @@
   "Link created between two documents by " : "Lien entre deux documents crée par ",
   "Delete link" : "Supprimer le lien",
   "Open Document" : "Ouvrir le document",
-  "Link successfully deleted" : "Lien supprimé avec succès"
+  "Link successfully deleted" : "Lien supprimé avec succès",
+  "Open help in a new window" : "Ouvrir l'aide dans une nouvelle fenêtre",
+  "Add a category" : "Ajouter une catégorie"
 }

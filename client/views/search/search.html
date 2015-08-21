@@ -3,48 +3,10 @@
 		<div class="col-md-12">
 			 <div class="panel panel-default">
 			 	<div class="panel-heading" style="position:relative">
-			 		<h3 class="panel-title">{{_ "Search"}} <small><a class="pull-right" data-toggle="collapse" href="#helpSearch" title="{{_ 'Help'}}" aria-expanded="false" aria-controls="collapseExample"><span class="glyphicon glyphicon-info-sign"></span></a></small></h3>
-					<div class="collapse" id="helpSearch">
-						<div class="row">
-							<div class="col-md-12">
-								<h4>{{_ "Help"}}</h4>
-								<p>The searches are case insensitive</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<p><span class="glyphicon glyphicon-info-sign"></span> {{_ "Classic search"}}</p>
-								<ul>
-									{{#if simpleSearchBehaviorIsAnd}}
-									<li>Search beahavior : AND
-										<ul>
-											<li><code>bake coffee</code> returns documents that contains <code>bake</code> and <code>coffee</code></li>
-											<li><code>bake | coffee</code> returns documents that contains <code>bake</code> | <code>coffee</code></li>
-											<li><code>bake | coffee cake</code> returns documents that contains <code>bake</code> as well as the documents that contains both <code>coffee</code> and <code>cake</code></li>
-										</ul>
-									</li>
-									{{else}}
-									<li>Search beahavior : OR
-										<ul>
-											<li><code>bake coffee</code> returns documents that contains <code>bake</code> or <code>coffee</code></li>
-											<li><code>bake & coffee</code> returns documents that contains <code>bake</code> and <code>coffee</code></li>
-											<li><code>bake & coffee cake</code> returns documents that contains both <code>bake</code> and <code>coffee</code> as well as the documents that contains <code>bake</code> and <code>cake</code></li>
-										</ul>
-									</li>
-									{{/if}}
-								</ul>
-							</div>
-							<div class="col-md-6">
-								<p><span class="glyphicon glyphicon-info-sign"></span> {{_ "Full text search"}}</p>
-								<ul>
-									<li>To match on a phrase, as opposed to individual terms, enclose the phrase in escaped double quotes (<code>\"</code>), as in: <code>\"ssl certificate\"</code></li>
-									<li><code>\"ssl certificate\" authority key</code> returns documents that contains the full phrase <code>ssl certificate</code> as well as (<code>authority</code> or <code>key</code> or <code>ssl</code> or <code>certificate</code>)</li>
-									<li><code>bake coffee -cake</code> returns documents that contains <code>bake</code> or <code>coffee</code> but does not contains <code>cake</code></li>
-									<li>The full text search matches on the complete stemmed word. So if a document field contains the word <code>blueberry</code>, a search on the term <code>blue</code> will not match. However, <code>blueberry</code> or <code>blueberries</code> will match.</li>
-								</ul>
-							</div>
-          	</div>
-      		</div>
+			 		<h3 class="panel-title">
+						{{_ "Search"}}
+						<a class="pull-right" href="http://rationalk.ch/doc#search" target="_blank" title="{{_ 'Open help in a new window'}}"><span class="glyphicon glyphicon-info-sign"></span></a>
+					</h3>
 				</div>
 				<div class="panel-body">
 					<form class="form-inline searchForm" role="form">
