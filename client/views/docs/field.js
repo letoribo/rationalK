@@ -161,7 +161,9 @@ Template.field.events({
   },
   "click a.launchCustomFunction": function (event){
 	    event.preventDefault();
-	    console.log("Launching the custom function : " + event.currentTarget.dataset.customfunction);
+      if (Meteor.settings.public.debug){
+	       console.log("Launching the custom function : " + event.currentTarget.dataset.customfunction);
+      }
 	    Meteor.call(event.currentTarget.dataset.customfunction, function (error, result) {
 		  if (error) {
 		    // handle error
