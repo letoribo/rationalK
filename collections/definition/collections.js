@@ -31,21 +31,21 @@ WebSearchResults = new Mongo.Collection('websearchresults');
 XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
+FollowUp = new Mongo.Collection('FollowUp');
 
-if (Meteor.isServer){
-
-if (typeof Docs.createIndex === 'function'){
-	if (Meteor.settings.public.debug){
-		console.log("You are runnning a mongodb version >3.")
+if (Meteor.isServer) {
+	if (typeof Docs.createIndex === 'function') {
+		if (Meteor.settings.public.debug){
+			console.log("You are runnning a mongodb version >3.")
+		}
+		Docs.createIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
+		WalkedFiles.createIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
+		External.createIndex({ "$**": "text" }, { name: "TextIndex" });
 	}
-	Docs.createIndex( { full: "text" },{name: "MyFullTextSearchIndex"});
-	WalkedFiles.createIndex( { path: "text" },{name: "MyFileFullTextSearchIndex"});
-	External.createIndex({ "$**": "text" },{ name: "TextIndex" });
-}
-else {
-	if (Meteor.settings.public.debug){
-		console.log("You are runnning a mongodb version <3 (probably 2.6.X).")
-	}
+	else {
+		if (Meteor.settings.public.debug){
+			console.log("You are runnning a mongodb version <3 (probably 2.6.X).")
+		}
 	if (typeof Docs._ensureIndex === 'function'){
 		Docs._ensureIndex( { full: "text" },{name: "MyFullTextSearchIndex"});
 		WalkedFiles._ensureIndex( { path: "text" },{name: "MyFileFullTextSearchIndex"});
@@ -74,6 +74,12 @@ External.allow(
 });
 
 Filelinks.allow(
+	{insert: function (userId, doc) {return !! userId; },
+	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
+    remove: function (userId, doc) {return !!userId;}
+});
+
+FollowUp.allow(
 	{insert: function (userId, doc) {return !! userId; },
 	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
     remove: function (userId, doc) {return !!userId;}

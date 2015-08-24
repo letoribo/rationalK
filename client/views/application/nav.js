@@ -1,5 +1,68 @@
 Template.nav.rendered = function () {
 	document.title = (typeof(Meteor.settings.public.header_text) !== 'undefined')?Meteor.settings.public.header_text:"rationalK";
+
+	// single keys
+	 Mousetrap.bind('4', function() { console.log('4'); });
+	 Mousetrap.bind("?", function() { console.log('show shortcuts!'); });
+	 Mousetrap.bind('esc', function() { console.log('escape'); }, 'keyup');
+
+	 // combinations
+	 Mousetrap.bind('command+shift+u', function() { console.log('command shift u'); });
+
+	 // map multiple combinations to the same callback
+	 Mousetrap.bind(['command+k', 'ctrl+k'], function() {
+			 console.log('command k or control k');
+
+			 // return false to prevent default browser behavior
+			 // and stop event from bubbling
+			 return false;
+	 });
+
+	 // gmail style sequences
+	 Mousetrap.bind('g i', function() { console.log('go to inbox'); });
+	 Mousetrap.bind('f u', function() {
+		 console.log('go to follow up');
+		 bootbox.prompt("Type some tags separated with ,", function(result) {
+			 var FollowUp ={};
+			 if (result === null) {
+			 }
+			 else {
+				 console.log("Hi <b>"+result+"</b>");
+				 FollowUp.tags = result;
+				 Session.set("FollowUp",FollowUp);
+				 bootbox.prompt("Type some text", function(result) {
+					 FollowUp = Session.get("FollowUp");
+					 if (result === null) {
+
+					 }
+					 else {
+						 FollowUp.text = result;
+						 Session.set("FollowUp",FollowUp);
+						 Meteor.call('createFollowUp', FollowUp, function (error, result) {
+				 			if (error) {
+
+				 			}
+							else {
+								if (typeof(toastr) !== 'undefined') {
+	                toastr.success("Follow Up succesfully saved");
+	              }
+							}
+						});
+
+					 }
+				 }); //end of second bootbox
+			 } //end of else
+		 });
+	 Mousetrap.bind('* a', function() { console.log('select all'); });
+
+	 // konami code!
+	 Mousetrap.bind('up up down down left right left right b a enter', function() {
+			 console.log('konami code');
+	 });
+
+
+});
+
 };
 
 Template.nav.helpers({

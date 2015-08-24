@@ -1,4 +1,4 @@
-var filterByOrg = function (meteor, collection, userId, strict) {
+filterByOrg = function (meteor, collection, userId, strict) {
   var user;
   if (userId) {
     user = Meteor.users.findOne(userId);
@@ -11,6 +11,10 @@ var filterByOrg = function (meteor, collection, userId, strict) {
     return meteor.ready();
   }
 };
+
+Meteor.publish("followup", function () {
+  return FollowUp.find();
+});
 
 Meteor.publish("accounts", function () {
   return Meteor.users.find({}, {

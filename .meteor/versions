@@ -92,6 +92,7 @@ mobile-status-bar@1.0.3
 momentjs:moment@2.10.6
 mongo@1.1.0
 mongo-livedata@1.0.8
+mousetrap:mousetrap@1.4.6_1
 mrt:meteor-nodemailer@0.2.0
 mrt:underscore-string-latest@2.3.3
 netanelgilad:excel@0.2.4

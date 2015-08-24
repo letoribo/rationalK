@@ -71,15 +71,12 @@ Template.settingsTemplate.events({
 
 
 Template.settingsTemplate.helpers({
-  /*
-	option1: function () {
-		return Settings.findOne({optionName: "option1"}).optionValue;
-	},
-	custom_settings: function () {
-		return Settings.findOne({optionName: "custom_settings"}).optionValue;
-	},
-  */
-  validatedFilesPath: function (){
-    return rkSettings.findOne({key: "validatedFilesPath"}).value;
-  }
+  validatedFilesPath: function () {
+    var validatedFilesPath = rkSettings.findOne({key: "validatedFilesPath"});
+    var validatedFilesPathValue="";
+    if (typeof  validatedFilesPath !== 'undefined') {
+      validatedFilesPathValue = rkSettings.findOne({key: "validatedFilesPath"}).value;
+    }
+    return validatedFilesPathValue;
+  },
 });
