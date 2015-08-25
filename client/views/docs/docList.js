@@ -46,17 +46,22 @@ Template.docList.helpers({
         var filelinkInfo = '';
         var inValidatedFolder = '';
         if (typeof(object.filelinkFieldName) !== 'undefined') {
-          if (object.fields[object.filelinkFieldName].exists){
-            //do nothing
+          if (object.fields[object.filelinkFieldName].value === ""){
+
           }
           else {
-            var filelinkInfo = " <span class='label label-warning'>"+TAPi18n.__('Broken filelink')+"</span>";
-          }
-          if (object.fields[object.filelinkFieldName].inValidatedFolder){
-            var inValidatedFolder =  " <span class='label label-success'>" + TAPi18n.__('Validated') + "</span>";
-          }
-          else {
-            //do nothing
+            if (object.fields[object.filelinkFieldName].exists){
+              //do nothing
+            }
+            else {
+              var filelinkInfo = " <span class='label label-warning'>"+TAPi18n.__('Broken filelink')+"</span>";
+            }
+            if (object.fields[object.filelinkFieldName].inValidatedFolder){
+              var inValidatedFolder =  " <span class='label label-success'>" + TAPi18n.__('Validated') + "</span>";
+            }
+            else {
+              //do nothing
+            }
           }
         }
 

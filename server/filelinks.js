@@ -166,32 +166,54 @@ Meteor.methods({
 			check(docId, String);
 			check(clientPath, String);
 			check(fieldName, String);
-			console.log('Starting to checking one filelink...');
+			if (Meteor.settings.public.debug){
+				console.log('Starting to checking one filelink...');
+
+			}
 			var fs=Npm.require("fs");
 
 			clientPath =  Meteor.call('stripBeginEndQuotes', clientPath);
 			fullFilename = Meteor.call('serverFilename', clientPath);
-			console.log("Après (Server): " + fullFilename)
+			if (Meteor.settings.public.debug){
+				console.log("Après (Server): " + fullFilename)
+			}
 
 			//Pas top, obligé de charger tous les fields pour n'en modifier qu'un seul...
-			console.log('docId = ' + docId);
-			var fields = Docs.findOne({_id : docId}).fields
-			console.log(fields)
-
-			try {
-				var stats = fs.lstatSync(fullFilename);
-				if (stats.isDirectory()) {
-						fields[fieldName].filefolder = "folder";
-				}
-				if (stats.isFile()) {
-						fields[fieldName].filefolder = "file";
-				}
-				fields[fieldName].exists = true;
-				fields[fieldName].stats = stats;
+			if (Meteor.settings.public.debug){
+				console.log('docId = ' + docId);
 			}
-			catch (e) {
-				console.log("There was an error with the file : " + fullFilename);
-				console.log(e);
+			var fields = Docs.findOne({_id : docId}).fields
+			if (Meteor.settings.public.debug){
+				console.log(fields)
+			}
+
+			if (fullFilename !== ""){
+				//le champ est rempli
+				try {
+					var stats = fs.lstatSync(fullFilename);
+					if (stats.isDirectory()) {
+							fields[fieldName].filefolder = "folder";
+					}
+					if (stats.isFile()) {
+							fields[fieldName].filefolder = "file";
+					}
+					fields[fieldName].exists = true;
+					fields[fieldName].stats = stats;
+				}
+				catch (e) {
+					console.log("There was an error with the file : " + fullFilename);
+					console.log(e);
+					fields[fieldName].exists = false;
+					fields[fieldName].stats = [];
+					fields[fieldName].filefolder = [];
+				}
+
+			}
+			else {
+				//le champ est vide
+				if (Meteor.settings.public.debug){
+					console.log("Empty filelink");
+				}
 				fields[fieldName].exists = false;
 				fields[fieldName].stats = [];
 				fields[fieldName].filefolder = [];
@@ -210,7 +232,9 @@ Meteor.methods({
 				}
 			);
 
-			console.log('Finished walking thru one filelink...');
+			if (Meteor.settings.public.debug){
+				console.log('Finished walking thru one filelink...');
+			}
 	    return true;
 	}
 });
