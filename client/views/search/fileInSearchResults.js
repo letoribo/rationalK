@@ -6,7 +6,7 @@ Template.fileInSearchResults.helpers({
 		var fileLink = this.path.replace(/\"/g, ''); //remove " from filelink ;
 		fileLink = clientFilename(fileLink);
 		if (fileLink){
-			fileLink = replaceFilename(fileLink);
+			fileLink = clientFilename(fileLink);
 			var fileLinkUrl = 'rk:'+fileLink;
 		}
 		else {

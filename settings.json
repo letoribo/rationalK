@@ -1,19 +1,25 @@
 {
 	"public":{
 		"contact":"info@rationalk.ch",
-		"filelink_replacements":[
-      {"tobereplaced":"/mnt/share/","replacement":"J:/"},
-      {"tobereplaced":"C:/","replacement":"/Users/thomasdokithonon/Documents/"},
-			{"tobereplaced":"K:/","replacement":"/Users/thomasdokithonon/Downloads/"}
-		],
 		"filelink_replace":[
       {"server":"/Users/thomasdokithonon/Downloads/","client":"J:/"},
       {"server":"//Company-NetApp01b.xxxx.local/","client":"C:/"},
 			{"server":"//Company-NetApp01b.xxxx.local/Company/","client":"C:\\"}
 		],
+		"show" : {
+			"relationships" : true,
+			"processes" : true,
+			"notes" : true,
+			"gantts" : true,
+			"projects" : true,
+			"discussions" : true,
+			"expert" : true,
+			"erp" : true,
+			"controlplan" : true,
+			"about" : true,
+			"footer" : true,
+		},
 		"display_nickname_instead_of_name" : false,
-		"hide_in_main_nav":["processes","about","notes","experts","discussions","projects","dbrelationships","controlplan","erp"],
-		"hide_in_main_nav_default":["erp","processes","about","files","notes","experts","discussions","projects","dbrelationships","controlplan","gantts"],
 		"show_footer" : false,
 		"header_text":"rK",
 		"project_files_categories":["-","FAI","CS","Other"],

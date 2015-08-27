@@ -22,7 +22,7 @@ Meteor.publish("accounts", function () {
       username: 1,
       profile: 1,
       emails: 1,
-      roles: 1
+      roles: 1,
     }
   });
 });

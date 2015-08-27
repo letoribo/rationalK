@@ -7,10 +7,14 @@
             </h3>
         </div>
         <div class="panel-body">
-          {{#if currentUser}}
-            <a class="submit" title="{{_ 'Add a category'}}" href="{{pathFor 'categoryNew'}}">{{_ 'Add a category'}}</a>
+          {{#if categories}}
+            {{#if currentUser}}
+              <a class="submit" title="{{_ 'Add a category'}}" href="{{pathFor 'categoryNew'}}">{{_ 'Add a category'}}</a>
+            {{/if}}
+            {{> reactiveTable collection=categories settings=settingsCategories}}
+          {{else}}
+            <p>{{_ 'You have no categories yet. Start by adding one'}}: <a class="submit" title="{{_ 'Add a category'}}" href="{{pathFor 'categoryNew'}}">{{_ 'Add a category'}}</a></p>
           {{/if}}
-          {{> reactiveTable collection=categories settings=settingsCategories}}
         </div>
     </div>
 </template>

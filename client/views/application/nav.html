@@ -21,9 +21,9 @@
 	                    <ul class="dropdown-menu" role="menu">
 		                    <li><a class="{{dontDisplayIfUserIsReadOnly}}" href="{{pathFor 'docCreate'}}" title="{{_ 'Create DB entry'}}">{{_ 'Create DB entry'}}</a></li>
 		                    <li><a href="{{pathFor 'browse'}}" title="{{_ 'Browse the DB'}}">{{_ 'Browse the DB'}}</a></li>
-		                    {{#if showDBrelationships}}
-		                    <li><a href="{{pathFor 'relationships'}}" title="DB Relationships">DB Relationships</a></li>
-		                    {{/if}}
+												{{#if show 'relationships'}}
+														<li><a href="{{pathFor 'relationships'}}" title="DB Relationships">DB Relationships</a></li>
+												{{/if}}
 												{{#if categories}}
 												<li class="divider"></li>
                 				<li class="dropdown-header">{{_ 'Categories'}}</li>
@@ -33,26 +33,26 @@
 												{{/if}}
 	                    </ul>
 	                </li>
-	                {{#if showNotes}}
-		            <li><a href="{{pathFor 'notes'}}" title="My notes"><span><strong><span class="glyphicon glyphicon-pencil"></span></strong> Notes</span></a></li>
-		            {{/if}}
-								{{#if showGantts}}
+	                {{#if show 'notes'}}
+		            	<li><a href="{{pathFor 'notes'}}" title="My notes"><span><strong><span class="glyphicon glyphicon-pencil"></span></strong> Notes</span></a></li>
+		            	{{/if}}
+								{{#if show 'gantts'}}
 								<li><a href="{{pathFor 'gantts'}}" title="Gantts">Gantts</a></li>
 								{{/if}}
 								<li><a href="{{pathFor 'followup'}}" title="Follow Up">Follow Up</a></li>
-		            {{#if showProjects}}
+		            {{#if show 'projects'}}
 		            <li><a href="{{pathFor 'projects'}}" title="Projects"><strong><span class="glyphicon glyphicon-briefcase"></span></strong> Projects</a></li>
 					{{/if}}
-					{{#if showDiscussions}}
+					{{#if show 'discussions'}}
 		            <li><a href="{{pathFor 'discussions'}}" title="Ban emails, start discussions !"><strong><span class="glyphicon glyphicon-comment"></span></strong> Discussions</a></li>
 					{{/if}}
-					{{#if showProjects}}
+					{{#if show 'expert'}}
 					<li><a href="{{pathFor 'expert'}}" title="Experts"><strong><span class="glyphicon glyphicon-user"></span></strong> Experts</a></li>
 					{{/if}}
-					{{#if showProcesses}}
-		            <li><a href="{{pathFor 'processes'}}" title="Processes"><img height="16px" src="/images/1422715147_tree_structure.png"/> Processes</a></li>
-		            {{/if}}
-		            {{#if showERP}}
+					{{#if show 'processes'}}
+		        <li><a href="{{pathFor 'processes'}}" title="Processes"><img height="16px" src="/images/1422715147_tree_structure.png"/> Processes</a></li>
+		      {{/if}}
+		            {{#if show 'erp'}}
 		            <li class="dropdown">
 	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ERP <span class="caret"></span></a>
 	                    <ul class="dropdown-menu" role="menu">
@@ -62,7 +62,7 @@
 	                </li>
 	                {{/if}}
 
-									{{#if showControlPlan}}
+									{{#if show 'controlplan'}}
 									<li><a href="{{pathFor 'controlplan'}}" title="Control Plan">Control Plan</a></li>
 									{{/if}}
 
@@ -79,7 +79,7 @@
 		                    <li><a href="{{pathFor 'stats'}}" title="See statistics">Stats</a></li>
 		                    <li><a href="{{pathFor 'settingsTemplate'}}" title="Settings">Settings</a></li>
 												<li><a href="{{pathFor 'update'}}" title="Update">Update</a></li>
-		                    {{#if showAbout}}
+		                    {{#if show 'about'}}
 		                    <li><a href="{{pathFor 'about'}}" title="About">About</a></li>
 		                    {{/if}}
 	                    </ul>

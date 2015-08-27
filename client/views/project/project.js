@@ -105,7 +105,7 @@ Template.project.helpers({
 
 
 							if (fileLink){
-								fileLink = replaceFilename(fileLink);
+								fileLink = clientFilename(fileLink);
 								var fileLinkUrl = '<a href="rk:'+fileLink+'" title="Open file on your computer"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>';
 							}
 							else {

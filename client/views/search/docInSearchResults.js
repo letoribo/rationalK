@@ -46,7 +46,7 @@ Template.docInSearchResults.helpers({
 
 
 		if (fileLink){
-			fileLink = replaceFilename(fileLink);
+			fileLink = clientFilename(fileLink);
 			var fileLinkUrl = 'rk:'+fileLink;
 		}
 		else {

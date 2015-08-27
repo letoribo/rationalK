@@ -63,23 +63,8 @@ Meteor.FieldType = {
         return new Spacebars.SafeString("<a href='mailto:" + value + "' title='Send Email' target='_blank'>" + value + "</a>");
       }
 			else if (type === 'filelink') {
-				if (1==2){
-					// je ne sais plus pourquoi j'ai fais cela ...
-	        filelink_replacements = Meteor.settings["public"].filelink_replacements;
-	        filelink = value.replace(/\"/g, ''); //remove " from filelink
-	        i = 0;
-	        while (i < filelink_replacements.length) {
-	          res = filelink.replace(filelink_replacements[i].tobereplaced, filelink_replacements[i].replacement);
-	          if (res && (res != null)) {
-	            filelink = res;
-	          }
-	          i++;
-	        }
-				}
-				else {
-					var filelink=stripBeginEndQuotes(value);
-					filelink = replaceFilename(filelink);
-				}
+				var filelink=stripBeginEndQuotes(value);
+				filelink = clientFilename(filelink);
 				var urlEncodedFilelink = encodeURIComponent(filelink);
         return new Spacebars.SafeString('<a href="rk:' + filelink + '" title="Open file" target="_blank">' + filelink + '</a>');
       } else {

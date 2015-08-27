@@ -1,6 +1,6 @@
 Template.categoryList.helpers({
   categories: function () {
-    return Categories.find();
+    return Categories.find().fetch();
   },
   settingsCategories: function () {
         return {
@@ -9,16 +9,9 @@ Template.categoryList.helpers({
             class: 'table table-condensed col-sm-12',
 						showNavigation: 'auto',
 						fields: [
-              {key : 'name', label : TAPi18n.__("Name")},
-              /*
-						    {
-						        key: 'view',
-						        label: TAPi18n.__("View"),
-						        fn: function (value, object) {
-                      return Views.findOne({_id: object.viewId}).name;
-							    }
-						    },
-                */
+              {
+                key: 'name',
+                label: TAPi18n.__("Name")},
 						    {
 						        key: 'actions',
 						        label: 'Actions',

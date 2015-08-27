@@ -1,6 +1,9 @@
-if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode==="demo") ) {
+//Default settings :
+if (typeof(Meteor.settings.rationalK_demo_mode) === 'undefined') {
+  Meteor.settings.rationalK_demo_mode = false;
+}
 
-
+if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode === true) ) {
     var removeAllDocuments = function () {
 		Docs.remove({});
 		Revisions.remove({});
@@ -20,10 +23,10 @@ if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode==="demo") ) {
 
 	var createSynonyms = function () {
 		Synonyms.insert({
-			synonyms : "bearings,roulement,lager"
+			synonyms: "bearings,roulement,lager",
 		});
 		Synonyms.insert({
-			synonyms : "ISO,norms,norme,ASTM"
+			synonyms: "ISO,norms,norme,ASTM",
 		});
 	};
 
@@ -39,12 +42,12 @@ if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode==="demo") ) {
 
 	var createProcessDocuments = function (processId,docId) {
 		console.log('Your Process Documents database is empty, I will add some data...');
-		if (ProcessDocuments.find({}).count() == 0){
+		if (ProcessDocuments.find({}).count() === 0) {
 			// Populate with dummy data
 			ProcessDocuments.insert({
 				processId : processId,
 				taskId : 'SCAN_OK',
-				html : '<a href="/doc/'+docId+'/edit">ISO 1002</a>'
+				html: '<a href="/doc/' + docId + '/edit">ISO 1002</a>',
 			});
 		}
 	};
@@ -506,7 +509,7 @@ if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode==="demo") ) {
 	  name: 'reset demo database',
 	  schedule: function (parser) {
 	    // parser is a later.parse object
-	    return parser.text('every 30 minutes');
+	    return parser.text('every 2 minutes');
 	  },
 	  job: resetDBWithDemoData
 	});

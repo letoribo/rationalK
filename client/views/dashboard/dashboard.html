@@ -28,7 +28,11 @@
               </h3>
           		</div>
   				<div class="panel-body">
-  					{{> reactiveTable collection=lastActivity settings=settingsLastActivity}}
+            {{#if lastActivity}}
+  					     {{> reactiveTable collection=lastActivity settings=settingsLastActivity}}
+            {{else}}
+                 <p>{{_ "Start doing things and they will appear here"}}.</p>
+            {{/if}}
   				</div>
   		   </div>
   	  </div>

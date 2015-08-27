@@ -1,16 +1,18 @@
 Template.nav.rendered = function () {
-	document.title = (typeof(Meteor.settings.public.header_text) !== 'undefined')?Meteor.settings.public.header_text:"rationalK";
+	document.title = (typeof(Meteor.settings.public.header_text) !== 'undefined') ? Meteor.settings.public.header_text : "rationalK";
 
 	// single keys
-	 Mousetrap.bind('4', function() { console.log('4'); });
-	 Mousetrap.bind("?", function() { console.log('show shortcuts!'); });
-	 Mousetrap.bind('esc', function() { console.log('escape'); }, 'keyup');
+	 Mousetrap.bind('4', function () { console.log('4'); });
+	 Mousetrap.bind("?", function () { console.log('show shortcuts!'); });
+	 Mousetrap.bind('esc', function () { console.log('escape'); }, 'keyup');
 
 	 // combinations
-	 Mousetrap.bind('command+shift+u', function() { console.log('command shift u'); });
+	 Mousetrap.bind('command+shift+u', function () {
+		 console.log('command shift u');
+	 });
 
 	 // map multiple combinations to the same callback
-	 Mousetrap.bind(['command+k', 'ctrl+k'], function() {
+	 Mousetrap.bind(['command+k', 'ctrl+k'], function () {
 			 console.log('command k or control k');
 
 			 // return false to prevent default browser behavior
@@ -19,7 +21,12 @@ Template.nav.rendered = function () {
 	 });
 
 	 // gmail style sequences
-	 Mousetrap.bind('g i', function() { console.log('go to inbox'); });
+	 Mousetrap.bind('c d', function () {
+		 Router.go("docCreate");
+	 });
+
+	 http://localhost:3000/doc/create
+
 	 Mousetrap.bind('f u', function() {
 		 console.log('go to follow up');
 		 bootbox.prompt("Type some tags separated with ,", function(result) {
@@ -103,39 +110,9 @@ Template.nav.helpers({
 	username: function (){
 		return Meteor.user().username;
 	},
-	showERP: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("erp")<0)?true:false;
-	},
-	showProcesses: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("processes")<0)?true:false;
-	},
-	showAbout: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("about")<0)?true:false;
-	},
-	showControlPlan: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("controlplan")<0)?true:false;
-	},
-	showFiles: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("files")<0)?true:false;
-	},
-	showProjects: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("projects")<0)?true:false;
-	},
-	showDiscussions: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("discussions")<0)?true:false;
-	},
-	showExperts: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("experts")<0)?true:false;
-	},
-	showNotes: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("notes")<0)?true:false;
-	},
-	showDBrelationships: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("dbrelationships")<0)?true:false;
-	},
-	showGantts: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("gantts")<0)?true:false;
-	},
+	show: function (navItem) {
+		return Meteor.settings.public.show[navItem];
+  },
 	headerText: function (){
 		return (typeof(Meteor.settings.public.header_text) !== 'undefined')?Meteor.settings.public.header_text:"rationalK";
 	},

@@ -43,36 +43,6 @@ Template.navExternal.helpers({
 	username: function (){
 		return Meteor.user().username;
 	},
-	showERP: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("erp")<0)?true:false;
-	},
-	showProcesses: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("processes")<0)?true:false;
-	},
-	showAbout: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("about")<0)?true:false;
-	},
-	showControlPlan: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("controlplan")<0)?true:false;
-	},
-	showFiles: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("files")<0)?true:false;
-	},
-	showProjects: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("projects")<0)?true:false;
-	},
-	showDiscussions: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("discussions")<0)?true:false;
-	},
-	showExperts: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("experts")<0)?true:false;
-	},
-	showNotes: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("notes")<0)?true:false;
-	},
-	showDBrelationships: function (){
-		return (Meteor.settings.public.hide_in_main_nav.indexOf("dbrelationships")<0)?true:false;
-	},
 	headerText: function (){
 		return (typeof(Meteor.settings.public.header_text) !== 'undefined')?Meteor.settings.public.header_text:"rationalK";
 	},

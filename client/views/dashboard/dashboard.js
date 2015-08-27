@@ -94,7 +94,7 @@ Template.dashboard.helpers({
 						}
 
 						if (fileLink) {
-							fileLink = replaceFilename(fileLink);
+							fileLink = clientFilename(fileLink);
 							fileLinkUrl = '<a href="rk:' +
 								fileLink +
 								'"' +
@@ -247,7 +247,7 @@ Template.dashboard.helpers({
 
 							fileLinkUrl = '';
 							if (fileLink) {
-								fileLink = replaceFilename(fileLink);
+								fileLink = clientFilename(fileLink);
 								fileLinkUrl = '<a href="rk:' +
 									fileLink +
 									'" title="Open file on your computer">' +
@@ -415,7 +415,7 @@ Template.dashboard.helpers({
 								console.log('chokidar activity :');
 								console.log(object);
 							}
-							fileLink = replaceFilename(object.path);
+							fileLink = clientFilename(object.path);
 							fileLinkUrl = '<a href="rk:' +
 							fileLink +
 							'" title="Open file on your computer">' +
