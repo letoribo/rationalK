@@ -21,7 +21,14 @@ if (Meteor.isServer){
 			);
 
       //download
-      dumpCommand = '(cd "'+ Meteor.settings.rationalK_Git.gitPullDir +'" && "'+Meteor.settings.rationalK_Git.gitExePath+'" pull)';
+      if (typeof(Meteor.settings.rationalK_Git.gitExePath) === 'undefined') {
+          gitCommand = 'git';
+      }
+      else {
+        gitCommand = '"' + Meteor.settings.rationalK_Git.gitExePath + '"';
+      }
+
+      dumpCommand = '(cd "'+ Meteor.settings.rationalK_Git.gitPullDir +'" && '+gitCommand+' pull)';
       console.log(dumpCommand)
       var child = exec(dumpCommand);
 
