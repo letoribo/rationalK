@@ -37,6 +37,12 @@
 	"rationalK_walk_cron_interval":"every 4 hours",
 	"rationalK_filelink_check_cron_interval":"every 2 hours",
 	"rationalK_backups_out":"/Users/thomasdokithonon/Downloads/backups",
+	"rationalK_Git" : {
+		"autoUpdate" : true,
+		"gitPullDir" : "C:/Users/doki/rationalK",
+		"gitExePath" : "C:/Program Files (x86)/Git/bin/git.exe",
+		"mupDeployFolder" : "C:/Users/doki/deploy"
+	},
 	"rationalK_auto_update" : true,
 	"rationalK_auto_update_user" : "username",
 	"rationalK_auto_update_password" : "pass",
