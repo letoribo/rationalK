@@ -28,7 +28,7 @@ if (Meteor.isServer){
         gitCommand = '"' + Meteor.settings.rationalK_Git.gitExePath + '"';
       }
 
-      dumpCommand = '(cd "'+ Meteor.settings.rationalK_Git.gitPullDir +'" && '+gitCommand+' pull)';
+      dumpCommand = '(cd "'+ Meteor.settings.rationalK_Git.gitPullDir +'" && ' + gitCommand + ' pull)';
       console.log(dumpCommand)
       var child = exec(dumpCommand);
 
@@ -98,8 +98,8 @@ if (Meteor.isServer){
     SyncedCron.add({
       name: 'A cron that update rationalK from git',
       schedule: function (parser) {
-        //return parser.text('at 12:30 pm');
-        return parser.text('every 2 minutes');
+        return parser.text('at 12:30 pm');
+        //return parser.text('every 2 minutes');
       },
       job: updateFromGit
     });
