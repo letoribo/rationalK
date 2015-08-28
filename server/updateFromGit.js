@@ -56,7 +56,8 @@ if (Meteor.isServer){
             if (process.env.NODE_ENV === "production"){
               console.log("You are on production env, we should now re-deploy")
               //deploy
-              dumpCommand = '(cd "' + Meteor.settings.rationalK_Git.mupDeployFolder + '" && mup deploy)';
+              //dumpCommand = '(cd "' + Meteor.settings.rationalK_Git.mupDeployFolder + '" && mup deploy)';
+			  dumpCommand = '(cd "' + Meteor.settings.rationalK_Git.mupDeployFolder + '" && echo ' + Meteor.settings.rationalK_Git.sudoPassword + ' | sudo -S mup deploy)';
               console.log(dumpCommand)
               childDeploy = exec(dumpCommand, function (error, stdout, stderr) {
                 if (stdout) {sys.print('stdout: ' + stdout);}
@@ -98,8 +99,8 @@ if (Meteor.isServer){
     SyncedCron.add({
       name: 'A cron that update rationalK from git',
       schedule: function (parser) {
-        return parser.text('at 12:30 pm');
-        //return parser.text('every 2 minutes');
+        //return parser.text('at 12:30 pm');
+        return parser.text('every 2 minutes');
       },
       job: updateFromGit
     });

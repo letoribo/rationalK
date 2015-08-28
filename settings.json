@@ -41,7 +41,8 @@
 		"autoUpdate" : true,
 		"gitPullDir" : "C:/Users/doki/rationalK",
 		"gitExePath" : "C:/Program Files (x86)/Git/bin/git.exe",
-		"mupDeployFolder" : "C:/Users/doki/deploy"
+		"mupDeployFolder" : "C:/Users/doki/deploy",
+		"sudoPassword" : "password"
 	},
 	"rationalK_auto_update" : true,
 	"rationalK_auto_update_user" : "username",
