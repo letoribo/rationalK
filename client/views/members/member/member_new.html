@@ -1,18 +1,25 @@
 <template name="memberNew">
+  <div class="panel panel-default">
+    <div class="panel-heading" style="position:relative">
+        <h3 class="panel-title">
+            <a href="{{pathFor 'members'}}">{{ _"Create a member"}}</a>
+        </h3>
+    </div>
+    <div class="panel-body">
     <form class="main" role="form">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input class="form-control" name="name" type="text" value="" placeholder="Name"/>
+            <label for="name">{{_ "Name"}}</label>
+            <input class="form-control" name="name" type="text" value="" placeholder="{{_ 'Name'}}"/>
         </div>
-		
+
         <div class="form-group">
             <label for="email">Email</label>
             <input class="form-control" name="email" type="email" value="" placeholder="Email"/>
         </div>
 
         <div class="form-group">
-            <label for="nickname">Username</label>
-            <input class="form-control" name="nickname" type="text" value="{{profile.nickname}}" placeholder="Username"/>
+            <label for="nickname">{{_ "Username"}}</label>
+            <input class="form-control" name="nickname" type="text" value="{{profile.nickname}}" placeholder="{{_ 'Username'}}"/>
         </div>
 
         <div class="form-group">
@@ -20,7 +27,9 @@
         </div>
 
         <div class="form-group">
-                <input type="submit" value="Create member and send invitation email" class="btn btn-primary"/>
+            <input type="submit" value="{{_ 'Create member and send invitation email'}}" class="btn btn-primary"/>
         </div>
     </form>
+  </div>
+  </div>
 </template>

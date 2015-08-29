@@ -13,56 +13,55 @@ Template.members.helpers({
 					showNavigation: 'auto',
 					fields: [
               {
-                key : 'email',
+                key: 'email',
                 label: 'Email',
                 fn: function (value, object) {
-                    console.log(object)
                     return object.email;
-                }
+                },
               },
               {
-                key : 'nickname',
+                key: 'nickname',
                 label: TAPi18n.__("Username"),
                 fn: function (value, object) {
                     return object.profile.nickname;
-                }
+                },
               },
               {
-                key : 'name',
+                key: 'name',
                 label: TAPi18n.__("Name"),
                 fn: function (value, object) {
                     return object.profile.name;
-                }
+                },
               },
               {
-                key : 'accountId',
+                key: 'accountId',
                 label: TAPi18n.__("Account ID"),
                 fn: function (value, object) {
                     return object.accountId ? object.accountId : new Spacebars.SafeString('<span class="label label-warning">Invitation pending</span>');
-                }
+                },
               },
               {
-                key : 'roles',
+                key: 'roles',
                 label: TAPi18n.__("Roles"),
                 fn: function (value, object) {
-                  var html = ''
-                  var rolesArray = object.profile.roles
+                  var html = '';
+                  var rolesArray = object.profile.roles;
                   var arrayLength = rolesArray.length;
-                  for (var i = 0; i < arrayLength; i++) {
-                      html = html .concat(' <span class="label label-success">'+rolesArray[i]+'</span>' );
+                  for (i = 0; i < arrayLength; i++) {
+                      html = html .concat(' <span class="label label-success">' + rolesArray[i] + '</span>');
                   }
                   return  new Spacebars.SafeString(html);
-                }
+                },
               },
               {
-                key : 'Actions',
+                key: 'Actions',
                 label: TAPi18n.__("Actions"),
                 fn: function (value, object) {
-                    var memberEditUrl = Router.routes['memberEdit'].url({_id: object._id});
+                    var memberEditUrl = Router.routes.memberEdit.url({_id: object._id});
                     return new Spacebars.SafeString('<a href="' + memberEditUrl + '" title="' + TAPi18n.__("Edit") + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>');
-                }
-              }
-					]
-		}
-  }
+                },
+              },
+					],
+		};
+  },
 });

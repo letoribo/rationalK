@@ -68,19 +68,19 @@
 
 		            {{#if isAdmin}}
 	                <li class="dropdown">
-	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Config <span class="caret"></span></a>
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{_ "Config"}} <span class="caret"></span></a>
 	                    <ul class="dropdown-menu" role="menu">
-		                    <li><a href="{{pathFor 'categoryList'}}" title="Manage categories">Categories</a></li>
-		                    <li><a href="{{pathFor 'members'}}" title="Manage members">Members</a></li>
-		                    <li><a href="{{pathFor 'predefinedtagsEdit'}}" title="Manage predefined tags">Manage tags</a></li>
-		                    <li><a href="{{pathFor 'synonyms'}}" title="Manage search synonyms">Manage search synonyms</a></li>
-		                    <li><a href="{{pathFor 'docImport'}}" title="Import CSV files">Import</a></li>
-		                    <li><a href="{{pathFor 'docExport'}}" title="Export CSV files">Export</a></li>
-		                    <li><a href="{{pathFor 'stats'}}" title="See statistics">Stats</a></li>
-		                    <li><a href="{{pathFor 'settingsTemplate'}}" title="Settings">Settings</a></li>
-												<li><a href="{{pathFor 'update'}}" title="Update">Update</a></li>
+		                    <li><a href="{{pathFor 'categoryList'}}" title='{{_ "Manage categories"}}'>{{_ "Categories"}}</a></li>
+		                    <li><a href="{{pathFor 'members'}}" title='{{_ "Manage members"}}'>{{_ "Members"}}</a></li>
+		                    <li><a href="{{pathFor 'predefinedtagsEdit'}}" title='{{_ "Manage predefined tags"}}'>{{_ "Manage predefined tags"}}</a></li>
+		                    <li><a href="{{pathFor 'synonyms'}}" title="Manage search synonyms">{{_ "Manage search synonyms"}}</a></li>
+		                    <li><a href="{{pathFor 'docImport'}}" title='{{_ "Import"}}'>{{_ "Import"}}</a></li>
+		                    <li><a href="{{pathFor 'docExport'}}" title='{{_ "Export"}}'>{{_ "Export"}}</a></li>
+		                    <li><a href="{{pathFor 'stats'}}" title='{{_ "Statistics"}}'>{{_ "Statistics"}}</a></li>
+		                    <li><a href="{{pathFor 'settingsTemplate'}}" title='{{_ "Settings"}}'>{{_ "Settings"}}</a></li>
+												<li><a href="{{pathFor 'update'}}" title='{{_ "Update"}}'>{{_ "Update"}}</a></li>
 		                    {{#if show 'about'}}
-		                    <li><a href="{{pathFor 'about'}}" title="About">About</a></li>
+		                    <li><a href="{{pathFor 'about'}}" title='{{_ "About"}}'>{{_ "About"}}</a></li>
 		                    {{/if}}
 	                    </ul>
 	                </li>
@@ -93,10 +93,10 @@
 			        <ul class="nav navbar-nav navbar-right">
 				        {{#if onDemo}}
 				        	<!--No Change password button -->
-									<form id="logout-form" class="form-inline">{{username}} <button type="submit" class="btn btn-link" id="logout-button">Log out</button></form>
+									<form id="logout-form" class="form-inline">{{username}} <button type="submit" class="btn btn-link" id="logout-button">{{_ "Log out"}}</button></form>
 				        {{else}}
 			            	<!-- {{> loginButtons}} -->
-										<li><a title="Log out" class="logout" href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+										<li><a title='{{_ "Log out"}}' class="logout" href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
 			            {{/if}}
 			        </ul>
 						{{/if}}

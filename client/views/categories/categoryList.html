@@ -2,7 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading" style="position:relative">
             <h3 class="panel-title">
-                <a href="{{pathFor 'categoryList'}}">Categories</a>
+                <a href="{{pathFor 'categoryList'}}">{{_ "Categories"}}</a>
                 <a class="pull-right" href="http://rationalk.ch/doc#categories" target="_blank" title="{{_ 'Open help in a new window'}}"><span class="glyphicon glyphicon-info-sign"></span></a>
             </h3>
         </div>
@@ -13,7 +13,7 @@
             {{/if}}
             {{> reactiveTable collection=categories settings=settingsCategories}}
           {{else}}
-            <p>{{_ 'You have no categories yet. Start by adding one'}}: <a class="submit" title="{{_ 'Add a category'}}" href="{{pathFor 'categoryNew'}}">{{_ 'Add a category'}}</a></p>
+            <p>{{_ 'You have no category yet'}}. {{_ 'Start by adding one'}}: <a class="submit" title="{{_ 'Add a category'}}" href="{{pathFor 'categoryNew'}}">{{_ 'Add a category'}}</a></p>
           {{/if}}
         </div>
     </div>

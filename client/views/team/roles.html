@@ -1,22 +1,11 @@
 <template name="roles">
     <link rel="stylesheet" type="text/css" href="/loudev/css/multi-select.css">
-
     <div class="form-group">
-            <a href='#' id='select-all'>All</a> ↔ <a href='#' id='select-none'>None</a>
-
-            <select class="form-control" id="roles" name="roles" multiple="multiple">
-                {{#each roles}}
-                    <option value="{{name}}">{{name}}</option>
-                {{/each}}
-            </select>
+        <a href='#' id='select-all'>{{_ "All"}}</a> ↔ <a href='#' id='select-none'>{{_ "None"}}</a>
+        <select class="form-control" id="roles" name="roles" multiple="multiple">
+          {{#each roles}}
+          <option value="{{name}}">{{name}}</option>
+          {{/each}}
+        </select>
     </div>
-
-    <script>
-        $('#roles').multiSelect({
-            selectableHeader: "<div class='custom-header'>Selectable items</div>",
-            selectionHeader: "<div class='custom-header'>Selection items</div>",
-            selectableFooter: "<div class='custom-header'>Selectable footer</div>",
-            selectionFooter: "<div class='custom-header'>Selection footer</div>"
-        });
-    </script>
 </template>

@@ -3,6 +3,8 @@ Template.categoryList.helpers({
     return Categories.find().fetch();
   },
   settingsCategories: function () {
+    var urlBrowse;
+    var urlCategoryEdit;
         return {
             rowsPerPage: 10,
             showFilter: false,
@@ -16,14 +18,27 @@ Template.categoryList.helpers({
 						        key: 'actions',
 						        label: 'Actions',
 						        fn: function (value, object) {
-                      var urlBrowse = Router.routes.browse.path({categorySlug : object.slug});
-                      var urlCategoryEdit = Router.routes.categoryEdit.path({_id : object._id});
-                      return new Spacebars.SafeString('<a href="'+ urlCategoryEdit +'" title="Edit this category"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> <a class="select" href="'+ urlBrowse +'" title="Browse file in this category"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> <a class="delete" href="#" title="Delete this category, the associated view and the associated docs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>');
-							    }
-						    }
-						]
-		}
-  }
+                      urlBrowse = Router.routes.browse.path({
+                        categorySlug: object.slug,
+                      });
+                      urlCategoryEdit = Router.routes.categoryEdit.path({
+                        _id: object._id,
+                      });
+                      return new Spacebars.SafeString(
+                        '<a href="'
+                        + urlCategoryEdit
+                        + '" title="Edit this category">'
+                        + '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> '
+                        + '<a class="select" href="'
+                        + urlBrowse
+                        + '" title="Browse file in this category"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> '
+                        + '<a class="delete" href="#" title="Delete this category, the associated view and the associated docs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>'
+                      );
+							    },
+						    },
+						],
+		};
+  },
 });
 
 Template.categoryList.events({
@@ -35,8 +50,8 @@ Template.categoryList.events({
       Meteor.call('deleteAllDocsInACategory', this._id);
       Meteor.call('deleteAllRevisionsInACategory', this._id);
       Meteor.call('deleteAllDocFromUserSpaceByCategory', this._id);
-      delete Session.keys['selectedCategory'];
+      delete Session.keys.selectedCategory;
       return false;
     }
-  }
+  },
 });
