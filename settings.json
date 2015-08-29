@@ -1,6 +1,5 @@
 {
 	"public":{
-		"contact":"info@rationalk.ch",
 		"filelink_replace":[
       {"server":"/Users/thomasdokithonon/Downloads/","client":"J:/"},
       {"server":"//Company-NetApp01b.xxxx.local/","client":"C:/"},
@@ -9,7 +8,7 @@
 		"show" : {
 			"relationships" : true,
 			"processes" : true,
-			"notes" : true,
+			"notes" : false,
 			"gantts" : true,
 			"projects" : true,
 			"discussions" : true,

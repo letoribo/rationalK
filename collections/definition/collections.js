@@ -1,8 +1,8 @@
-History     = new Mongo.Collection('history');
-Views       = new Mongo.Collection('views');
-Docs        = new Mongo.Collection('docs');
-Revisions   = new Mongo.Collection('revisions');
-Categories  = new Mongo.Collection('categories');
+History = new Mongo.Collection('history');
+Views = new Mongo.Collection('views');
+Docs = new Mongo.Collection('docs');
+Revisions = new Mongo.Collection('revisions');
+Categories = new Mongo.Collection('categories');
 Singeletons = new Mongo.Collection('singletons');
 PredefinedTags = new Mongo.Collection('predefinedtags');
 rkSettings = new Mongo.Collection('rkSettings');
@@ -54,136 +54,137 @@ if (Meteor.isServer) {
 }
 } //end if Server
 
-XMLFiles.allow(
-	{
-		insert: function (userId, doc) {return !! userId; },
-		update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+XMLFiles.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Gantts.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Gantts.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-External.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+External.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Filelinks.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Filelinks.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-FollowUp.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+FollowUp.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Tags.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Tags.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-controlPlan.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+controlPlan.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Production.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Production.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
 
-Synonyms.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Synonyms.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Projects.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
-});
-TempProjectFiles.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
-});
-ProjectFiles.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Projects.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Expert.allow(
-	{insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+TempProjectFiles.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Processes.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+ProjectFiles.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-ProcessDocuments.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Expert.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Messages.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Processes.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Notes.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+ProcessDocuments.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-Discussions.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Messages.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-WalkedFiles.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Notes.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-TempWalkedFiles.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+Discussions.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-SearchQueries.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+WalkedFiles.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-PredefinedTags.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+TempWalkedFiles.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
+});
+
+SearchQueries.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
+});
+
+PredefinedTags.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
 
@@ -191,43 +192,44 @@ PredefinedTags.attachSchema(new SimpleSchema({
   label: {
     type: String,
     label: "Tags",
-    max: 30
-  }
+    max: 30,
+  },
 }));
 
-FoldersToScan.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+FoldersToScan.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-rkSettings.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+rkSettings.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-rkStatus.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+rkStatus.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
-
-userSpaces.allow({
-	insert: function (userId, doc) {return !! userId; },
-	update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;}
+userSpaces.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
 });
 
 
 Attachments = new FS.Collection("attachments", {
-        stores: [new FS.Store.FileSystem("attachments")]
+	stores: [
+		new FS.Store.FileSystem("attachments"),
+	],
 });
 
 Attachments.allow({
-    insert: function (userId, doc) {return !!userId;},
-    update: function (userId, doc, fieldNames, modifier) {return !!userId;},
-    remove: function (userId, doc) {return !!userId;},
-    download: function (userId) {return !!userId;}
+	insert: function (userId) {return !! userId; },
+	update: function (userId) {return !!userId; },
+	remove: function (userId) {return !!userId; },
+  download: function (userId) {return !!userId; },
 });

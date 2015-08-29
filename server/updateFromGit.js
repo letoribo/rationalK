@@ -67,9 +67,15 @@ if (Meteor.isServer) {
                 console.log(dumpCommand);
               }
               childDeploy = exec(dumpCommand, function (error, stdout, stderr) {
-                if (stdout) {sys.print('stdout: ' + stdout); }
-                if (stderr) {sys.print('stderr: ' + stderr); }
-                if (error !== null) {console.log('exec error: ' + error); }
+                if (stdout) {
+                  sys.print('stdout: ' + stdout);
+                }
+                if (stderr) {
+                  sys.print('stderr: ' + stderr);
+                }
+                if (error !== null) {
+                  console.log('exec error: ' + error);
+                }
               });
 
               rkStatus.update(
@@ -109,8 +115,8 @@ if (Meteor.isServer) {
     SyncedCron.add({
       name: 'A cron that update rationalK from git',
       schedule: function (parser) {
-        //return parser.text('at 12:30 pm');
-        return parser.text('every 2 minutes');
+        return parser.text('at 12:30 pm');
+        //return parser.text('every 2 minutes');
       },
       job: updateFromGit,
     });
