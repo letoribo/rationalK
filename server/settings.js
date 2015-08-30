@@ -52,7 +52,7 @@ if (Meteor.isServer) {
             value: results,
           },
           {
-            upsert : true,
+            upsert: true,
           }
         );
 
