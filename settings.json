@@ -61,9 +61,6 @@
 		"mnt/company/anotherfolder",
 		"J:/folder"
 	],
-	"forbiddenPaths_help":[
-		"Use forward slash. Do not add first slash and do not add trailing slash."
-	],
 	"external":{
 		"22IN06" :
 		{
