@@ -17,57 +17,63 @@ Meteor.methods({
 	walkThruFilelinks: function () {
 		var validatedFilesPathArray = [];
 		var validatedFilesPath;
+		var arrayLength;
+		var cat;
+		var fs;
+		var docs;
+		var nDocs;
+		var fullFilename;
 		if (Meteor.settings.public.debug) {
 			console.log('Starting walking thru the different filelinks...');
 		}
-
 
 		if (typeof rkSettings.findOne({key: "validatedFilesPath"}) !== 'undefined') {
 			validatedFilesPath = rkSettings.findOne({key: "validatedFilesPath"}).value;
 			//they can be separated by | :
 			validatedFilesPathArray = validatedFilesPath.split("|");
 		}
-
-			if (Meteor.settings.public.debug){
-				console.log('validatedFilesPathArray : ');
-				console.log(validatedFilesPathArray);
-			}
+		if (Meteor.settings.public.debug) {
+			console.log('validatedFilesPathArray : ');
+			console.log(validatedFilesPathArray);
+		}
 
       Filelinks.remove({});
-			var fs=Npm.require("fs");
-      var cat = Categories.find().fetch();
-      var arrayLength = cat.length;
-      for (var i = 0; i < arrayLength; i++) {
+			fs = Npm.require("fs");
+      cat = Categories.find().fetch();
+      arrayLength = cat.length;
+      for (i = 0; i < arrayLength; i++) {
           //console.log("Cat Id : "+cat[i]._id);
           //console.log("View Id : "+cat[i].viewId);
           fieldsInThisView = Views.findOne(
             {
               $and: [
-                {"_id":cat[i].viewId}
+                {
+									"_id": cat[i].viewId,
+								},
       			   ]
             }
           ).fields;
-          //console.log(fieldsInThisView);
 
           for (key in fieldsInThisView) {
               if (fieldsInThisView.hasOwnProperty(key)) {
-                  if (fieldsInThisView[key].type=="filelink"){
+                  if (fieldsInThisView[key].type === "filelink") {
                     //console.log(key);
                     //console.log(fieldsInThisView[key].type);
 
-                    var docs = Docs.find({"categoryId":cat[i]._id}).fetch();
-                    var nDocs = docs.length;
-                    //console.log(nDocs);
-                    for (var j = 0; j < nDocs; j++) {
+                    docs = Docs.find({
+											"categoryId": cat[i]._id,
+										}).fetch();
+                    nDocs = docs.length;
+                    for (j = 0; j < nDocs; j++) {
                       fields = docs[j].fields;
                       filelinkObj = fields[key];
                       filelinkObj.type = "filelink";
                       filelinkObj.docId = docs[j]._id;
 											filelinkObj.inValidatedFolder = false;
 
-                      var fullFilename=filelinkObj.value
+                      fullFilename = filelinkObj.value;
 
-											if (fullFilename!==""){
+											if (fullFilename !== ""){
 
 												// Check if the file is inside a validated folder (validated in the sense of the quality dpt)
 												var validatedFilesPathArrayLength = validatedFilesPathArray.length;
@@ -157,24 +163,25 @@ Meteor.methods({
               }
           }
       }
-			if (Meteor.settings.public.debug){
+			if (Meteor.settings.public.debug) {
 				console.log('Finished walking thru the different filelinks...');
 			}
 	    return true;
 	},
-	walkThruOneFilelink: function (docId,clientPath,fieldName) {
+	walkThruOneFilelink: function (docId, clientPath, fieldName) {
+			var fs = Npm.require("fs");
 			check(docId, String);
 			check(clientPath, String);
 			check(fieldName, String);
-			if (Meteor.settings.public.debug){
+			if (Meteor.settings.public.debug) {
 				console.log('Starting to checking one filelink...');
 
 			}
-			var fs=Npm.require("fs");
 
-			clientPath =  Meteor.call('stripBeginEndQuotes', clientPath);
-			fullFilename = Meteor.call('serverFilename', clientPath);
-			if (Meteor.settings.public.debug){
+
+			clientPathStripped =  Meteor.call('stripBeginEndQuotes', clientPath);
+			fullFilename = Meteor.call('serverFilename', clientPathStripped);
+			if (Meteor.settings.public.debug) {
 				console.log("Après (Server): " + fullFilename)
 			}
 

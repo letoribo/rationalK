@@ -20,7 +20,6 @@
 		},
 		"display_nickname_instead_of_name" : false,
 		"header_text":"rK",
-		"project_files_categories":["-","FAI","CS","Other"],
 		"display_upload" : false,
 		"display_search_score" : false,
 		"custom_function_file":"companyA.js",

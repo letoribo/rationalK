@@ -1,6 +1,6 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    //#todo : pass this as option in the settings page
+      //#todo : pass this as option in the members page
       var roles = [];
       var role = {};
       role.name = "CdP";
@@ -18,23 +18,23 @@ if (Meteor.isServer) {
 
       rkSettings.update(
         {
-          key : "Roles"
+          key: "Roles"
         },
         {
-          key : "Roles",
-          value : roles
+          key: "Roles",
+          value: roles,
         },
         {
-          upsert : true
+          upsert: true,
         }
       );
       rkSettings.update(
         {
-          key: "discussions"
+          key: "discussions",
         },
         {
           key: "discussions",
-          value: Meteor.settings.discussions
+          value: Meteor.settings.discussions,
         },
         {
           upsert : true
@@ -42,26 +42,26 @@ if (Meteor.isServer) {
       );
       rkSettings.update(
         {
-          key: "simple_search_behavior"
+          key: "simple_search_behavior",
         },
         {
           key: "simple_search_behavior",
-          value: Meteor.settings.simple_search_behavior
+          value: Meteor.settings.simple_search_behavior,
         },
         {
-          upsert : true
+          upsert: true,
         }
       );
       rkSettings.update(
         {
-          key: "forbiddenPaths"
+          key: "forbiddenPaths",
         },
         {
           key: "forbiddenPaths",
-          value: Meteor.settings.forbiddenPaths
+          value: Meteor.settings.forbiddenPaths,
         },
         {
-          upsert : true
+          upsert: true,
         }
       );
 
@@ -112,24 +112,39 @@ if (Meteor.isServer) {
     updateSettings: function (data) {
       check(data, Match.Optional(
         {
-          validatedFilesPath: Match.Optional(String)
+          validatedFilesPath: Match.Optional(String),
+          projectFileTypes: Match.Optional(String),
         }
       ));
       if (typeof data.validatedFilesPath !== 'undefined') {
         rkSettings.update(
           {
-            key: "validatedFilesPath"
+            key: "validatedFilesPath",
           },
           {
             key: "validatedFilesPath",
-            value: data.validatedFilesPath
+            value: data.validatedFilesPath,
           },
           {
-            upsert : true
+            upsert: true,
           }
         );
       }
-    }
+      else if (typeof data.projectFileTypes !== 'undefined') {
+        rkSettings.update(
+          {
+            key: "projectFileTypes",
+          },
+          {
+            key: "projectFileTypes",
+            value: data.projectFileTypes,
+          },
+          {
+            upsert: true,
+          }
+        );
+      }
+    },
   }); //end of server methods
 
 

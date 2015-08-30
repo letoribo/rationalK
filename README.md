@@ -37,6 +37,19 @@ You can run the application locally (like on your laptop) or on a server
 3. Start the application by entering in the console prompt : ```meteor --settings settings.json```
 4. Access the application at : http://localhost:3000 (can vary)
 
+## Settings
+
+`settings.json` :
+
+```
+"forbiddenPaths":[
+  "Users/thomasdokithonon/Dropbox",
+  "mnt/company/anotherfolder",
+  "J:/folder"
+],
+```
+Use forward slash and do not add the trailing slash
+
 ## Login
 
 When login for the first time, the username is ```admin0@rationalk.ch``` and the password is ```admin0```

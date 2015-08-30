@@ -111,17 +111,6 @@ Template.gantt.helpers({
 	ProjectFiles: function () {
 		return ProjectFiles.find({}).fetch();
 	},
-  	categoryOptions: function () {
-	  	var categoryOptions='';
-	  	for (i = 0; i < Meteor.settings.public.project_files_categories.length; i++) {
-		  	categoryOptions +='<option value="'+Meteor.settings.public.project_files_categories[i]+'"';
-		  	if (this.category==Meteor.settings.public.project_files_categories[i]){
-			  categoryOptions +=" selected";
-		  	}
-		  	categoryOptions +='>'+Meteor.settings.public.project_files_categories[i]+'</option>';
-		}
-		return new Spacebars.SafeString(categoryOptions);
-	}
 });
 
 Template.gantt.events({

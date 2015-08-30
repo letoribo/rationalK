@@ -1,4 +1,3 @@
-// Inside the if (Meteor.isClient) block, right after Template.body.helpers:
 Template.settingsTemplate.events({
   "submit .option1": function (event) {
 	    // This function is called when the new task form is submitted
@@ -54,6 +53,25 @@ Template.settingsTemplate.events({
   	    }
       })
     },
+    'submit #projectFileTypesForm': function (e, t) {
+  		var data = {};
+      var projectFileTypes;
+      e.preventDefault();
+  		projectFileTypes = t.$('#projectFileTypes').val();
+      data.projectFileTypes = projectFileTypes;
+  	  Meteor.call('updateSettings', data, function (err) {
+	    if (err) {
+        if (typeof(toastr) !== 'undefined') {
+    		    toastr.error(err.reason + ". Please try again.");
+        }
+	    }
+	    else {
+        if (typeof(toastr) !== 'undefined') {
+    			toastr.success(TAPi18n.__('Saved'));
+    		}
+	    }
+      });
+    },
     "click a.walkThruFilelinks": function (e) {
       e.preventDefault();
       Meteor.call('walkThruFilelinks',function (error, result) {});
@@ -73,10 +91,18 @@ Template.settingsTemplate.events({
 Template.settingsTemplate.helpers({
   validatedFilesPath: function () {
     var validatedFilesPath = rkSettings.findOne({key: "validatedFilesPath"});
-    var validatedFilesPathValue="";
+    var validatedFilesPathValue = "";
     if (typeof  validatedFilesPath !== 'undefined') {
       validatedFilesPathValue = rkSettings.findOne({key: "validatedFilesPath"}).value;
     }
     return validatedFilesPathValue;
+  },
+  projectFileTypes: function () {
+    var projectFileTypes = rkSettings.findOne({key: "projectFileTypes"});
+    var projectFileTypesValue = "";
+    if (typeof  projectFileTypes !== 'undefined') {
+      projectFileTypesValue = projectFileTypes.value;
+    }
+    return projectFileTypesValue;
   },
 });

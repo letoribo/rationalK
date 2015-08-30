@@ -186,5 +186,7 @@
   "Update member" : "Mettre à jour le profil",
   "Delete member" : "Supprimer le membre",
   "All" : "Tous",
-  "None" : "Aucun"
+  "None" : "Aucun",
+  "Project files types" : "Types de fichier projet",
+  "Types of files in your project" : "Types de fichier se trouvant dans les projets"
 }

@@ -29,22 +29,34 @@ Template.project.helpers({
 		return ProjectFiles.find({$and:[{projectId:this._id},{category:null}]}).fetch();
 	},
 	ProjectFilesInCategoryFinance: function () {
-		return ProjectFiles.find({category:"Finance"}).fetch();
+		return ProjectFiles.find({category: "Finance"}).fetch();
 	},
 	ProjectFilesInCategoryTechnical: function () {
-		return ProjectFiles.find({category:"Technical"}).fetch();
+		return ProjectFiles.find({category: "Technical"}).fetch();
 	},
 	ProjectFiles: function () {
 		return ProjectFiles.find({}).fetch();
 	},
   	categoryOptions: function () {
-	  	var categoryOptions='';
-	  	for (i = 0; i < Meteor.settings.public.project_files_categories.length; i++) {
-		  	categoryOptions +='<option value="'+Meteor.settings.public.project_files_categories[i]+'"';
-		  	if (this.category==Meteor.settings.public.project_files_categories[i]){
+	  	var categoryOptions = '';
+
+			if (typeof rkSettings.findOne({key: "projectFileTypes"}) !== 'undefined') {
+				projectFileTypes = rkSettings.findOne({key: "projectFileTypes"}).value;
+				//they can be separated by | :
+				projectFileTypesArray = projectFileTypes.split("|");
+			}
+			if (Meteor.settings.public.debug) {
+				console.log('projectFileTypesArray : ');
+				console.log(projectFileTypesArray);
+			}
+
+			categoryOptions += '<option value=""></option>';
+	  	for (i = 0; i < projectFileTypesArray.length; i++) {
+		  	categoryOptions += '<option value="' + projectFileTypesArray[i] + '"';
+		  	if (this.category === projectFileTypesArray[i]) {
 			  categoryOptions +=" selected";
 		  	}
-		  	categoryOptions +='>'+Meteor.settings.public.project_files_categories[i]+'</option>';
+		  	categoryOptions +='>'+projectFileTypesArray[i]+'</option>';
 		}
 		return new Spacebars.SafeString(categoryOptions);
 	},
