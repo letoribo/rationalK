@@ -1,33 +1,5 @@
 if (Meteor.isServer) {
   Meteor.startup(function () {
-      //#todo : pass this as option in the members page
-      var roles = [];
-      var role = {};
-      role.name = "CdP";
-      role.slug = getSlug(role.name);
-      roles.push(role);
-      var role = {};
-      role.name = "Spécialistes";
-      role.slug = getSlug(role.name);
-      roles.push(role);
-
-      if (Meteor.settings.public.debug){
-        console.log("Roles : ")
-        console.log(roles)
-      }
-
-      rkSettings.update(
-        {
-          key: "Roles"
-        },
-        {
-          key: "Roles",
-          value: roles,
-        },
-        {
-          upsert: true,
-        }
-      );
       rkSettings.update(
         {
           key: "discussions",
@@ -37,7 +9,7 @@ if (Meteor.isServer) {
           value: Meteor.settings.discussions,
         },
         {
-          upsert : true
+          upsert: true,
         }
       );
       rkSettings.update(
@@ -65,21 +37,22 @@ if (Meteor.isServer) {
         }
       );
 
-
       Meteor.call("listAvailableFunctions", function (error, results) {
-        var availableFunction, j, len;
+        var availableFunction;
+        var j;
+        var len;
         var availableFunctionsValue = [];
 
         rkSettings.update(
           {
-            key: "customFieldsType"
+            key: "customFieldsType",
           },
           {
             key: "customFieldsType",
-            value: results
+            value: results,
           },
           {
-            upsert : true
+            upsert : true,
           }
         );
 
@@ -90,23 +63,20 @@ if (Meteor.isServer) {
           }
           rkSettings.update(
             {
-              key: "availableFunctionsValue"
+              key: "availableFunctionsValue",
             },
             {
               key: "availableFunctionsValue",
-              value: availableFunctionsValue
+              value: availableFunctionsValue,
             },
             {
-              upsert : true
+              upsert: true,
             }
           );
         }
         return true;
       });
-
-
   });
-
 
 	Meteor.methods({
     updateSettings: function (data) {
@@ -114,6 +84,7 @@ if (Meteor.isServer) {
         {
           validatedFilesPath: Match.Optional(String),
           projectFileTypes: Match.Optional(String),
+          Roles: Match.Optional(String),
         }
       ));
       if (typeof data.validatedFilesPath !== 'undefined') {
@@ -138,6 +109,39 @@ if (Meteor.isServer) {
           {
             key: "projectFileTypes",
             value: data.projectFileTypes,
+          },
+          {
+            upsert: true,
+          }
+        );
+      }
+      else if (typeof data.Roles !== 'undefined') {
+        var roles = [];
+        var role = {};
+
+        rolesTemp = data.Roles.split('|');
+
+        var arrayLength = rolesTemp.length;
+        for (i = 0; i < arrayLength; i++) {
+          role = {};
+          role.name = rolesTemp[i];
+          role.slug = getSlug(role.name);
+          roles.push(role);
+        }
+
+        if (Meteor.settings.public.debug){
+          console.log("Roles 2 : ")
+          console.log(roles)
+        }
+
+
+        rkSettings.update(
+          {
+            key: "Roles",
+          },
+          {
+            key: "Roles",
+            value: roles,
           },
           {
             upsert: true,

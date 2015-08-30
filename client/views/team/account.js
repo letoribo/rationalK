@@ -7,10 +7,13 @@ Template.account.helpers({
     return ((ref = Meteor.user()) != null ? ref._id : void 0) === this._id;
   },
   emailStatus: function () {
+    var emailStatus;
     if (this.emails[0].verified) {
-      return '<span class="label label-success">verified</span>';
-    } else {
-      return '<span class="label label-danger">unverified</span>';
+      emailStatus = '<span class="label label-success">verified</span>';
     }
-  }
+    else {
+      emailStatus = '<span class="label label-danger">unverified</span>';
+    }
+    return emailStatus;
+  },
 });

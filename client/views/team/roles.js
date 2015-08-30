@@ -7,7 +7,8 @@ Template.roles.rendered = function () {
 
 Template.roles.helpers({
   roles: function () {
-    return [
+    var arrayLength;
+    var Roles = [
       {
         name: "admin",
       },
@@ -18,6 +19,24 @@ Template.roles.helpers({
         name: "approver",
       },
     ];
+    var rolesSettings = rkSettings.findOne({
+      key: "Roles",
+    },
+    {
+      fields: {
+        'value': 1,
+      },
+    });
+    if (typeof  rolesSettings !== 'undefined') {
+      rolesSettingsVal = rolesSettings.value;
+      arrayLength = rolesSettingsVal.length;
+      for (i = 0; i < arrayLength; i++) {
+        var role = {};
+        Roles.push(rolesSettingsVal[i]);
+      }
+    }
+    console.log(Roles);
+    return Roles;
   },
 });
 

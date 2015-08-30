@@ -188,5 +188,6 @@
   "All" : "Tous",
   "None" : "Aucun",
   "Project files types" : "Types de fichier projet",
-  "Types of files in your project" : "Types de fichier se trouvant dans les projets"
+  "Types of files in your project" : "Types de fichier se trouvant dans les projets",
+  "Separate them with a vertical bar" : "Séparez les par une barre verticale"
 }
