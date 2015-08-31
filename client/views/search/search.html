@@ -74,6 +74,9 @@
 				        				{{#if fields}}
 				        					{{>docInSearchResults}}
 				        				{{/if}}
+												{{#if text}}
+				        					{{>filesContentInSearchResults}}
+				        				{{/if}}
 				        				{{#if message}}
 													{{>messageInSearchResults}}
 												{{/if}}

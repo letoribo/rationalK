@@ -37,7 +37,16 @@ Meteor.publish("XMLFiles", function () {
 
 Meteor.publish("external", function (externalDocId) {
   check(externalDocId, String);
-  return External.find({'externalDocId':externalDocId},{fields: {'externalDocId':0,'full':0}});
+  return External.find(
+    {
+      'externalDocId': externalDocId,
+    },
+    {
+      fields: {
+        'externalDocId': 0,
+        'full': 0,
+      },
+    });
 });
 
 
@@ -70,21 +79,21 @@ Meteor.publish("projects", function () {
 Meteor.publish("project", function (projectId) {
   check(projectId, String);
   return Projects.find({
-    _id: projectId
+    _id: projectId,
   });
 });
 
 Meteor.publish("projectfiles", function (projectId) {
   check(projectId, String);
   return ProjectFiles.find({
-    projectId: projectId
+    projectId: projectId,
   });
 });
 
 Meteor.publish("process", function (processId) {
   check(processId, String);
   return Processes.find({
-    _id: processId
+    _id: processId,
   });
 });
 
@@ -98,7 +107,7 @@ Meteor.publish(null, function () {
 
 Meteor.publish("orgs", function () {
   return Orgs.find({
-    userId: this.userId
+    userId: this.userId,
   });
 });
 
@@ -116,7 +125,7 @@ Meteor.publish("myCurrentSearchQuery", function () {
     {
       fields: {numberOfSearchResults: 1},
       sort: { searchDate: -1 },
-      limit : 1
+      limit: 1,
     }
   );
 });
@@ -196,7 +205,7 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
     }
 
     // I have something to search for :
-    if (searchType==="fullTextSearch"){
+    if (searchType === "fullTextSearch") {
 
       if (catFilter ==="all"){
         var searchResultsDocs = Docs.find({
@@ -204,7 +213,7 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
           }, {
               fields: { score: { $meta: 'textScore' } },
               sort: { score: { $meta: 'textScore' } },
-              limit : 30
+              limit: 30,
           });
 
           var searchResultsExternal = External.find({
@@ -212,7 +221,15 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             }, {
                 fields: { score: { $meta: 'textScore' } },
                 sort: { score: { $meta: 'textScore' } },
-                limit : 30
+                limit: 30,
+            });
+
+          var searchResultsFilesContent = FilesContent.find({
+                $text: { $search: searchQuery },
+            }, {
+                fields: { score: { $meta: 'textScore' } },
+                sort: { score: { $meta: 'textScore' } },
+                limit: 30,
             });
         }
         else {
@@ -229,7 +246,8 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             });
 
           var searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
-        }
+          var searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
+        } // end of filter on category
 
         //Docs.find({$text: { $search: "bearing" }}, {fields: { score: { $meta: 'textScore' } },sort: { score: { $meta: 'textScore' } }, limit : 30 });
 
@@ -260,12 +278,13 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
         var searchResults = [
           searchResultsDocs,
           searchResultsExternal,
-          searchResultsWalkedFiles
+          searchResultsFilesContent,
+          searchResultsWalkedFiles,
         ]
         //console.log(searchResults.fetch());
-        var nResults = searchResultsDocs.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
-    }
-    if (searchType==="regexpSearch"){
+        var nResults = searchResultsDocs.count() + searchResultsExternal.count() + searchResultsFilesContent.count() + searchResultsWalkedFiles.count();
+    } //end of type fulltext search
+    else if (searchType==="regexpSearch"){
       if (Meteor.settings.simple_search_behavior==="or"){
         var parts = searchQuery.trim().split(/[&]+/);
         var len = parts.length;
@@ -408,24 +427,12 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             arrayOfOrForExternal.push({$and : arrayOfAndForExternal})
         }
 
-
-        // var searchResultsDocs = Docs.find({$and : [{ full: /ball/gi }]})
-        /*
-        var arrayOfOrForDocs = [
-          {full : /thomas/gi},
-          {$and : arrayOfAndForDocs}
-        ];
-        */
-
         if (Meteor.settings.public.debug){
             console.log("arrayOfOrForDocs : ");
             console.log(arrayOfOrForDocs);
             console.log("arrayOfOrForExternal : ");
             console.log(arrayOfOrForExternal);
         }
-
-
-
 
 
         if (catFilter ==="all"){

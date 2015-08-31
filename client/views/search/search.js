@@ -113,8 +113,9 @@ Template.searchTpl.helpers({
 			// on renvoit tous les docs car ils ont été filtré surt le server (dans publication.js)
 			if (searchType === "fullTextSearch") {
 				docsResults = Docs.find({}, {sort: {score: -1}}).fetch();
+				filesContentResults = FilesContent.find({}, {sort: {score: -1}}).fetch();
 				filesResults = WalkedFiles.find({}).fetch();
-				results = results.concat(docsResults).concat(filesResults);
+				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults);
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();

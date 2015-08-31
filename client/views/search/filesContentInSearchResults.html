@@ -1,0 +1,27 @@
+<template name="filesContentInSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<p>{{text}}</p>
+			{{#each prettySearchDisplay}}
+	        	<p><strong>{{fieldname}}</strong> : {{fieldvalue}}</p>
+	        {{else}}
+				<p>Il looks like all your fields for this category are marked as hidden.</p>
+	        {{/each}}
+		</div>
+		<div class="col-md-2">
+			<span class="label label-default">File Content</span>
+			<br/>
+			<a href="#" class="updateDocInMySpace" title="{{userSpaceLinkTitle}}"><span class='glyphicon {{userSpaceIcon}}' aria-hidden='true'></span></a>
+			{{#if searchScore}}
+				<span class="label label-info"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> Special search score : {{searchScore}}</span>
+			{{/if}}
+			{{#if fileLinkUrl}}
+				<a href="{{fileLinkUrl}}" title="{{_ 'open_file'}}"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+			{{/if}}
+			<br/>
+			{{#if searchTypeIsFullTextSearch}}
+				<p>Search Score : {{textScore}}</p>
+			{{/if}}
+		</div>
+	</div>
+</template>
