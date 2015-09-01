@@ -42,6 +42,10 @@
 		"mupDeployFolder" : "C:/Users/doki/deploy",
 		"sudoPassword" : "password"
 	},
+	"scanFilesContent" : {
+		"do": true,
+		"interval" : "every 5 minutes"
+	},
 	"rationalK_auto_update" : true,
 	"rationalK_auto_update_user" : "username",
 	"rationalK_auto_update_password" : "pass",

@@ -1,4 +1,4 @@
 {
-  "chokidar": "1.0.3",
-  "textract": "1.1.1"
+	"chokidar": "1.0.5",
+	"textract": "1.1.1"
 }

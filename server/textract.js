@@ -1,5 +1,6 @@
 if (Meteor.isServer) {
 
+	
   var fs=Npm.require("fs");
 
   Meteor.methods({
@@ -44,21 +45,27 @@ if (Meteor.isServer) {
                       extension = fileName.split('.').pop();
                       if (allowedExtensions.indexOf(extension) > 0) {
                         //do scan the file
-                        console.log('do scan the file');
-                        console.log(serverFilename);
+						if (Meteor.settings.public.debug) {
+							console.log('do scan the file');
+							console.log(serverFilename);
+						}
                         Meteor.call("indexFileContent2", serverFilename, function (error, results) {
-                          console.log("error from the meteor call indexFileContent2 : ");
-                          console.log(error);
-                          console.log("results from the meteor call indexFileContent2 : ");
-                          console.log(results);
+							if (Meteor.settings.public.debug) {
+							  console.log("error from the meteor call indexFileContent2 : ");
+							  console.log(error);
+							  console.log("results from the meteor call indexFileContent2 : ");
+							  console.log(results);
+							}
 
                           if (results) {
                             insertedId = FilesContent.insert({
                               filePath: results.filePath,
                               text: results.text,
                             });
-                            console.log("insertedId :");
-                            console.log(insertedId);
+							if (Meteor.settings.public.debug) {
+								console.log("insertedId :");
+								console.log(insertedId);
+							}
                           }
                         });
 
@@ -71,7 +78,9 @@ if (Meteor.isServer) {
               });
           }
           else {
-            console.log(folder + ' does NOT exists. I will skip this folder.');
+            if (Meteor.settings.public.debug) {
+				console.log(folder + ' does NOT exists. I will skip this folder.');
+			}
             fileTree = false;
           }
           return fileTree;
@@ -86,82 +95,77 @@ if (Meteor.isServer) {
       var textract2 = Async.runSync(function(done) {
 
         textract.fromFileWithPath(filePath, function( error, text ) {
-          console.log(error);
-          console.log(text);
-          done(error, text);
+			if (Meteor.settings.public.debug) {
+				console.log(error);
+				console.log(text);
+			}
+			done(error, text);
         });
 
       });
-      console.log("textract2.error : ");
-      console.log(textract2.error);
-      console.log("textract2.result : ");
-      console.log(textract2.result);
+	  if (Meteor.settings.public.debug) {
+		console.log("textract2.error : ");
+		console.log(textract2.error);
+		console.log("textract2.result : ");
+		console.log(textract2.result);
+	  }
 
       var obj = {};
       obj.filePath = filePath;
       obj.text = textract2.result;
       obj.error = textract2.error;
-      console.log("obj:");
-      console.log(obj);
+	  if (Meteor.settings.public.debug) {
+		console.log("obj:");
+		console.log(obj);
+	  }
       return obj;
     },
   });
 
   indexFilesContent5 = function () {
     Meteor.call("indexFilesContent4", function (error, results) {
-      console.log("error from the meteor call : ");
-      console.log(error);
-      console.log("results from the meteor call : ");
-      console.log(results);
+		if (Meteor.settings.public.debug) {
+		  console.log("error from the meteor call : ");
+		  console.log(error);
+		  console.log("results from the meteor call : ");
+		  console.log(results);
+		}
     });
   };
 
   indexFileContent3 = function () {
     var filePath = "C:/Users/doki/test.docx";
     Meteor.call("indexFileContent2",filePath, function (error, results) {
-      console.log("error from the meteor call : ");
-      console.log(error);
-      console.log("results from the meteor call : ");
-      console.log(results);
+		if (Meteor.settings.public.debug) {
+		  console.log("error from the meteor call : ");
+		  console.log(error);
+		  console.log("results from the meteor call : ");
+		  console.log(results);
+		}
 
       if (results) {
         insertedId = FilesContent.insert({
           filePath: results.filePath,
           text: results.text,
         });
-        console.log("insertedId :");
-        console.log(insertedId);
+		if (Meteor.settings.public.debug) {
+			console.log("insertedId :");
+			console.log(insertedId);
+		}
       }
     });
   };
 
-  SyncedCron.add({
-	  name: 'index file content',
-	  schedule: function (parser) {
-	    // parser is a later.parse object
-	    return parser.text('every 2 hours');
-	  },
-	  //job: indexFileContent3,
-    job: indexFilesContent5,
-	});
+  if (Meteor.settings.scanFilesContent.do) {
+	  SyncedCron.add({
+		  name: 'index file content',
+		  schedule: function (parser) {
+			// parser is a later.parse object
+			return parser.text(Meteor.settings.scanFilesContent.interval);
+		  },
+		  //job: indexFileContent3,
+		job: indexFilesContent5,
+		});
+  }
 
 } //end of if server check
-
-/*
-var filePath = "C:/Users/doki/test.docx";
-Meteor.call("indexFileContent2",filePath, function (error, results) {
-  console.log("error from the meteor call : ");
-  console.log(error);
-  console.log("results from the meteor call : ");
-  console.log(results);
-
-  if (results){
-    insertedId = FilesContent.insert({
-      filePath: results.filePath,
-      text: results.text,
-    });
-    console.log("insertedId :");
-    console.log(insertedId);
-  }
-});
-*/
