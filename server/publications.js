@@ -5,9 +5,11 @@ filterByOrg = function (meteor, collection, userId, strict) {
     return collection.find({
       orgId: user.profile.orgId
     });
-  } else if (!strict) {
+  }
+  else if (!strict) {
     return collection.find();
-  } else {
+  }
+  else {
     return meteor.ready();
   }
 };
@@ -139,41 +141,40 @@ Meteor.publish('ressourcePlanningPublished', function () {
 
 
 Meteor.publish('cse', function (query) {
-  check(query,String);
-  if (typeof Meteor.settings.cse!== 'undefined'){
-
   var self = this;
-  if (query){
+  var response;
+  var thumb;
+  var doc;
+  check(query, String);
+  if (typeof Meteor.settings.cse !== 'undefined') {
+  if (query) {
     try {
-      var response = Meteor.http.get('https://www.googleapis.com/customsearch/v1', {
+      response = Meteor.http.get('https://www.googleapis.com/customsearch/v1', {
         params: {
           q: query,
-          cx : Meteor.settings.cse.cx,
-          key :Meteor.settings.cse.key
-        }
+          cx: Meteor.settings.cse.cx,
+          key: Meteor.settings.cse.key,
+        },
       });
-
       _.each(response.data.items, function (item) {
-
         if (typeof item.pagemap.cse_thumbnail !== 'undefined') {
-          var thumb = item.pagemap.cse_thumbnail[0].src;
+          thumb = item.pagemap.cse_thumbnail[0].src;
         }
         else {
-          var thumb = "/images/noimgavailable.png";
+          thumb = "/images/noimgavailable.png";
         }
-        var doc = {
+        doc = {
           thumb: thumb,
           title: item.title,
           link: item.link,
-          snippet: item.snippet
+          snippet: item.snippet,
         };
 
         self.added('websearchresults', Random.id(), doc);
       });
-
       self.ready();
-
-    } catch(error) {
+    }
+    catch(error) {
       console.log(error);
     }
   }
@@ -182,7 +183,7 @@ Meteor.publish('cse', function (query) {
   }
   }
   else {
-    console.log("You need to defined cse in your setting file settings.json")
+    console.log("You need to defined cse in your setting file settings.json");
   }
 });
 

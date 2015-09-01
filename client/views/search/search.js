@@ -74,14 +74,14 @@ Template.searchTpl.helpers({
 
 			if ( !Session.get("includeWalkedFilesInResults") && !Session.get("includeWebInResults") ) {
 				str = str.concat(TAPi18n.__('Relaunch your search and include') + " : ");
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__("your files")+'</a>');
+				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__("your files") + '</a>');
 				str = str.concat(', ');
 				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="web">' + TAPi18n.__("the web") + '</a>');
-				str = str.concat(' '+TAPi18n.__("or")+' ');
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="webandfiles">' + TAPi18n.__("both") +'</a>.');
+				str = str.concat(' ' + TAPi18n.__("or") + ' ');
+				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="webandfiles">' + TAPi18n.__("both") + '</a>.');
 			}
 			if ( !Session.get("includeWalkedFilesInResults") && Session.get("includeWebInResults") ) {
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__('Relaunch by including your files in your search')+'</a>.');
+				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__('Relaunch by including your files in your search') + '</a>.');
 			}
 			if ( Session.get("includeWalkedFilesInResults") && !Session.get("includeWebInResults") ) {
 				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="web">' + TAPi18n.__('Relaunch by including the web in your search') + '</a>.');
@@ -127,7 +127,18 @@ Template.searchTpl.helpers({
 				externalResults = External.find({}).fetch();
 				results = results.concat(docsResults).concat(messagesResults).concat(discussionsResults).concat(filesResults).concat(notesResults).concat(expertResults).concat(externalResults);
 			}
-			return results;
+
+			function byDescendingScore (a, b) {
+			  if (a.score < b.score) {
+			    return 1;
+				}
+				else if (a.score > b.score) {
+			    return -1;
+				}
+			  return 0;
+			}
+
+			return results.sort(byDescendingScore);
 		},
 	highlightResults: function () {
 		return Session.get("highlightResults");

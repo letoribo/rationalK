@@ -19,6 +19,9 @@ Template.filesContentInSearchResults.helpers({
 		var lastRevision = Revisions.findOne({docId: this._id },{sort: { revisionNumber: -1}})
   	return ((typeof lastRevision)!== 'undefined') ? lastRevision : false;
 	},
+	shortText: function() {
+		return this.text.substring(0, 500);
+	},
 	searchTypeIsFullTextSearch: function () {
 		return (Session.get('searchType')==='fullTextSearch')
 	},
