@@ -33,6 +33,7 @@ percolate:synced-cron
 chrismbeckett:toastr
 meteorhacks:kadira
 meteorhacks:zones
+meteorhacks:async
 gadicohen:messageformat
 olragon:handsontable
 chhib:mongodb-uri

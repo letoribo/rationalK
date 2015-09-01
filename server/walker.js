@@ -1,10 +1,9 @@
 if (Meteor.isServer) {
-
-		var walkThruFolders = function (){
+		var walkThruFolders = function () {
 	      	Meteor.call('walkThruFolders');
 		}
 
-		if (Meteor.settings.rationalK_walk_cron){
+		if (Meteor.settings.rationalK_walk_cron) {
 			SyncedCron.add({
 				  name: 'Walk thru folders',
 				  schedule: function (parser) {
@@ -14,37 +13,35 @@ if (Meteor.isServer) {
 			});
 		}
 
-	var fs=Npm.require("fs");
+	var fs = Npm.require("fs");
 
 	Meteor.methods({
   		walkThruFolders: function () {
 				console.log('Starting scanning all folders.');
 				rkStatus.update(
 					{
-						method: 'walkThruFolders'
+						method: 'walkThruFolders',
 					},
 					{
 						method: 'walkThruFolders',
-						state : 'running',
-						date: new Date()
+						state: 'running',
+						date: new Date(),
 					},
 					{
-						upsert: true
+						upsert: true,
 					}
 				);
 
-				if (Meteor.settings.public.debug){
+				if (Meteor.settings.public.debug) {
 					console.log('Starting scanning all folders.');
 				}
 	  		TempWalkedFiles.remove({});
 
 	  		// #todo : this has to be replace with a diff function based on size, and modified time
-
-		    //var files = fs.readdirSync('./');
 		    var folders = FoldersToScan.find().fetch();
-			folders.forEach(function (folder) {
-				if (folder.path!=""){
-					var walkPath = folder.path
+				folders.forEach(function (folder) {
+					if (folder.path != ""){
+					var walkPath = folder.path;
 					walkPath = walkPath.replace(/\/$/, ""); //removing trailing slash
 
 					var fileTree = getFilesRecursive(walkPath);
@@ -71,9 +68,8 @@ if (Meteor.isServer) {
 						            });
 						        } else {
 						            fileTree.push({
-						                name: fileName
+						                name: fileName,
 						            });
-
 
 						            var extension = fileName.split('.').pop();
 						            var allowedExtensions = ["doc", "docx", "xls", "xlsx", "xlsm","txt","pdf"];
