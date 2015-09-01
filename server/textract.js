@@ -139,7 +139,7 @@ if (Meteor.isServer) {
 	  name: 'index file content',
 	  schedule: function (parser) {
 	    // parser is a later.parse object
-	    return parser.text('every 2 minutes');
+	    return parser.text('every 2 hours');
 	  },
 	  //job: indexFileContent3,
     job: indexFilesContent5,
