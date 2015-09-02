@@ -8,9 +8,17 @@ Template.gantt.rendered = function () {
 
 	var demo_tasks = {
 		data:[
-			{"id":1, "text":"TG1", "start_date":moment(today).format("DD-MM-YYYY"),"duration":"2","order":"10", progress: 0, open: false},
-			{"id":2, "text":"Process", "start_date":moment(today).businessAdd(3, 'days').format("DD-MM-YYYY"), "duration":"3", "order":"20", progress: 0, open: true},
-			{"id":3, "text":"Production", "start_date":moment(today).businessAdd(6, 'days').format("DD-MM-YYYY"), "duration":"3", "order":"30", progress: 0, open: true},
+			{
+				"id":1, "text":"TG1", "start_date":moment(today).format("DD-MM-YYYY"),"duration":"2","order":"10", progress: 0, open: false
+			},
+			{
+				"id":2, "text":"Process", "start_date":moment(today).businessAdd(3, 'days').format("DD-MM-YYYY"), "duration":"3", "order":"20", progress: 0, open: true,
+				"predecessors": [1],
+			},
+			{
+				"id":3, "text":"Production", "start_date":moment(today).businessAdd(6, 'days').format("DD-MM-YYYY"), "duration":"3", "order":"30", progress: 0, open: true,
+				"predecessors": [2],
+			},
 		],
 		links:[
 			{id:"1",source:"1",target:"2",type:gantt.config.links.finish_to_start},
@@ -145,6 +153,93 @@ Template.gantt.events({
 			Session.set('ganttWarning',ganttWarnings);
 			return false;
 
+	},
+	"click a.showCriticalPath": function (e){
+			var today = new Date();
+
+			Tasks = [
+			{
+				"id":1,
+				"text":"TG1",
+				"start_date":moment(today).format("DD-MM-YYYY"),
+				"duration":"2",
+				"order":"10",
+				progress: 0,
+				open: false,
+			},
+			{
+				"id":2,
+				"text": "Process",
+				"start_date": moment(today).businessAdd(3, 'days').format("DD-MM-YYYY"),
+				"duration":"3",
+				"order":"20",
+				progress: 0,
+				open: true,
+				"predecessors": [1],
+			},
+			{
+				"id":3,
+				"text":"Production",
+				"start_date":moment(today).businessAdd(6, 'days').format("DD-MM-YYYY"),
+				"duration":"3",
+				"order":"30",
+				"progress": 0,
+				"open": true,
+				"predecessors": [2],
+			},
+		];
+		console.log(Tasks);
+		lastTask = getLastTasks(Tasks);
+
+		function getLastTasks(Tasks){
+			nTasks = Tasks.length;
+			lastDate = moment("01-01-1900","DD-MM-YYYY");
+			for (i = 0; i < nTasks; i++) {
+				endDate = moment(Tasks[i].start_date,"DD-MM-YYYY").businessAdd(Tasks[i].duration, 'days').format("DD-MM-YYYY");
+				//endDate = moment(Tasks[i].start_date,"DD-MM-YYYY").businessAdd(1, 'days').format("DD-MM-YYYY");
+				console.log("Task Id : ")
+				console.log(Tasks[i].id);
+				console.log("Task startDate : ");
+				console.log(Tasks[i].start_date);
+				console.log("Task duration [days]: ");
+				console.log(Tasks[i].duration);
+				console.log("Task calculated end Date: ");
+				console.log(endDate);
+				Tasks[i].end_date = endDate;
+			}
+			console.log("Tasks : ");
+			console.log(Tasks);
+			function byDescendingDate (a, b) {
+				var aa = moment(a.end_date, "DD-MM-YYYY");
+				var bb = moment(b.end_date, "DD-MM-YYYY");
+				if (aa.diff(bb) < 0) {
+					return 1;
+				}
+				if (aa.diff(bb) > 0) {
+					return -1;
+				}
+				return 0;
+			}
+			tasksOrderedByDescendingDates = Tasks.sort(byDescendingDate);
+			console.log("Tasks by descending dates : ");
+			console.log(tasksOrderedByDescendingDates);
+			return Tasks[0];
+		}
+
+		function computeCriticalPath(Tasks){
+			lastTask = getLastTasks(Tasks);
+			console.log("lastTask : ");
+			console.log(lastTask);
+
+		}
+
+		computeCriticalPath(Tasks);
+
+
+
+
+	  e.preventDefault();
+		return false;
 	},
 	"click a.saveGantt": function (e){
 	    e.preventDefault();
