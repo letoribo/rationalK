@@ -33,7 +33,10 @@
 	"rationalK_license_key":"licensekey",
 	"rationalK_walk_cron":true,
 	"rationalK_walk_cron_interval":"every 4 hours",
-	"rationalK_filelink_check_cron_interval":"every 2 hours",
+	"scanFilelinks" : {
+		"do": true,
+		"interval" : "at 01:00 am"
+	},
 	"rationalK_backups_out":"/Users/thomasdokithonon/Downloads/backups",
 	"rationalK_Git" : {
 		"autoUpdate" : true,

@@ -4,25 +4,29 @@ walkThruFilelinks = function () {
 	Meteor.call('walkThruFilelinks');
 };
 
-SyncedCron.add({
-	  name: 'Walk thru filelinks',
-	  schedule: function (parser) {
-			return parser.text(Meteor.settings.rationalK_filelink_check_cron_interval);
-	  },
-	  job: walkThruFilelinks
-});
-
+if (Meteor.settings.scanFilelinks.do) {
+	SyncedCron.add({
+		  name: 'Walk thru filelinks',
+		  schedule: function (parser) {
+				return parser.text(Meteor.settings.scanFilelinks.interval);
+		  },
+		  job: walkThruFilelinks,
+	});
+}
 
 Meteor.methods({
 	walkThruFilelinks: function () {
 		var validatedFilesPathArray = [];
 		var validatedFilesPath;
-		var arrayLength;
 		var cat;
 		var fs;
 		var docs;
 		var nDocs;
+		var nCats;
 		var fullFilename;
+		var query;
+		var validatedFilesPathArrayLength;
+		var fullFilenameWithForwardSlash;
 		if (Meteor.settings.public.debug) {
 			console.log('Starting walking thru the different filelinks...');
 		}
@@ -31,91 +35,111 @@ Meteor.methods({
 			validatedFilesPath = rkSettings.findOne({key: "validatedFilesPath"}).value;
 			//they can be separated by | :
 			validatedFilesPathArray = validatedFilesPath.split("|");
+			if (Meteor.settings.public.debug) {
+				console.log('The files in the following folders are considered as validated in term on quality : ');
+				console.log('validatedFilesPathArray : ');
+				console.log(validatedFilesPathArray);
+			}
 		}
+
+    Filelinks.remove({});
+		fs = Npm.require("fs");
+    cat = Categories.find().fetch();
+		nCats = cat.length;
 		if (Meteor.settings.public.debug) {
-			console.log('validatedFilesPathArray : ');
-			console.log(validatedFilesPathArray);
+			console.log('You have ' + nCats + ' categorie(s)');
 		}
-
-      Filelinks.remove({});
-			fs = Npm.require("fs");
-      cat = Categories.find().fetch();
-      arrayLength = cat.length;
-      for (i = 0; i < arrayLength; i++) {
-          //console.log("Cat Id : "+cat[i]._id);
-          //console.log("View Id : "+cat[i].viewId);
-          fieldsInThisView = Views.findOne(
-            {
-              $and: [
-                {
-									"_id": cat[i].viewId,
-								},
-      			   ]
-            }
-          ).fields;
-
-          for (key in fieldsInThisView) {
-              if (fieldsInThisView.hasOwnProperty(key)) {
-                  if (fieldsInThisView[key].type === "filelink") {
-                    //console.log(key);
-                    //console.log(fieldsInThisView[key].type);
-
-                    docs = Docs.find({
-											"categoryId": cat[i]._id,
-										}).fetch();
-                    nDocs = docs.length;
-                    for (j = 0; j < nDocs; j++) {
-                      fields = docs[j].fields;
-                      filelinkObj = fields[key];
-                      filelinkObj.type = "filelink";
-                      filelinkObj.docId = docs[j]._id;
+    for (i = 0; i < nCats; i++) {
+				if (Meteor.settings.public.debug) {
+        	console.log("Cat Id : " + cat[i]._id);
+        	console.log("View Id : " + cat[i].viewId);
+				}
+        fieldsInThisView = Views.findOne(
+          {
+            $and: [
+              {
+								"_id": cat[i].viewId,
+							},
+						],
+          }
+        ).fields;
+				if (Meteor.settings.public.debug) {
+					console.log("The fields in this view/category are : ");
+					console.log(fieldsInThisView);
+				}
+        for (key in fieldsInThisView) {
+            if (fieldsInThisView.hasOwnProperty(key)) {
+                if (fieldsInThisView[key].type === "filelink") {
+									if (Meteor.settings.public.debug) {
+										console.log("Let's consider the field named : " + key + " which is of type : " + fieldsInThisView[key].type);
+									}
+									console.log(query);
+  								//console.log(JSON.parse(query));
+                  docs = Docs.find(
+										{
+											$and: [
+				                {
+													"categoryId": cat[i]._id,
+												},
+											],
+									}).fetch();
+									// #todo : take only the doc with and existing filelink key;
+                  nDocs = docs.length;
+									if (Meteor.settings.public.debug) {
+										console.log('You have ' + nDocs + ' documents in this categorie(s)');
+									}
+                  for (j = 0; j < nDocs; j++) {
+                    fields = docs[j].fields;
+										if (Meteor.settings.public.debug) {
+												console.log('In the doc number ' + j + ", the fields are : ");
+												console.log(fields);
+										}
+                    filelinkObj = fields[key];
+										doUpdate = false;
+										if (typeof filelinkObj !== 'undefined') {
+                    	filelinkObj.type = "filelink";
+                    	filelinkObj.docId = docs[j]._id;
 											filelinkObj.inValidatedFolder = false;
+                    	fullFilename = filelinkObj.value;
 
-                      fullFilename = filelinkObj.value;
-
-											if (fullFilename !== ""){
-
+											if (fullFilename !== "") {
 												// Check if the file is inside a validated folder (validated in the sense of the quality dpt)
-												var validatedFilesPathArrayLength = validatedFilesPathArray.length;
-												for (var k = 0; k < validatedFilesPathArrayLength; k++) {
-
+												validatedFilesPathArrayLength = validatedFilesPathArray.length;
+												for (k = 0; k < validatedFilesPathArrayLength; k++) {
 													validatedFilesPath = validatedFilesPathArray[k];
-
-													var fullFilenameWithForwardSlash = fullFilename.replace(/\\/g,"/");
-
-													if (fullFilenameWithForwardSlash.indexOf(validatedFilesPath)>=0){
+													fullFilenameWithForwardSlash = fullFilename.replace(/\\/g, "/");
+													if (fullFilenameWithForwardSlash.indexOf(validatedFilesPath) >= 0) {
 														filelinkObj.inValidatedFolder = true;
-														if (Meteor.settings.public.debug){
-																console.log("The file : " + fullFilename + " is in the validated folder : "+ validatedFilesPath);
+														if (Meteor.settings.public.debug) {
+																console.log("The file : " + fullFilename + " is in the validated folder : " + validatedFilesPath);
 																console.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
 														}
 														break;
 													}
 													else {
-														console.log("The file : " + fullFilename + " is NOT in the validated folder : "+ validatedFilesPath);
-														console.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
+														if (Meteor.settings.public.debug) {
+															console.log("The file : " + fullFilename + " is NOT in the validated folder : " + validatedFilesPath);
+															console.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
+														}
 													}
-
-												}
+												} //end of loop over validated path
 
 												fullFilename =  Meteor.call('stripBeginEndQuotes', fullFilename);
-                        // do some replacement if needed
-												//console.log("Avant (Client): " + fullFilename)
 												fullFilename = Meteor.call('serverFilename', fullFilename);
-												//console.log("Après (Server): " + fullFilename)
 
                         try {
                           // Query the entry
                           stats = fs.lstatSync(fullFilename);
                           //console.log(stats);
                           if (stats.isDirectory()) {
-                              filelinkObj.filefolder="folder";
+                              filelinkObj.filefolder = "folder";
                           }
                           if (stats.isFile()) {
-                              filelinkObj.filefolder="file";
+                              filelinkObj.filefolder = "file";
                           }
                           filelinkObj.stats = stats;
                           filelinkObj.exists = true;
+													doUpdate = true;
                         }
                         catch (e) {
                           //console.log(e);
@@ -123,14 +147,13 @@ Meteor.methods({
                         }
 											}
 											else { //doc with filelink empty.
+												doUpdate = false;
 												filelinkObj.exists = true;
-												filelinkObj.filefolder="empty";
-												filelinkObj.stats = []
+												filelinkObj.filefolder = "empty";
+												filelinkObj.stats = [];
 											}
 
                       fields[key] = filelinkObj;
-                      //console.log(fields[key]);
-                      //console.log(fields)
                       //the direct is to prevent to create a revision
                       Docs.direct.update(
                   			{
@@ -144,59 +167,61 @@ Meteor.methods({
                             }
                         }
                   		);
-											if (filelinkObj.filefolder!=="empty"){
+											if (filelinkObj.filefolder !== "empty") {
+												if (Meteor.settings.public.debug) {
+													console.log("We insert the filelinkObj into the filelinkDB.");
+												}
                         Filelinks.insert(
                     			{
                     			    path: Meteor.call('stripBeginEndQuotes', filelinkObj.value),
-															serverPath : fullFilename,
+															serverPath: fullFilename,
                               stats: filelinkObj.stats,
-                              exists : filelinkObj.exists,
-                              type : filelinkObj.filefolder,
-                              docId : filelinkObj.docId,
-															inValidatedFolder : filelinkObj.inValidatedFolder
+                              exists: filelinkObj.exists,
+                              type: filelinkObj.filefolder,
+                              docId: filelinkObj.docId,
+															inValidatedFolder: filelinkObj.inValidatedFolder,
                     			}
                     		);
 											}
-
-                    }
+										} // end of filelink field is undefined
                   }
-              }
+                }
+            }
           }
       }
 			if (Meteor.settings.public.debug) {
-				console.log('Finished walking thru the different filelinks...');
+				console.log('Finished walking through the different filelinks.');
 			}
 	    return true;
 	},
 	walkThruOneFilelink: function (docId, clientPath, fieldName) {
 			var fs = Npm.require("fs");
+			var stats;
+			var fields;
 			check(docId, String);
 			check(clientPath, String);
 			check(fieldName, String);
 			if (Meteor.settings.public.debug) {
 				console.log('Starting to checking one filelink...');
 			}
-
-
 			clientPathStripped =  Meteor.call('stripBeginEndQuotes', clientPath);
 			fullFilename = Meteor.call('serverFilename', clientPathStripped);
 			if (Meteor.settings.public.debug) {
-				console.log("Après (Server): " + fullFilename)
+				console.log("Après (Server): " + fullFilename);
 			}
-
 			//Pas top, obligé de charger tous les fields pour n'en modifier qu'un seul...
-			if (Meteor.settings.public.debug){
+			if (Meteor.settings.public.debug) {
 				console.log('docId = ' + docId);
 			}
-			var fields = Docs.findOne({_id : docId}).fields
-			if (Meteor.settings.public.debug){
-				console.log(fields)
+			fields = Docs.findOne({_id: docId}).fields;
+			if (Meteor.settings.public.debug) {
+				console.log(fields);
 			}
 
-			if (fullFilename !== ""){
+			if (fullFilename !== "") {
 				//le champ est rempli
 				try {
-					var stats = fs.lstatSync(fullFilename);
+					stats = fs.lstatSync(fullFilename);
 					if (stats.isDirectory()) {
 							fields[fieldName].filefolder = "folder";
 					}
@@ -213,11 +238,10 @@ Meteor.methods({
 					fields[fieldName].stats = [];
 					fields[fieldName].filefolder = [];
 				}
-
 			}
 			else {
 				//le champ est vide
-				if (Meteor.settings.public.debug){
+				if (Meteor.settings.public.debug) {
 					console.log("Empty filelink");
 				}
 				fields[fieldName].exists = false;
@@ -227,20 +251,20 @@ Meteor.methods({
 
 			Docs.direct.update(
 				{
-					_id: docId
+					_id: docId,
 				},
 				{
 					$set: {
-						hasFilelink : true,
-						fields : fields,
-						filelinkFieldName: fieldName
-						}
+						hasFilelink: true,
+						fields: fields,
+						filelinkFieldName: fieldName,
+					},
 				}
 			);
 
-			if (Meteor.settings.public.debug){
-				console.log('Finished walking thru one filelink...');
+			if (Meteor.settings.public.debug) {
+				console.log('Finished walking thru one filelink.');
 			}
 	    return true;
-	}
+	},
 });

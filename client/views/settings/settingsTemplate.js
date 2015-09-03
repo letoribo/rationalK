@@ -88,7 +88,7 @@ Template.settingsTemplate.events({
     },
     "click a.walkThruFilelinks": function (e) {
       e.preventDefault();
-      Meteor.call('walkThruFilelinks',function (error, result) {});
+      Meteor.call('walkThruFilelinks', function () {});
       return false;
     },
     "click a.scanFilesContent": function (e) {
