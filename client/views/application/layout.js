@@ -1,7 +1,3 @@
-Template.header.helpers({
-
-});
-
 Template.layout.helpers({
   validLicense: function () {
 	    return Session.get('validLicense');
@@ -9,8 +5,4 @@ Template.layout.helpers({
   show: function (navItem) {
 		return Meteor.settings.public.show[navItem];
   },
-});
-
-Template.layout.events({
-
 });

@@ -7,6 +7,7 @@ Template.roles.rendered = function () {
 
 Template.roles.helpers({
   roles: function () {
+    var role;
     var arrayLength;
     var Roles = [
       {
@@ -31,7 +32,7 @@ Template.roles.helpers({
       rolesSettingsVal = rolesSettings.value;
       arrayLength = rolesSettingsVal.length;
       for (i = 0; i < arrayLength; i++) {
-        var role = {};
+        role = {};
         Roles.push(rolesSettingsVal[i]);
       }
     }

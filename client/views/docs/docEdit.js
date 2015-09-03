@@ -218,10 +218,10 @@ Template.docEdit.helpers({
     return selectedCategory.get() || this.categoryId;
   },
   displayUpload: function () {
-    return Meteor.settings["public"].display_upload;
+    return Meteor.settings.public.show.upload;
   },
   displaySearchScore: function () {
-    return Meteor.settings["public"].display_search_score;
+    return Meteor.settings.public.show.searchScore;
   },
   searchScore: function () {
     return this.searchScore;

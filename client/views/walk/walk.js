@@ -1,21 +1,18 @@
 Template.walk.helpers({
 	foldersToScan: function () {
 		var folders = FoldersToScan.find().fetch();
-		var textareaContent="";
+		var textareaContent = "";
 		folders.forEach(function (folder) {
-			if (folder.path==""){
-				//do nothing
-			}
-			else {
+			if (folder.path !== "") {
 				textareaContent = textareaContent + folder.path + "\n";
 			}
 		});
 		textareaContent = textareaContent.slice(0, - 1); //remove last line break \n
 		return textareaContent;
 	},
-	walkThruFoldersStatus :function () {
-		var walkThruFoldersStatus = rkStatus.findOne({method : 'walkThruFolders' });
-		if (Meteor.settings.public.debug){
+	walkThruFoldersStatus: function () {
+		var walkThruFoldersStatus = rkStatus.findOne({method: 'walkThruFolders' });
+		if (Meteor.settings.public.debug) {
 			console.log(walkThruFoldersStatus)
 		}
 		if (typeof(walkThruFoldersStatus) !== 'undefined') {
@@ -47,35 +44,21 @@ Template.walk.helpers({
 				return  "hidden"
 			}
 		}
-	}
+	},
 });
 
-
-
 Template.walk.events({
-	"submit .foldersToScanForm": function (event,template) {
-		event.preventDefault();
-		var PythonResults = Meteor.call('updateFoldersToScan',event.target.folders.value, function (error, result) {
-		if (error) {
-		    // handle error
-		  } else {
-
-		  }
-		});
-		return true;
+	"submit .foldersToScanForm": function (e) {
+		e.preventDefault();
+		return Meteor.call('updateFoldersToScan', e.target.folders.value, function () {});
 	},
 	"click a.walkThruFolders": function (e) {
 		e.preventDefault();
-		Meteor.call('walkThruFolders',function (error, result) {
-			console.log(error);
-			console.log(result)
-		});
-		return false;
-	}
+		return Meteor.call('walkThruFolders', function () {});
+	},
 });
 
 Template.walk.rendered = function () {
-
 var opts = {
   lines: 13, // The number of lines to draw
   length: 20, // The length of each line

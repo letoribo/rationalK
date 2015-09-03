@@ -77,17 +77,16 @@ Template.loginLayout.helpers({
 			return true;
 		}
 	},
-	showFooter: function (){
-	    return Meteor.settings.public.show_footer;
+	showFooter: function () {
+	    return Meteor.settings.public.show.footer;
 	},
-  isFreshInstall: function (){
+  isFreshInstall: function () {
     //var nAccounts = Meteor.users.find().count();
     var nAccounts = Members.collection.find().count();
     console.log(nAccounts);
-    console.log(this)
+    console.log(this);
     console.log(this.data);
-	    //return Meteor.settings.public.show_footer;
-	}
+	},
 });
 
 

@@ -16,12 +16,11 @@
 			"erp" : true,
 			"controlplan" : true,
 			"about" : true,
-			"footer" : true
+			"footer" : true,
+			"upload" : false,
+			"searchScore" : false,
 		},
-		"display_nickname_instead_of_name" : false,
 		"header_text":"rK",
-		"display_upload" : false,
-		"display_search_score" : false,
 		"custom_function_file":"companyA.js",
 		"debug" : true
 	},
@@ -35,7 +34,10 @@
 		"do": true,
 		"interval" : "at 01:00 am"
 	},
-	"rationalK_backups_out":"/Users/thomasdokithonon/Downloads/backups",
+	"periodicBackup" :{
+		"do": true,
+		"outFolder" :"/Users/thomasdokithonon/Downloads/backups"
+	},
 	"rationalK_Git" : {
 		"autoUpdate" : true,
 		"gitPullDir" : "C:/Users/doki/rationalK",

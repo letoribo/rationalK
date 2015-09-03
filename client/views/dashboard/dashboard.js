@@ -87,7 +87,9 @@ Template.dashboard.helpers({
 								fields = Views.findOne(viewId).fields;
 								for (fieldname in fields) {
 									if (fields[fieldname].type === 'filelink') {
-										fileLink = currentDoc.fields[fieldname].value;
+										if (typeof(currentDoc.fields[fieldname]) !== 'undefined') {
+											fileLink = currentDoc.fields[fieldname].value;
+										}
 									}
 								}
 							}
@@ -239,7 +241,9 @@ Template.dashboard.helpers({
 									fields = Views.findOne(viewId).fields;
 									for (fieldname in fields) {
 										if (fields[fieldname].type === 'filelink') {
-											fileLink = currentDoc.fields[fieldname].value;
+											if (typeof(currentDoc.fields[fieldname]) !== 'undefined') {
+												fileLink = currentDoc.fields[fieldname].value;
+											}
 										}
 									}
 								}

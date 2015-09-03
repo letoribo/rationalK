@@ -44,7 +44,7 @@ if (Meteor.isServer) {
           }
         );
 
-        if ((results != null)) {
+        if ((results !== null)) {
           for (j = 0, len = results.length; j < len; j++) {
             availableFunction = results[j];
             availableFunctionsValue.push(availableFunction.value);
@@ -68,6 +68,9 @@ if (Meteor.isServer) {
 
 	Meteor.methods({
     updateSettings: function (data) {
+      var roles = [];
+      var role = {};
+      var arrayLength;
       check(data, Match.Optional(
         {
           validatedFilesPath: Match.Optional(String),
@@ -104,24 +107,14 @@ if (Meteor.isServer) {
         );
       }
       else if (typeof data.Roles !== 'undefined') {
-        var roles = [];
-        var role = {};
-
         rolesTemp = data.Roles.split('|');
-
-        var arrayLength = rolesTemp.length;
+        arrayLength = rolesTemp.length;
         for (i = 0; i < arrayLength; i++) {
           role = {};
           role.name = rolesTemp[i];
           role.slug = getSlug(role.name);
           roles.push(role);
         }
-
-        if (Meteor.settings.public.debug){
-          console.log("Roles 2 : ")
-          console.log(roles)
-        }
-
 
         rkSettings.update(
           {
@@ -138,6 +131,4 @@ if (Meteor.isServer) {
       }
     },
   }); //end of server methods
-
-
 }//end if server
