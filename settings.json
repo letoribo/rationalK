@@ -49,11 +49,6 @@
 		"do": true,
 		"interval" : "every 5 minutes"
 	},
-	"rationalK_auto_update" : true,
-	"rationalK_auto_update_user" : "username",
-	"rationalK_auto_update_password" : "pass",
-	"rationalK_home_dir" : "/Users/thomasdokithonon/Downloads",
-	"rationalK_deployment_dir" : "/home/dokithonon/my-meteor-deployment",
 	"chokidar" : false,
 	"rationalK_mail" : {
 		"username" : "username",
