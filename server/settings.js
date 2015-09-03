@@ -2,18 +2,6 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
       rkSettings.update(
         {
-          key: "discussions",
-        },
-        {
-          key: "discussions",
-          value: Meteor.settings.discussions,
-        },
-        {
-          upsert: true,
-        }
-      );
-      rkSettings.update(
-        {
           key: "simple_search_behavior",
         },
         {

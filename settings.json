@@ -27,12 +27,10 @@
 	},
 	"rationalK_demo_mode" : false,
 	"rationalK_upload_dir" : "~/Dropbox/rationalK/uploads",
-	"rationalK_license_mode" : "offline",
-	"rationalK_license_url" : "http://rationalk.ch/api/?key",
-	"rationalK_license_owner":"admin@rationalk.ch",
-	"rationalK_license_key":"licensekey",
-	"rationalK_walk_cron":true,
-	"rationalK_walk_cron_interval":"every 4 hours",
+	"scanFolders" : {
+		"do": false,
+		"interval" : "at 03:00 am"
+	},
 	"scanFilelinks" : {
 		"do": true,
 		"interval" : "at 01:00 am"
@@ -54,7 +52,6 @@
 	"rationalK_auto_update_password" : "pass",
 	"rationalK_home_dir" : "/Users/thomasdokithonon/Downloads",
 	"rationalK_deployment_dir" : "/home/dokithonon/my-meteor-deployment",
-	"discussions" : false,
 	"chokidar" : false,
 	"rationalK_mail" : {
 		"username" : "username",
