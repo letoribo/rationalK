@@ -3,8 +3,8 @@ var exec;
 var mongoUrl;
 var database;
 var backup;
-//if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
-if (Meteor.isServer)  {
+if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
+//if (Meteor.isServer)  { //for test
 	exec = Npm.require('child_process').exec;
 	sys = Npm.require('sys');
 	mongoUrl = MongoDBURI.parse(process.env.MONGO_URL);
@@ -37,8 +37,8 @@ if (Meteor.isServer)  {
 		SyncedCron.add({
 		    name: 'Daily DB backup',
 		    schedule: function (parser) {
-		      //return parser.text('at 9:00 pm'); // fires at 9:00pm every day
-		      return parser.text('every 2 minutes'); // pour les essais
+		      return parser.text('at 9:00 pm'); // fires at 9:00pm every day
+		      //return parser.text('every 2 minutes'); // pour les essais
 		    },
 		    job: function () {
 					var backupSubFolderName = "backupDaily";
