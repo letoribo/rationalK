@@ -37,13 +37,13 @@ Template.dashboard.helpers({
 						var doc = Docs.findOne(object.docId);
 						if (typeof(doc) !== 'undefined') {
 							truncatedText = getTruncatedText(
-								Router.routes.docEdit.path({_id: this.docId}),
+								Router.routes.docEdit.path({_id: object.docId}),
 								doc.full
 							);
 						}
 						else {
 							truncatedText = getTruncatedText(
-								Router.routes.docEdit.path({_id: this.docId}),
+								Router.routes.docEdit.path({_id: object.docId}),
 								""
 							);
 						}

@@ -136,7 +136,7 @@ Meteor.methods({
       });
       full = "";
       for (key in doc.fields) {
-        full = full.concat(doc.fields[key].value).concat(" ");
+        full = full.concat(doc.fields[key].value).concat(" | ");
       }
       Docs.update({
         _id: att.docId

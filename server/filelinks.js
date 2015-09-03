@@ -175,7 +175,6 @@ Meteor.methods({
 			check(fieldName, String);
 			if (Meteor.settings.public.debug) {
 				console.log('Starting to checking one filelink...');
-
 			}
 
 
