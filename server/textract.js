@@ -4,6 +4,9 @@ if (Meteor.isServer) {
   var fs=Npm.require("fs");
 
   Meteor.methods({
+	  removeFilesContent: function () {
+		  FilesContent.remove({});
+	  },
     indexFilesContent4: function () {
       var stats = {};
       var fileTree = [];
