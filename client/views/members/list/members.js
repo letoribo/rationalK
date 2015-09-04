@@ -46,9 +46,11 @@ Template.members.helpers({
                 fn: function (value, object) {
                   var html = '';
                   var rolesArray = object.profile.roles;
-                  var arrayLength = rolesArray.length;
-                  for (i = 0; i < arrayLength; i++) {
-                      html = html .concat(' <span class="label label-success">' + rolesArray[i] + '</span>');
+                  if ((typeof rolesArray !== 'undefined') && (rolesArray !== null) ) {
+                    var arrayLength = rolesArray.length;
+                    for (i = 0; i < arrayLength; i++) {
+                        html = html .concat(' <span class="label label-success">' + rolesArray[i] + '</span>');
+                    }
                   }
                   return  new Spacebars.SafeString(html);
                 },
