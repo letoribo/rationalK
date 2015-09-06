@@ -31,7 +31,6 @@ matb33:collection-hooks
 maazalik:highcharts
 percolate:synced-cron
 chrismbeckett:toastr
-meteorhacks:kadira
 meteorhacks:zones
 meteorhacks:async
 gadicohen:messageformat
@@ -47,9 +46,9 @@ pascoual:pdfjs
 netanelgilad:excel
 peerlibrary:xml2js
 audit-argument-checks
-meteorhacks:kadira-debug
 dhtmlx:gantt
 meteorhacks:npm
 npm-container
 ongoworks:speakingurl
 mousetrap:mousetrap
+lowi:audit-trail
