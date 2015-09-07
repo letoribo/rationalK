@@ -19,7 +19,8 @@
 			"footer" : true,
 			"upload" : false,
 			"searchScore" : false,
-			"followup" : false
+			"followup" : false,
+			"trello" : true
 		},
 		"header_text":"rK",
 		"custom_function_file":"companyA.js",

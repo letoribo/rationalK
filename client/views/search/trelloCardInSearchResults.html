@@ -1,0 +1,16 @@
+<template name="trelloCardInSearchResults">
+	<div class="row">
+		<div class="col-md-10">
+			<p>{{full}}</p>
+		</div>
+		<div class="col-md-2">
+			<span class="label label-default">Trello Card in board : {{boardName}}</span>
+			<br/>
+			<a href="{{url}}" target="_blank" title="{{_ 'Open Card in Trello'}}"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+			<br/>
+			{{#if searchTypeIsFullTextSearch}}
+				<p>Search Score : {{textScore}}</p>
+			{{/if}}
+		</div>
+	</div>
+</template>

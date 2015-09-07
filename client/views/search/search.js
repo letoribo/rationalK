@@ -114,8 +114,9 @@ Template.searchTpl.helpers({
 			if (searchType === "fullTextSearch") {
 				docsResults = Docs.find({}, {sort: {score: -1}}).fetch();
 				filesContentResults = FilesContent.find({}, {sort: {score: -1}}).fetch();
+				trelloResults = Trello.find({}, {sort: {score: -1}}).fetch();
 				filesResults = WalkedFiles.find({}).fetch();
-				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults);
+				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults).concat(trelloResults);
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();

@@ -74,6 +74,9 @@
 				        				{{#if fields}}
 				        					{{>docInSearchResults}}
 				        				{{/if}}
+												{{#if boardName}}
+				        					{{>trelloCardInSearchResults}}
+				        				{{/if}}
 												{{#if text}}
 				        					{{>filesContentInSearchResults}}
 				        				{{/if}}
