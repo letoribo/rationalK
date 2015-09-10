@@ -55,18 +55,20 @@
 		        <li><a href="{{pathFor 'processes'}}" title="Processes"><img height="16px" src="/images/1422715147_tree_structure.png"/> Processes</a></li>
 		      {{/if}}
 		            {{#if show 'erp'}}
-		            <li class="dropdown">
-	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ERP <span class="caret"></span></a>
-	                    <ul class="dropdown-menu" role="menu">
-		                    <li><a href="{{pathFor 'plan'}}" title="Manage categories">Planning</a></li>
-		                    <li><a href="{{pathFor 'stocks'}}" title="Manage members">Stocks</a></li>
-	                    </ul>
-	                </li>
-	                {{/if}}
-
-									{{#if show 'controlplan'}}
-									<li><a href="{{pathFor 'controlplan'}}" title="Control Plan">Control Plan</a></li>
+									{{#if hasTemplate "build"}}
+				            <li class="dropdown">
+			                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ERP <span class="caret"></span></a>
+			                    <ul class="dropdown-menu" role="menu">
+				                    <li><a href="{{pathFor 'plan'}}" title="Manage categories">Planning</a></li>
+				                    <li><a href="{{pathFor 'stocks'}}" title="Manage members">Stocks</a></li>
+			                    </ul>
+			                </li>
 									{{/if}}
+	              {{/if}}
+
+								{{#if show 'controlplan'}}
+								<li><a href="{{pathFor 'controlplan'}}" title="Control Plan">Control Plan</a></li>
+								{{/if}}
 
 		            {{#if isAdmin}}
 	                <li class="dropdown">

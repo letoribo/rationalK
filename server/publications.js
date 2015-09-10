@@ -60,10 +60,6 @@ Meteor.publish("filelinks", function () {
   return Filelinks.find();
 });
 
-Meteor.publish("production", function () {
-  return Production.find();
-});
-
 Meteor.publish("messages", function () {
   return Messages.find();
 });
@@ -132,12 +128,7 @@ Meteor.publish("myCurrentSearchQuery", function () {
   );
 });
 
-Meteor.publish('ressourcePlanningPublished', function () {
-  var self = this;
-  var result = Meteor.call('createRessourcePlanning');
-  self.added('ressourceplanning', Random.id(), result);
-  self.ready();
-});
+
 
 
 Meteor.publish('cse', function (query) {

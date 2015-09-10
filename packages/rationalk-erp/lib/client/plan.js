@@ -198,7 +198,7 @@ Template.plan.rendered = function () {
 };
 
 Template.plan.helpers({
-	productionPlanning: function (){
+	productionPlanning: function () {
 		var productionPlanning = createProductionPlanning();
 		return productionPlanning;
 	},

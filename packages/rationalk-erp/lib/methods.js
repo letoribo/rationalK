@@ -1,5 +1,10 @@
+RKERP = {};
+
+
 Meteor.methods({
 		addNeedToThisProduct: function (productId,dataset) {
+			check(productId, String);
+			check(dataset, Match.Any);
 		console.log("Product Id : "+productId);
 		console.log("dataset : ");
 		console.log(dataset);
@@ -91,6 +96,7 @@ Meteor.methods({
 		}
 	},
 	deleteThisNeed: function (dataset) {
+		check(dataset, Match.Any);
 		//dataset : {parentproductid: "zzLmwhnteDGEmmDxD", productname: "Cage", neededqty: "1", productionstep: "Assembly"}
 		var productId = dataset.parentproductid;
 		var needs = Production.findOne(productId).needs;
@@ -127,8 +133,7 @@ Meteor.methods({
 		}
 	},
 	planProduction: function (dataset) {
-		check(dataset,Match.Any); //todo
-
+		check(dataset, Match.Any); //#todo
 		var productName = dataset.productName;
 		var productQty=dataset.productQty;
 		var startDate = dataset.startDate;
@@ -163,6 +168,7 @@ Meteor.methods({
 		}
 	},
 	deleteProduction: function (dataset) {
+		check(dataset, Match.Any); //#todo
 		if (Meteor.settings.public.debug){
 			console.log("Deleting production matching : ");
 			console.log(dataset);
@@ -221,7 +227,9 @@ Meteor.methods({
 
 	},
 	addToStock: function (productName,productQty) {
-		if (Meteor.settings.public.debug){
+		check(productName, String);
+		check(productQty, Number);
+		if (Meteor.settings.public.debug) {
 			console.log(productQty);
 		}
 		Production.update(
@@ -243,6 +251,7 @@ Meteor.methods({
 		}
 	},
 	deleteProduct: function (productId) {
+		check(productId, String);
 		var productName = Production.findOne(productId).productName;
 
 		//check if the product is not used in another product :

@@ -22,7 +22,6 @@ Expert = new Mongo.Collection('expert');
 Projects = new Mongo.Collection('projects');
 TempProjectFiles = new Mongo.Collection('tempprojectfiles');
 ProjectFiles = new Mongo.Collection('projectfiles');
-Production = new Mongo.Collection('production');
 controlPlan = new Mongo.Collection('controlplan');
 Filelinks = new Mongo.Collection('filelinks');
 Tags = new Mongo.Collection('tags');
@@ -105,13 +104,6 @@ controlPlan.allow( {
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },
 });
-
-Production.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
 
 Synonyms.allow( {
 		insert: function (userId) {return !! userId; },

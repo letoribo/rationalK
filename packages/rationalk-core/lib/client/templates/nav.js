@@ -71,6 +71,9 @@ Template.nav.helpers({
 	show: function (navItem) {
 		return Meteor.settings.public.show[navItem];
   },
+	hasTemplate: function (templateName) {
+    return Template[templateName];
+  },
 	headerText: function () {
 		return (typeof(Meteor.settings.public.header_text) !== 'undefined') ? Meteor.settings.public.header_text : "rationalK";
 	},
