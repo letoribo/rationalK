@@ -151,7 +151,8 @@ Template.settingsTemplate.helpers({
       });
       return Roles.join("|");
     }
-
-
+  },
+  hasTemplate: function (templateName) {
+    return Template[templateName];
   },
 });

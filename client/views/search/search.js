@@ -40,6 +40,9 @@ Template.searchTpl.onDestroyed(function () {
 });
 
 Template.searchTpl.helpers({
+	hasTemplate: function (templateName) {
+    return Template[templateName];
+  },
 	Categories: function () {
 		return Categories.find().fetch();
 	},
@@ -114,9 +117,17 @@ Template.searchTpl.helpers({
 			if (searchType === "fullTextSearch") {
 				docsResults = Docs.find({}, {sort: {score: -1}}).fetch();
 				filesContentResults = FilesContent.find({}, {sort: {score: -1}}).fetch();
-				trelloResults = Trello.find({}, {sort: {score: -1}}).fetch();
+
+				if (typeof RKTrello !== 'undefined') {
+					trelloResults = RKTrello.findAll();
+				}
+
 				filesResults = WalkedFiles.find({}).fetch();
-				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults).concat(trelloResults);
+				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults);
+
+				if (typeof RKTrello !== 'undefined') {
+					results = results.concat(trelloResults);
+				}
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();

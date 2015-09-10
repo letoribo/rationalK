@@ -18,10 +18,6 @@ Meteor.publish("followup", function () {
   return FollowUp.find();
 });
 
-Meteor.publish("trello", function () {
-  return Trello.find();
-});
-
 Meteor.publish("accounts", function () {
   return Meteor.users.find({}, {
     fields: {
@@ -242,15 +238,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
                 limit: 30,
             });
 
-            searchResultsTrello = Trello.find( {
-                  $text: {
-                    $search: searchQuery,
-                  },
-              }, {
-                  fields: { score: { $meta: 'textScore' } },
-                  sort: { score: { $meta: 'textScore' } },
-                  limit: 30,
-              });
+            if (typeof RKTrello !== 'undefined') {
+              searchResultsTrello = RKTrello.findFullText(searchQuery);
+            }
         }
         else {
           //marche pas todo
@@ -267,7 +257,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
 
           var searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
           var searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
-          searchResultsTrello = Trello.find({$text: { $search: "somethingthatyouwillneverfind" }});
+          if (typeof RKTrello !== 'undefined') {
+            searchResultsTrello = RKTrello.findDummy();
+          }
         } // end of filter on category
 
         //Docs.find({$text: { $search: "bearing" }}, {fields: { score: { $meta: 'textScore' } },sort: { score: { $meta: 'textScore' } }, limit : 30 });
@@ -301,15 +293,23 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
           searchResultsExternal,
           searchResultsFilesContent,
           searchResultsWalkedFiles,
-          searchResultsTrello,
-        ]
+        ];
+
+        if (typeof RKTrello !== 'undefined') {
+          searchResults = searchResults.concat(searchResultsTrello);
+        }
         //console.log(searchResults.fetch());
         nResults =
         searchResultsDocs.count()
         + searchResultsExternal.count()
         + searchResultsFilesContent.count()
-        + searchResultsWalkedFiles.count()
-        + searchResultsTrello.count();
+        + searchResultsWalkedFiles.count();
+
+        if (typeof RKTrello !== 'undefined') {
+          nResults = nResults + searchResultsTrello.count();
+        }
+
+
     } //end of type fulltext search
     else if (searchType === "regexpSearch") {
       if (Meteor.settings.simple_search_behavior === "or") {

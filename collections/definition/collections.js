@@ -33,7 +33,7 @@ RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
 FollowUp = new Mongo.Collection('FollowUp');
 FilesContent = new Mongo.Collection('FilesContent');
-Trello = new Mongo.Collection('Trello');
+
 
 if (Meteor.isServer) {
 	if (typeof Docs.createIndex === 'function') {
@@ -44,7 +44,6 @@ if (Meteor.isServer) {
 		WalkedFiles.createIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
 		External.createIndex({ "$**": "text" }, { name: "TextIndex" });
 		FilesContent.createIndex({ text: "text" }, { name: "TextIndex" });
-		Trello.createIndex({ full: "text" }, { name: "TextIndex" });
 	}
 	else {
 		if (Meteor.settings.public.debug) {
@@ -55,16 +54,9 @@ if (Meteor.isServer) {
 			WalkedFiles._ensureIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
 			External._ensureIndex({ "$**": "text" }, { name: "TextIndex" });
 			FilesContent._ensureIndex( { text: "text" }, {name: "TextIndex"});
-			Trello._ensureIndex( { full: "text" }, {name: "TextIndex"});
 	}
 }
 } //end if Server
-
-Trello.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
 
 FilesContent.allow( {
 		insert: function (userId) {return !! userId; },
