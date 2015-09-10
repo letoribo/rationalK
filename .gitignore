@@ -2,3 +2,7 @@
 .DS_Store
 rationalK/
 *.tar.gz
+packages/rationalk-lib
+packages/rationalk-core
+packages/rationalk-erp
+packages/rationalk-trello
