@@ -6,3 +6,5 @@ rationalk:lib
 rationalk:core
 rationalk:trello
 rationalk:erp
+rationalk:checklists
+rationalk:cse

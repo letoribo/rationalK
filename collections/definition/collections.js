@@ -26,7 +26,6 @@ controlPlan = new Mongo.Collection('controlplan');
 Filelinks = new Mongo.Collection('filelinks');
 Tags = new Mongo.Collection('tags');
 External = new Mongo.Collection('external');
-WebSearchResults = new Mongo.Collection('websearchresults');
 XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');

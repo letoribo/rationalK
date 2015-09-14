@@ -68,26 +68,36 @@ Template.searchTpl.helpers({
 		}
 	},
 	webSearchResults: function () {
-		return WebSearchResults.find();
+		if (typeof RKCSE !== 'undefined') {
+			return RKCSE.findAll();
+		}
+		return false;
 	},
 	messageOnNoResult: function () {
 		var str = '<p>';
 		if (typeof Session.get("searchQuery") !== 'undefined') {
 			str = str.concat(TAPi18n.__('No results') + ". ");
 
-			if ( !Session.get("includeWalkedFilesInResults") && !Session.get("includeWebInResults") ) {
-				str = str.concat(TAPi18n.__('Relaunch your search and include') + " : ");
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__("your files") + '</a>');
-				str = str.concat(', ');
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="web">' + TAPi18n.__("the web") + '</a>');
-				str = str.concat(' ' + TAPi18n.__("or") + ' ');
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="webandfiles">' + TAPi18n.__("both") + '</a>.');
+			if (typeof RKCSE !== 'undefined') {
+				if ( !Session.get("includeWalkedFilesInResults") && !Session.get("includeWebInResults") ) {
+					str = str.concat(TAPi18n.__('Relaunch your search and include') + " : ");
+					str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__("your files") + '</a>');
+					str = str.concat(', ');
+					str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="web">' + TAPi18n.__("the web") + '</a>');
+					str = str.concat(' ' + TAPi18n.__("or") + ' ');
+					str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="webandfiles">' + TAPi18n.__("both") + '</a>.');
+				}
+				if ( !Session.get("includeWalkedFilesInResults") && Session.get("includeWebInResults") ) {
+					str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__('Relaunch by including your files in your search') + '</a>.');
+				}
+				if ( Session.get("includeWalkedFilesInResults") && !Session.get("includeWebInResults") ) {
+					str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="web">' + TAPi18n.__('Relaunch by including the web in your search') + '</a>.');
+				}
 			}
-			if ( !Session.get("includeWalkedFilesInResults") && Session.get("includeWebInResults") ) {
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__('Relaunch by including your files in your search') + '</a>.');
-			}
-			if ( Session.get("includeWalkedFilesInResults") && !Session.get("includeWebInResults") ) {
-				str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="web">' + TAPi18n.__('Relaunch by including the web in your search') + '</a>.');
+			else {
+				if ( !Session.get("includeWalkedFilesInResults") ) {
+					str = str.concat('<a href="#" title="" class="relaunchSearchWithDifferentOptions" data-includeInSearch="files">' + TAPi18n.__('Relaunch by including your files in your search') + '</a>');
+				}
 			}
 
 			str = str.concat('</p>');
@@ -168,15 +178,19 @@ Template.searchTpl.events({
 			Session.set("includeWalkedFilesInResults", true);
 			document.getElementById("includeWalkedFilesInResultsCheckbox").checked = true;
 		}
-		if (e.currentTarget.dataset.includeinsearch === "web") {
-			Session.set("includeWebInResults", true);
-			document.getElementById("includeWebInResultsCheckbox").checked = true;
+		if (typeof RKCSE !== 'undefined') {
+			if (e.currentTarget.dataset.includeinsearch === "web") {
+				Session.set("includeWebInResults", true);
+				document.getElementById("includeWebInResultsCheckbox").checked = true;
+			}
 		}
-		if (e.currentTarget.dataset.includeinsearch === "filesandweb") {
-			Session.set("includeWalkedFilesInResults", true);
-			document.getElementById("includeWalkedFilesInResultsCheckbox").checked = true;
-			Session.set("includeWebInResults", true);
-			document.getElementById("includeWebInResultsCheckbox").checked = true;
+		if (typeof RKCSE !== 'undefined') {
+			if (e.currentTarget.dataset.includeinsearch === "filesandweb") {
+				Session.set("includeWalkedFilesInResults", true);
+				document.getElementById("includeWalkedFilesInResultsCheckbox").checked = true;
+				Session.set("includeWebInResults", true);
+				document.getElementById("includeWebInResultsCheckbox").checked = true;
+			}
 		}
 		document.getElementById("searchForm").submit();
 		return false;
@@ -234,7 +248,9 @@ Template.searchTpl.events({
 			Session.set("searchType", e.target.searchType.value);
 			Session.set("catFilter", e.target.catFilter.value);
 			Session.set("includeWalkedFilesInResults", e.target.includeWalkedFilesInResultsCheckbox.checked);
-			Session.set("includeWebInResults", e.target.includeWebInResultsCheckbox.checked);
+			if (typeof RKCSE !== 'undefined') {
+				Session.set("includeWebInResults", e.target.includeWebInResultsCheckbox.checked);
+			}
 			//after all : (synonyms max be added here ?)
 			Session.set("searchQuerySentToServer", e.target.searchQuery.value);
 		}

@@ -45,11 +45,9 @@
 								<input type="checkbox" checked="{{includeWalkedFilesInResults}}" id="includeWalkedFilesInResultsCheckbox"> {{_ "Include Windows files"}}
 							</label>
   					</div>
-						<div id="includeWebInResultsDiv" class="checkbox includeWebInResultsCheckbox">
-							<label>
-								<input type="checkbox" checked="{{includeWebInResults}}" id="includeWebInResultsCheckbox"> {{_ "Include Web"}}
-							</label>
-  					</div>
+						{{#if hasTemplate "webInSearchResults"}}
+							{{> webInSearchResultsCheckbox}}
+						{{/if}}
 
   					<button type="submit" class="btn btn-primary search">{{_ "Search"}}</button>
 
@@ -108,14 +106,15 @@
 											{{messageOnNoResult}}
 										{{/if}}
 									{{/each}}
-
-							{{#if webSearchResults.count}}
-									{{#each webSearchResults}}
-										<div class="post">
-											{{> webInSearchResults}}
-										</div>
-									{{/each}}
-							{{/if}}
+								{{#if hasTemplate "webInSearchResults"}}
+									{{#if webSearchResults.count}}
+											{{#each webSearchResults}}
+												<div class="post">
+													{{> webInSearchResults}}
+												</div>
+											{{/each}}
+									{{/if}}
+								{{/if}}
 					</div>
         		</div>
     		</div>
