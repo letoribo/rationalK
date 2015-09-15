@@ -68,26 +68,6 @@ Meteor.publish("processes", function () {
   return Processes.find();
 });
 
-Meteor.publish("projects", function () {
-  return Projects.find();
-});
-
-
-
-Meteor.publish("project", function (projectId) {
-  check(projectId, String);
-  return Projects.find({
-    _id: projectId,
-  });
-});
-
-Meteor.publish("projectfiles", function (projectId) {
-  check(projectId, String);
-  return ProjectFiles.find({
-    projectId: projectId,
-  });
-});
-
 Meteor.publish("process", function (processId) {
   check(processId, String);
   return Processes.find({

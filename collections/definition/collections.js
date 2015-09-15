@@ -19,9 +19,6 @@ Synonyms = new Mongo.Collection('synonyms');
 ProcessDocuments = new Mongo.Collection('processdocuments');
 Processes = new Mongo.Collection('processes');
 Expert = new Mongo.Collection('expert');
-Projects = new Mongo.Collection('projects');
-TempProjectFiles = new Mongo.Collection('tempprojectfiles');
-ProjectFiles = new Mongo.Collection('projectfiles');
 controlPlan = new Mongo.Collection('controlplan');
 Filelinks = new Mongo.Collection('filelinks');
 Tags = new Mongo.Collection('tags');
@@ -105,24 +102,6 @@ controlPlan.allow( {
 });
 
 Synonyms.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-Projects.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-TempProjectFiles.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-ProjectFiles.allow( {
 		insert: function (userId) {return !! userId; },
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },

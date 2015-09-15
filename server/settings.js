@@ -93,20 +93,6 @@ if (Meteor.isServer) {
           }
         );
       }
-      else if (typeof data.projectFileTypes !== 'undefined') {
-        rkSettings.update(
-          {
-            key: "projectFileTypes",
-          },
-          {
-            key: "projectFileTypes",
-            value: data.projectFileTypes,
-          },
-          {
-            upsert: true,
-          }
-        );
-      }
       else if (typeof data.Roles !== 'undefined') {
         rolesTemp = data.Roles.split('|');
         arrayLength = rolesTemp.length;

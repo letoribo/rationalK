@@ -16,14 +16,7 @@ Template.settingsTemplate.events({
 		var optionName = "custom_settings";
 	    var optionValue = event.target.custom_settings.value;
 
-	    Meteor.call('updateOption', optionName, optionValue, function (error, result) {
-		  if (error) {
-		    // handle error
-		  } else {
-		    // examine result
-		    console.log(result);
-		  }
-		});
+	    Meteor.call('updateOption', optionName, optionValue, function () {});
 
 	    // Clear form
 	    //event.target.option1.value = optionValue;
@@ -49,25 +42,6 @@ Template.settingsTemplate.events({
       		}
   	    }
       })
-    },
-    'submit #projectFileTypesForm': function (e, t) {
-  		var data = {};
-      var projectFileTypes;
-      e.preventDefault();
-  		projectFileTypes = t.$('#projectFileTypes').val();
-      data.projectFileTypes = projectFileTypes;
-  	  Meteor.call('updateSettings', data, function (err) {
-	    if (err) {
-        if (typeof(toastr) !== 'undefined') {
-    		    toastr.error(err.reason + ". Please try again.");
-        }
-	    }
-	    else {
-        if (typeof(toastr) !== 'undefined') {
-    			toastr.success(TAPi18n.__('Saved'));
-    		}
-	    }
-      });
     },
     'submit #rolesForm': function (e, t) {
   		var data = {};
@@ -134,14 +108,6 @@ Template.settingsTemplate.helpers({
       validatedFilesPathValue = rkSettings.findOne({key: "validatedFilesPath"}).value;
     }
     return validatedFilesPathValue;
-  },
-  projectFileTypes: function () {
-    var projectFileTypes = rkSettings.findOne({key: "projectFileTypes"});
-    var projectFileTypesValue = "";
-    if (typeof  projectFileTypes !== 'undefined') {
-      projectFileTypesValue = projectFileTypes.value;
-    }
-    return projectFileTypesValue;
   },
   Roles: function () {
     var settings = rkSettings.findOne({key: "Roles"});
