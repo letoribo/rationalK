@@ -22,7 +22,7 @@ cfs:collection-filters@0.2.4
 cfs:data-man@0.0.6
 cfs:file@0.1.17
 cfs:filesystem@0.1.2
-cfs:http-methods@0.0.29
+cfs:http-methods@0.0.30
 cfs:http-publish@0.0.13
 cfs:power-queue@0.9.11
 cfs:reactive-list@0.0.9
@@ -71,7 +71,6 @@ less@1.0.14
 livedata@1.0.13
 localstorage@1.0.3
 logging@1.0.7
-lowi:audit-trail@1.0.1
 maazalik:highcharts@0.4.0
 matb33:collection-hooks@0.7.15
 meteor@1.1.6
@@ -108,13 +107,13 @@ percolate:synced-cron@1.2.2
 raix:eventemitter@0.1.3
 raix:ui-dropped-event@0.0.7
 random@1.0.3
-rationalk:checklists@0.0.1
-rationalk:core@0.0.1
+rationalk:checklists@0.0.2
+rationalk:core@0.0.2
 rationalk:cse@0.0.1
 rationalk:erp@0.0.1
 rationalk:fmea@0.0.1
 rationalk:lib@0.0.1
-rationalk:ppm@0.0.1
+rationalk:ppm@0.0.2
 rationalk:trello@0.0.1
 reactive-dict@1.1.0
 reactive-var@1.0.5

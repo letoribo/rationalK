@@ -6,3 +6,7 @@ packages/rationalk-lib
 packages/rationalk-core
 packages/rationalk-erp
 packages/rationalk-trello
+packages/rationalk-ppm
+packages/rationalk-fmea
+packages/rationalk-cse
+packages/npm-container
