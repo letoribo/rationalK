@@ -22,7 +22,7 @@
 			"followup" : false,
 			"trello" : true,
 			"checklists" : true,
-			"fmea" : true,
+			"fmea" : true
 		},
 		"header_text":"rK",
 		"custom_function_file":"companyA.js",

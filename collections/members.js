@@ -11,7 +11,7 @@ var purgeMember;
 
 purgeMember = function (id, accountId) {
 	check(id, String);
-	check(accountId, String);
+	check(accountId, Match.Optional(String));//if the user has not approuved then he has no account id
   Members.collection.remove({
     _id: id
   });
@@ -137,12 +137,50 @@ Meteor.methods({
 			// remove last trailing slash if any :
 			clientURL = clientURL.replace(/\/$/, "");
 
+			var emailText = "You need to setup your password. Please register with this link: " + clientURL + "/invitation/" + invitationId
+			var emailSubject = "[rationalK] You have been added as a member";
+
+			// alternative using nodemailer :
+			var mailOptions = {
+					from : Meteor.settings.rationalK_mail.from, // sender address
+					to : att.email, // list of receivers
+					//cc : data.submitterEmail,
+					subject: emailSubject, // Subject line
+					//text: 'Hello world', // plaintext body
+					html: emailText, // html body
+			};
+
+			var nodemailer = Nodemailer;
+			// create reusable transport method (opens pool of SMTP connections)
+			var smtpTransport = nodemailer.createTransport("SMTP",{
+				host: Meteor.settings.rationalK_mail.host,
+				port: Meteor.settings.rationalK_mail.port,
+				auth: {
+						user: Meteor.settings.rationalK_mail.username,
+						pass: Meteor.settings.rationalK_mail.password
+				}
+			});
+
+			smtpTransport.sendMail(mailOptions, function (error, response){
+			if(error){
+					console.log(error);
+			}
+			else{
+					console.log("Message sent: " + response.message);
+			}
+				// if you don't want to use this transport object anymore, uncomment following line
+			 smtpTransport.close(); // shut down the connection pool, no more messages
+		 });
+		 // end of nodemailer alternative
+
+		 /*
       Email.send({
         from: "admin@rationalk.ch",
         to: att.email,
-        subject: "[rationalK] You have been added as a member",
-        text: "You need to setup your password. Please register with this link: " + clientURL + "/invitation/" + invitationId
+        subject: emailSubject,
+        text: emailText,
       });
+			*/
     }
     return memberId;
   }
