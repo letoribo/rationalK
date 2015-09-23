@@ -13,7 +13,9 @@ Template.memberEdit.events({
     };
     Meteor.call("memberUpdate", properties, function (error, id) {
       if (error) {
-        Errors.throwError(error.reason);
+        if (typeof(toastr) !== 'undefined') {
+          toastr.error(error.reason);
+        }
       } else {
         Router.go("members");
       }
@@ -25,7 +27,9 @@ Template.memberEdit.events({
     if (confirm("Delete this member?")) {
       Meteor.call("memberDelete", this._id, function (error, id) {
         if (error) {
-          return Errors.throwError(error.reason);
+          if (typeof(toastr) !== 'undefined') {
+            toastr.error(error.reason);
+          }
         } else {
           return Router.go("members");
         }

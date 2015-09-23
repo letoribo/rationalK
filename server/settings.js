@@ -43,24 +43,25 @@ if (Meteor.isServer) {
             upsert: true,
           }
         );
-
-        if ((results !== null)) {
-          for (j = 0, len = results.length; j < len; j++) {
-            availableFunction = results[j];
-            availableFunctionsValue.push(availableFunction.value);
-          }
-          rkSettings.update(
-            {
-              key: "availableFunctionsValue",
-            },
-            {
-              key: "availableFunctionsValue",
-              value: availableFunctionsValue,
-            },
-            {
-              upsert: true,
+        if (typeof results !== "undefined") {
+          if ((results !== null)) {
+            for (j = 0, len = results.length; j < len; j++) {
+              availableFunction = results[j];
+              availableFunctionsValue.push(availableFunction.value);
             }
-          );
+            rkSettings.update(
+              {
+                key: "availableFunctionsValue",
+              },
+              {
+                key: "availableFunctionsValue",
+                value: availableFunctionsValue,
+              },
+              {
+                upsert: true,
+              }
+            );
+          }
         }
         return true;
       });
@@ -86,20 +87,6 @@ if (Meteor.isServer) {
           {
             key: "validatedFilesPath",
             value: data.validatedFilesPath,
-          },
-          {
-            upsert: true,
-          }
-        );
-      }
-      else if (typeof data.projectFileTypes !== 'undefined') {
-        rkSettings.update(
-          {
-            key: "projectFileTypes",
-          },
-          {
-            key: "projectFileTypes",
-            value: data.projectFileTypes,
           },
           {
             upsert: true,

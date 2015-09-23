@@ -19,20 +19,16 @@ Synonyms = new Mongo.Collection('synonyms');
 ProcessDocuments = new Mongo.Collection('processdocuments');
 Processes = new Mongo.Collection('processes');
 Expert = new Mongo.Collection('expert');
-Projects = new Mongo.Collection('projects');
-TempProjectFiles = new Mongo.Collection('tempprojectfiles');
-ProjectFiles = new Mongo.Collection('projectfiles');
-Production = new Mongo.Collection('production');
 controlPlan = new Mongo.Collection('controlplan');
 Filelinks = new Mongo.Collection('filelinks');
 Tags = new Mongo.Collection('tags');
 External = new Mongo.Collection('external');
-WebSearchResults = new Mongo.Collection('websearchresults');
 XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
 FollowUp = new Mongo.Collection('FollowUp');
 FilesContent = new Mongo.Collection('FilesContent');
+
 
 if (Meteor.isServer) {
 	if (typeof Docs.createIndex === 'function') {
@@ -105,32 +101,7 @@ controlPlan.allow( {
     remove: function (userId) {return !!userId; },
 });
 
-Production.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-
 Synonyms.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-Projects.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-TempProjectFiles.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-ProjectFiles.allow( {
 		insert: function (userId) {return !! userId; },
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },

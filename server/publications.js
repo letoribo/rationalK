@@ -60,36 +60,12 @@ Meteor.publish("filelinks", function () {
   return Filelinks.find();
 });
 
-Meteor.publish("production", function () {
-  return Production.find();
-});
-
 Meteor.publish("messages", function () {
   return Messages.find();
 });
 
 Meteor.publish("processes", function () {
   return Processes.find();
-});
-
-Meteor.publish("projects", function () {
-  return Projects.find();
-});
-
-
-
-Meteor.publish("project", function (projectId) {
-  check(projectId, String);
-  return Projects.find({
-    _id: projectId,
-  });
-});
-
-Meteor.publish("projectfiles", function (projectId) {
-  check(projectId, String);
-  return ProjectFiles.find({
-    projectId: projectId,
-  });
 });
 
 Meteor.publish("process", function (processId) {
@@ -132,12 +108,7 @@ Meteor.publish("myCurrentSearchQuery", function () {
   );
 });
 
-Meteor.publish('ressourcePlanningPublished', function () {
-  var self = this;
-  var result = Meteor.call('createRessourcePlanning');
-  self.added('ressourceplanning', Random.id(), result);
-  self.ready();
-});
+
 
 
 Meteor.publish('cse', function (query) {
@@ -189,28 +160,33 @@ Meteor.publish('cse', function (query) {
 
 
 Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,includeWalkedFilesInResults) {
-    check(searchQuery, String);
-    check(searchType, String);
-    check(catFilter, String);
-    check(includeWalkedFilesInResults, Match.OneOf(null, Boolean));
-    //console.log("You are searching for : _" +searchQuery + "_ on the server (searchType: "+searchType+")");
-    if ( (typeof searchQuery === 'undefined') || (searchQuery==="") ){
-      //console.log("I will not publish anything, your search query is empty.");
-      return [];
-    }
+  var searchResultsDocs;
+  var searchResults;
+  var searchResultsTrello;
+  var nResults;
+  check(searchQuery, String);
+  check(searchType, String);
+  check(catFilter, String);
+  check(includeWalkedFilesInResults, Match.OneOf(null, Boolean));
+  //console.log("You are searching for : _" +searchQuery + "_ on the server (searchType: "+searchType+")");
+  if ( (typeof searchQuery === 'undefined') || (searchQuery === "") ) {
+    //console.log("I will not publish anything, your search query is empty.");
+    return [];
+  }
 
-    if (Meteor.settings.public.debug){
-      console.log('Query : ' + searchQuery);
-      console.log('Type of search : ' + searchType);
-      console.log('Filter on category : ' + catFilter);
-    }
+  if (Meteor.settings.public.debug) {
+    console.log('Query : ' + searchQuery);
+    console.log('Type of search : ' + searchType);
+    console.log('Filter on category : ' + catFilter);
+  }
 
-    // I have something to search for :
-    if (searchType === "fullTextSearch") {
-
-      if (catFilter ==="all"){
-        var searchResultsDocs = Docs.find({
-              $text: { $search: searchQuery }
+  // I have something to search for :
+  if (searchType === "fullTextSearch") {
+      if (catFilter ==="all") {
+        searchResultsDocs = Docs.find( {
+              $text: {
+                $search: searchQuery,
+              },
           }, {
               fields: { score: { $meta: 'textScore' } },
               sort: { score: { $meta: 'textScore' } },
@@ -232,10 +208,14 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
                 sort: { score: { $meta: 'textScore' } },
                 limit: 30,
             });
+
+            if (typeof RKTrello !== 'undefined') {
+              searchResultsTrello = RKTrello.findFullText(searchQuery);
+            }
         }
         else {
           //marche pas todo
-          var searchResultsDocs = Docs.find({
+          searchResultsDocs = Docs.find({
                 $and : [
                     {$text: { $search: searchQuery }},
                     {"categoryId" : catFilter}
@@ -248,6 +228,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
 
           var searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
           var searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
+          if (typeof RKTrello !== 'undefined') {
+            searchResultsTrello = RKTrello.findDummy();
+          }
         } // end of filter on category
 
         //Docs.find({$text: { $search: "bearing" }}, {fields: { score: { $meta: 'textScore' } },sort: { score: { $meta: 'textScore' } }, limit : 30 });
@@ -276,17 +259,31 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
           var searchResultsWalkedFiles = WalkedFiles.find({'path' : 'aDummyPathYouWillNeverFind' });
         }
 
-        var searchResults = [
+        searchResults = [
           searchResultsDocs,
           searchResultsExternal,
           searchResultsFilesContent,
           searchResultsWalkedFiles,
-        ]
+        ];
+
+        if (typeof RKTrello !== 'undefined') {
+          searchResults = searchResults.concat(searchResultsTrello);
+        }
         //console.log(searchResults.fetch());
-        var nResults = searchResultsDocs.count() + searchResultsExternal.count() + searchResultsFilesContent.count() + searchResultsWalkedFiles.count();
+        nResults =
+        searchResultsDocs.count()
+        + searchResultsExternal.count()
+        + searchResultsFilesContent.count()
+        + searchResultsWalkedFiles.count();
+
+        if (typeof RKTrello !== 'undefined') {
+          nResults = nResults + searchResultsTrello.count();
+        }
+
+
     } //end of type fulltext search
-    else if (searchType==="regexpSearch"){
-      if (Meteor.settings.simple_search_behavior==="or"){
+    else if (searchType === "regexpSearch") {
+      if (Meteor.settings.simple_search_behavior === "or") {
         var parts = searchQuery.trim().split(/[&]+/);
         var len = parts.length;
         var arrayOfAndForDocs = [];
@@ -554,10 +551,10 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
 		    searchDate: new Date(),
 				who: this.userId,
 				searchQuery: searchQuery,
-				numberOfSearchResults : nResults,
+				numberOfSearchResults: nResults,
 				includeSynonymsInResults: false,
         includeWalkedFilesInResults: includeWalkedFilesInResults,
-				searchType: searchType
+				searchType: searchType,
 		});
     return searchResults;
 });
@@ -571,7 +568,6 @@ Meteor.publish("history", function () {
   if (this.userId) {
     user = Meteor.users.findOne(this.userId);
     return History.find({
-
     }, {
       sort: {
         createdAt: -1

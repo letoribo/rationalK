@@ -23,7 +23,9 @@ Template.memberNew.events({
     Meteor.call("memberNew", properties, function (error, id) {
       rd.hide();
       if (error) {
-        Errors.throwError(error.reason);
+        if (typeof(toastr) !== 'undefined') {
+          toastr.error(error.reason);
+        }
       } else {
         Router.go("members");
       }

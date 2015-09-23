@@ -37,6 +37,16 @@ You can run the application locally (like on your laptop) or on a server
 3. Start the application by entering in the console prompt : ```meteor --settings settings.json```
 4. Access the application at : http://localhost:3000 (can vary)
 
+## Packages
+
+### Mandatory packages
+rationalk-lib
+rationalk-core
+
+### Optional packages
+rationalk-trello
+rationalk-erp
+
 ## Settings
 
 `settings.json` :
