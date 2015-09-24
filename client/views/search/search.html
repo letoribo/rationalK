@@ -77,6 +77,11 @@
 														{{>trelloCardInSearchResults}}
 													{{/if}}
 											  {{/if}}
+												{{#if hasTemplate "corePFMEAInSearchResults"}}
+													{{#if searchResultFromCorePFMEA}}
+														{{>corePFMEAInSearchResults}}
+													{{/if}}
+											  {{/if}}
 												{{#if text}}
 				        					{{>filesContentInSearchResults}}
 				        				{{/if}}

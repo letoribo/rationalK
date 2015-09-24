@@ -132,12 +132,24 @@ Template.searchTpl.helpers({
 					trelloResults = RKTrello.findAll();
 				}
 
+				if (typeof RKFMEA !== 'undefined') {
+					pfmeaResults = RKFMEA.corePFMEA.findAll();
+					results = results.concat(pfmeaResults);
+					if (Meteor.settings.public.debug) {
+						console.log("Searching through core PFMEA entries...");
+						console.log("pfmeaResults : ");
+						console.log(pfmeaResults);
+					}
+				}
+
+
 				filesResults = WalkedFiles.find({}).fetch();
 				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults);
 
 				if (typeof RKTrello !== 'undefined') {
 					results = results.concat(trelloResults);
 				}
+
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();

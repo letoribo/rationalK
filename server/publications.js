@@ -182,7 +182,7 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
 
   // I have something to search for :
   if (searchType === "fullTextSearch") {
-      if (catFilter ==="all") {
+      if (catFilter === "all") {
         searchResultsDocs = Docs.find( {
               $text: {
                 $search: searchQuery,
@@ -212,24 +212,36 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             if (typeof RKTrello !== 'undefined') {
               searchResultsTrello = RKTrello.findFullText(searchQuery);
             }
+            if (typeof RKFMEA !== 'undefined') {
+              searchResultsPFMEA = RKFMEA.corePFMEA.findFullText(searchQuery);
+            }
         }
         else {
           //marche pas todo
           searchResultsDocs = Docs.find({
-                $and : [
-                    {$text: { $search: searchQuery }},
-                    {"categoryId" : catFilter}
-                ]
+                $and: [
+                    {
+                      $text: {
+                        $search: searchQuery,
+                      },
+                    },
+                    {
+                      "categoryId": catFilter,
+                    },
+                ],
             }, {
                 fields: { score: { $meta: 'textScore' } },
                 sort: { score: { $meta: 'textScore' } },
-                limit : 30
+                limit: 30,
             });
 
           var searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
           var searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
           if (typeof RKTrello !== 'undefined') {
             searchResultsTrello = RKTrello.findDummy();
+          }
+          if (typeof RKFMEA !== 'undefined') {
+            searchResultsPFMEA = RKFMEA.corePFMEA.findDummy();
           }
         } // end of filter on category
 
@@ -269,6 +281,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
         if (typeof RKTrello !== 'undefined') {
           searchResults = searchResults.concat(searchResultsTrello);
         }
+        if (typeof RKFMEA !== 'undefined') {
+          searchResults = searchResults.concat(searchResultsPFMEA);
+        }
         //console.log(searchResults.fetch());
         nResults =
         searchResultsDocs.count()
@@ -278,6 +293,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
 
         if (typeof RKTrello !== 'undefined') {
           nResults = nResults + searchResultsTrello.count();
+        }
+        if (typeof RKFMEA !== 'undefined') {
+          nResults = nResults + searchResultsPFMEA.count();
         }
 
 
