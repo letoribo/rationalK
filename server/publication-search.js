@@ -1,7 +1,6 @@
 Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, includeWalkedFilesInResults) {
   var searchResultsDocs;
   var searchResults = [];
-  var searchResultsTrello;
   var nResults = 0;
   var searchResultsExternal;
   var searchResultsFilesContent;
@@ -68,8 +67,17 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               nResults = nResults + sr.count();
               searchResults = searchResults.concat(sr);
             }
+
+            if (typeof RKDiscussions !== 'undefined') {
+              sr = RKDiscussions.findFullTextDiscussions(searchQuery);
+              nResults = nResults + sr.count();
+              searchResults = searchResults.concat(sr);
+              sr = RKDiscussions.findFullTextMessages(searchQuery);
+              nResults = nResults + sr.count();
+              searchResults = searchResults.concat(sr);
+            }
         }
-        else { //no filters on categories
+        else { //there is a filter on categories
           //marche pas todo
           searchResultsDocs = Docs.find({
                 $and: [
@@ -88,14 +96,23 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
                 limit: 30,
             });
 
-          var searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
-          var searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
+          searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
+          searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
           if (typeof RKTrello !== 'undefined') {
             searchResultsTrello = RKTrello.findDummy();
           }
           if (typeof RKFMEA !== 'undefined') {
             searchResultsPFMEA = RKFMEA.corePFMEA.findDummy();
           }
+          if (typeof RKDiscussions !== 'undefined') {
+            sr = RKDiscussions.findDummyDiscussions();
+            searchResults = searchResults.concat(sr);
+            sr = RKDiscussions.findDummyMessages();
+            searchResults = searchResults.concat(sr);
+          }
+
+
+
         } // end of filter on category
 
         // ne marche pas alors que ca marche bien sur le serveur

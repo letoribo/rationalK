@@ -12,8 +12,6 @@ FoldersToScan = new Mongo.Collection('folderstoscan');
 TempWalkedFiles = new Mongo.Collection('tempwalkedfiles');
 WalkedFiles = new Mongo.Collection('walkedfiles');
 SearchQueries = new Mongo.Collection('searchqueries');
-Discussions = new Mongo.Collection('discussions');
-Messages = new Mongo.Collection('messages');
 Notes = new Mongo.Collection('notes');
 Synonyms = new Mongo.Collection('synonyms');
 ProcessDocuments = new Mongo.Collection('processdocuments');
@@ -118,19 +116,7 @@ ProcessDocuments.allow( {
     remove: function (userId) {return !!userId; },
 });
 
-Messages.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
 Notes.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-Discussions.allow( {
 		insert: function (userId) {return !! userId; },
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },

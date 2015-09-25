@@ -60,10 +60,6 @@ Meteor.publish("filelinks", function () {
   return Filelinks.find();
 });
 
-Meteor.publish("messages", function () {
-  return Messages.find();
-});
-
 Meteor.publish("processes", function () {
   return Processes.find();
 });
@@ -296,20 +292,8 @@ Meteor.publish("myNotes", function () {
   return Notes.find({userId: this.userId});
 });
 
-
 Meteor.publish("synonyms", function () {
   return Synonyms.find();
-});
-
-Meteor.publish("discussions", function () {
-  return Discussions.find();
-});
-
-Meteor.publish("discussion", function (discussionId) {
-  check(discussionId, String)
-  return Discussions.find({
-    _id: discussionId
-  });
 });
 
 Meteor.publish("docHistory", function (docId) {
@@ -333,13 +317,6 @@ Meteor.publish("docHistory", function (docId) {
   }
 });
 
-
-Meteor.publish("messagesinthisdiscussion", function (discussionId) {
-  check(discussionId, String)
-  return Messages.find({
-    discussionId: discussionId
-  });
-});
 
 Meteor.publish("revisions", function (data) {
   check(data, Match.Optional(

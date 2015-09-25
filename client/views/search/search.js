@@ -127,6 +127,9 @@ Template.searchTpl.helpers({
 				filesContentResults = FilesContent.find({}, {sort: {score: -1}}).fetch();
 				results = results.concat(filesContentResults);
 
+				filesResults = WalkedFiles.find({}).fetch();
+				results = results.concat(filesResults);
+
 				if (typeof RKTrello !== 'undefined') {
 					results = results.concat(RKTrello.findAll());
 				}
@@ -135,12 +138,13 @@ Template.searchTpl.helpers({
 					results = results.concat(RKExperts.findAllFullTextSearch());
 				}
 
+				if (typeof RKDiscussions !== 'undefined') {
+					results = results.concat(RKDiscussions.findAllFullTextSearch()); // both discussion and messages
+				}
+
 				if (typeof RKFMEA !== 'undefined') {
 					results = results.concat(RKFMEA.corePFMEA.findAll());
 				}
-
-				filesResults = WalkedFiles.find({}).fetch();
-				results = results.concat(filesResults);
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();
@@ -203,15 +207,6 @@ Template.searchTpl.events({
 		document.getElementById("searchForm").submit();
 		return false;
 	},
-	/*
-	"keyup input.keywords": function (event, template) {
-		if (event.target.value.length>=2){
-			if (Session.get("highlightResults")) {
-				Template.searchTpl.myHilitor.apply(event.target.value);
-			}
-		}
-  	},
-		*/
 	"change .highlight-checkbox input": function (event) {
 		Session.set("highlightResults", event.target.checked);
 		if (Session.get("highlightResults")) {

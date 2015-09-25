@@ -85,11 +85,15 @@
 												{{#if text}}
 				        					{{>filesContentInSearchResults}}
 				        				{{/if}}
-				        				{{#if message}}
-													{{>messageInSearchResults}}
+												{{#if hasTemplate "messageInSearchResults"}}
+					        				{{#if searchResultFromMessage}}
+														{{>messageInSearchResults}}
+													{{/if}}
 												{{/if}}
-												{{#if subject}}
-													{{>discussionInSearchResults}}
+												{{#if hasTemplate "discussionInSearchResults"}}
+													{{#if searchResultFromDiscussion}}
+														{{>discussionInSearchResults}}
+													{{/if}}
 												{{/if}}
 												{{#if path}}
 													{{>fileInSearchResults}}
