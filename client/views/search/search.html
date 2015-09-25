@@ -97,8 +97,10 @@
 												{{#if content}}
 													{{>noteInSearchResults}}
 												{{/if}}
-												{{#if fieldOfExpertise}}
-													{{>expertInSearchResults}}
+												{{#if hasTemplate "expert"}}
+													{{#if searchResultFromExperts}}
+														{{>expertInSearchResults}}
+													{{/if}}
 												{{/if}}
 												{{#if externalDocId}}
 													{{>externalInSearchResults}}

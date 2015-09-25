@@ -18,7 +18,6 @@ Notes = new Mongo.Collection('notes');
 Synonyms = new Mongo.Collection('synonyms');
 ProcessDocuments = new Mongo.Collection('processdocuments');
 Processes = new Mongo.Collection('processes');
-Expert = new Mongo.Collection('expert');
 controlPlan = new Mongo.Collection('controlplan');
 Filelinks = new Mongo.Collection('filelinks');
 Tags = new Mongo.Collection('tags');
@@ -102,12 +101,6 @@ controlPlan.allow( {
 });
 
 Synonyms.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-Expert.allow( {
 		insert: function (userId) {return !! userId; },
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },

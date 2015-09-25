@@ -130,6 +130,7 @@ Template.searchTpl.helpers({
 
 				if (typeof RKTrello !== 'undefined') {
 					trelloResults = RKTrello.findAll();
+					results = results.concat(trelloResults);
 				}
 
 				if (typeof RKFMEA !== 'undefined') {
@@ -142,13 +143,8 @@ Template.searchTpl.helpers({
 					}
 				}
 
-
 				filesResults = WalkedFiles.find({}).fetch();
 				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults);
-
-				if (typeof RKTrello !== 'undefined') {
-					results = results.concat(trelloResults);
-				}
 
 			}
 			if (searchType === "regexpSearch") {
@@ -157,9 +153,15 @@ Template.searchTpl.helpers({
 				messagesResults = Messages.find({}).fetch();
 				discussionsResults = Notes.find({}).fetch();
 				notesResults = Discussions.find({}).fetch();
-				expertResults = Expert.find({}).fetch();
+
+				if (typeof RKExperts !== 'undefined') {
+					console.log("rationalk-experts is installed, i will findAll.")
+					expertResults = RKExperts.findAll();
+					results = results.concat(expertResults);
+				}
+
 				externalResults = External.find({}).fetch();
-				results = results.concat(docsResults).concat(messagesResults).concat(discussionsResults).concat(filesResults).concat(notesResults).concat(expertResults).concat(externalResults);
+				results = results.concat(docsResults).concat(messagesResults).concat(discussionsResults).concat(filesResults).concat(notesResults).concat(externalResults);
 			}
 
 			function byDescendingScore (a, b) {

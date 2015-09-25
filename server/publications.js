@@ -212,6 +212,7 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             if (typeof RKTrello !== 'undefined') {
               searchResultsTrello = RKTrello.findFullText(searchQuery);
             }
+
             if (typeof RKFMEA !== 'undefined') {
               searchResultsPFMEA = RKFMEA.corePFMEA.findFullText(searchQuery);
             }
@@ -309,7 +310,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
         var arrayOfAndForMessages = [];
         var arrayOfAndForDiscussions = [];
         var arrayOfAndForNotes = [];
-        var arrayOfAndForExperts = [];
+        if (typeof RKExperts !== 'undefined') {
+          var arrayOfAndForExperts = [];
+        }
         var arrayOfAndForExternal = [];
 
         for (var i = 0; i < len; i++) {
@@ -322,7 +325,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             arrayOfAndForMessages.push({message: orPartsRegExp});
             arrayOfAndForDiscussions.push({subject: orPartsRegExp});
             arrayOfAndForNotes.push({content: orPartsRegExp});
-            arrayOfAndForExperts.push({fieldOfExpertise: orPartsRegExp});
+            if (typeof RKExperts !== 'undefined') {
+              arrayOfAndForExperts.push({fieldOfExpertise: orPartsRegExp});
+            }
             arrayOfAndForExternal.push({full: orPartsRegExp});
         }
 
@@ -357,8 +362,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
           limit : 30
         }
         );
-
-        var searchResultsExpert = Expert.find({$and : arrayOfAndForExperts },{limit : 30});
+        if (typeof RKExperts !== 'undefined') {
+          var searchResultsExpert = RKExperts.findAnd(arrayOfAndForExperts);
+        }
         var searchResultsExternal = External.find({$and : arrayOfAndForExperts },{limit : 30});
 
         if (includeWalkedFilesInResults){
@@ -390,7 +396,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
         var arrayOfOrForMessages = [];
         var arrayOfOrForDiscussions = [];
         var arrayOfOrForNotes = [];
-        var arrayOfOrForExperts = [];
+        if (typeof RKExperts !== 'undefined') {
+          var arrayOfOrForExperts = [];
+        }
         var arrayOfOrForExternal = [];
 
         for (var i = 0; i < len; i++) {
@@ -402,7 +410,9 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             var arrayOfAndForMessages = [];
             var arrayOfAndForDiscussions = [];
             var arrayOfAndForNotes = [];
-            var arrayOfAndForExperts = [];
+            if (typeof RKExperts !== 'undefined') {
+              var arrayOfAndForExperts = [];
+            }
             var arrayOfAndForExternal = [];
 
             for (var j = 0; j < lenAndParts; j++) {
@@ -413,10 +423,13 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
               arrayOfAndForMessages.push({message: andPartsRegExp});
               arrayOfAndForDiscussions.push({subject: andPartsRegExp});
               arrayOfAndForNotes.push({content: andPartsRegExp});
-              arrayOfAndForExperts.push({fieldOfExpertise: andPartsRegExp});
+              if (typeof RKExperts !== 'undefined') {
+                arrayOfAndForExperts.push({fieldOfExpertise: andPartsRegExp});
+              }
               arrayOfAndForExternal.push({full: andPartsRegExp});
             }
 
+            /*
             if (Meteor.settings.public.debug){
                 console.log("arrayOfAndForDocs : ");
                 console.log(arrayOfAndForDocs);
@@ -433,21 +446,17 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
                 console.log("arrayOfAndForExternal : ");
                 console.log(arrayOfAndForExternal);
             }
+            */
 
             arrayOfOrForDocs.push({$and : arrayOfAndForDocs})
             arrayOfOrForWalkedFiles.push({$and : arrayOfAndForWalkedFiles})
             arrayOfOrForMessages.push({$and : arrayOfAndForMessages})
             arrayOfOrForDiscussions.push({$and : arrayOfAndForDiscussions})
             arrayOfOrForNotes.push({$and : arrayOfAndForNotes})
-            arrayOfOrForExperts.push({$and : arrayOfAndForExperts})
+            if (typeof RKExperts !== 'undefined') {
+              arrayOfOrForExperts.push({$and : arrayOfAndForExperts})
+            }
             arrayOfOrForExternal.push({$and : arrayOfAndForExternal})
-        }
-
-        if (Meteor.settings.public.debug){
-            console.log("arrayOfOrForDocs : ");
-            console.log(arrayOfOrForDocs);
-            console.log("arrayOfOrForExternal : ");
-            console.log(arrayOfOrForExternal);
         }
 
 
@@ -473,7 +482,6 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             }
           );
         }
-
 
         var searchResultsMessages = Messages.find(
           {
@@ -502,14 +510,12 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
             limit : 30
           }
         );
-        var searchResultsExpert = Expert.find(
-          {
-            $or : arrayOfOrForExperts
-          },
-          {
-            limit : 30
-          }
-        );
+
+        if (typeof RKExperts !== 'undefined') {
+          console.log("rationalk-experts is installed, I will search through it");
+          var searchResultsExpert = RKExperts.findOr(arrayOfOrForExperts);
+        }
+
 
         var searchResultsExternal = External.find(
           {
@@ -555,14 +561,20 @@ Meteor.publish('searchResults', function (searchQuery,catFilter,searchType,inclu
         searchResultsMessages,
         searchResultsDiscussions,
         searchResultsNotes,
-        searchResultsExpert,
         searchResultsExternal,
         searchResultsWalkedFiles
       ]
 
+      var nResults = 0;
+      if (typeof RKExperts !== 'undefined') {
+        searchResults.push(searchResultsExpert);
+        nResults = nResults + searchResultsExpert.count();
+      }
+
       //console.log(searchResults.fetch());
 
-      var nResults = searchResultsDocs.count() + searchResultsMessages.count() + searchResultsDiscussions.count() + searchResultsNotes.count() + searchResultsExpert.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
+      var nResults = searchResultsDocs.count() + searchResultsMessages.count() + searchResultsDiscussions.count() + searchResultsNotes.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
+
     }
     // for statistiques, store the searches
     SearchQueries.insert({
@@ -721,10 +733,6 @@ Meteor.publish("myNotes", function () {
 
 Meteor.publish("synonyms", function () {
   return Synonyms.find();
-});
-
-Meteor.publish("expert", function () {
-  return Expert.find();
 });
 
 Meteor.publish("discussions", function () {
