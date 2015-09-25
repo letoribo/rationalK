@@ -116,36 +116,31 @@ Template.searchTpl.helpers({
 	searchResults: function () {
 			var searchType = Session.get('searchType');
 			var results = [];
-			if (Meteor.settings.public.debug) {
-				console.log("Session.get(searchQuery) : ");
-				console.log(Session.get("searchQuery"));
-			}
 			if (typeof Session.get("searchQuery") === 'undefined') {
 				return false; //prevent form fetching all docs
 			}
 			// on renvoit tous les docs car ils ont été filtré surt le server (dans publication.js)
 			if (searchType === "fullTextSearch") {
 				docsResults = Docs.find({}, {sort: {score: -1}}).fetch();
+				results = results.concat(docsResults);
+
 				filesContentResults = FilesContent.find({}, {sort: {score: -1}}).fetch();
+				results = results.concat(filesContentResults);
 
 				if (typeof RKTrello !== 'undefined') {
-					trelloResults = RKTrello.findAll();
-					results = results.concat(trelloResults);
+					results = results.concat(RKTrello.findAll());
+				}
+
+				if (typeof RKExperts !== 'undefined') {
+					results = results.concat(RKExperts.findAllFullTextSearch());
 				}
 
 				if (typeof RKFMEA !== 'undefined') {
-					pfmeaResults = RKFMEA.corePFMEA.findAll();
-					results = results.concat(pfmeaResults);
-					if (Meteor.settings.public.debug) {
-						console.log("Searching through core PFMEA entries...");
-						console.log("pfmeaResults : ");
-						console.log(pfmeaResults);
-					}
+					results = results.concat(RKFMEA.corePFMEA.findAll());
 				}
 
 				filesResults = WalkedFiles.find({}).fetch();
-				results = results.concat(docsResults).concat(filesContentResults).concat(filesResults);
-
+				results = results.concat(filesResults);
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();
@@ -155,7 +150,6 @@ Template.searchTpl.helpers({
 				notesResults = Discussions.find({}).fetch();
 
 				if (typeof RKExperts !== 'undefined') {
-					console.log("rationalk-experts is installed, i will findAll.")
 					expertResults = RKExperts.findAll();
 					results = results.concat(expertResults);
 				}
