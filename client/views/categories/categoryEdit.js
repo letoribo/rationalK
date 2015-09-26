@@ -7,24 +7,22 @@ Template.categoryEdit.events({
       info: $(e.target).find("[name=info]").val(),
       viewId: $("#selectedView").val(),
       categoryId: this._id,
-      slug: getSlug($(e.target).find("[name=name]").val())
+      slug: getSlug($(e.target).find("[name=name]").val()),
     };
-    Meteor.call("categoryUpdate", properties, function (error, id) {
-      if (error) {
-        // do nothing (a popup should appear)
-      } else {
+    Meteor.call("categoryUpdate", properties, function (error) {
+      if (!error) {
         Router.go("categoryList");
       }
     });
-  }
+  },
 });
 
 Template.categoryEdit.helpers({
   views: function () {
     return Views.find({
       type: {
-        $not: "system"
-      }
+        $not: "system",
+      },
     });
   },
   isViewSelected: function (viewId) {
@@ -32,9 +30,9 @@ Template.categoryEdit.helpers({
   },
   viewData: function () {
     return Views.findOne({
-      _id: this.viewId
+      _id: this.viewId,
     });
-  }
+  },
 });
 
 Template.categoryEdit.rendered = function () {

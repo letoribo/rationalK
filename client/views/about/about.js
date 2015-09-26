@@ -2,45 +2,41 @@ Template.about.helpers({
 	Orgs: function () {
 		return Orgs.find();
 	},
-	version : function () {
+	version: function () {
 		return rK_version; //global variable defined in lib/rK_version.js
 		//return version.version;
 	},
-	licenseKey : function () {
+	licenseKey: function () {
 		return Session.get('licenseKey');
 	},
-	licenseExpDate : function () {
+	licenseExpDate: function () {
 		return Session.get('licenseExpDate');
 	},
-	licenseNumberUsers : function () {
+	licenseNumberUsers: function () {
 		return Session.get('licenseNumberUsers');
 	},
-	licensedTo : function () {
+	licensedTo: function () {
 		return Session.get('licensedTo');
 	},
-	internetConnection : function () {
-		if (Session.get('internetConnection')){
+	internetConnection: function () {
+		if (Session.get('internetConnection')) {
 			return "Your internet connection is alive.";
 		}
-		else {
-			return "Please check your internet connection.";
-		}
+		return "Please check your internet connection.";
 	},
-	lastVersion : function () {
+	lastVersion: function () {
 		return Session.get('lastVersion');
 	},
-	newInThisVersion : function () {
+	newInThisVersion: function () {
 		return Session.get('newInThisVersion');
 	},
-	downloadLink : function () {
+	downloadLink: function () {
 		var lastVersion = Session.get('lastVersion');
-		var downloadLink = "http://rationalk.ch/downloads/rK_v"+lastVersion+".tar.gz";
+		var downloadLink = "http://rationalk.ch/downloads/rK_v" + lastVersion + ".tar.gz";
 		return downloadLink;
 	},
-	myVersionIsBehind : function () {
-
-
-		function versionCompare(v1, v2, options) {
+	myVersionIsBehind: function () {
+		function versionCompare (v1, v2, options) {
 			var lexicographical = options && options.lexicographical,
 			zeroExtend = options && options.zeroExtend
 			var v1parts = v1.split('.');
@@ -108,7 +104,6 @@ Template.about.helpers({
 });
 
 Template.about.rendered = function (template) {
-
 
 	// Asynchronous call with a callback on the client
 	if (1==1){

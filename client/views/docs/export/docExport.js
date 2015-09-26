@@ -1,4 +1,5 @@
-var progress, results;
+var progress;
+var results;
 
 results = new ReactiveVar();
 
@@ -6,16 +7,25 @@ progress = new ReactiveVar('');
 
 Template.docExport.events({
   "click #export": function (el) {
+    var categoryId;
+    var config;
+    var csv;
+    var data;
+    var delimiter;
+    var hasQuotes;
+    var rd;
+    var shareDialogInfo;
     el.preventDefault();
-    var categoryId, config, count, csv, data, delimiter, hasQuotes, rd, shareDialogInfo;
     $('#import').prop('disabled', true);
     $("#csv").val('');
     categoryId = $("#selectedCategory").val();
     delimiter = $("input[name=delimiter]:checked").val();
     hasQuotes = $('input[name=quotes]').prop('checked');
     if (!categoryId) {
-      Errors.throwError("Please select a category");
-      return false;
+      if (typeof(toastr) !== 'undefined') {
+        toastr.error("Please fill in with the category");
+      }
+      throw new Meteor.Error(422, "Please fill in with the category");
     }
     shareDialogInfo = {
       template: Template.spinner,
@@ -24,25 +34,28 @@ Template.docExport.events({
       modalBodyClass: "share-modal-body",
       modalFooterClass: "share-modal-footer",
       removeOnHide: true,
-      buttons: {}
+      buttons: {},
     };
     rd = ReactiveModal.initDialog(shareDialogInfo);
     rd.show();
     progress.set('Please wait...');
     Session.set('selectedCategory', categoryId);
     data = Docs.find({
-      categoryId: categoryId
-    }).fetch().map(function (el) {
-      var key, obj;
+      categoryId: categoryId,
+    }).fetch().map(function (elem) {
+      var key;
+      var obj;
       obj = {};
-      for (key in el.fields) {
-        obj[key] = el.fields[key].value;
+      for (key in elem.fields) {
+        if ({}.hasOwnProperty.call(elem.fields, key)) {
+          obj[key] = elem.fields[key].value;
+        }
       }
       return obj;
     });
     config = {
       delimiter: delimiter,
-      quotes: hasQuotes
+      quotes: hasQuotes,
     };
     csv = Papa.unparse(data, config);
     $('#csv').val(csv);
@@ -50,7 +63,7 @@ Template.docExport.events({
     rd.hide();
     progress.set('');
     return false;
-  }
+  },
 });
 
 Template.docExport.helpers({

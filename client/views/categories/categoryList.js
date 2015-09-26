@@ -5,38 +5,38 @@ Template.categoryList.helpers({
   settingsCategories: function () {
     var urlBrowse;
     var urlCategoryEdit;
-        return {
-            rowsPerPage: 10,
-            showFilter: false,
-            class: 'table table-condensed col-sm-12',
-						showNavigation: 'auto',
-						fields: [
-              {
-                key: 'name',
-                label: TAPi18n.__("Name")},
-						    {
-						        key: 'actions',
-						        label: 'Actions',
-						        fn: function (value, object) {
-                      urlBrowse = Router.routes.browse.path({
-                        categorySlug: object.slug,
-                      });
-                      urlCategoryEdit = Router.routes.categoryEdit.path({
-                        _id: object._id,
-                      });
-                      return new Spacebars.SafeString(
-                        '<a href="'
-                        + urlCategoryEdit
-                        + '" title="Edit this category">'
-                        + '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> '
-                        + '<a class="select" href="'
-                        + urlBrowse
-                        + '" title="Browse file in this category"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> '
-                        + '<a class="delete" href="#" title="Delete this category, the associated view and the associated docs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>'
-                      );
-							    },
-						    },
-						],
+    return {
+        rowsPerPage: 10,
+        showFilter: false,
+        class: 'table table-condensed col-sm-12',
+				showNavigation: 'auto',
+				fields: [
+          {
+            key: 'name',
+            label: TAPi18n.__("Name")},
+				    {
+				        key: 'actions',
+				        label: 'Actions',
+				        fn: function (value, object) {
+                  urlBrowse = Router.routes.browse.path({
+                    categorySlug: object.slug,
+                  });
+                  urlCategoryEdit = Router.routes.categoryEdit.path({
+                    _id: object._id,
+                  });
+                  return new Spacebars.SafeString(
+                    '<a href="'
+                    + urlCategoryEdit
+                    + '" title="Edit this category">'
+                    + '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> '
+                    + '<a class="select" href="'
+                    + urlBrowse
+                    + '" title="Browse file in this category"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a> '
+                    + '<a class="delete" href="#" title="Delete this category, the associated view and the associated docs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>'
+                  );
+					    },
+				    },
+				],
 		};
   },
 });

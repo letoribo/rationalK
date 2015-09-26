@@ -1,14 +1,15 @@
-var progress, results;
-
+var progress;
+var results;
 results = new ReactiveVar();
-
 progress = new ReactiveVar('');
 
 Template.docImport.events({
   "click #preview": function (el) {
+    var categoryId;
+    var delimiter;
+    var limitPreview;
+    var temp;
     el.preventDefault();
-    console.log("clicked");
-    var categoryId, delimiter, limitPreview, temp;
     categoryId = $("#selectedCategory").val();
     console.log(categoryId);
     delimiter = $("input[name=delimiter]:checked").val();
@@ -26,14 +27,23 @@ Template.docImport.events({
     temp = Papa.parse($("#csv").val(), {
       header: true,
       preview: limitPreview,
-      delimiter: delimiter
+      delimiter: delimiter,
     });
     results.set(temp.data);
     progress.set("Showing preview for " + temp.data.length + " rows");
     return false;
   },
   "click #import": function (el) {
-    var categoryId, count, delimiter, i, len, rd, row, shareDialogInfo, temp;
+    var categoryId;
+    var count;
+    var delimiter;
+    var i;
+    var len;
+    var rd;
+    var row;
+    var shareDialogInfo;
+    var temp;
+    el.preventDefault();
     $('#import').prop('disabled', true);
     categoryId = $("#selectedCategory").val();
     delimiter = $("input[name=delimiter]:checked").val();
@@ -50,7 +60,7 @@ Template.docImport.events({
       modalBodyClass: "share-modal-body",
       modalFooterClass: "share-modal-footer",
       removeOnHide: true,
-      buttons: {}
+      buttons: {},
     };
     rd = ReactiveModal.initDialog(shareDialogInfo);
     rd.show();
@@ -58,16 +68,16 @@ Template.docImport.events({
     Session.set('selectedCategory', categoryId);
     temp = Papa.parse($("#csv").val(), {
       header: true,
-      delimiter: delimiter
+      delimiter: delimiter,
     }).data;
     count = 0;
-    if ((temp != null ? temp.length : void 0) > 0) {
+    if ((temp !== null ? temp.length : void 0) > 0) {
       for (i = 0, len = temp.length; i < len; i++) {
         row = temp[i];
         if (count === 0) {
           count++;
-          if (Meteor.settings.public.debug){
-            console.log(row)
+          if (Meteor.settings.public.debug) {
+            console.log(row);
           }
           if ($('input[name=autocreatefields]').prop('checked')) {
             Meteor.call('docImport-autoCreateFields', categoryId, row, function (error, id) {
@@ -85,8 +95,9 @@ Template.docImport.events({
           }
         }
         Meteor.call("docImport", categoryId, row, function (error, id) {
+          var currentRowCount;
           count++;
-          var currentRowCount = count -1; //because header is inside
+          currentRowCount = count - 1; //because header is inside
           console.log("Importation " + currentRowCount + "/" + temp.length);
           progress.set("Importation " + currentRowCount + "/" + temp.length);
           if (error) {
@@ -101,7 +112,8 @@ Template.docImport.events({
           }
         });
       }
-    } else {
+    }
+    else {
       rd.hide();
       progress.set('');
     }
@@ -110,7 +122,7 @@ Template.docImport.events({
   "click #cancel": function (el) {
     el.preventDefault();
     return results.set({});
-  }
+  },
 });
 
 Template.docImport.helpers({
@@ -137,17 +149,21 @@ Template.docImport.helpers({
     return Categories.find();
   },
   keys: function () {
-    var key, res, value;
+    var key;
+    var res;
+    var value;
     res = [];
     for (key in this) {
-      value = this[key];
-      res.push({
-        key: key,
-        value: value
-      });
+      if ({}.hasOwnProperty.call(this, key)) {
+        value = this[key];
+        res.push({
+          key: key,
+          value: value,
+        });
+      }
     }
     return res;
-  }
+  },
 });
 
 Template.docImport.rendered = function () {
