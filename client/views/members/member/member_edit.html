@@ -27,7 +27,7 @@
 			     {{> roles }}
         </div>
 		    {{/if}}
-        
+
         <div class="form-group">
             <label for="locale">{{_ "Language"}} (fr,de,en)</label>
             <input class="form-control" name="locale" type="text" value="{{profile.locale}}" placeholder="{{_ 'en'}}"/>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <input type="submit" value="{{_ 'Update member'}}" class="btn btn-primary submit pull-right"/>
-            <a class="btn btn-danger delete" href="#">{{_ "Delete member"}}</a>
+            <a class="btn btn-danger delete" href="#" data-memberid="{{_id}}">{{_ "Delete member"}}</a>
         </div>
 
     </form>

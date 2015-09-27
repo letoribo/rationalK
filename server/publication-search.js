@@ -6,6 +6,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
   var searchResultsFilesContent;
   var searchResultsWalkedFiles;
   var sr;
+  var i;
   check(searchQuery, String);
   check(searchType, String);
   check(catFilter, String);
@@ -15,11 +16,10 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
     return [];
   }
 
-  if (Meteor.settings.public.debug) {
-    console.log('Query : ' + searchQuery);
-    console.log('Type of search : ' + searchType);
-    console.log('Filter on category : ' + catFilter);
-  }
+  RKCore.log('Query : ' + searchQuery);
+  RKCore.log('Type of search : ' + searchType);
+  RKCore.log('Filter on category : ' + catFilter);
+
 
   // I have something to search for :
   if (searchType === "fullTextSearch") {
@@ -62,20 +62,19 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               searchResultsPFMEA = RKFMEA.corePFMEA.findFullText(searchQuery);
             }
 
-            if (typeof RKExperts !== 'undefined') {
-              sr = RKExperts.findFullText(searchQuery);
-              nResults = nResults + sr.count();
-              searchResults = searchResults.concat(sr);
-            }
-
-            if (typeof RKDiscussions !== 'undefined') {
-              sr = RKDiscussions.findFullTextDiscussions(searchQuery);
-              nResults = nResults + sr.count();
-              searchResults = searchResults.concat(sr);
-              sr = RKDiscussions.findFullTextMessages(searchQuery);
-              nResults = nResults + sr.count();
-              searchResults = searchResults.concat(sr);
-            }
+            if (typeof RKCore.searchResultsPackage !== 'undefined') {
+    					searchResultsPackage = RKCore.searchResultsPackage;
+    					nPackages = searchResultsPackage.length;
+    			    for (i = 0; i < nPackages; i++) {
+    						packageName = searchResultsPackage[i].name;
+    		        RKCore.log(packageName);
+                if (typeof eval(packageName).findFullText === 'function') { //todo
+                  sr = eval(packageName).findFullText(searchQuery); //todo
+                  nResults = nResults + sr.count();
+                  searchResults = searchResults.concat(sr);
+                }
+    			    }
+    				}
         }
         else { //there is a filter on categories
           //marche pas todo
@@ -104,14 +103,18 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
           if (typeof RKFMEA !== 'undefined') {
             searchResultsPFMEA = RKFMEA.corePFMEA.findDummy();
           }
-          if (typeof RKDiscussions !== 'undefined') {
-            sr = RKDiscussions.findDummyDiscussions();
-            searchResults = searchResults.concat(sr);
-            sr = RKDiscussions.findDummyMessages();
-            searchResults = searchResults.concat(sr);
+
+          if (typeof RKCore.searchResultsPackage !== 'undefined') {
+            searchResultsPackage = RKCore.searchResultsPackage;
+            nPackages = searchResultsPackage.length;
+            for (i = 0; i < nPackages; i++) {
+              packageName = searchResultsPackage[i].name;
+              if (typeof eval(packageName).findDummy === 'function') { //todo
+                sr = eval(packageName).findDummy(searchQuery); //todo
+                searchResults = searchResults.concat(sr);
+              }
+            }
           }
-
-
 
         } // end of filter on category
 
@@ -210,15 +213,17 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         }
         else {
           console.log("There is a filter on a category");
-          var searchResultsDocs = Docs.find({
+          searchResultsDocs = Docs.find({
             $and: [
-              {$and : arrayOfAndForDocs },
-              {categoryId: catFilter}
-              ]
-            },
-            {
-              limit : 30
-            }
+              {$and: arrayOfAndForDocs },
+              {
+                categoryId: catFilter,
+              },
+            ],
+          },
+          {
+            limit: 30,
+          }
           );
         }
 

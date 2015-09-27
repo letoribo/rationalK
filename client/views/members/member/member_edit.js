@@ -9,38 +9,69 @@ Template.memberEdit.events({
       locale: $(e.target).find("[name=locale]").val(),
       memberId: this._id,
       roles: $('select#roles').val(),
-      nickname: $(e.target).find("[name=nickname]").val()
+      nickname: $(e.target).find("[name=nickname]").val(),
     };
-    Meteor.call("memberUpdate", properties, function (error, id) {
+    Meteor.call("memberUpdate", properties, function (error) {
       if (error) {
         if (typeof(toastr) !== 'undefined') {
           toastr.error(error.reason);
         }
-      } else {
+      }
+      else {
         Router.go("members");
       }
     });
     return false;
   },
   "click .delete": function (e) {
+    var doDelete = function() {
+
+    };
     e.preventDefault();
+
+    BootstrapModalPrompt.prompt({
+    title: "Confirmation",
+    content: "Do you really want to delete this user ?",
+    }, function (result) {
+      if (result) {
+        console.log(e.currentTarget.dataset.memberid);
+        Meteor.call("memberDelete", e.currentTarget.dataset.memberid, function (error) {
+          if (error) {
+            if (typeof(toastr) !== 'undefined') {
+              toastr.error(error.reason);
+            }
+          }
+          else {
+            return Router.go("members");
+          }
+        });
+        return false;
+      }
+    });
+
+    /*
     if (confirm("Delete this member?")) {
-      Meteor.call("memberDelete", this._id, function (error, id) {
+      Meteor.call("memberDelete", this._id, function (error) {
         if (error) {
           if (typeof(toastr) !== 'undefined') {
             toastr.error(error.reason);
           }
-        } else {
+        }
+        else {
           return Router.go("members");
         }
       });
       return false;
     }
+    */
     return false;
-  }
+  },
 });
 
 Template.memberEdit.rendered = function () {
   $("#" + this.data.gender).prop('checked', true);
-  return $('#roles').multiSelect('select', this.data.profile.roles);
+  if (this.data.profile.roles) {
+    $('#roles').multiSelect('select', this.data.profile.roles);
+  }
+  return false;
 };

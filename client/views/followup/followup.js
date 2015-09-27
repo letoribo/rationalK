@@ -1,10 +1,6 @@
-Template.followup.rendered = function () {
-
-};
-
 Template.followup.helpers({
 	FollowUp: function () {
-		return FollowUp.find().fetch()
+		return FollowUp.find().fetch();
 	},
 	settingsFollowUp: function () {
         return {
@@ -13,7 +9,6 @@ Template.followup.helpers({
             class: 'table table-condensed col-sm-12',
 						rowClass: function (item) {
 					  var exists = item.exists;
-					  //
 					  switch (exists) {
 					    case '':
 							case false:
@@ -27,8 +22,8 @@ Template.followup.helpers({
 				        key: 'createdAt',
 				        label: 'Date',
 								sortDirection: 'descending',
-								sortByValue : true,
-								fn: function (value, object) {
+								sortByValue: true,
+								fn: function (value) {
 										return moment(value).format('DD.MM.YY HH:mm');
 								},
 				    },
@@ -37,36 +32,30 @@ Template.followup.helpers({
 				        label: 'Who',
 								label: 'Username',
 								fn: function (value, object) {
-										return Members.collection.findOne({accountId:object.who}).profile.nickname;
+										return Members.collection.findOne({accountId: object.who}).profile.nickname;
 								},
 				    },
 				    {
-				        key: 'tags',
-				        label: 'Tags',
-								fn: function (value, object) {
-									value = value.replace(/;/g, ',');
-					        tags = value.split(',');
-					        htmlTags = tags.map(function (tag) {
-					          return "<span class='label label-info searchThisWord'>" + tag + "</span>";
-					        });
-					        return new Spacebars.SafeString(htmlTags.join(' '));
-								},
+			        key: 'tags',
+			        label: 'Tags',
+							fn: function (value) {
+								tags = value.replace(/;/g, ',').split(',');
+				        htmlTags = tags.map(function (tag) {
+				          return "<span class='label label-info searchThisWord'>" + tag + "</span>";
+				        });
+				        return new Spacebars.SafeString(htmlTags.join(' '));
+							},
 				    },
 						{
 				        key: 'text',
 				        label: 'Text',
 				    },
 					],
-		}
+		};
     },
 	isAdmin: function () {
-	    var loggedInUser;
-	    loggedInUser = Meteor.user();
-	    return Roles.userIsInRole(loggedInUser, ['admin']);
-  	}
-});
-
-
-Template.followup.events({
-
+    var loggedInUser;
+    loggedInUser = Meteor.user();
+    return Roles.userIsInRole(loggedInUser, ['admin']);
+	},
 });

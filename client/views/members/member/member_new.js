@@ -1,13 +1,15 @@
 Template.memberNew.events({
   "submit form": function (e) {
-    var properties, rd, shareDialogInfo;
+    var properties;
+    var rd;
+    var shareDialogInfo;
     e.preventDefault();
     properties = {
       name: $(e.target).find("[name=name]").val(),
       email: $(e.target).find("[name=email]").val().toLowerCase(),
       nickname: $(e.target).find("[name=nickname]").val(),
       roles: $('select#roles').val(),
-      hostname: window.location.hostname
+      hostname: window.location.hostname,
     };
     shareDialogInfo = {
       template: Template.spinner,
@@ -16,19 +18,20 @@ Template.memberNew.events({
       modalBodyClass: "share-modal-body",
       modalFooterClass: "share-modal-footer",
       removeOnHide: true,
-      buttons: {}
+      buttons: {},
     };
     rd = ReactiveModal.initDialog(shareDialogInfo);
     rd.show();
-    Meteor.call("memberNew", properties, function (error, id) {
+    Meteor.call("memberNew", properties, function (error) {
       rd.hide();
       if (error) {
         if (typeof(toastr) !== 'undefined') {
           toastr.error(error.reason);
         }
-      } else {
+      }
+      else {
         Router.go("members");
       }
     });
-  }
+  },
 });

@@ -288,10 +288,6 @@ Meteor.publish("mySpace", function () {
   return userSpaces.find({userId: this.userId});
 });
 
-Meteor.publish("myNotes", function () {
-  return Notes.find({userId: this.userId});
-});
-
 Meteor.publish("synonyms", function () {
   return Synonyms.find();
 });

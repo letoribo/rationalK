@@ -116,6 +116,9 @@ Template.searchTpl.helpers({
 	searchResults: function () {
 			var searchType = Session.get('searchType');
 			var results = [];
+			var searchResultsPackage;
+			var nPackages;
+			var i;
 			if (typeof Session.get("searchQuery") === 'undefined') {
 				return false; //prevent form fetching all docs
 			}
@@ -134,6 +137,9 @@ Template.searchTpl.helpers({
 					results = results.concat(RKTrello.findAll());
 				}
 
+				/*
+				This has been replaced by a hook !!!
+
 				if (typeof RKExperts !== 'undefined') {
 					results = results.concat(RKExperts.findAllFullTextSearch());
 				}
@@ -141,10 +147,30 @@ Template.searchTpl.helpers({
 				if (typeof RKDiscussions !== 'undefined') {
 					results = results.concat(RKDiscussions.findAllFullTextSearch()); // both discussion and messages
 				}
+				*/
 
 				if (typeof RKFMEA !== 'undefined') {
 					results = results.concat(RKFMEA.corePFMEA.findAll());
 				}
+
+				if (typeof RKFMEA !== 'undefined') {
+					results = results.concat(RKFMEA.corePFMEA.findAll());
+				}
+
+				if (typeof RKCore.searchResultsPackage !== 'undefined') {
+					searchResultsPackage = RKCore.searchResultsPackage;
+					nPackages = searchResultsPackage.length;
+			    for (i = 0; i < nPackages; i++) {
+						packageName = searchResultsPackage[i].name;
+		        RKCore.log(packageName);
+						if(typeof eval(packageName).findAllFullTextSearch === 'function') {
+							results = results.concat(eval(packageName).findAllFullTextSearch()); //todo
+						}
+			    }
+				}
+
+
+
 			}
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();

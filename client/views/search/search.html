@@ -95,12 +95,16 @@
 														{{>discussionInSearchResults}}
 													{{/if}}
 												{{/if}}
+												{{#if hasTemplate "noteInSearchResults"}}
+													{{#if searchResultFromNotes}}
+														{{>noteInSearchResults}}
+													{{/if}}
+												{{/if}}
+
 												{{#if path}}
 													{{>fileInSearchResults}}
 												{{/if}}
-												{{#if content}}
-													{{>noteInSearchResults}}
-												{{/if}}
+
 												{{#if hasTemplate "expert"}}
 													{{#if searchResultFromExperts}}
 														{{>expertInSearchResults}}

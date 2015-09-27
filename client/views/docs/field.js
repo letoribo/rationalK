@@ -17,8 +17,21 @@ Template.field.helpers({
     return ((Router.current().route.getName() === "docCreate" ) ? true : false);
   },
   inputForFieldType: function () {
-    var dateValue, encodedValue, memberValue, ref, ref1, spans, textValue;
-
+    var dateValue;
+    var encodedValue;
+    var memberValue;
+    var ref;
+    var ref1;
+    var spans;
+    var textValue;
+    var optionsArray;
+    var arrayLength;
+    var optionsText;
+    var i;
+    var currentOption;
+    var selected;
+    var currentFilelink;
+    var html;
     if (typeof(rkSettings.findOne({key: "availableFunctionsValue"})) !== 'undefined') {
       if (ref = this.value.type, indexOf.call(rkSettings.findOne({key: "availableFunctionsValue"}).value, ref) >= 0) {
         encodedValue = htmlEncode(this.value.value);
@@ -34,37 +47,27 @@ Template.field.helpers({
       return "<input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='" + this.value.type + "' placeholder='" + this.key + "'/>";
     }
     else if (this.value.type === "select") {
-      if (Meteor.settings.public.debug){
-        console.log("this.value = ");
-        console.log(this.value);
-      }
-      var optionsArray = this.value.multipleChoices.split(",");
-      var arrayLength = optionsArray.length;
-      var optionsText = '<option value=""></option>';
-      for (var i = 0; i < arrayLength; i++) {
-
-        var currentOption = optionsArray[i].trim();
-
-        if (Meteor.settings.public.debug){
-          console.log("this.value.value (the doc value)= ");
-          console.log(this.value.value.trim());
-          console.log("currentOption")
-          console.log(currentOption);
-        }
-        if (this.value.value.trim() === currentOption){
-          var selected = "selected";
-          console.log("I will select it");
+      RKCore.log("this.value = ");
+      RKCore.log(this.value);
+      optionsArray = this.value.multipleChoices.split(",");
+      arrayLength = optionsArray.length;
+      optionsText = '<option value=""></option>';
+      for (i = 0; i < arrayLength; i++) {
+        currentOption = optionsArray[i].trim();
+        RKCore.log("this.value.value (the doc value)= ");
+        RKCore.log(this.value.value.trim());
+        RKCore.log("currentOption");
+        RKCore.log(currentOption);
+        if (this.value.value.trim() === currentOption) {
+          selected = "selected";
+          RKCore.log("I will select it");
         }
         else {
-          var selected = "";
+          selected = "";
         }
-        optionsText = optionsText + '<option value="'+ currentOption +'" '+selected+'>' + currentOption + '</option>';
+        optionsText = optionsText + '<option value="' + currentOption + '" ' + selected + '>' + currentOption + '</option>';
       }
-      return "<select name='" + this.key + "' class='form-control dyn-field'>"+optionsText+"</select>";
-
-
-      encodedValue = this.value.value.replace(/'/g, '&#39;');
-      return "<input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='" + this.value.type + "' placeholder='" + this.key + "'/>";
+      return "<select name='" + this.key + "' class='form-control dyn-field'>" + optionsText + "</select>";
     }
     else if (this.value.type === "url") {
       encodedValue = this.value.value.replace(/'/g, '&#39;');
@@ -75,10 +78,9 @@ Template.field.helpers({
       return "<input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='email' placeholder='email@email.com'/>";
     }
     else if (this.value.type === "filelink") {
-      var encodedValue;
-      if (Router.current().route.getName() === "docCreate" ){
+      if (Router.current().route.getName() === "docCreate" ) {
         //let's check if we arrive with something in the session
-        var currentFilelink = Session.get("currentFilelink");
+        currentFilelink = Session.get("currentFilelink");
         if (typeof(currentFilelink) !== 'undefined') {
           encodedValue = currentFilelink.replace(/'/g, '&#39;');
           if (typeof(toastr) !== 'undefined') {
@@ -92,38 +94,29 @@ Template.field.helpers({
       else {
         encodedValue = this.value.value.replace(/'/g, '&#39;');
         encodedValue = stripBeginEndQuotes(encodedValue);
-        if (Meteor.settings.public.debug){
-            console.log("encodedValue : " + encodedValue);
-        }
+        RKCore.log("encodedValue : " + encodedValue);
       }
-      var html='';
-
-      if (encodedValue.length>0){
+      html = '';
+      if (encodedValue.length > 0) {
         html = html.concat('<div class="input-group">');
       }
-
       html = html.concat("<input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='text' placeholder='//server/folder/file.ext' data-fieldtype='filelink'/>");
-
-      if (encodedValue.length>0){
-        html = html.concat('<div class="input-group-addon"><a href="rk:'+ encodedValue +'" title="'+TAPi18n.__('open_file')+'" target="_blank"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a></div>');
+      if (encodedValue.length > 0) {
+        html = html.concat('<div class="input-group-addon"><a href="rk:' + encodedValue + '" title="' + TAPi18n.__('open_file') + '" target="_blank"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a></div>');
       }
-
-      if (encodedValue.length>0){
+      if (encodedValue.length > 0) {
         html = html.concat('</div>');
       }
-
       return html;
-
-    } else if (this.value.type === "tags") {
-			if (Router.current().route.getName()!=="revisionView"){
+    }
+    else if (this.value.type === "tags") {
+			if (Router.current().route.getName() !== "revisionView") {
       	spans = PredefinedTags.find().fetch().map(function (tag) {
         	return "<span id='11' class='label label-default proposedTag' data-tag='" + tag.label + "'><a href='#' style='text-decorations:none; color:inherit;text-decoration:none;'>" + tag.label + "</a></span>";
       	});
 				return "<input class='form-control dyn-field' id='tagfield' placeholder='Type a word and press enter or comma' name='" + this.key + "' value='" + this.value.value + "' type='text' />\n<br/>\n" + (spans.toString());
 			}
-			else {
-				return "<input class='form-control dyn-field' id='tagfield' name='" + this.key + "' value='" + this.value.value + "' type='text' />";
-			}
+			return "<input class='form-control dyn-field' id='tagfield' name='" + this.key + "' value='" + this.value.value + "' type='text' />";
     }
     else if (this.value.type === "date") {
       dateValue = moment(this.value.value).format('YYYY.MM.DD HH:mm');
@@ -131,8 +124,8 @@ Template.field.helpers({
     }
     else if (this.value.type === "member") {
       memberValue = ((ref1 = Members.collection.findOne({
-        _id: this.value.value
-      })) != null ? ref1.profile.name : void 0) || '';
+        _id: this.value.value,
+      })) !== null ? ref1.profile.name : void 0) || '';
       return "<input class='form-control dyn-field dyn-member' name='" + this.key + "' value='" + this.value.value + "' type='hidden' placeholder='" + this.key + "'/>\n<input class='form-control dyn-member-visible' name='" + this.key + "' value='" + memberValue + "' type='text' placeholder='" + this.key + "'/>";
     }
     return this.value.value;
@@ -140,37 +133,24 @@ Template.field.helpers({
   is_mandatory: function () {
     if (this.value.mandatory) {
       return "*";
-    } else {
-      return "";
     }
-  }
+    return "";
+  },
 });
 
 Template.field.events({
   "click .deleteField": function (e) {
     e.preventDefault();
     if (confirm("Are you sure you want to delete this field ?")) {
-      Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function (error, id) {
-        if (error) {
-          // do nothing (a popup should appear)
-        }
-      });
+      Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function () { });
       return false;
     }
     return false;
   },
-  "click a.launchCustomFunction": function (event){
-	    event.preventDefault();
-      if (Meteor.settings.public.debug){
-	       console.log("Launching the custom function : " + event.currentTarget.dataset.customfunction);
-      }
-	    Meteor.call(event.currentTarget.dataset.customfunction, function (error, result) {
-		  if (error) {
-		    // handle error
-		  } else {
-		    // examine result
-		  }
-		});
+  "click a.launchCustomFunction": function (e){
+	  e.preventDefault();
+	  RKCore.log("Launching the custom function : " + e.currentTarget.dataset.customfunction);
+	  Meteor.call(e.currentTarget.dataset.customfunction, function () {});
 		return false;
-	}
+	},
 });

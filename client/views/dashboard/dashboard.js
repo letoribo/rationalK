@@ -17,6 +17,7 @@ Template.dashboard.events({
 
 Template.dashboard.helpers({
 	myFavorites: function () {
+		RKCore.log("salut");
 		return userSpaces.find({userId: Meteor.userId()}, {}).fetch();
 	},
 	lastActivity: function () {

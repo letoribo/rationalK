@@ -1,14 +1,16 @@
 Template.eachProp.helpers({
   keys: function () {
-    var key, res, value;
+    var key;
+    var res;
+    var value;
     res = [];
     for (key in this) {
       value = this[key];
       res.push({
         key: key,
-        value: value
+        value: value,
       });
     }
     return res;
-  }
+  },
 });

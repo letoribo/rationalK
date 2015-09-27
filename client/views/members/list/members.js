@@ -46,8 +46,9 @@ Template.members.helpers({
                 fn: function (value, object) {
                   var html = '';
                   var rolesArray = object.profile.roles;
+                  var arrayLength;
                   if ((typeof rolesArray !== 'undefined') && (rolesArray !== null) ) {
-                    var arrayLength = rolesArray.length;
+                    arrayLength = rolesArray.length;
                     for (i = 0; i < arrayLength; i++) {
                         html = html .concat(' <span class="label label-success">' + rolesArray[i] + '</span>');
                     }

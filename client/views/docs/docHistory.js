@@ -1,7 +1,3 @@
-Template.docHistory.rendered = function () {
-
-};
-
 Template.docHistory.events({
   "click .updateDocInMySpace": function (e) {
 		e.preventDefault();

@@ -2,30 +2,32 @@ Template.fieldForView.events({
   "click .deleteField": function (e) {
     e.preventDefault();
     if (confirm("Are you sure you want to delete this field ?")) {
-      Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function (error, id) {
-        if (error) {
-          // do nothing (a popup should appear)
-        }
-      });
+      Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function () {});
       return false;
     }
     return false;
   },
   "change select.newFieldTypeClass": function (e) {
     e.preventDefault();
-    if (Meteor.settings.public.debug){
-      console.log(e.target.value);
-      console.log(e.target.dataset["key"]);
-    }
-    if (e.target.value==='select'){
+    RKCore.log(e.target.value);
+    RKCore.log(e.target.dataset["key"]);
+    if (e.target.value === 'select') {
       document.getElementById("divMultipleChoice_"+e.target.dataset["key"]).style.display = 'block';
-    }else {
+    }
+    else {
       document.getElementById("divMultipleChoice_"+e.target.dataset["key"]).style.display = 'none';
     }
   },
   "click .editField": function (e) {
+    var instance;
+    var isChecked;
+    var isHideInSearchResultsDisplayChecked;
+    var isHideInTableChecked;
+    var isUniqueChecked;
+    var newKey;
+    var newType;
+    var multipleChoices;
     e.preventDefault();
-    var instance, isChecked, isHideInSearchResultsDisplayChecked, isHideInTableChecked, isUniqueChecked, newKey, newType, multipleChoices;
     instance = Template.instance();
     if (!instance.readonly) {
       newKey = instance.find('input#newField').value;
@@ -35,15 +37,11 @@ Template.fieldForView.events({
       isUniqueChecked = instance.find('input#fieldAdd_unique').checked;
       isHideInSearchResultsDisplayChecked = instance.find('input#fieldAdd_hideInSearchResultsDisplay').checked;
       isHideInTableChecked = instance.find('input#fieldAdd_hideInTable').checked;
-      Meteor.call('viewUpdateField', Template.parentData(1)._id, this.key, newKey, newType, isChecked, isUniqueChecked, isHideInTableChecked, isHideInSearchResultsDisplayChecked, multipleChoices, function (error, results) {
-        if (error) {
-          // do nothing (a popup should appear)
-        } else {
-
+      Meteor.call('viewUpdateField', Template.parentData(1)._id, this.key, newKey, newType, isChecked, isUniqueChecked, isHideInTableChecked, isHideInSearchResultsDisplayChecked, multipleChoices, function (error) {
+        if (!error) {
           if (typeof(toastr) !== 'undefined') {
       			toastr.success('Field updated');
       		}
-
           return false;
         }
       });
@@ -57,7 +55,7 @@ Template.fieldForView.events({
     $(instance.find('input#fieldAdd_hideInSearchResultsDisplay')).attr('disabled', instance.readonly);
     $(instance.find('input#fieldAdd_hideInTable')).attr('disabled', instance.readonly);
     return false;
-  }
+  },
 });
 
 Template.fieldForView.created = function () {
@@ -106,14 +104,8 @@ Template.fieldForView.helpers({
     return allFieldsType;
   },
   isSelected: function () {
-    //console.log(this.value);
     parentThis = Template.parentData(1);
-    //console.log ("The parent is a type :");
-    //console.log(parentThis.value.type)
-    //console.log ("The current is a type :");
-    //console.log(this.value);
     if (parentThis.value.type === this.value){
-      //console.log ("I return selected");
       return "selected";
     }
     else {

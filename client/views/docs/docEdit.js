@@ -14,20 +14,20 @@ var saveFields = function () {
 
 Template.docEdit.events({
   "submit form#docEdit": function (e) {
-    e.preventDefault();
     var ismodal;
+    var categoryId;
     var fields = {}; //need to be defined here
     var docId = this._id;
+    var usefulForRoles = [];
     var doCheckIfFilelinkExists = false;
     var clientPath; //need to be defined here
     var fieldName; //need to be defined here
+    var properties;
+    e.preventDefault();
     $(".dyn-field").each(function (index, element) {
       if ($(this).data("fieldtype")==="filelink"){
-        //console.log($(this).data("fieldtype"));
-        if (Meteor.settings.public.debug){
-            console.log("I have found a filelink in your fields.")
-            console.log("Lets check if the file exist")
-        }
+        RKCore.log("I have found a filelink in your fields.");
+        RKCore.log("Lets check if the file exist");
         doCheckIfFilelinkExists = true;
         clientPath = element.value;
         fieldName = element.name;
@@ -40,49 +40,37 @@ Template.docEdit.events({
       }
     });
 
-    var categoryId = $("#selectedCategory").val();
+    categoryId = $("#selectedCategory").val();
 
-    var usefulForRoles = [];
     $('#usefulForRolesCheckboxes input:checked').each(function () {
       usefulForRoles.push($(this).attr('name'));
     });
 
-    if (Meteor.settings.public.debug){
-        console.log("usefulForRoles : ")
-        console.log(usefulForRoles)
-    }
+    RKCore.log("usefulForRoles : ");
+    RKCore.log(usefulForRoles);
 
-
-
-    var properties = {
-      name : $(e.target).find("[name=name]").val(),
-      docId : this._id,
-      categoryId : categoryId,
-      searchScore : $("#searchScore").val(),
-      fields : fields,
-      usefulForRoles : usefulForRoles
+    properties = {
+      name: $(e.target).find("[name=name]").val(),
+      docId: this._id,
+      categoryId: categoryId,
+      searchScore: $("#searchScore").val(),
+      fields: fields,
+      usefulForRoles: usefulForRoles,
     };
     ismodal = this.ismodal;
 
-
     Meteor.call("docUpdate", properties, function (error, id) {
-      if (error) {
-        // do nothing (an error message should appears)
-      } else {
-        //
-        if (doCheckIfFilelinkExists){
+      if (!error) {
+        if (doCheckIfFilelinkExists) {
           //if we do so, we don't need to wait for the cron to check all the files
-          if (Meteor.settings.public.debug){
-              console.log("I will check if the file link is correct");
-              console.log(clientPath);
-              console.log(fieldName);
-          }
-          Meteor.call("walkThruOneFilelink",id,clientPath,fieldName, function (error, id){});
+          RKCore.log("I will check if the file link is correct");
+          RKCore.log(clientPath);
+          RKCore.log(fieldName);
+          Meteor.call("walkThruOneFilelink", id, clientPath, fieldName, function () {});
         }
         if (typeof(toastr) !== 'undefined') {
           toastr.success(TAPi18n.__("Document saved"));
         }
-
       }
     });
 
@@ -114,10 +102,8 @@ Template.docEdit.events({
   "click #deleteDoc": function (e) {
     e.preventDefault();
     if (confirm("Are you sure you want to delete this doc ?")) {
-      Meteor.call("docDelete", this._id, function (error, id) {
-        if (error) {
-          // do nothing (a popup should appear)
-        } else {
+      Meteor.call("docDelete", this._id, function (error) {
+        if (!error) {
           return Router.go("browse");
         }
       });
@@ -125,39 +111,40 @@ Template.docEdit.events({
     }
     return false;
   },
-  'change #selectedCategory': function (e, t) {
+  'change #selectedCategory': function (e) {
+    e.preventDefault();
     saveFields();
     return selectedCategory.set($('#selectedCategory').val());
-  }
+  },
 });
 
 Template.docEdit.rendered = function () {
-
   // delete here so that when I come back to the search page, it loads faster
-  Session.set('searchQuery',undefined);
-  delete Session.keys.searchQuery
-  Session.set('searchQuerySentToServer',undefined);
-  delete Session.keys.searchQuery
+  Session.set('searchQuery', undefined);
+  delete Session.keys.searchQuery;
+  Session.set('searchQuerySentToServer', undefined);
+  delete Session.keys.searchQuery;
 
   selectedCategory.set("");
-  return previousFields = {};
-  if (Meteor.settings.public.debug){console.log(Session.get("currentFilelink"));}
+  RKCore.log(Session.get("currentFilelink"));
+  previousFields = {};
+  return previousFields;
 };
 
 Template.docEdit.helpers({
   onDocEditPage: function () {
-    //console.log(Router.current().route.getName())
     return ((Router.current().route.getName() === "docEdit" ) ? true : false);
   },
-  usefulForRolesCheckbox : function (){
-    var Roles = rkSettings.findOne({key: "Roles"}).value
+  usefulForRolesCheckbox: function () {
+    var Roles = rkSettings.findOne({key: "Roles"}).value;
     var arrayLength = Roles.length;
-    for (var i = 0; i < arrayLength; i++) {
+    var i;
+    for (i = 0; i < arrayLength; i++) {
       if (typeof(this.usefulForRoles) === 'undefined') {
         Roles[i].thisDocumentisUsefulForThisRole = false;
       }
       else {
-        if (this.usefulForRoles.indexOf(Roles[i].slug)>=0){
+        if (this.usefulForRoles.indexOf(Roles[i].slug) >= 0) {
           Roles[i].thisDocumentisUsefulForThisRole = true;
         }
         else {
@@ -165,10 +152,8 @@ Template.docEdit.helpers({
         }
       }
     }
-    if (Meteor.settings.public.debug){
-      console.log("Roles for this document : ");
-      console.log(Roles)
-    }
+    RKCore.log("Roles for this document : ");
+    RKCore.log(Roles);
     return Roles;
   },
   tags: function () {
@@ -184,16 +169,14 @@ Template.docEdit.helpers({
   userSpaceLinkTitle: function () {
     if (userSpaceHasDoc(Meteor.userId(), this._id)) {
       return 'Remove doc from my space';
-    } else {
-      return 'Add doc to my space';
     }
+    return 'Add doc to my space';
   },
   userSpaceIcon: function () {
     if (userSpaceHasDoc(Meteor.userId(), this._id)) {
       return 'glyphicon-star';
-    } else {
-      return 'glyphicon-star-empty';
     }
+    return 'glyphicon-star-empty';
   },
   fieldIs: function (field) {
     return this.type === field;
@@ -204,7 +187,7 @@ Template.docEdit.helpers({
   revisionsUrl: function () {
     var url;
     url = Router.routes.revisions.path({
-      docId: this._id
+      docId: this._id,
     });
     return url;
   },
@@ -227,7 +210,10 @@ Template.docEdit.helpers({
     return this.searchScore;
   },
   dataForKey: function () {
-    var data, ref, ref1, ref2;
+    var data;
+    var ref;
+    var ref1;
+    var ref2;
     var value = (ref = Template.parentData(1)) != null ? (ref1 = ref.fields) != null ? (ref2 = ref1[this.key]) != null ? ref2.value : void 0 : void 0 : void 0;
     if (!value) {
       value = previousFields[this.key];
@@ -248,25 +234,28 @@ Template.docEdit.helpers({
   },
   viewFields: function () {
     var ref;
+    var fields;
+    var view;
+    var keys;
     var categoryId = selectedCategory.get() || this.categoryId;
     var viewId = (ref = Categories.findOne({
-      _id: categoryId
+      _id: categoryId,
     })) != null ? ref.viewId : void 0;
     if (viewId) {
-      var keys = Views.getFieldInOrder(viewId);
-      var view = Views.findOne({
-        _id: viewId
+      keys = Views.getFieldInOrder(viewId);
+      view = Views.findOne({
+        _id: viewId,
       });
-      var fields = view.fields;
+      fields = view.fields;
       return keys.map(function (key) {
         return {
           key: key,
           _id: key,
           type: fields[key].type,
           mandatory: fields[key].mandatory,
-          multipleChoices : fields[key].multipleChoices
+          multipleChoices: fields[key].multipleChoices,
         };
       });
     }
-  }
+  },
 });
