@@ -104,53 +104,6 @@ Meteor.publish("myCurrentSearchQuery", function () {
   );
 });
 
-Meteor.publish('cse', function (query) {
-  var self = this;
-  var response;
-  var thumb;
-  var doc;
-  check(query, String);
-  if (typeof Meteor.settings.cse !== 'undefined') {
-  if (query) {
-    try {
-      response = Meteor.http.get('https://www.googleapis.com/customsearch/v1', {
-        params: {
-          q: query,
-          cx: Meteor.settings.cse.cx,
-          key: Meteor.settings.cse.key,
-        },
-      });
-      _.each(response.data.items, function (item) {
-        if (typeof item.pagemap.cse_thumbnail !== 'undefined') {
-          thumb = item.pagemap.cse_thumbnail[0].src;
-        }
-        else {
-          thumb = "/images/noimgavailable.png";
-        }
-        doc = {
-          thumb: thumb,
-          title: item.title,
-          link: item.link,
-          snippet: item.snippet,
-        };
-
-        self.added('websearchresults', Random.id(), doc);
-      });
-      self.ready();
-    }
-    catch(error) {
-      console.log(error);
-    }
-  }
-  else {
-    self.ready();
-  }
-  }
-  else {
-    console.log("You need to defined cse in your setting file settings.json");
-  }
-});
-
 Meteor.publish("dates", function () {
   return Dates.find();
 });

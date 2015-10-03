@@ -118,6 +118,7 @@ rationalk:lib@0.0.1
 rationalk:notes@0.0.1
 rationalk:ppm@0.0.2
 rationalk:trello@0.0.2
+rationalk:wikisearch@0.0.1
 reactive-dict@1.1.0
 reactive-var@1.0.5
 reload@1.1.3
