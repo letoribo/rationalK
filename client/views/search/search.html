@@ -63,12 +63,10 @@
 								</div>
 				     	</div>
 				     {{/if}}
-
 					</form>
 						<hr/>
 						<div id="resultsContent" class="results-wrapper">
 		        			{{#each searchResults}}
-										<div class="post">
 				        				{{#if fields}}
 				        					{{>docInSearchResults}}
 				        				{{/if}}
@@ -100,7 +98,11 @@
 														{{>noteInSearchResults}}
 													{{/if}}
 												{{/if}}
-
+												{{#if hasTemplate "wikiInSearchResults"}}
+													{{#if searchResultFromWiki}}
+														{{>wikiInSearchResults}}
+													{{/if}}
+												{{/if}}
 												{{#if path}}
 													{{>fileInSearchResults}}
 												{{/if}}
@@ -113,7 +115,6 @@
 												{{#if externalDocId}}
 													{{>externalInSearchResults}}
 												{{/if}}
-			        			</div>
 									{{else}}
 										{{#if webSearchResults.count}}
 

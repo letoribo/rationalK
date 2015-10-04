@@ -137,22 +137,6 @@ Template.searchTpl.helpers({
 					results = results.concat(RKTrello.findAll());
 				}
 
-				/*
-				This has been replaced by a hook !!!
-
-				if (typeof RKExperts !== 'undefined') {
-					results = results.concat(RKExperts.findAllFullTextSearch());
-				}
-
-				if (typeof RKDiscussions !== 'undefined') {
-					results = results.concat(RKDiscussions.findAllFullTextSearch()); // both discussion and messages
-				}
-				*/
-
-				if (typeof RKFMEA !== 'undefined') {
-					results = results.concat(RKFMEA.corePFMEA.findAll());
-				}
-
 				if (typeof RKFMEA !== 'undefined') {
 					results = results.concat(RKFMEA.corePFMEA.findAll());
 				}
@@ -168,8 +152,6 @@ Template.searchTpl.helpers({
 						}
 			    }
 				}
-
-
 
 			}
 			if (searchType === "regexpSearch") {

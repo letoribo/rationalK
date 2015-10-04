@@ -93,5 +93,8 @@
 	"cse":{
 		"cx" : "*******:*****",
 		"key" : "*****-0-cm-mxSSaq7LpH_hj7k"
+	},
+	"wiki":{
+		"endpoints" : ["https://en.wikipedia.org/w","http://www.imfdb.org"]
 	}
 }
