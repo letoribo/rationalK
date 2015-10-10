@@ -126,12 +126,14 @@ if (Meteor.isServer) {
 		  },
 			job: function () {
 		    Meteor.call("indexFilesContent", function (error, results) {
-				if (Meteor.settings.public.debug) {
-				  console.log("error from the meteor call : ");
-				  console.log(error);
-				  console.log("results from the meteor call : ");
-				  console.log(results);
-				}
+          if (error) {
+			     RKCore.log("error from the meteor call : ");
+           RKCore.log(error);
+          }
+          else if (result) {
+            RKCore.log("results from the meteor call : ");
+            RKCore.log(results);
+          }
 		    });
 		  },
 		});

@@ -103,6 +103,11 @@
 														{{>wikiInSearchResults}}
 													{{/if}}
 												{{/if}}
+												{{#if hasTemplate "taskInSearchResults"}}
+													{{#if searchResultFromTasks}}
+														{{>taskInSearchResults}}
+													{{/if}}
+												{{/if}}
 												{{#if path}}
 													{{>fileInSearchResults}}
 												{{/if}}
