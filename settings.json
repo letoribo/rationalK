@@ -23,7 +23,8 @@
 			"trello" : true,
 			"checklists" : true,
 			"fmea" : true,
-			"tasks" : true
+			"tasks" : true,
+			"sheetconnector" : true
 		},
 		"header_text":"rK",
 		"custom_function_file":"companyA.js",

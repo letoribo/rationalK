@@ -37,21 +37,6 @@ Meteor.publish("XMLFiles", function () {
   return XMLFiles.find();
 });
 
-Meteor.publish("external", function (externalDocId) {
-  check(externalDocId, String);
-  return External.find(
-    {
-      'externalDocId': externalDocId,
-    },
-    {
-      fields: {
-        'externalDocId': 0,
-        'full': 0,
-      },
-    });
-});
-
-
 Meteor.publish("controlplan", function () {
   return controlPlan.find();
 });

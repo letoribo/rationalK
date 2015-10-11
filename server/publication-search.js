@@ -34,18 +34,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               limit: 30,
           });
 
-          searchResultsExternal = External.find(
-            {
-              $text: {
-                $search: searchQuery,
-              },
-            },
-            {
-                fields: { score: { $meta: 'textScore' } },
-                sort: { score: { $meta: 'textScore' } },
-                limit: 30,
-            });
-
           searchResultsFilesContent = FilesContent.find({
                 $text: { $search: searchQuery },
             }, {
@@ -95,7 +83,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
                 limit: 30,
             });
 
-          searchResultsExternal = External.find({$text: { $search: "somethingthatyouwillneverfind" }});
           searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
           if (typeof RKTrello !== 'undefined') {
             searchResultsTrello = RKTrello.findDummy();
@@ -112,6 +99,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               if (typeof eval(packageName).findDummy === 'function') { //todo
                 sr = eval(packageName).findDummy(searchQuery); //todo
                 searchResults = searchResults.concat(sr);
+                nResults = nResults + sr.count();
               }
             }
           }
@@ -153,7 +141,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         }
 
         searchResults = searchResults.concat(searchResultsDocs);
-        searchResults = searchResults.concat(searchResultsExternal);
         searchResults = searchResults.concat(searchResultsFilesContent);
         searchResults = searchResults.concat(searchResultsWalkedFiles);
 
@@ -166,7 +153,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         //console.log(searchResults.fetch());
         nResults = nResults
         + searchResultsDocs.count()
-        + searchResultsExternal.count()
         + searchResultsFilesContent.count()
         + searchResultsWalkedFiles.count();
 

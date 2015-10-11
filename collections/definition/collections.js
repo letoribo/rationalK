@@ -18,7 +18,6 @@ Processes = new Mongo.Collection('processes');
 controlPlan = new Mongo.Collection('controlplan');
 Filelinks = new Mongo.Collection('filelinks');
 Tags = new Mongo.Collection('tags');
-External = new Mongo.Collection('external');
 XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
@@ -33,7 +32,6 @@ if (Meteor.isServer) {
 		}
 		Docs.createIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
 		WalkedFiles.createIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
-		External.createIndex({ "$**": "text" }, { name: "TextIndex" });
 		FilesContent.createIndex({ text: "text" }, { name: "TextIndex" });
 	}
 	else {
@@ -43,7 +41,6 @@ if (Meteor.isServer) {
 		if (typeof Docs._ensureIndex === 'function') {
 			Docs._ensureIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
 			WalkedFiles._ensureIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
-			External._ensureIndex({ "$**": "text" }, { name: "TextIndex" });
 			FilesContent._ensureIndex( { text: "text" }, {name: "TextIndex"});
 	}
 }
@@ -62,12 +59,6 @@ XMLFiles.allow( {
 });
 
 Gantts.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
-
-External.allow( {
 		insert: function (userId) {return !! userId; },
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },

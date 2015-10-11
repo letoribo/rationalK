@@ -117,9 +117,13 @@
 														{{>expertInSearchResults}}
 													{{/if}}
 												{{/if}}
-												{{#if externalDocId}}
-													{{>externalInSearchResults}}
+
+												{{#if hasTemplate "sheetInSearchResults"}}
+													{{#if searchResultFromSheet}}
+														{{>sheetInSearchResults}}
+													{{/if}}
 												{{/if}}
+												
 									{{else}}
 										{{#if webSearchResults.count}}
 
