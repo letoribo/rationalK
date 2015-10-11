@@ -22,7 +22,7 @@ XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
 FollowUp = new Mongo.Collection('FollowUp');
-FilesContent = new Mongo.Collection('FilesContent');
+
 
 
 if (Meteor.isServer) {
@@ -32,7 +32,6 @@ if (Meteor.isServer) {
 		}
 		Docs.createIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
 		WalkedFiles.createIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
-		FilesContent.createIndex({ text: "text" }, { name: "TextIndex" });
 	}
 	else {
 		if (Meteor.settings.public.debug) {
@@ -41,16 +40,10 @@ if (Meteor.isServer) {
 		if (typeof Docs._ensureIndex === 'function') {
 			Docs._ensureIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
 			WalkedFiles._ensureIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
-			FilesContent._ensureIndex( { text: "text" }, {name: "TextIndex"});
 	}
 }
 } //end if Server
 
-FilesContent.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
 
 XMLFiles.allow( {
 		insert: function (userId) {return !! userId; },

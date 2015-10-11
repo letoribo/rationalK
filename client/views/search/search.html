@@ -80,9 +80,6 @@
 														{{>corePFMEAInSearchResults}}
 													{{/if}}
 											  {{/if}}
-												{{#if text}}
-				        					{{>filesContentInSearchResults}}
-				        				{{/if}}
 												{{#if hasTemplate "messageInSearchResults"}}
 					        				{{#if searchResultFromMessage}}
 														{{>messageInSearchResults}}
@@ -123,7 +120,13 @@
 														{{>sheetInSearchResults}}
 													{{/if}}
 												{{/if}}
-												
+
+												{{#if hasTemplate "filesContentInSearchResults"}}
+													{{#if searchResultFromFileContent}}
+					        					{{>filesContentInSearchResults}}
+					        				{{/if}}
+												{{/if}}
+
 									{{else}}
 										{{#if webSearchResults.count}}
 

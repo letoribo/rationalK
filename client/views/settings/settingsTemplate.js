@@ -65,30 +65,6 @@ Template.settingsTemplate.events({
       Meteor.call('walkThruFilelinks', function () {});
       return false;
     },
-    "click a.scanFilesContent": function (e) {
-      e.preventDefault();
-      Meteor.call("indexFilesContent4", function (error, results) {
-    		if (Meteor.settings.public.debug) {
-    		  console.log("error from the meteor call : ");
-    		  console.log(error);
-    		  console.log("results from the meteor call : ");
-    		  console.log(results);
-    		}
-      });
-      return false;
-    },
-	"click a.removeFilesContent": function (e) {
-      e.preventDefault();
-      Meteor.call("removeFilesContent", function (error, results) {
-    		if (Meteor.settings.public.debug) {
-    		  console.log("error from the meteor call : ");
-    		  console.log(error);
-    		  console.log("results from the meteor call : ");
-    		  console.log(results);
-    		}
-      });
-      return false;
-    },
     "click a.walkThruFolders": function (e) {
       e.preventDefault();
       Meteor.call('walkThruFolders',function (error, result) {

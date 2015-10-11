@@ -2,8 +2,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
   var searchResultsDocs;
   var searchResults = [];
   var nResults = 0;
-  var searchResultsExternal;
-  var searchResultsFilesContent;
   var searchResultsWalkedFiles;
   var sr;
   var i;
@@ -20,8 +18,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
   RKCore.log('Type of search : ' + searchType);
   RKCore.log('Filter on category : ' + catFilter);
 
-
-  // I have something to search for :
   if (searchType === "fullTextSearch") {
       if (catFilter === "all") {
         searchResultsDocs = Docs.find( {
@@ -34,35 +30,27 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               limit: 30,
           });
 
-          searchResultsFilesContent = FilesContent.find({
-                $text: { $search: searchQuery },
-            }, {
-                fields: { score: { $meta: 'textScore' } },
-                sort: { score: { $meta: 'textScore' } },
-                limit: 30,
-            });
+          if (typeof RKTrello !== 'undefined') {
+            searchResultsTrello = RKTrello.findFullText(searchQuery);
+          }
 
-            if (typeof RKTrello !== 'undefined') {
-              searchResultsTrello = RKTrello.findFullText(searchQuery);
-            }
+          if (typeof RKFMEA !== 'undefined') {
+            searchResultsPFMEA = RKFMEA.corePFMEA.findFullText(searchQuery);
+          }
 
-            if (typeof RKFMEA !== 'undefined') {
-              searchResultsPFMEA = RKFMEA.corePFMEA.findFullText(searchQuery);
-            }
-
-            if (typeof RKCore.searchResultsPackage !== 'undefined') {
-    					searchResultsPackage = RKCore.searchResultsPackage;
-    					nPackages = searchResultsPackage.length;
-    			    for (i = 0; i < nPackages; i++) {
-    						packageName = searchResultsPackage[i].name;
-    		        RKCore.log(packageName);
-                if (typeof eval(packageName).findFullText === 'function') { //todo
-                  sr = eval(packageName).findFullText(searchQuery); //todo
-                  nResults = nResults + sr.count();
-                  searchResults = searchResults.concat(sr);
-                }
-    			    }
-    				}
+          if (typeof RKCore.searchResultsPackage !== 'undefined') {
+  					searchResultsPackage = RKCore.searchResultsPackage;
+  					nPackages = searchResultsPackage.length;
+  			    for (i = 0; i < nPackages; i++) {
+  						packageName = searchResultsPackage[i].name;
+  		        RKCore.log("The package " + packageName + " has a function findFullText. So I will search inside.");
+              if (typeof eval(packageName).findFullText === 'function') { //todo
+                sr = eval(packageName).findFullText(searchQuery); //todo
+                nResults = nResults + sr.count();
+                searchResults = searchResults.concat(sr);
+              }
+  			    }
+  				}
         }
         else { //there is a filter on categories
           //marche pas todo
@@ -83,7 +71,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
                 limit: 30,
             });
 
-          searchResultsFilesContent = FilesContent.find({$text: { $search: "somethingthatyouwillneverfind" }});
           if (typeof RKTrello !== 'undefined') {
             searchResultsTrello = RKTrello.findDummy();
           }
@@ -108,9 +95,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
 
         // ne marche pas alors que ca marche bien sur le serveur
         if (includeWalkedFilesInResults) {
-          if (Meteor.settings.public.debug) {
-            console.log("Finding walked files on the server using full text search...");
-          }
+          RKCore.log("Finding walked files on the server using full text search...");
 
           searchResultsWalkedFiles = WalkedFiles.find(
             {
@@ -141,7 +126,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         }
 
         searchResults = searchResults.concat(searchResultsDocs);
-        searchResults = searchResults.concat(searchResultsFilesContent);
         searchResults = searchResults.concat(searchResultsWalkedFiles);
 
         if (typeof RKTrello !== 'undefined') {
@@ -153,7 +137,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         //console.log(searchResults.fetch());
         nResults = nResults
         + searchResultsDocs.count()
-        + searchResultsFilesContent.count()
         + searchResultsWalkedFiles.count();
 
         if (typeof RKTrello !== 'undefined') {

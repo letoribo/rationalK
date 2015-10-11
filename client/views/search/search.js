@@ -127,16 +127,12 @@ Template.searchTpl.helpers({
 				docsResults = Docs.find({}, {sort: {score: -1}}).fetch();
 				results = results.concat(docsResults);
 
-				filesContentResults = FilesContent.find({}, {sort: {score: -1}}).fetch();
-				results = results.concat(filesContentResults);
-
 				filesResults = WalkedFiles.find({}).fetch();
 				results = results.concat(filesResults);
 
 				if (typeof RKTrello !== 'undefined') {
 					results = results.concat(RKTrello.findAll());
 				}
-
 				if (typeof RKFMEA !== 'undefined') {
 					results = results.concat(RKFMEA.corePFMEA.findAll());
 				}
@@ -146,7 +142,7 @@ Template.searchTpl.helpers({
 					nPackages = searchResultsPackage.length;
 			    for (i = 0; i < nPackages; i++) {
 						packageName = searchResultsPackage[i].name;
-		        RKCore.log(packageName);
+		        RKCore.log("The package : " + packageName + " has a method : findAllFullTextSearch. So I will search inside.");
 						if(typeof eval(packageName).findAllFullTextSearch === 'function') {
 							results = results.concat(eval(packageName).findAllFullTextSearch()); //todo
 						}
@@ -232,29 +228,9 @@ Template.searchTpl.events({
 			Template.searchTpl.myHilitor.remove();
 		}
 	},
-	/*
-	"change .includeSynonymsInResults-checkbox input": function (e) {
-		e.preventDefault();
-  	Session.set("includeSynonymsInResults", e.target.checked);
-		return false;
-	},
-	"change .includeWalkedFilesInResultsCheckbox input": function (e) {
-			e.preventDefault();
-			return false;
-	},
-	*/
 	"change #searchType": function (e) {
 		e.preventDefault();
-			//do not change the session here, to avoid unnecessary loading
-			/*
-			if (e.target.value === "regexpSearch"){
-				document.getElementById("includeWalkedFilesInResultsCheckbox").disabled = false;
-			}
-			else {
-				document.getElementById("includeWalkedFilesInResultsCheckbox").checked = false;
-				document.getElementById("includeWalkedFilesInResultsCheckbox").disabled = true;
-			}
-			*/
+		//do not change the session here, to avoid unnecessary loading
 		return false;
 	},
 	"submit .searchForm": function (e) {
