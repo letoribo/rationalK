@@ -14,10 +14,6 @@ filterByOrg = function (meteor, collection, userId, strict) {
   }
 };
 
-Meteor.publish("followup", function () {
-  return FollowUp.find();
-});
-
 Meteor.publish("accounts", function () {
   return Meteor.users.find({}, {
     fields: {
