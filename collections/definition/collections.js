@@ -21,9 +21,6 @@ Tags = new Mongo.Collection('tags');
 XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
-FollowUp = new Mongo.Collection('FollowUp');
-
-
 
 if (Meteor.isServer) {
 	if (typeof Docs.createIndex === 'function') {
@@ -63,11 +60,6 @@ Filelinks.allow( {
     remove: function (userId) {return !!userId; },
 });
 
-FollowUp.allow( {
-		insert: function (userId) {return !! userId; },
-		update: function (userId) {return !!userId; },
-    remove: function (userId) {return !!userId; },
-});
 
 Tags.allow( {
 		insert: function (userId) {return !! userId; },

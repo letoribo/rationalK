@@ -153,22 +153,14 @@ Template.searchTpl.helpers({
 			if (searchType === "regexpSearch") {
 				docsResults = Docs.find({}).fetch();
 				filesResults = WalkedFiles.find({}).fetch();
-				//messagesResults = Messages.find({}).fetch();
-				//discussionsResults = Notes.find({}).fetch();
-				notesResults = Discussions.find({}).fetch();
 
 				if (typeof RKExperts !== 'undefined') {
 					expertResults = RKExperts.findAll();
 					results = results.concat(expertResults);
 				}
 
-				//externalResults = External.find({}).fetch();
 				results = results.concat(docsResults);
-				//results = results.concat(messagesResults);
-				//results = results.concat(discussionsResults);
 				results = results.concat(filesResults);
-				results = results.concat(notesResults);
-				//results = results.concat(externalResults);
 			}
 
 			function byDescendingScore (a, b) {
