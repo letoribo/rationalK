@@ -1,5 +1,5 @@
 Template.searchTpl.onCreated(function () {
-	Session.setDefault("searchType", "regexpSearch");
+	Session.setDefault("searchType", "fullTextSearch");
 });
 
 Template.searchTpl.rendered = function () {
