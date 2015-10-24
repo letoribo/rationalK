@@ -36,7 +36,6 @@ Template.fileInSearchResults.helpers({
 Template.fileInSearchResults.events({
 	"click .convertIntoDBDoc": function (e) {
   		e.preventDefault();
-			if (Meteor.settings.public.debug){console.log(e.currentTarget.dataset.filelink);}
 			Session.set("currentFilelink",e.currentTarget.dataset.filelink);
 			Router.go("docCreate");
       return false;

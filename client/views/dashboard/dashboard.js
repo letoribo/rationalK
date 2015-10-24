@@ -17,7 +17,6 @@ Template.dashboard.events({
 
 Template.dashboard.helpers({
 	myFavorites: function () {
-		RKCore.log("salut");
 		return userSpaces.find({userId: Meteor.userId()}, {}).fetch();
 	},
 	lastActivity: function () {
@@ -415,11 +414,6 @@ Template.dashboard.helpers({
 							return "";
 						} //end of if data.doc not undefined
 						else if (typeof object.path !== 'undefined') {
-							//chokidar
-							if (Meteor.settings.public.debug) {
-								console.log('chokidar activity :');
-								console.log(object);
-							}
 							fileLink = clientFilename(object.path);
 							fileLinkUrl = '<a href="rk:' +
 							fileLink +
