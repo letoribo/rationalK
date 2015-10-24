@@ -16,6 +16,9 @@ Template.dashboard.events({
 });
 
 Template.dashboard.helpers({
+	packageDashboard: function () {
+		return RKCore.packageDashboard;
+	},
 	myFavorites: function () {
 		return userSpaces.find({userId: Meteor.userId()}, {}).fetch();
 	},
