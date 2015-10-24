@@ -15,13 +15,7 @@ Template.settingsTemplate.events({
 	    // This function is called when the new task form is submitted
 		var optionName = "custom_settings";
 	    var optionValue = event.target.custom_settings.value;
-
 	    Meteor.call('updateOption', optionName, optionValue, function () {});
-
-	    // Clear form
-	    //event.target.option1.value = optionValue;
-
-	    // Prevent default form submit
 	    return false;
   	},
     'submit #validatedFilesPathForm' : function (e, t){
@@ -77,6 +71,9 @@ Template.settingsTemplate.events({
 
 
 Template.settingsTemplate.helpers({
+  packageSettings: function () {
+		return RKCore.packageSettings;
+	},
   validatedFilesPath: function () {
     var validatedFilesPath = rkSettings.findOne({key: "validatedFilesPath"});
     var validatedFilesPathValue = "";

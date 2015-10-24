@@ -84,5 +84,8 @@
 	{{#if hasTemplate "settingsFilesContent"}}
 		{{> settingsFilesContent}}
 	{{/if}}
+	{{#each packageSettings}}
+		{{> UI.dynamic template=templateName}}
+	{{/each}}
 
 </template>
