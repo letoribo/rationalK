@@ -14,6 +14,7 @@ binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
+bryanmorgan:webshot@1.0.0
 callback-hook@1.0.3
 cfs:access-point@0.1.49
 cfs:base-package@0.0.30
@@ -47,6 +48,7 @@ email@1.0.6
 fastclick@1.0.3
 gadicohen:headers@0.0.30
 gadicohen:messageformat@0.0.52
+gadicohen:phantomjs@0.0.2
 geojson-utils@1.0.3
 handlebars@1.0.3
 html-tools@1.0.4
