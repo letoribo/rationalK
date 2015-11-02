@@ -28,10 +28,6 @@ if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
 	// need to create the folder backups first and then change the owner :
 	// sudo chown -R :meteoruser /home/company/backups
 	backup = function (backupSubFolderName) {
-			dumpCommand = "mongodump"
-				+ " --db " + mongoUrl.database
-				+ " --excludeCollection ['filelinks']"
-				+ " --out " + Meteor.settings.periodicBackup.outFolder + "/" + backupSubFolderName;
 			if (typeof Docs.createIndex === 'function') {
 				RKCore.log("You are runnning a mongodb version >3.");
 				dumpCommand = "mongodump"
