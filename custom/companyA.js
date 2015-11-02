@@ -19,9 +19,7 @@ if (Meteor.settings.public.custom_function_file === "companyA.js") {
 			var arrayLength;
 			var docId;
 			var IdSubstring;
-			if (Meteor.settings.public.debug) {
-				console.log("Running custom function generateId for a company");
-			}
+			RKCore.log("Running custom function generateId for a company");
 			if ((document.getElementById("docEdit")) && (typeof(document.getElementById("docEdit")) !== 'undefined')) {
 				idFieldName = "Report ID";
 				currentDocId = document.getElementById("docEdit").elements.namedItem(idFieldName).value;
@@ -40,13 +38,10 @@ if (Meteor.settings.public.custom_function_file === "companyA.js") {
 
 
 					arrayLength = DocInThisCategory.length;
-					if (Meteor.settings.public.debug) {
-						console.log("You have " + arrayLength + " documents in the ENG category");
-					}
+					RKCore.log("You have " + arrayLength + " documents in the ENG category");
+
 					for (i = 0; i < arrayLength; i++) {
-						if (Meteor.settings.public.debug) {
-							console.log(DocInThisCategory[i].fields[idFieldName]);
-						}
+						RKCore.log(DocInThisCategory[i].fields[idFieldName]);
 						if (typeof(DocInThisCategory[i].fields[idFieldName]) !== 'undefined') {
 							docId = DocInThisCategory[i].fields[idFieldName].value;
 							//Remove the first 2 caracteres that are doc type :
