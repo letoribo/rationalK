@@ -3,6 +3,8 @@ var exec;
 var mongoUrl;
 var database;
 var backup;
+var i;
+var collectionsToBackup = ['docs','views'];
 if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
 //if (Meteor.isServer)  { //for test
 	exec = Npm.require('child_process').exec;
@@ -17,28 +19,49 @@ if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
 				+ " --db " + mongoUrl.database
 				+ " --excludeCollection ['filelinks']"
 				+ " --out " + Meteor.settings.periodicBackup.outFolder + "/" + backupSubFolderName;
-			if (Meteor.settings.public.debug) {
-				console.log("command : " + dumpCommand);
+			if (typeof Docs.createIndex === 'function') {
+				RKCore.log("You are runnning a mongodb version >3.");
+				dumpCommand = "mongodump"
+					+ " --db " + mongoUrl.database
+					+ " --excludeCollection ['filelinks']" //excludeCollection is only available at 3.0
+					+ " --out " + Meteor.settings.periodicBackup.outFolder + "/" + backupSubFolderName;
 			}
+			else {
+				RKCore.log("You are runnning a mongodb version <3 (probably 2.6.X).");
+				var nCollectionsToBackup = collectionsToBackup.length;
+				dumpCommand = ''
+				for (i = 0; i < nCollectionsToBackup; i++) {
+					dumpCommand = dumpCommand + "mongodump"
+						+ " --db " + mongoUrl.database
+						+ " --collection " +  collectionsToBackup[i] //excludeCollection is only available at 3.0
+						+ " --out " + Meteor.settings.periodicBackup.outFolder + "/" + backupSubFolderName
+						+ " && "
+				}
+				dumpCommand = dumpCommand.slice(0, - 4);
+			}
+
+			RKCore.log("command : " + dumpCommand);
+
 			exec(dumpCommand, function (error, stdout, stderr) {
 		  	if (stdout) {
-		  		console.log('stdout: ' + stdout);
+		  		RKCore.log('stdout: ' + stdout);
 		  	}
 		  	if (stderr) {
-					console.log('stderr: ' + stderr);
+					RKCore.log('stderr: ' + stderr);
 		  	}
 		  	if (error !== null) {
-		  	  console.log('exec error: ' + error);
+		  	  RKCore.log('exec error: ' + error);
 		  	}
 			});
+
 	};
 
 	if ( (Meteor.settings.periodicBackup.do) && (typeof(Meteor.settings.periodicBackup.outFolder) !== 'undefined') ) {
 		SyncedCron.add({
 		    name: 'Daily DB backup',
 		    schedule: function (parser) {
-		      return parser.text('at 9:00 pm'); // fires at 9:00pm every day
-		      //return parser.text('every 2 minutes'); // pour les essais
+		      //return parser.text('at 9:00 pm'); // fires at 9:00pm every day
+		      return parser.text('every 2 minutes'); // pour les essais
 		    },
 		    job: function () {
 					var backupSubFolderName = "backupDaily";
