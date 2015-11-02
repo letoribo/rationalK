@@ -6,10 +6,10 @@ var backup;
 var i;
 var j;
 var collectionsToBackup = ['docs','views','history','revisions','categories','rkSettings','userspaces','folderstoscan','walkedfiles','searchqueries','tags'];
-RKCore.log("RKCore.packageBackup : ");
-RKCore.log(RKCore.packageBackup);
 
 if (typeof(RKCore.packageBackup) !== 'undefined'){
+	RKCore.log("RKCore.packageBackup : ");
+	RKCore.log(RKCore.packageBackup);
 	var nPackagesThatWantToBackupCollections = RKCore.packageBackup.length;
 	for (j = 0; j < nPackagesThatWantToBackupCollections; j++) {
 		collectionsToBackup = collectionsToBackup.concat(RKCore.packageBackup[j].collections);
@@ -18,8 +18,8 @@ if (typeof(RKCore.packageBackup) !== 'undefined'){
 RKCore.log("collectionsToBackup : ");
 RKCore.log(collectionsToBackup);
 
-//if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
-if (Meteor.isServer)  { //for test
+if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
+//if (Meteor.isServer)  { //for test
 	exec = Npm.require('child_process').exec;
 	sys = Npm.require('sys');
 	mongoUrl = MongoDBURI.parse(process.env.MONGO_URL);
@@ -73,8 +73,8 @@ if (Meteor.isServer)  { //for test
 		SyncedCron.add({
 		    name: 'Daily DB backup',
 		    schedule: function (parser) {
-		      //return parser.text('at 9:00 pm'); // fires at 9:00pm every day
-		      return parser.text('every 2 minutes'); // pour les essais
+		      return parser.text('at 9:00 pm'); // fires at 9:00pm every day
+		      //return parser.text('every 2 minutes'); // pour les essais
 		    },
 		    job: function () {
 					var backupSubFolderName = "backupDaily";
