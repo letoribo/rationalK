@@ -38,12 +38,11 @@ Template.filelinks.helpers({
 			        key: 'inValidatedFolder',
 			        label: 'In a validated folder',
 			    },
-					/*,
 			    {
 			        key: 'mtime',
 			        label: 'Modified On',
+							hidden: true,
 			    },
-					*/
 			    {
 			        key: 'actions',
 			        label: 'Actions',

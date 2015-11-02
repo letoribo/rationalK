@@ -24,36 +24,27 @@ Meteor.methods({
 		var nDocs;
 		var nCats;
 		var fullFilename;
-		var query;
 		var validatedFilesPathArrayLength;
 		var fullFilenameWithForwardSlash;
-		if (Meteor.settings.public.debug) {
-			console.log('Starting walking thru the different filelinks...');
-		}
+		RKCore.log('Starting walking thru the different filelinks...');
 
 		if (typeof rkSettings.findOne({key: "validatedFilesPath"}) !== 'undefined') {
 			validatedFilesPath = rkSettings.findOne({key: "validatedFilesPath"}).value;
 			//they can be separated by | :
 			validatedFilesPathArray = validatedFilesPath.split("|");
-			if (Meteor.settings.public.debug) {
-				console.log('The files in the following folders are considered as validated in term on quality : ');
-				console.log('validatedFilesPathArray : ');
-				console.log(validatedFilesPathArray);
-			}
+			RKCore.log('The files in the following folders are considered as validated in term on quality : ');
+			RKCore.log('validatedFilesPathArray : ');
+			RKCore.log(validatedFilesPathArray);
 		}
 
     Filelinks.remove({});
 		fs = Npm.require("fs");
     cat = Categories.find().fetch();
 		nCats = cat.length;
-		if (Meteor.settings.public.debug) {
-			console.log('You have ' + nCats + ' categorie(s)');
-		}
+		RKCore.log('You have ' + nCats + ' categorie(s)');
     for (i = 0; i < nCats; i++) {
-				if (Meteor.settings.public.debug) {
-        	console.log("Cat Id : " + cat[i]._id);
-        	console.log("View Id : " + cat[i].viewId);
-				}
+        RKCore.log("Cat Id : " + cat[i]._id);
+        RKCore.log("View Id : " + cat[i].viewId);
         fieldsInThisView = Views.findOne(
           {
             $and: [
@@ -63,18 +54,15 @@ Meteor.methods({
 						],
           }
         ).fields;
-				if (Meteor.settings.public.debug) {
-					console.log("The fields in this view/category are : ");
-					console.log(fieldsInThisView);
-				}
+
+				RKCore.log("The fields in this view/category are : ");
+				RKCore.log(fieldsInThisView);
+
         for (key in fieldsInThisView) {
             if (fieldsInThisView.hasOwnProperty(key)) {
                 if (fieldsInThisView[key].type === "filelink") {
-									if (Meteor.settings.public.debug) {
-										console.log("Let's consider the field named : " + key + " which is of type : " + fieldsInThisView[key].type);
-									}
-									console.log(query);
-  								//console.log(JSON.parse(query));
+									RKCore.log("Let's consider the field named : " + key + " which is of type : " + fieldsInThisView[key].type);
+
                   docs = Docs.find(
 										{
 											$and: [
@@ -85,15 +73,15 @@ Meteor.methods({
 									}).fetch();
 									// #todo : take only the doc with and existing filelink key;
                   nDocs = docs.length;
-									if (Meteor.settings.public.debug) {
-										console.log('You have ' + nDocs + ' documents in this categorie(s)');
-									}
+
+									RKCore.log('You have ' + nDocs + ' documents in this categorie(s)');
+
                   for (j = 0; j < nDocs; j++) {
                     fields = docs[j].fields;
-										if (Meteor.settings.public.debug) {
-												console.log('In the doc number ' + j + ", the fields are : ");
-												console.log(fields);
-										}
+
+										RKCore.log('In the doc number ' + j + ", the fields are : ");
+										RKCore.log(fields);
+
                     filelinkObj = fields[key];
 										doUpdate = false;
 										if (typeof filelinkObj !== 'undefined') {
@@ -110,17 +98,13 @@ Meteor.methods({
 													fullFilenameWithForwardSlash = fullFilename.replace(/\\/g, "/");
 													if (fullFilenameWithForwardSlash.indexOf(validatedFilesPath) >= 0) {
 														filelinkObj.inValidatedFolder = true;
-														if (Meteor.settings.public.debug) {
-																console.log("The file : " + fullFilename + " is in the validated folder : " + validatedFilesPath);
-																console.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
-														}
+														RKCore.log("The file : " + fullFilename + " is in the validated folder : " + validatedFilesPath);
+														RKCore.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
 														break;
 													}
 													else {
-														if (Meteor.settings.public.debug) {
-															console.log("The file : " + fullFilename + " is NOT in the validated folder : " + validatedFilesPath);
-															console.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
-														}
+														RKCore.log("The file : " + fullFilename + " is NOT in the validated folder : " + validatedFilesPath);
+														RKCore.log("inValidatedFolder : " + filelinkObj.inValidatedFolder);
 													}
 												} //end of loop over validated path
 
@@ -130,7 +114,6 @@ Meteor.methods({
                         try {
                           // Query the entry
                           stats = fs.lstatSync(fullFilename);
-                          //console.log(stats);
                           if (stats.isDirectory()) {
                               filelinkObj.filefolder = "folder";
                           }
@@ -142,7 +125,6 @@ Meteor.methods({
 													doUpdate = true;
                         }
                         catch (e) {
-                          //console.log(e);
                           filelinkObj.exists = false;
                         }
 											}
@@ -157,20 +139,18 @@ Meteor.methods({
                       //the direct is to prevent to create a revision
                       Docs.direct.update(
                   			{
-                  			  _id: docs[j]._id
+                  			  _id: docs[j]._id,
                   			},
                   			{
                           $set: {
-                            fields: fields ,
-                            hasFilelink: filelinkObj.exists ,
-                            filelinkFieldName: key
-                            }
+                            fields: fields,
+                            hasFilelink: filelinkObj.exists,
+                            filelinkFieldName: key,
+													},
                         }
                   		);
 											if (filelinkObj.filefolder !== "empty") {
-												if (Meteor.settings.public.debug) {
-													console.log("We insert the filelinkObj into the filelinkDB.");
-												}
+												RKCore.log("We insert the filelinkObj into the filelinkDB.");
                         Filelinks.insert(
                     			{
                     			    path: Meteor.call('stripBeginEndQuotes', filelinkObj.value),
@@ -189,9 +169,7 @@ Meteor.methods({
             }
           }
       }
-			if (Meteor.settings.public.debug) {
-				console.log('Finished walking through the different filelinks.');
-			}
+			RKCore.log('Finished walking through the different filelinks.');
 	    return true;
 	},
 	walkThruOneFilelink: function (docId, clientPath, fieldName) {
@@ -201,22 +179,19 @@ Meteor.methods({
 			check(docId, String);
 			check(clientPath, String);
 			check(fieldName, String);
-			if (Meteor.settings.public.debug) {
-				console.log('Starting to checking one filelink...');
-			}
+
+			RKCore.log('Starting to checking one filelink...');
+
 			clientPathStripped =  Meteor.call('stripBeginEndQuotes', clientPath);
 			fullFilename = Meteor.call('serverFilename', clientPathStripped);
-			if (Meteor.settings.public.debug) {
-				console.log("Après (Server): " + fullFilename);
-			}
+
+			RKCore.log("Après (Server): " + fullFilename);
 			//Pas top, obligé de charger tous les fields pour n'en modifier qu'un seul...
-			if (Meteor.settings.public.debug) {
-				console.log('docId = ' + docId);
-			}
+
+			RKCore.log('docId = ' + docId);
 			fields = Docs.findOne({_id: docId}).fields;
-			if (Meteor.settings.public.debug) {
-				console.log(fields);
-			}
+
+			RKCore.log(fields);
 
 			if (fullFilename !== "") {
 				//le champ est rempli
@@ -232,8 +207,8 @@ Meteor.methods({
 					fields[fieldName].stats = stats;
 				}
 				catch (e) {
-					console.log("There was an error with the file : " + fullFilename);
-					console.log(e);
+					RKCore.log("There was an error with the file : " + fullFilename);
+					RKCore.log(e);
 					fields[fieldName].exists = false;
 					fields[fieldName].stats = [];
 					fields[fieldName].filefolder = [];
@@ -241,9 +216,7 @@ Meteor.methods({
 			}
 			else {
 				//le champ est vide
-				if (Meteor.settings.public.debug) {
-					console.log("Empty filelink");
-				}
+				RKCore.log("Empty filelink");
 				fields[fieldName].exists = false;
 				fields[fieldName].stats = [];
 				fields[fieldName].filefolder = [];
@@ -261,10 +234,7 @@ Meteor.methods({
 					},
 				}
 			);
-
-			if (Meteor.settings.public.debug) {
-				console.log('Finished walking thru one filelink.');
-			}
+			RKCore.log('Finished walking thru one filelink.');
 	    return true;
 	},
 });

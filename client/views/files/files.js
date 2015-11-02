@@ -11,12 +11,12 @@ Template.files.helpers({
 	        rowsPerPage: 100,
 	        showFilter: true,
 	        class: 'table table-condensed col-sm-12',
-					showColumnToggles : true,
+					showColumnToggles: true,
 					fields: [
 			    {
 			        key: 'path',
 			        label: 'Server Path',
-							hidden : true
+							hidden: true,
 			    },
 					{
 			        key: 'path',
