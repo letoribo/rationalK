@@ -4,9 +4,22 @@ var mongoUrl;
 var database;
 var backup;
 var i;
-var collectionsToBackup = ['docs','views'];
-if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
-//if (Meteor.isServer)  { //for test
+var j;
+var collectionsToBackup = ['docs','views','history','revisions','categories','rkSettings','userspaces','folderstoscan','walkedfiles','searchqueries','tags'];
+RKCore.log("RKCore.packageBackup : ");
+RKCore.log(RKCore.packageBackup);
+
+if (typeof(RKCore.packageBackup) !== 'undefined'){
+	var nPackagesThatWantToBackupCollections = RKCore.packageBackup.length;
+	for (j = 0; j < nPackagesThatWantToBackupCollections; j++) {
+		collectionsToBackup = collectionsToBackup.concat(RKCore.packageBackup[j].collections);
+	}
+}
+RKCore.log("collectionsToBackup : ");
+RKCore.log(collectionsToBackup);
+
+//if ((Meteor.isServer) && (process.env.NODE_ENV === "production")) {
+if (Meteor.isServer)  { //for test
 	exec = Npm.require('child_process').exec;
 	sys = Npm.require('sys');
 	mongoUrl = MongoDBURI.parse(process.env.MONGO_URL);
