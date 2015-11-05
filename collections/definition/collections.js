@@ -22,6 +22,16 @@ XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
 
+Axapta = new Mongo.Collection('axapta');
+
+Axapta.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
+});
+
+
+
 if (Meteor.isServer) {
 	if (typeof Docs.createIndex === 'function') {
 		if (Meteor.settings.public.debug) {

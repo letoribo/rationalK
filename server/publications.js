@@ -25,6 +25,11 @@ Meteor.publish("accounts", function () {
   });
 });
 
+
+Meteor.publish("axapta", function () {
+  return Axapta.find();
+});
+
 Meteor.publish("tags", function () {
   return Tags.find();
 });
