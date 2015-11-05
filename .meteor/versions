@@ -125,6 +125,7 @@ rationalk:lib@0.0.1
 rationalk:notes@0.0.1
 rationalk:sheetconnector@0.0.1
 rationalk:tasks@0.0.1
+rationalk:touchscreen@0.0.1
 rationalk:trello@0.0.2
 rationalk:wikisearch@0.0.1
 reactive-dict@1.1.0

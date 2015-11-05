@@ -25,7 +25,8 @@
 			"fmea" : true,
 			"tasks" : true,
 			"sheetconnector" : true,
-			"kanban": true
+			"kanban": true,
+			"touchscreen" : true
 		},
 		"header_text":"rK",
 		"companyLogo": "http://www.logo-maker.net/images/common/company-logo8.gif",
@@ -100,5 +101,8 @@
 	},
 	"wiki":{
 		"endpoints" : ["https://en.wikipedia.org/w","http://www.imfdb.org"]
+	},
+	"sql":{
+		"do": true
 	}
 }

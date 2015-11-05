@@ -1,3 +1,4 @@
+if (Meteor.settings.sql.do) {
 var opts = {
       //query : "select * from projtablecube where PROJID = @projectId",
       query : "select * from projtablecube where STATUS = @status AND TYPE = @type",
@@ -86,3 +87,4 @@ var opts = {
 
         query.unprepare();
 */
+}

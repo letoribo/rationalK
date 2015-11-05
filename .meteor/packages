@@ -19,4 +19,5 @@ rationalk:tasks
 rationalk:sheetconnector
 rationalk:filecontent
 rationalk:kanban
+rationalk:touchscreen
 emgee:mssql
