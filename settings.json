@@ -104,5 +104,15 @@
 	},
 	"sql":{
 		"do": true
-	}
+	},
+	"database": {
+		"server"   : "server\\instance",
+		"database" : "db",
+		"user"     : "username",
+		"password" : "pass",
+		"options"  : {
+		  "useUTC"     : false,
+		  "appName"    : "MeteorApp"
+		}
+  }
 }
