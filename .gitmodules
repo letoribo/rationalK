@@ -1,0 +1,51 @@
+[submodule "packages/rationalk-lib"]
+	path = packages/rationalk-lib
+	url = https://github.com/dokithonon/rationalk-lib.git
+[submodule "packages/rationalk-fmea"]
+	path = packages/rationalk-fmea
+	url = https://github.com/dokithonon/rationalk-fmea.git
+[submodule "packages/rationalk-cse"]
+	path = packages/rationalk-cse
+	url = https://github.com/dokithonon/rationalk-cse.git
+[submodule "packages/rationalk-checklists"]
+	path = packages/rationalk-checklists
+	url = https://github.com/dokithonon/rationalk-checklists.git
+[submodule "packages/rationalk-ppm"]
+	path = packages/rationalk-ppm
+	url = https://github.com/dokithonon/rationalk-ppm.git
+[submodule "packages/rationalk-notes"]
+	path = packages/rationalk-notes
+	url = https://github.com/dokithonon/rationalk-notes.git
+[submodule "packages/rationalk-core"]
+	path = packages/rationalk-core
+	url = https://github.com/dokithonon/rationalk-core.git
+[submodule "packages/rationalk-erp"]
+	path = packages/rationalk-erp
+	url = https://github.com/dokithonon/rationalk-erp.git
+[submodule "packages/rationalk-trello"]
+	path = packages/rationalk-trello
+	url = https://github.com/dokithonon/rationalk-trello.git
+[submodule "packages/rationalk-experts"]
+	path = packages/rationalk-experts
+	url = https://github.com/dokithonon/rationalk-experts.git
+[submodule "packages/rationalk-discussions"]
+	path = packages/rationalk-discussions
+	url = https://github.com/dokithonon/rationalk-discussions.git
+[submodule "packages/rationalk-wikisearch"]
+	path = packages/rationalk-wikisearch
+	url = https://github.com/dokithonon/rationalk-wikisearch.git
+[submodule "packages/rationalk-tasks"]
+	path = packages/rationalk-tasks
+	url = https://github.com/dokithonon/rationalk-tasks.git
+[submodule "packages/rationalk-sheetconnector"]
+	path = packages/rationalk-sheetconnector
+	url = https://github.com/dokithonon/rationalk-sheetconnector.git
+[submodule "packages/rationalk-filecontent"]
+	path = packages/rationalk-filecontent
+	url = https://github.com/dokithonon/rationalk-filecontent.git
+[submodule "packages/rationalk-kanban"]
+	path = packages/rationalk-kanban
+	url = https://github.com/dokithonon/rationalk-kanban.git
+[submodule "packages/rationalk-touchscreen"]
+	path = packages/rationalk-touchscreen
+	url = https://github.com/dokithonon/rationalk-touchscreen.git
