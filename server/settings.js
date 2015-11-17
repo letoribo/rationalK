@@ -24,47 +24,6 @@ if (Meteor.isServer) {
           upsert: true,
         }
       );
-
-      Meteor.call("listAvailableFunctions", function (error, results) {
-        var availableFunction;
-        var j;
-        var len;
-        var availableFunctionsValue = [];
-
-        rkSettings.update(
-          {
-            key: "customFieldsType",
-          },
-          {
-            key: "customFieldsType",
-            value: results,
-          },
-          {
-            upsert: true,
-          }
-        );
-        if (typeof results !== "undefined") {
-          if ((results !== null)) {
-            for (j = 0, len = results.length; j < len; j++) {
-              availableFunction = results[j];
-              availableFunctionsValue.push(availableFunction.value);
-            }
-            rkSettings.update(
-              {
-                key: "availableFunctionsValue",
-              },
-              {
-                key: "availableFunctionsValue",
-                value: availableFunctionsValue,
-              },
-              {
-                upsert: true,
-              }
-            );
-          }
-        }
-        return true;
-      });
   });
 
 	Meteor.methods({

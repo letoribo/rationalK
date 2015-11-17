@@ -23,9 +23,24 @@ getAllFieldsType = function (){
 	{ value : "email",text : "Email"}
 	];
 
-	customFieldsType = rkSettings.findOne({key: "customFieldsType"}).value
+	//customFieldsType = rkSettings.findOne({key: "customFieldsType"}).value
 	//console.log(standardFieldsType)
-	//console.log(customFieldsType)
+	//RKCore.log(customFieldsType);
+
+	if (typeof(RKCore.customFieldsType) !== 'undefined') {
+		RKCore.log("RKCore.customFieldsType : ");
+		RKCore.log(RKCore.customFieldsType);
+		customFieldsType = RKCore.customFieldsType;
+		/*
+		var nPackagesThatWantToBackupCollections = RKCore.packageBackup.length;
+		for (j = 0; j < nPackagesThatWantToBackupCollections; j++) {
+			collectionsToBackup = collectionsToBackup.concat(RKCore.packageBackup[j].collections);
+		}
+		*/
+	}
+
+
+
 	allFieldsType = standardFieldsType.concat(customFieldsType);
 	//console.log(allFieldsType)
 	return allFieldsType;
