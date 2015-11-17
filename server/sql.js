@@ -1,5 +1,5 @@
 if (Meteor.settings.sql.do) {
-var opts = {
+	var opts = {
       //query : "select * from projtablecube where PROJID = @projectId",
       query : "select * from projtablecube where STATUS = @status AND TYPE = @type",
       inputs : {
@@ -19,8 +19,11 @@ var opts = {
 
     //var result  = query({ projectId : "001303" });
     var result  = query({ status : "3" , type : "4" });
-    var arrayLength = result.length;
-    for (var i = 0; i < arrayLength; i++) {
+    var nResults = result.length;
+	RKCore.log("nResults : ");
+    RKCore.log(nResults);
+	Axapta.remove({});
+    for (var i = 0; i < nResults; i++) {
       //console.log(result[i]);
       entry = result[i];
       Axapta.update(
@@ -43,48 +46,4 @@ var opts = {
     }
 
     query.unprepare();
-
-/*
-
-    var opts = {
-          query : "select * from projtablecube where WORKERRESPONSIBLENAME = @projectManager",
-          inputs : {
-            projectManager : Sql.driver.NVarChar
-          }
-        }
-
-        // Sync-style
-        try {
-          var query = Sql.ps(opts);
-        } catch (e) {
-          RKCore.log("e : ");
-          RKCore.log(e);
-        }
-
-        var result  = query({ projectManager : "DOKI-THONON Thomas" });
-
-
-        var arrayLength = result.length;
-        for (var i = 0; i < arrayLength; i++) {
-          //console.log(result[i]);
-
-
-          Axapta.update(
-      			{
-      				projectId : "Roles"
-      			},
-      			{
-      			    key: "Roles",
-      			    value: roles
-      			},
-      			{
-      			    upsert: true
-      			}
-      		);
-
-
-        }
-
-        query.unprepare();
-*/
 }

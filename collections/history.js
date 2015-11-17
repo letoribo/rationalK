@@ -60,12 +60,14 @@ Meteor.history = function (txt, data, type, docId) {
   nEntries = History.find({}).count();
   RKCore.log("nEntries in History : " + nEntries);
   maxHistoryEntries = 300;
+  /*
   while (nEntries > maxHistoryEntries) {
     RKCore.log("History db has exceed the number of entries. Let's remove the oldest entries");
     oldestEntry = History.findOne({}, {sort: {createdAt: 1}})._id;
     History.remove(oldestEntry);
     nEntries = History.find({}).count();
   }
+  */
 
   return true;
 };
