@@ -2,3 +2,6 @@
 .DS_Store
 rationalK/
 *.tar.gz
+packages/rationalk-custom-*/
+.meteor/packages
+.meteor/versions
