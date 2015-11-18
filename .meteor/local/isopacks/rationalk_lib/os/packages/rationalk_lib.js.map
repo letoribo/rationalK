@@ -1,1 +1,0 @@
-{"version":3,"sources":["rationalk:lib/lib/core.js"],"names":[],"mappings":";;;;;;;;AAAA,e;AACA,4B","file":"/packages/rationalk_lib.js","sourcesContent":["rationalK = {};\nrationalK.VERSION = '0.0.1';\n"]}

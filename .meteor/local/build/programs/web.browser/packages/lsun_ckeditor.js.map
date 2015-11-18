@@ -1,2 +1,0 @@
-)]}'
-{"version":3,"sources":["lsun:ckeditor/load.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,8C;AACA,4D;AACA,4E;AACA,6D","file":"/packages/lsun_ckeditor.js","sourcesContent":["var script = document.createElement('script');\nscript.setAttribute('type', 'text/javascript');  // optional\nscript.setAttribute('src', '//cdn.ckeditor.com/4.5.2/standard/ckeditor.js');\ndocument.getElementsByTagName('head')[0].appendChild(script);\n"]}

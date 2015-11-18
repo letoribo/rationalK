@@ -1,5 +1,0 @@
-(function(){if (Meteor.isServer){
-		
-}
-
-})();
