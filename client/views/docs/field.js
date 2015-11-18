@@ -71,7 +71,7 @@ Template.field.helpers({
     }
     else if (this.value.type === "url") {
       encodedValue = this.value.value.replace(/'/g, '&#39;');
-      return "<input class='form-control dyn-field' name='" + this.key + "' type='" + this.value.type + "' placeholder='http://mysite.com/mypage.html'/>";
+      return "<input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='" + this.value.type + "' placeholder='http://mysite.com/mypage.html'/>";
     }
     else if (this.value.type === "email") {
       encodedValue = this.value.value.replace(/'/g, '&#39;');
