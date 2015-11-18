@@ -1,0 +1,1357 @@
+{
+  "format": "javascript-image-pre1",
+  "arch": "os.osx.x86_64",
+  "load": [
+    {
+      "sourceMap": "packages/underscore.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/underscore.js"
+    },
+    {
+      "node_modules": "npm/meteor/node_modules",
+      "sourceMap": "packages/meteor.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/meteor.js"
+    },
+    {
+      "sourceMap": "packages/reload.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/reload.js"
+    },
+    {
+      "sourceMap": "packages/json.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/json.js"
+    },
+    {
+      "sourceMap": "packages/base64.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/base64.js"
+    },
+    {
+      "sourceMap": "packages/ejson.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ejson.js"
+    },
+    {
+      "node_modules": "npm/logging/node_modules",
+      "sourceMap": "packages/logging.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/logging.js"
+    },
+    {
+      "sourceMap": "packages/routepolicy.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/routepolicy.js"
+    },
+    {
+      "sourceMap": "packages/tracker.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/tracker.js"
+    },
+    {
+      "sourceMap": "packages/deps.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/deps.js"
+    },
+    {
+      "sourceMap": "packages/htmljs.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/htmljs.js"
+    },
+    {
+      "sourceMap": "packages/html-tools.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/html-tools.js"
+    },
+    {
+      "sourceMap": "packages/blaze-tools.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/blaze-tools.js"
+    },
+    {
+      "sourceMap": "packages/spacebars-compiler.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/spacebars-compiler.js"
+    },
+    {
+      "sourceMap": "packages/jquery.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/jquery.js"
+    },
+    {
+      "sourceMap": "packages/id-map.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/id-map.js"
+    },
+    {
+      "sourceMap": "packages/ordered-dict.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ordered-dict.js"
+    },
+    {
+      "sourceMap": "packages/random.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/random.js"
+    },
+    {
+      "sourceMap": "packages/geojson-utils.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/geojson-utils.js"
+    },
+    {
+      "sourceMap": "packages/minimongo.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/minimongo.js"
+    },
+    {
+      "sourceMap": "packages/observe-sequence.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/observe-sequence.js"
+    },
+    {
+      "sourceMap": "packages/reactive-var.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/reactive-var.js"
+    },
+    {
+      "sourceMap": "packages/blaze.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/blaze.js"
+    },
+    {
+      "sourceMap": "packages/templating.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/templating.js"
+    },
+    {
+      "sourceMap": "packages/spacebars.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/spacebars.js"
+    },
+    {
+      "sourceMap": "packages/ui.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ui.js"
+    },
+    {
+      "sourceMap": "packages/boilerplate-generator.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/boilerplate-generator.js",
+      "assets": {
+        "boilerplate_web.browser.html": "assets/packages/boilerplate-generator/boilerplate_web.browser.html",
+        "boilerplate_web.cordova.html": "assets/packages/boilerplate-generator/boilerplate_web.cordova.html"
+      }
+    },
+    {
+      "sourceMap": "packages/webapp-hashing.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/webapp-hashing.js"
+    },
+    {
+      "node_modules": "npm/webapp/node_modules",
+      "sourceMap": "packages/webapp.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/webapp.js"
+    },
+    {
+      "sourceMap": "packages/check.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/check.js"
+    },
+    {
+      "sourceMap": "packages/retry.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/retry.js"
+    },
+    {
+      "sourceMap": "packages/audit-argument-checks.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/audit-argument-checks.js"
+    },
+    {
+      "sourceMap": "packages/callback-hook.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/callback-hook.js"
+    },
+    {
+      "node_modules": "npm/ddp/node_modules",
+      "sourceMap": "packages/ddp.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ddp.js"
+    },
+    {
+      "sourceMap": "packages/binary-heap.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/binary-heap.js"
+    },
+    {
+      "node_modules": "npm/mongo/node_modules",
+      "sourceMap": "packages/mongo.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/mongo.js"
+    },
+    {
+      "sourceMap": "packages/autoupdate.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/autoupdate.js"
+    },
+    {
+      "sourceMap": "packages/meteor-platform.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/meteor-platform.js"
+    },
+    {
+      "node_modules": "npm/npm-bcrypt/node_modules",
+      "sourceMap": "packages/npm-bcrypt.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/npm-bcrypt.js"
+    },
+    {
+      "sourceMap": "packages/accounts-base.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/accounts-base.js"
+    },
+    {
+      "sourceMap": "packages/sha.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/sha.js"
+    },
+    {
+      "sourceMap": "packages/srp.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/srp.js"
+    },
+    {
+      "node_modules": "npm/email/node_modules",
+      "sourceMap": "packages/email.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/email.js"
+    },
+    {
+      "sourceMap": "packages/accounts-password.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/accounts-password.js"
+    },
+    {
+      "sourceMap": "packages/alanning_roles.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/alanning_roles.js"
+    },
+    {
+      "sourceMap": "packages/iron_core.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_core.js"
+    },
+    {
+      "sourceMap": "packages/iron_dynamic-template.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_dynamic-template.js",
+      "assets": {
+        "dynamic_template.html": "assets/packages/iron_dynamic-template/dynamic_template.html"
+      }
+    },
+    {
+      "sourceMap": "packages/iron_layout.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_layout.js",
+      "assets": {
+        "default_layout.html": "assets/packages/iron_layout/default_layout.html"
+      }
+    },
+    {
+      "sourceMap": "packages/iron_url.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_url.js"
+    },
+    {
+      "sourceMap": "packages/iron_middleware-stack.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_middleware-stack.js"
+    },
+    {
+      "sourceMap": "packages/iron_location.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_location.js"
+    },
+    {
+      "sourceMap": "packages/reactive-dict.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/reactive-dict.js"
+    },
+    {
+      "sourceMap": "packages/iron_controller.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_controller.js"
+    },
+    {
+      "node_modules": "npm/iron_router/node_modules",
+      "sourceMap": "packages/iron_router.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/iron_router.js",
+      "assets": {
+        "lib/templates.html": "assets/packages/iron_router/lib/templates.html"
+      }
+    },
+    {
+      "sourceMap": "packages/mizzao_jquery-ui.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/mizzao_jquery-ui.js"
+    },
+    {
+      "sourceMap": "packages/mizzao_bootboxjs.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/mizzao_bootboxjs.js"
+    },
+    {
+      "sourceMap": "packages/twbs_bootstrap.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/twbs_bootstrap.js"
+    },
+    {
+      "node_modules": "npm/sacha_spin/node_modules",
+      "sourceMap": "packages/sacha_spin.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/sacha_spin.js"
+    },
+    {
+      "sourceMap": "packages/pahans_reactive-modal.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/pahans_reactive-modal.js"
+    },
+    {
+      "node_modules": "npm/mrt_meteor-nodemailer/node_modules",
+      "sourceMap": "packages/mrt_meteor-nodemailer.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/mrt_meteor-nodemailer.js"
+    },
+    {
+      "sourceMap": "packages/momentjs_moment.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/momentjs_moment.js"
+    },
+    {
+      "sourceMap": "packages/netanelgilad_moment-business.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/netanelgilad_moment-business.js"
+    },
+    {
+      "sourceMap": "packages/ian_accounts-ui-bootstrap-3.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ian_accounts-ui-bootstrap-3.js"
+    },
+    {
+      "sourceMap": "packages/aslagle_reactive-table.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/aslagle_reactive-table.js"
+    },
+    {
+      "sourceMap": "packages/cfs_standard-packages.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_standard-packages.js"
+    },
+    {
+      "sourceMap": "packages/cfs_base-package.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_base-package.js"
+    },
+    {
+      "sourceMap": "packages/livedata.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/livedata.js"
+    },
+    {
+      "sourceMap": "packages/mongo-livedata.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/mongo-livedata.js"
+    },
+    {
+      "sourceMap": "packages/raix_eventemitter.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/raix_eventemitter.js"
+    },
+    {
+      "node_modules": "npm/cfs_storage-adapter/node_modules",
+      "sourceMap": "packages/cfs_storage-adapter.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_storage-adapter.js"
+    },
+    {
+      "node_modules": "npm/cfs_filesystem/node_modules",
+      "sourceMap": "packages/cfs_filesystem.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_filesystem.js"
+    },
+    {
+      "sourceMap": "packages/raix_ui-dropped-event.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/raix_ui-dropped-event.js"
+    },
+    {
+      "sourceMap": "packages/url.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/url.js"
+    },
+    {
+      "node_modules": "npm/http/node_modules",
+      "sourceMap": "packages/http.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/http.js"
+    },
+    {
+      "node_modules": "npm/cfs_data-man/node_modules",
+      "sourceMap": "packages/cfs_data-man.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_data-man.js"
+    },
+    {
+      "node_modules": "npm/cfs_file/node_modules",
+      "sourceMap": "packages/cfs_file.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_file.js"
+    },
+    {
+      "sourceMap": "packages/cfs_ui.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_ui.js"
+    },
+    {
+      "sourceMap": "packages/ajduke_bootstrap-tagsinput.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ajduke_bootstrap-tagsinput.js"
+    },
+    {
+      "node_modules": "npm/aldeed_simple-schema/node_modules",
+      "sourceMap": "packages/aldeed_simple-schema.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/aldeed_simple-schema.js"
+    },
+    {
+      "path": "packages/aldeed_autoform/packages/aldeed_autoform.js"
+    },
+    {
+      "path": "packages/aldeed_collection2/packages/aldeed_collection2.js"
+    },
+    {
+      "path": "packages/matb33_collection-hooks/packages/matb33_collection-hooks.js"
+    },
+    {
+      "sourceMap": "packages/maazalik_highcharts.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/maazalik_highcharts.js"
+    },
+    {
+      "node_modules": "npm/percolate_synced-cron/node_modules",
+      "path": "packages/percolate_synced-cron/packages/percolate_synced-cron.js"
+    },
+    {
+      "sourceMap": "packages/chrismbeckett_toastr.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/chrismbeckett_toastr.js"
+    },
+    {
+      "node_modules": "npm/meteorhacks_inject-initial/node_modules",
+      "sourceMap": "packages/meteorhacks_inject-initial.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/meteorhacks_inject-initial.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_zones.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/meteorhacks_zones.js"
+    },
+    {
+      "sourceMap": "packages/meteorhacks_async.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/meteorhacks_async.js"
+    },
+    {
+      "node_modules": "npm/gadicohen_headers/node_modules",
+      "sourceMap": "packages/gadicohen_headers.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/gadicohen_headers.js"
+    },
+    {
+      "node_modules": "npm/gadicohen_messageformat/node_modules",
+      "sourceMap": "packages/gadicohen_messageformat.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/gadicohen_messageformat.js",
+      "assets": {
+        "cli/mf_extract.js": "assets/packages/gadicohen_messageformat/cli/mf_extract.js"
+      }
+    },
+    {
+      "sourceMap": "packages/olragon_handsontable.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/olragon_handsontable.js"
+    },
+    {
+      "node_modules": "npm/chhib_mongodb-uri/node_modules",
+      "sourceMap": "packages/chhib_mongodb-uri.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/chhib_mongodb-uri.js"
+    },
+    {
+      "sourceMap": "packages/coffeescript.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/coffeescript.js"
+    },
+    {
+      "sourceMap": "packages/meteorspark_util.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/meteorspark_util.js"
+    },
+    {
+      "sourceMap": "packages/cfs_http-methods.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_http-methods.js"
+    },
+    {
+      "path": "packages/tap_i18n/packages/tap_i18n.js"
+    },
+    {
+      "sourceMap": "packages/anti_i18n.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/anti_i18n.js"
+    },
+    {
+      "sourceMap": "packages/softwarerero_accounts-t9n.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/softwarerero_accounts-t9n.js"
+    },
+    {
+      "sourceMap": "packages/joshowens_simple-form.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/joshowens_simple-form.js"
+    },
+    {
+      "sourceMap": "packages/service-configuration.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/service-configuration.js"
+    },
+    {
+      "sourceMap": "packages/joshowens_accounts-entry.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/joshowens_accounts-entry.js"
+    },
+    {
+      "sourceMap": "packages/cwaring_modernizr.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cwaring_modernizr.js"
+    },
+    {
+      "sourceMap": "packages/dschulz_jquery-qrcode.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/dschulz_jquery-qrcode.js"
+    },
+    {
+      "sourceMap": "packages/sergeyt_typeahead.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/sergeyt_typeahead.js"
+    },
+    {
+      "sourceMap": "packages/pascoual_pdfjs.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/pascoual_pdfjs.js"
+    },
+    {
+      "node_modules": "npm/netanelgilad_excel/node_modules",
+      "sourceMap": "packages/netanelgilad_excel.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/netanelgilad_excel.js"
+    },
+    {
+      "sourceMap": "packages/peerlibrary_blocking.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/peerlibrary_blocking.js"
+    },
+    {
+      "node_modules": "npm/peerlibrary_xml2js/node_modules",
+      "sourceMap": "packages/peerlibrary_xml2js.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/peerlibrary_xml2js.js"
+    },
+    {
+      "sourceMap": "packages/dhtmlx_gantt.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/dhtmlx_gantt.js"
+    },
+    {
+      "path": "packages/meteorhacks_npm/packages/meteorhacks_npm.js"
+    },
+    {
+      "node_modules": "npm/ongoworks_speakingurl/node_modules",
+      "sourceMap": "packages/ongoworks_speakingurl.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/ongoworks_speakingurl.js"
+    },
+    {
+      "sourceMap": "packages/mousetrap_mousetrap.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/mousetrap_mousetrap.js"
+    },
+    {
+      "sourceMap": "packages/theduke_bootstrap-modal-prompt.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/theduke_bootstrap-modal-prompt.js"
+    },
+    {
+      "node_modules": "npm/bryanmorgan_webshot/node_modules",
+      "sourceMap": "packages/bryanmorgan_webshot.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/bryanmorgan_webshot.js"
+    },
+    {
+      "node_modules": "npm/gadicohen_phantomjs/node_modules",
+      "sourceMap": "packages/gadicohen_phantomjs.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/gadicohen_phantomjs.js"
+    },
+    {
+      "sourceMap": "packages/session.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/session.js"
+    },
+    {
+      "node_modules": "npm/cfs_tempstore/node_modules",
+      "sourceMap": "packages/cfs_tempstore.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_tempstore.js"
+    },
+    {
+      "sourceMap": "packages/cfs_http-publish.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_http-publish.js"
+    },
+    {
+      "sourceMap": "packages/cfs_access-point.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_access-point.js"
+    },
+    {
+      "sourceMap": "packages/cfs_reactive-property.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_reactive-property.js"
+    },
+    {
+      "sourceMap": "packages/cfs_reactive-list.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_reactive-list.js"
+    },
+    {
+      "sourceMap": "packages/cfs_power-queue.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_power-queue.js"
+    },
+    {
+      "sourceMap": "packages/cfs_upload-http.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_upload-http.js"
+    },
+    {
+      "sourceMap": "packages/cfs_collection.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_collection.js"
+    },
+    {
+      "sourceMap": "packages/cfs_collection-filters.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_collection-filters.js"
+    },
+    {
+      "sourceMap": "packages/cfs_worker.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/cfs_worker.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_lib.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_lib.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_core.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_core.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_trello.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_trello.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_erp.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_erp.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_checklists.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_checklists.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_cse.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_cse.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_fmea.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_fmea.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_experts.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_experts.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_discussions.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_discussions.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_notes.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_notes.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_wikisearch.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_wikisearch.js"
+    },
+    {
+      "sourceMap": "packages/rajit_bootstrap3-datepicker.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rajit_bootstrap3-datepicker.js"
+    },
+    {
+      "sourceMap": "packages/lsun_ckeditor.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/lsun_ckeditor.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_tasks.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_tasks.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_sheetconnector.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_sheetconnector.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_filecontent.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_filecontent.js"
+    },
+    {
+      "sourceMap": "packages/rubaxa_sortable.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rubaxa_sortable.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_kanban.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_kanban.js"
+    },
+    {
+      "sourceMap": "packages/rationalk_touchscreen.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/rationalk_touchscreen.js"
+    },
+    {
+      "node_modules": "npm/emgee_mssql/node_modules",
+      "sourceMap": "packages/emgee_mssql.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/emgee_mssql.js"
+    },
+    {
+      "sourceMap": "packages/jesa_bearingcalculation.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/jesa_bearingcalculation.js"
+    },
+    {
+      "sourceMap": "packages/jesa_fieldtypes.js.map",
+      "sourceMapRoot": "packages",
+      "path": "packages/jesa_fieldtypes.js"
+    },
+    {
+      "path": "packages/global-imports.js"
+    },
+    {
+      "path": "app/lib/i18n/en.i18n.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/lib/i18n/fr.i18n.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/lib/methods.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/lib/settingsToastr.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/definition/collections.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/helpers/attributes.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/helpers/loggedIn.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/helpers/org.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/calculation/calculation.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/gantt/gantt.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/account.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/categories.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/controlplan.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/docs.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/history.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/members.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/orgs.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/process.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/processdocuments.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/processes.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/revisions.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/settings.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/synonyms.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/userspaces.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/views.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/collections/walk.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/approval.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/association.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/backup.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/chokidar.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/createFirstUser.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/demo.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/email.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/filelinks.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/hooks.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/jobs.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/license.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/members.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/publication-search.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/publications.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/settings.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/sql.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/tags.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/update.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/updateFromGit.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/walker.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/server/xml.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    },
+    {
+      "path": "app/settings/accounts_configuration.js",
+      "assets": {
+        "22IN06.json": "assets/app/22IN06.json",
+        "licenseFile.json": "assets/app/licenseFile.json",
+        "mySheetDB.xlsx": "assets/app/mySheetDB.xlsx",
+        "calculations/calc1.json": "assets/app/calculations/calc1.json",
+        "calculations/calc2.json": "assets/app/calculations/calc2.json",
+        "calculations/parameters.json": "assets/app/calculations/parameters.json",
+        "gantts/ganttModel.js": "assets/app/gantts/ganttModel.js"
+      }
+    }
+  ]
+}

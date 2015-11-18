@@ -1,0 +1,31 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKCheckLists",
+      "export": true
+    },
+    {
+      "name": "CheckLists"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "web.browser/packages/rationalk_checklists.js",
+      "length": 20092,
+      "offset": 0,
+      "servePath": "/packages/rationalk_checklists.js",
+      "sourceMap": "web.browser/packages/rationalk_checklists.js.map"
+    }
+  ]
+}

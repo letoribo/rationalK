@@ -1,0 +1,37 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKNotes",
+      "export": true
+    },
+    {
+      "name": "Notes"
+    },
+    {
+      "name": "url"
+    },
+    {
+      "name": "menuHTML"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "web.browser/packages/rationalk_notes.js",
+      "length": 21283,
+      "offset": 0,
+      "servePath": "/packages/rationalk_notes.js",
+      "sourceMap": "web.browser/packages/rationalk_notes.js.map"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "JESABearingCalculation",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "registerI18nTemplate"
+    },
+    {
+      "name": "registerTemplate"
+    },
+    {
+      "name": "non_package_templates"
+    },
+    {
+      "name": "JESABearings"
+    },
+    {
+      "name": "menuHTML"
+    },
+    {
+      "name": "newId"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "web.browser/packages/jesa_bearingcalculation.js",
+      "length": 80912,
+      "offset": 0,
+      "servePath": "/packages/jesa_bearingcalculation.js",
+      "sourceMap": "web.browser/packages/jesa_bearingcalculation.js.map"
+    }
+  ]
+}

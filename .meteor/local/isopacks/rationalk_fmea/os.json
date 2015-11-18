@@ -1,0 +1,53 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKFMEA",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "PFMEA"
+    },
+    {
+      "name": "corePFMEA"
+    },
+    {
+      "name": "SettingsFMEA"
+    },
+    {
+      "name": "urlCorePFMEA"
+    },
+    {
+      "name": "menuHTML"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_fmea.js",
+      "length": 46295,
+      "offset": 0,
+      "servePath": "/packages/rationalk_fmea.js",
+      "sourceMap": "os/packages/rationalk_fmea.js.map"
+    }
+  ]
+}

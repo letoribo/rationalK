@@ -1,0 +1,56 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKFilesContent",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "registerI18nTemplate"
+    },
+    {
+      "name": "registerTemplate"
+    },
+    {
+      "name": "non_package_templates"
+    },
+    {
+      "name": "FilesContent"
+    },
+    {
+      "name": "fileLink"
+    },
+    {
+      "name": "fileLinkUrl"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "web.browser/packages/rationalk_filecontent.js",
+      "length": 37582,
+      "offset": 0,
+      "servePath": "/packages/rationalk_filecontent.js",
+      "sourceMap": "web.browser/packages/rationalk_filecontent.js.map"
+    }
+  ]
+}

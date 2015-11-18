@@ -1,0 +1,31 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKCSE",
+      "export": true
+    },
+    {
+      "name": "WebSearchResults"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_cse.js",
+      "length": 9411,
+      "offset": 0,
+      "servePath": "/packages/rationalk_cse.js",
+      "sourceMap": "os/packages/rationalk_cse.js.map"
+    }
+  ]
+}

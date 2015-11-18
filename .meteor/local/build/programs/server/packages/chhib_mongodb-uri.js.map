@@ -1,0 +1,1 @@
+{"version":3,"file":"/packages/chhib:mongodb-uri.js","sources":["chhib:mongodb-uri/mongodb-uri.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;AAAA,wC","sourcesContent":["MongoDBURI = Npm.require(\"mongodb-uri\");"]}

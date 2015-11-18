@@ -1,0 +1,55 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKWiki",
+      "export": true
+    },
+    {
+      "name": "endpoints"
+    },
+    {
+      "name": "nEndpoints"
+    },
+    {
+      "name": "endpoint"
+    },
+    {
+      "name": "queryWiki"
+    },
+    {
+      "name": "articleTitles"
+    },
+    {
+      "name": "articleContent"
+    },
+    {
+      "name": "articleUrl"
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "WikiSearchResults"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_wikisearch.js",
+      "length": 18853,
+      "offset": 0,
+      "servePath": "/packages/rationalk_wikisearch.js",
+      "sourceMap": "os/packages/rationalk_wikisearch.js.map"
+    }
+  ]
+}

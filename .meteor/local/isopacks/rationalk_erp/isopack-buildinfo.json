@@ -1,0 +1,368 @@
+{
+  "builtBy": "meteor/16",
+  "unibuildDependencies": {
+    "os.json": {
+      "files": {
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/package.js": "7034cdcbd2d48d3f7cd85f69f68dc10d5574c43d",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-core/package.js": "bf25ae82ddec106588180e0bd3ae4559829a9cd5",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-lib/package.js": "19c2f9a35db1e0797c383244a400fb27e2a02645",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/methods.js": "ac30b33a5c205fe133f2c7ae250b755fe32e71e8",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/collections.js": "bf1f4701aefbbf6158583194d7c8735beec7e0a7",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/routes.js": "609dc7589376854eca154b12225ca0f3d5b75594",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/server/publications.js": "ce4403913b88b218ebf4aa62ed4e78d297d6450c",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/server/methods.js": "83ff61e6a4a450b537f53e73579b885eb4e6f202"
+      },
+      "directories": []
+    },
+    "web.browser.json": {
+      "files": {
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/package.js": "7034cdcbd2d48d3f7cd85f69f68dc10d5574c43d",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-core/package.js": "bf25ae82ddec106588180e0bd3ae4559829a9cd5",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-lib/package.js": "19c2f9a35db1e0797c383244a400fb27e2a02645",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/methods.js": "ac30b33a5c205fe133f2c7ae250b755fe32e71e8",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/collections.js": "bf1f4701aefbbf6158583194d7c8735beec7e0a7",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/routes.js": "609dc7589376854eca154b12225ca0f3d5b75594",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/client/plan.html": "d94d280fb5d8ef8d423763afcaad06b96bbc99c0",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/client/plan.js": "87377fd0d227ca811f883a7f96336137ace5a8b9",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/client/build.html": "32a9c26a4193ea5ed82098204a0c059d795f19de",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/client/build.js": "961f2cdf061faea21e9be2a905f3f96c36fb874c",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/client/stocks.html": "6faee8d99561e3b99e3196f046873c32c60e17b4",
+        "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/lib/client/stocks.js": "5dc675df4a7f2c37071b4cf0ff79b350c123202f"
+      },
+      "directories": []
+    }
+  },
+  "pluginDependencies": {
+    "files": {
+      "/Users/thomasdokithonon/rationalK/packages/rationalk-erp/package.js": "7034cdcbd2d48d3f7cd85f69f68dc10d5574c43d"
+    },
+    "directories": []
+  },
+  "pluginProviderPackageMap": {
+    "rationalk:erp": {
+      "kind": "local",
+      "sourceRoot": "/Users/thomasdokithonon/rationalK/packages/rationalk-erp"
+    },
+    "meteor": {
+      "kind": "versioned",
+      "version": "1.1.6"
+    },
+    "rationalk:core": {
+      "kind": "local",
+      "sourceRoot": "/Users/thomasdokithonon/rationalK/packages/rationalk-core"
+    },
+    "rationalk:lib": {
+      "kind": "local",
+      "sourceRoot": "/Users/thomasdokithonon/rationalK/packages/rationalk-lib"
+    },
+    "meteor-platform": {
+      "kind": "versioned",
+      "version": "1.2.2"
+    },
+    "accounts-password": {
+      "kind": "versioned",
+      "version": "1.1.1"
+    },
+    "alanning:roles": {
+      "kind": "versioned",
+      "version": "1.2.13"
+    },
+    "iron:router": {
+      "kind": "versioned",
+      "version": "1.0.9"
+    },
+    "mizzao:jquery-ui": {
+      "kind": "versioned",
+      "version": "1.11.4"
+    },
+    "mizzao:bootboxjs": {
+      "kind": "versioned",
+      "version": "4.4.0"
+    },
+    "twbs:bootstrap": {
+      "kind": "versioned",
+      "version": "3.3.5"
+    },
+    "sacha:spin": {
+      "kind": "versioned",
+      "version": "2.3.1"
+    },
+    "pahans:reactive-modal": {
+      "kind": "versioned",
+      "version": "1.0.2"
+    },
+    "email": {
+      "kind": "versioned",
+      "version": "1.0.6"
+    },
+    "mrt:meteor-nodemailer": {
+      "kind": "versioned",
+      "version": "0.2.0"
+    },
+    "momentjs:moment": {
+      "kind": "versioned",
+      "version": "2.10.6"
+    },
+    "netanelgilad:moment-business": {
+      "kind": "versioned",
+      "version": "0.0.1"
+    },
+    "ian:accounts-ui-bootstrap-3": {
+      "kind": "versioned",
+      "version": "1.2.79"
+    },
+    "reactive-var": {
+      "kind": "versioned",
+      "version": "1.0.5"
+    },
+    "aslagle:reactive-table": {
+      "kind": "versioned",
+      "version": "0.8.12"
+    },
+    "cfs:standard-packages": {
+      "kind": "versioned",
+      "version": "0.5.9"
+    },
+    "cfs:filesystem": {
+      "kind": "versioned",
+      "version": "0.1.2"
+    },
+    "raix:ui-dropped-event": {
+      "kind": "versioned",
+      "version": "0.0.7"
+    },
+    "cfs:ui": {
+      "kind": "versioned",
+      "version": "0.1.3"
+    },
+    "ajduke:bootstrap-tagsinput": {
+      "kind": "versioned",
+      "version": "0.7.0"
+    },
+    "jquery": {
+      "kind": "versioned",
+      "version": "1.11.3_2"
+    },
+    "aldeed:autoform": {
+      "kind": "versioned",
+      "version": "5.5.1"
+    },
+    "aldeed:collection2": {
+      "kind": "versioned",
+      "version": "2.5.0"
+    },
+    "matb33:collection-hooks": {
+      "kind": "versioned",
+      "version": "0.8.0"
+    },
+    "maazalik:highcharts": {
+      "kind": "versioned",
+      "version": "0.4.0"
+    },
+    "percolate:synced-cron": {
+      "kind": "versioned",
+      "version": "1.3.0"
+    },
+    "chrismbeckett:toastr": {
+      "kind": "versioned",
+      "version": "2.1.2_1"
+    },
+    "meteorhacks:zones": {
+      "kind": "versioned",
+      "version": "1.6.0"
+    },
+    "meteorhacks:async": {
+      "kind": "versioned",
+      "version": "1.0.0"
+    },
+    "gadicohen:messageformat": {
+      "kind": "versioned",
+      "version": "0.0.52"
+    },
+    "olragon:handsontable": {
+      "kind": "versioned",
+      "version": "0.12.3"
+    },
+    "chhib:mongodb-uri": {
+      "kind": "versioned",
+      "version": "0.9.1"
+    },
+    "tap:i18n": {
+      "kind": "versioned",
+      "version": "1.6.1"
+    },
+    "anti:i18n": {
+      "kind": "versioned",
+      "version": "0.4.3"
+    },
+    "joshowens:accounts-entry": {
+      "kind": "versioned",
+      "version": "1.0.3"
+    },
+    "cwaring:modernizr": {
+      "kind": "versioned",
+      "version": "3.0.0_1"
+    },
+    "dschulz:jquery-qrcode": {
+      "kind": "versioned",
+      "version": "1.0.1"
+    },
+    "sergeyt:typeahead": {
+      "kind": "versioned",
+      "version": "0.11.1_4"
+    },
+    "pascoual:pdfjs": {
+      "kind": "versioned",
+      "version": "1.1.114"
+    },
+    "netanelgilad:excel": {
+      "kind": "versioned",
+      "version": "0.2.4"
+    },
+    "peerlibrary:xml2js": {
+      "kind": "versioned",
+      "version": "0.4.8_1"
+    },
+    "audit-argument-checks": {
+      "kind": "versioned",
+      "version": "1.0.3"
+    },
+    "dhtmlx:gantt": {
+      "kind": "versioned",
+      "version": "0.0.1"
+    },
+    "meteorhacks:npm": {
+      "kind": "versioned",
+      "version": "1.5.0"
+    },
+    "ongoworks:speakingurl": {
+      "kind": "versioned",
+      "version": "5.0.1"
+    },
+    "mousetrap:mousetrap": {
+      "kind": "versioned",
+      "version": "1.4.6_1"
+    },
+    "theduke:bootstrap-modal-prompt": {
+      "kind": "versioned",
+      "version": "0.0.2"
+    },
+    "bryanmorgan:webshot": {
+      "kind": "versioned",
+      "version": "1.0.0"
+    },
+    "gadicohen:phantomjs": {
+      "kind": "versioned",
+      "version": "0.0.2"
+    },
+    "webapp": {
+      "kind": "versioned",
+      "version": "1.2.0"
+    },
+    "logging": {
+      "kind": "versioned",
+      "version": "1.0.7"
+    },
+    "tracker": {
+      "kind": "versioned",
+      "version": "1.0.7"
+    },
+    "deps": {
+      "kind": "versioned",
+      "version": "1.0.7"
+    },
+    "session": {
+      "kind": "versioned",
+      "version": "1.1.0"
+    },
+    "ddp": {
+      "kind": "versioned",
+      "version": "1.1.0"
+    },
+    "livedata": {
+      "kind": "versioned",
+      "version": "1.0.13"
+    },
+    "mongo": {
+      "kind": "versioned",
+      "version": "1.1.0"
+    },
+    "blaze": {
+      "kind": "versioned",
+      "version": "2.1.2"
+    },
+    "ui": {
+      "kind": "versioned",
+      "version": "1.0.6"
+    },
+    "spacebars": {
+      "kind": "versioned",
+      "version": "1.0.6"
+    },
+    "templating": {
+      "kind": "versioned",
+      "version": "1.1.1"
+    },
+    "check": {
+      "kind": "versioned",
+      "version": "1.0.5"
+    },
+    "underscore": {
+      "kind": "versioned",
+      "version": "1.0.3"
+    },
+    "random": {
+      "kind": "versioned",
+      "version": "1.0.3"
+    },
+    "ejson": {
+      "kind": "versioned",
+      "version": "1.0.6"
+    },
+    "accounts-base": {
+      "kind": "versioned",
+      "version": "1.2.0"
+    },
+    "iron:core": {
+      "kind": "versioned",
+      "version": "1.0.8"
+    },
+    "cfs:base-package": {
+      "kind": "versioned",
+      "version": "0.0.30"
+    },
+    "cfs:file": {
+      "kind": "versioned",
+      "version": "0.1.17"
+    },
+    "cfs:collection": {
+      "kind": "versioned",
+      "version": "0.5.5"
+    },
+    "cfs:collection-filters": {
+      "kind": "versioned",
+      "version": "0.2.4"
+    },
+    "cfs:access-point": {
+      "kind": "versioned",
+      "version": "0.1.49"
+    },
+    "cfs:worker": {
+      "kind": "versioned",
+      "version": "0.1.4"
+    },
+    "cfs:upload-http": {
+      "kind": "versioned",
+      "version": "0.0.20"
+    },
+    "aldeed:simple-schema": {
+      "kind": "versioned",
+      "version": "1.3.3"
+    },
+    "htmljs": {
+      "kind": "versioned",
+      "version": "1.0.4"
+    }
+  },
+  "includeCordovaUnibuild": false
+}

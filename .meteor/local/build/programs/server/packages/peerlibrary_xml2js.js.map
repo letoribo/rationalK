@@ -1,0 +1,1 @@
+{"version":3,"sources":["peerlibrary:xml2js/server.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;AAAA,+B;;AAEA,sD","file":"/packages/peerlibrary_xml2js.js","sourcesContent":["xml2js = Npm.require('xml2js');\n\nxml2js.parseStringSync = blocking(xml2js.parseString);"]}

@@ -1,0 +1,74 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKJESACustomFields",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "registerI18nTemplate"
+    },
+    {
+      "name": "registerTemplate"
+    },
+    {
+      "name": "non_package_templates"
+    },
+    {
+      "name": "listAvailableFunctions"
+    },
+    {
+      "name": "currentDocId"
+    },
+    {
+      "name": "docType"
+    },
+    {
+      "name": "Year"
+    },
+    {
+      "name": "categoryId"
+    },
+    {
+      "name": "DocInThisCategory"
+    },
+    {
+      "name": "newNumber"
+    },
+    {
+      "name": "i"
+    },
+    {
+      "name": "max"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "web.browser/packages/jesa_fieldtypes.js",
+      "length": 33363,
+      "offset": 0,
+      "servePath": "/packages/jesa_fieldtypes.js",
+      "sourceMap": "web.browser/packages/jesa_fieldtypes.js.map"
+    }
+  ]
+}

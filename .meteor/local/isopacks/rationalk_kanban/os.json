@@ -1,0 +1,42 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKKanban",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    },
+    {
+      "package": "rubaxa:sortable",
+      "constraint": "0.5.2_1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_kanban.js",
+      "length": 10557,
+      "offset": 0,
+      "servePath": "/packages/rationalk_kanban.js",
+      "sourceMap": "os/packages/rationalk_kanban.js.map"
+    }
+  ]
+}

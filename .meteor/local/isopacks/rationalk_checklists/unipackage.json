@@ -1,0 +1,20 @@
+{
+  "name": "rationalk:checklists",
+  "summary": "Add the check list functionality to rationalK",
+  "version": "0.0.2",
+  "isTest": false,
+  "plugins": [],
+  "unibuilds": [
+    {
+      "kind": "main",
+      "arch": "os",
+      "path": "os.json"
+    },
+    {
+      "kind": "main",
+      "arch": "web.browser",
+      "path": "web.browser.json"
+    }
+  ],
+  "format": "unipackage-pre2"
+}

@@ -1,0 +1,157 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKTasks",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "Tasks"
+    },
+    {
+      "name": "Minutes"
+    },
+    {
+      "name": "Projects"
+    },
+    {
+      "name": "SettingsRKTasks"
+    },
+    {
+      "name": "FollowUp"
+    },
+    {
+      "name": "previousTask"
+    },
+    {
+      "name": "newTaskId"
+    },
+    {
+      "name": "previousMinutes"
+    },
+    {
+      "name": "newMinutesId"
+    },
+    {
+      "name": "newId"
+    },
+    {
+      "name": "previousProject"
+    },
+    {
+      "name": "folderPathForMinutesPrint"
+    },
+    {
+      "name": "filePath"
+    },
+    {
+      "name": "nMinutesIds"
+    },
+    {
+      "name": "j"
+    },
+    {
+      "name": "minutes"
+    },
+    {
+      "name": "nProjectIds"
+    },
+    {
+      "name": "project"
+    },
+    {
+      "name": "nActioneeIds"
+    },
+    {
+      "name": "member"
+    },
+    {
+      "name": "sendReminders"
+    },
+    {
+      "name": "sendRemindersActionee"
+    },
+    {
+      "name": "allTasks"
+    },
+    {
+      "name": "nTasks"
+    },
+    {
+      "name": "i"
+    },
+    {
+      "name": "senderMember"
+    },
+    {
+      "name": "sender"
+    },
+    {
+      "name": "senderLang"
+    },
+    {
+      "name": "senderText"
+    },
+    {
+      "name": "actioneeIds"
+    },
+    {
+      "name": "nActionee"
+    },
+    {
+      "name": "to"
+    },
+    {
+      "name": "recipients"
+    },
+    {
+      "name": "actionee"
+    },
+    {
+      "name": "text"
+    },
+    {
+      "name": "html"
+    },
+    {
+      "name": "editLink"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    },
+    {
+      "package": "rajit:bootstrap3-datepicker",
+      "constraint": "1.3.1"
+    },
+    {
+      "package": "lsun:ckeditor",
+      "constraint": "4.5.2_3"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_tasks.js",
+      "length": 183739,
+      "offset": 0,
+      "servePath": "/packages/rationalk_tasks.js",
+      "sourceMap": "os/packages/rationalk_tasks.js.map"
+    }
+  ]
+}

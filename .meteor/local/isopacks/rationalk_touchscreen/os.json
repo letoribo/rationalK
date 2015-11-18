@@ -1,0 +1,61 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKTouchScreen",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "ProjectsTouchScreen"
+    },
+    {
+      "name": "SettingsRKTouchScreen"
+    },
+    {
+      "name": "phasesHeader"
+    },
+    {
+      "name": "phaseScheduledFinishedDate"
+    },
+    {
+      "name": "randomDate"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    },
+    {
+      "package": "rajit:bootstrap3-datepicker",
+      "constraint": "1.3.1"
+    },
+    {
+      "package": "lsun:ckeditor",
+      "constraint": "4.5.2_3"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_touchscreen.js",
+      "length": 28497,
+      "offset": 0,
+      "servePath": "/packages/rationalk_touchscreen.js",
+      "sourceMap": "os/packages/rationalk_touchscreen.js.map"
+    }
+  ]
+}

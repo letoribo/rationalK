@@ -1,0 +1,61 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKCore",
+      "export": true
+    },
+    {
+      "name": "enforceLogin"
+    },
+    {
+      "name": "templateData"
+    },
+    {
+      "name": "searchQuerySentToServer"
+    },
+    {
+      "name": "searchType"
+    },
+    {
+      "name": "catFilter"
+    },
+    {
+      "name": "includeWalkedFilesInResults"
+    },
+    {
+      "name": "includeWebInResults"
+    },
+    {
+      "name": "result"
+    },
+    {
+      "name": "content"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:lib",
+      "constraint": "0.0.1"
+    }
+  ],
+  "implies": [
+    {
+      "package": "rationalk:lib",
+      "constraint": "0.0.1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_core.js",
+      "length": 103038,
+      "offset": 0,
+      "servePath": "/packages/rationalk_core.js",
+      "sourceMap": "os/packages/rationalk_core.js.map"
+    }
+  ]
+}

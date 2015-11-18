@@ -1,0 +1,43 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKERP",
+      "export": true
+    },
+    {
+      "name": "Production"
+    },
+    {
+      "name": "urlPlan"
+    },
+    {
+      "name": "urlStocks"
+    },
+    {
+      "name": "menuHTML"
+    },
+    {
+      "name": "ressourceName"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_erp.js",
+      "length": 61654,
+      "offset": 0,
+      "servePath": "/packages/rationalk_erp.js",
+      "sourceMap": "os/packages/rationalk_erp.js.map"
+    }
+  ]
+}

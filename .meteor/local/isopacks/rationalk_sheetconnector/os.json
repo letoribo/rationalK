@@ -1,0 +1,53 @@
+{
+  "format": "unipackage-unibuild-pre1",
+  "packageVariables": [
+    {
+      "name": "RKSheetConnector",
+      "export": true
+    },
+    {
+      "name": "__"
+    },
+    {
+      "name": "External"
+    },
+    {
+      "name": "workbook"
+    },
+    {
+      "name": "ws"
+    },
+    {
+      "name": "filterCellAddress"
+    },
+    {
+      "name": "headerCellAddress"
+    },
+    {
+      "name": "translations"
+    }
+  ],
+  "uses": [
+    {
+      "package": "meteor"
+    },
+    {
+      "package": "rationalk:core",
+      "constraint": "0.0.1"
+    },
+    {
+      "package": "tap:i18n",
+      "constraint": "1.0.7"
+    }
+  ],
+  "resources": [
+    {
+      "type": "prelink",
+      "file": "os/packages/rationalk_sheetconnector.js",
+      "length": 49676,
+      "offset": 0,
+      "servePath": "/packages/rationalk_sheetconnector.js",
+      "sourceMap": "os/packages/rationalk_sheetconnector.js.map"
+    }
+  ]
+}

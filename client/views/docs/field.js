@@ -20,7 +20,6 @@ Template.field.helpers({
     var dateValue;
     var encodedValue;
     var memberValue;
-    var ref;
     var ref1;
     var spans;
     var textValue;
@@ -32,13 +31,14 @@ Template.field.helpers({
     var selected;
     var currentFilelink;
     var html;
-    if (typeof(rkSettings.findOne({key: "availableFunctionsValue"})) !== 'undefined') {
-      if (ref = this.value.type, indexOf.call(rkSettings.findOne({key: "availableFunctionsValue"}).value, ref) >= 0) {
-        encodedValue = htmlEncode(this.value.value);
-        return "<div class='input-group'><input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='text' aria-describedby='basic-addon2'/> <span class='input-group-addon' id='basic-addon2'><a href='#' class='launchCustomFunction' id='" + this.value.type + "' data-customfunction='" + this.value.type + "'>" + this.value.type + "</a></span></div>";
-      }
+    //RKCore.log(this.value);
+    //RKCore.log(RKCore.customFieldsType);
+    var elementPos = RKCore.customFieldsType.map(function (x) {return x.value; }).indexOf(this.value.type);
+    if (elementPos >= 0) {
+      encodedValue = htmlEncode(this.value.value);
+      return "<div class='input-group'><input class='form-control dyn-field' name='" + this.key + "' value='" + encodedValue + "' type='text' aria-describedby='basic-addon2'/> <span class='input-group-addon' id='basic-addon2'><a href='#' class='launchCustomFunction' id='" + this.value.type + "' data-customfunction='" + this.value.type + "'>" + this.value.type + "</a></span></div>";
     }
-    if (this.value.type === "textarea") {
+    else if (this.value.type === "textarea") {
       textValue = htmlEncode(this.value.value);
       return "<textarea class='form-control dyn-field' name='" + this.key + "' placeholder='" + this.key + "'>" + textValue + "</textarea>";
     }
