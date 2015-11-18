@@ -5,3 +5,4 @@ rationalK/
 packages/rationalk-custom-*/
 .meteor/packages
 .meteor/versions
+.meteor/local/
