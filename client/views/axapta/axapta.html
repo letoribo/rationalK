@@ -4,13 +4,27 @@
   		   <div class="panel panel-default">
   		   		<div class="panel-heading" style="position:relative">
   		   			<h3 class="panel-title">
-                {{_ "My Space"}} - <span class='glyphicon glyphicon-star' aria-hidden='true'></span>
+                {{_ "AX"}} - JESActiveDrawingProject <span class='glyphicon glyphicon-star' aria-hidden='true'></span>
               </h3>
           	</div>
     				<div class="panel-body">
-    					 {{> reactiveTable collection=Axapta settings=settingsAxapta}}
+    					 {{> reactiveTable collection=JESActiveDrawingProject settings=settingsAxapta}}
     				</div>
   		   </div>
   	  </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+         <div class="panel panel-default">
+            <div class="panel-heading" style="position:relative">
+              <h3 class="panel-title">
+                {{_ "AX"}} - JESPurchProtoOnProject <span class='glyphicon glyphicon-star' aria-hidden='true'></span>
+              </h3>
+            </div>
+            <div class="panel-body">
+               {{> reactiveTable collection=JESPurchProtoOnProject}}
+            </div>
+         </div>
+      </div>
     </div>
 </template>

@@ -14,8 +14,11 @@ Template.axapta.helpers({
 	packageDashboard: function () {
 		return RKCore.packageDashboard;
 	},
-	Axapta: function () {
-		return Axapta.find({}, {}).fetch();
+	JESActiveDrawingProject: function () {
+		return Axapta.find({table: "JESActiveDrawingProject"}, {}).fetch();
+	},
+	JESPurchProtoOnProject: function () {
+		return Axapta.find({table: "JESPurchProtoOnProject"}, {}).fetch();
 	},
 	lastActivity: function () {
 		return History.find({}, {sort: { createdAt: -1}, limit: 20}).fetch();
