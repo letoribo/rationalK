@@ -21,3 +21,8 @@ rationalk:filecontent
 rationalk:kanban
 rationalk:touchscreen
 emgee:mssql
+
+
+# custom private packages :
+jesa:bearingcalculation
+jesa:fieldtypes
