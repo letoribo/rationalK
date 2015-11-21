@@ -18,7 +18,7 @@ Template.settingsTemplate.events({
 	    Meteor.call('updateOption', optionName, optionValue, function () {});
 	    return false;
   	},
-    'submit #validatedFilesPathForm' : function (e, t){
+    'submit #validatedFilesPathForm' : function (e, t) {
   		e.preventDefault();
   		var validatedFilesPath = t.$('#validatedFilesPath').val();
   		var data = {};
@@ -56,7 +56,27 @@ Template.settingsTemplate.events({
     },
     "click a.walkThruFilelinks": function (e) {
       e.preventDefault();
-      Meteor.call('walkThruFilelinks', function () {});
+      if (typeof(toastr) !== 'undefined') {
+        toastr.success(TAPi18n.__('Scan through filelink started. This may takes some times.'));
+      }
+      Meteor.call('walkThruFilelinks', function (err) {
+        if (!err) {
+          if (typeof(toastr) !== 'undefined') {
+            toastr.success(TAPi18n.__('Scan through filelink finished with success.'));
+          }
+        }
+      });
+      return false;
+    },
+    "click a.clearFilelinks": function (e) {
+      e.preventDefault();
+      Meteor.call('clearFilelinks', function (err) {
+        if (!err) {
+          if (typeof(toastr) !== 'undefined') {
+            toastr.success(TAPi18n.__('Filelinks database is now empty.'));
+          }
+        }
+      });
       return false;
     },
     "click a.walkThruFolders": function (e) {
@@ -64,6 +84,17 @@ Template.settingsTemplate.events({
       Meteor.call('walkThruFolders', function (error, result) {
         RKCore.log(error);
         RKCore.log(result);
+      });
+      return false;
+    },
+    "click a.clearWalkedFiles": function (e) {
+      e.preventDefault();
+      Meteor.call('clearWalkedFiles', function (err) {
+        if (!err) {
+          if (typeof(toastr) !== 'undefined') {
+            toastr.success(TAPi18n.__('Walked files database is now empty.'));
+          }
+        }
       });
       return false;
     },

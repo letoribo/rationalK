@@ -15,6 +15,9 @@ if (Meteor.settings.scanFilelinks.do) {
 }
 
 Meteor.methods({
+	clearFilelinks: function () {
+		Filelinks.remove({});
+	},
 	walkThruFilelinks: function () {
 		var validatedFilesPathArray = [];
 		var validatedFilesPath;

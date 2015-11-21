@@ -19,6 +19,11 @@ if (Meteor.isServer) {
 	fs = Npm.require("fs");
 
 	Meteor.methods({
+		clearWalkedFiles: function () {
+			TempWalkedFiles.remove({});
+			WalkedFiles.remove({});
+			return true;
+		},
 		walkThruFolders: function () {
 			var folders;
 			var walkPath;

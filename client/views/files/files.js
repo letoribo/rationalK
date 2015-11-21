@@ -90,15 +90,12 @@ Template.files.helpers({
 	}
 });
 
-
 Template.files.events({
 	"click a.walkThruFolders": function (e) {
 		e.preventDefault();
 		Meteor.call('walkThruFolders',function (error, result) {
-			if (Meteor.settings.public.debug){
-				console.log(error);
-				console.log(result);
-			}
+				RKCore.log(error);
+				RKCore.log(result);
 		});
 		return false;
 	}

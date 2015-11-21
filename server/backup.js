@@ -5,7 +5,7 @@ var database;
 var backup;
 var i;
 var j;
-var collectionsToBackup = ['docs','views','history','revisions','categories','rkSettings','userspaces','folderstoscan','walkedfiles','searchqueries','tags'];
+var collectionsToBackup = ['docs', 'views', 'revisions', 'categories', 'rkSettings', 'userspaces', 'folderstoscan', 'searchqueries', 'tags'];
 
 if (typeof(RKCore.packageBackup) !== 'undefined'){
 	RKCore.log("RKCore.packageBackup : ");
