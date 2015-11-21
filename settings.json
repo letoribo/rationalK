@@ -6,10 +6,7 @@
 			{"server":"//Company-NetApp01b.xxxx.local/Company/","client":"C:\\"}
 		],
 		"show" : {
-			"relationships" : true,
-			"processes" : true,
 			"notes" : false,
-			"gantts" : true,
 			"projects" : true,
 			"discussions" : true,
 			"expert" : true,
