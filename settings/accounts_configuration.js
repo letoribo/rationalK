@@ -2,61 +2,68 @@ var sendVerificationEmail;
 
 Accounts.config({
   sendVerificationEmail: true,
-  forbidClientAccountCreation: true
+  forbidClientAccountCreation: true,
 });
 
-sendVerificationEmail = function(userId) {
+sendVerificationEmail = function (userId) {
   return Accounts.sendVerificationEmail(userId);
 };
 
 if (Meteor.isServer) {
-  Accounts.onCreateUser(function(options, user) {
+  Accounts.onCreateUser(function (options, user) {
     user.profile = {};
     if (!options.verified) {
-      Meteor.setTimeout((function() {
+      Meteor.setTimeout((function () {
         Accounts.sendVerificationEmail(user._id);
       }), 2 * 1000);
-    } else {
-      Meteor.setTimeout((function() {
+    }
+    else {
+      Meteor.setTimeout((function () {
         Meteor.users.update({
-          _id: user._id
+          _id: user._id,
         }, {
           $set: {
-            "emails.0.verified": true
-          }
+            "emails.0.verified": true,
+          },
         });
       }), 2 * 1000);
     }
     return user;
   });
-  Meteor.startup(function() {
+  Meteor.startup(function () {
     var loginAttemptVerifier;
-    loginAttemptVerifier = function(parameters) {
-      var found, memberId, ref, ref1, user;
+    loginAttemptVerifier = function (parameters) {
+      var found;
+      var memberId;
+      var ref;
+      var ref1;
+      var user;
       if (parameters.user && parameters.user.emails && (parameters.user.emails.length > 0)) {
         user = parameters.user;
-        found = _.find(user.emails, function(thisEmail) {
+        found = _.find(user.emails, function (thisEmail) {
           return thisEmail.verified;
         });
         if (!found) {
           Accounts.sendVerificationEmail(user._id);
           throw new Meteor.Error(500, "We sent you an email.");
-        } else {
+        }
+        else {
           if (!Members.collection.find({
-            accountId: user._id
+            accountId: user._id,
           }).count() > 0) {
             memberId = Members.collection.insert({
-              email: (ref = user.emails) != null ? (ref1 = ref[0]) != null ? ref1.address : void 0 : void 0,
+              email: (ref = user.emails) !== null ? (ref1 = ref[0]) !== null ? ref1.address : void 0 : void 0,
               orgId: user.profile.orgId,
               profile: user.profile,
-              accountId: user._id
+              accountId: user._id,
             });
             Roles.setUserRoles(user._id, ['admin']);
           }
         }
         return found && parameters.allowed;
-      } else {
-        console.log("user has no registered emails.");
+      }
+      else {
+        RKCore.log("user has no registered emails.");
         return false;
       }
     };
