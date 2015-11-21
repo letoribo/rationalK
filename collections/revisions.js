@@ -5,7 +5,7 @@ Meteor.methods({
         "Must be logged in to add a doc to your space.");
     }
 
-	Revisions.remove({categoryId:categoryId});
-    return true;
-  }
+  	Revisions.remove({categoryId: categoryId});
+      return true;
+    },
 });

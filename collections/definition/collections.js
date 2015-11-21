@@ -30,8 +30,6 @@ Axapta.allow( {
     remove: function (userId) {return !!userId; },
 });
 
-
-
 if (Meteor.isServer) {
 	if (typeof Docs.createIndex === 'function') {
 		if (Meteor.settings.public.debug) {
