@@ -9,27 +9,28 @@ Meteor.methods({
       location: att.location,
       email: att.email,
       subdomain: att.subdomain,
-      userId: user._id
+      userId: user._id,
     });
   },
   orgEdit: function (att) {
-    var org, user;
+    var org;
+    var user;
     Meteor.checkLoggedIn();
     Meteor.checkAttributes(att, ["name", "location", "email", "subdomain", "orgId"]);
     user = Meteor.user();
     org = Orgs.findOne({
-      id: att.orgId
+      id: att.orgId,
     });
     return Orgs.update({
       id: att.orgId,
-      userId: user._id
+      userId: user._id,
     }, {
       $set: {
         name: att.name,
         location: att.location,
         email: att.email,
-        subdomain: att.subdomain
-      }
+        subdomain: att.subdomain,
+      },
     });
   },
   orgDelete: function (orgId) {
@@ -38,7 +39,7 @@ Meteor.methods({
     user = Meteor.user();
     return Orgs.remove({
       _id: orgId,
-      userId: user._id
+      userId: user._id,
     });
-  }
+  },
 });

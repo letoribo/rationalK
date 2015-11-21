@@ -1,6 +1,6 @@
 Meteor.orgIdForHostname = function (hostname) {
-  console.log(hostname);
+  RKCore.log(hostname);
   return Orgs.findOne({
-    subdomain: "kdanse"
+    subdomain: "kdanse",
   })._id;
 };
