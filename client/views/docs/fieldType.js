@@ -9,48 +9,40 @@ var stripBeginEndQuotes = function (s) {
 var memberAutocomplete,
   indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-getAllFieldsType = function (){
+getAllFieldsType = function () {
 
 	var standardFieldsType = [
-  { value : "text", text : TAPi18n.__("Text") },
-	{ value : "textarea", text : TAPi18n.__("Textarea") },
-	{ value : "select", text : TAPi18n.__("Multiple choices") },
-	{ value : "date", text : "Date" },
-	{ value : "member", text : TAPi18n.__("Member") },
-	{ value : "tags", text : TAPi18n.__("Tags") },
-	{ value : "url", text : TAPi18n.__("Url") },
-	{ value : "filelink",text : TAPi18n.__("Filelink") },
-	{ value : "email",text : "Email"}
+  { value: "text", text: TAPi18n.__("Text") },
+	{ value: "textarea", text: TAPi18n.__("Textarea") },
+	{ value: "select", text: TAPi18n.__("Multiple choices") },
+	{ value: "date", text: "Date" },
+	{ value: "member", text: TAPi18n.__("Member") },
+	{ value: "tags", text: TAPi18n.__("Tags") },
+	{ value: "url", text: TAPi18n.__("Url") },
+	{ value: "filelink", text: TAPi18n.__("Filelink") },
+	{ value: "email", text: "Email"},
 	];
-
-	//customFieldsType = rkSettings.findOne({key: "customFieldsType"}).value
-	//console.log(standardFieldsType)
-	//RKCore.log(customFieldsType);
 
 	if (typeof(RKCore.customFieldsType) !== 'undefined') {
 		RKCore.log("RKCore.customFieldsType : ");
 		RKCore.log(RKCore.customFieldsType);
 		customFieldsType = RKCore.customFieldsType;
-		/*
-		var nPackagesThatWantToBackupCollections = RKCore.packageBackup.length;
-		for (j = 0; j < nPackagesThatWantToBackupCollections; j++) {
-			collectionsToBackup = collectionsToBackup.concat(RKCore.packageBackup[j].collections);
-		}
-		*/
 	}
 
-
-
 	allFieldsType = standardFieldsType.concat(customFieldsType);
-	//console.log(allFieldsType)
 	return allFieldsType;
-
-
 };
 
 Meteor.FieldType = {
   transformValue: function (type, value) {
-    var filelink, filelink_replacements, htmlTags, i, ref, res, tags;
+    var filelink;
+		var htmlTags;
+		var i;
+		var ref;
+		var res;
+		var tags;
+		var filelink;
+		var urlEncodedFilelink;
     if (value && (value != null)) {
       if (type === "member") {
         return (ref = Members.collection.findOne({
@@ -78,16 +70,15 @@ Meteor.FieldType = {
         return new Spacebars.SafeString("<a href='mailto:" + value + "' title='Send Email' target='_blank'>" + value + "</a>");
       }
 			else if (type === 'filelink') {
-				var filelink=stripBeginEndQuotes(value);
+				filelink = stripBeginEndQuotes(value);
 				filelink = clientFilename(filelink);
-				var urlEncodedFilelink = encodeURIComponent(filelink);
-        return new Spacebars.SafeString('<a href="rk:' + filelink + '" title="Open file" target="_blank">' + filelink + '</a>');
-      } else {
-        return value;
+				urlEncodedFilelink = encodeURIComponent(filelink);
+        //return new Spacebars.SafeString('<a href="rk:' + filelink + '" title="Open file" target="_blank">' + filelink + '</a>');
+				return new Spacebars.SafeString('<a href="rk:' + filelink + '" title="Open file" target="_blank"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>');
       }
-    } else {
-      return '-';
+			return value;
     }
+		return '-';
   },
   getDefaultValue: function (key, type) {
     if (type === "member") {
