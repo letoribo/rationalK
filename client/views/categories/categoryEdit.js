@@ -5,6 +5,8 @@ Template.categoryEdit.events({
     properties = {
       name: $(e.target).find("[name=name]").val(),
       info: $(e.target).find("[name=info]").val(),
+      globalFilterOnTableView: $(e.target).find("[name=globalFilterOnTableView]").is(':checked'),
+      showColumnTogglesOnTableView: $(e.target).find("[name=showColumnTogglesOnTableView]").is(':checked'),
       viewId: $("#selectedView").val(),
       categoryId: this._id,
       slug: getSlug($(e.target).find("[name=name]").val()),

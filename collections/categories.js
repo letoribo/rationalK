@@ -1,12 +1,14 @@
 Meteor.methods({
   categoryUpdate: function (att) {
-    check(att, {
-      name : String,
-      categoryId: String,
-      info : Match.Optional(String),
-      slug : Match.Optional(String)
-    })
     var user = Meteor.user();
+    check(att, {
+      name: String,
+      categoryId: String,
+      info: Match.Optional(String),
+      slug: Match.Optional(String),
+      globalFilterOnTableView: Boolean,
+      showColumnTogglesOnTableView: Boolean,
+    });
     if (!user) {
       if (typeof(toastr) !== 'undefined') {
         toastr.error("You need to login to delete a category");
@@ -26,19 +28,22 @@ Meteor.methods({
       throw new Meteor.Error(422, "Please fill in with the categoryId");
     }
     Categories.update({
-      _id: att.categoryId
+      _id: att.categoryId,
     }, {
       $set: {
         name: att.name,
         info: att.info,
-        slug: att.slug
+        slug: att.slug,
+        globalFilterOnTableView: att.globalFilterOnTableView,
+        showColumnTogglesOnTableView: att.showColumnTogglesOnTableView,
       }
     });
   },
   categoryNew: function (att) {
-    check(att, {name : String})
-    var orgId, viewId;
+    var orgId;
+    var viewId;
     var user = Meteor.user();
+    check(att, {name: String});
     if (!user) {
       if (typeof(toastr) !== 'undefined') {
         toastr.error("You need to login to add a new category");
@@ -60,12 +65,14 @@ Meteor.methods({
       orgId: orgId,
       name: att.name,
       slug: att.slug,
-      viewId: viewId
+      viewId: viewId,
+      globalFilterOnTableView: true,
+      showColumnTogglesOnTableView: true,
     });
   },
   categoryDelete: function (categoryId) {
-    check(categoryId,String)
     var user;
+    check(categoryId, String);
     user = Meteor.user();
     if (!user) {
       if (typeof(toastr) !== 'undefined') {

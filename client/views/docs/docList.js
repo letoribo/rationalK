@@ -17,10 +17,27 @@ Template.docList.helpers({
     return Docs.find({categoryId: Session.get('selectedCategory')});
   },
   tableSettings: function () {
-    var viewId = Categories.findOne({_id: Session.get('selectedCategory')}).viewId;
+    var categoryId = Session.get('selectedCategory');
+    var category = Categories.findOne({_id: categoryId});
+    var globalFilterOnTableView = category.globalFilterOnTableView;
+    var showColumnTogglesOnTableView = category.showColumnTogglesOnTableView;
+    var viewId = category.viewId;
     var keys = Views.getFieldInOrder(viewId);
     var view = Views.findOne({_id: viewId});
-    var columns = keys.map(function (key) {
+    var nKeys = keys.length;
+    var i;
+    var filters = [];
+    var columns;
+    RKCore.log(view.fields);
+    for (i = 0; i < nKeys; i++) {
+        key = keys[i];
+        if (view.fields[key].customFilterInTableView) {
+          RKCore.log("I will include a custom filter on : " + key);
+          filters.push("myFilterOn" + key);
+        }
+    }
+
+    columns = keys.map(function (key) {
       return {
         key: "fields." + key + ".value",
         label: key,
@@ -83,11 +100,42 @@ Template.docList.helpers({
         return new Spacebars.SafeString("<a href='" + url + "'>" + value + "</a>");
       },
     });
+    RKCore.log("filters :");
+    RKCore.log(filters);
+    RKCore.log("columns :");
+    RKCore.log(columns);
     return {
       showNavigation: "auto",
       fields: columns,
-      showColumnToggles: true,
+      showFilter: globalFilterOnTableView,
+      showColumnToggles: showColumnTogglesOnTableView,
+      //filters: filters,
+      filters: ['myFilterOnTitre'],
     };
+  },
+  customFiltersOnFields: function () {
+    var customFiltersOnFields = [];
+    var categoryId = Session.get('selectedCategory');
+    var category = Categories.findOne({_id: categoryId});
+    var viewId = category.viewId;
+    var keys = Views.getFieldInOrder(viewId);
+    var view = Views.findOne({_id: viewId});
+    var nKeys = keys.length;
+    var i;
+    var obj = {};
+    for (i = 0; i < nKeys; i++) {
+        key = keys[i];
+        obj = {};
+        if (view.fields[key].customFilterInTableView) {
+          RKCore.log("I will create a custom filter on : " + key);
+          obj.label = TAPi18n.__("Filter on") + " : " + key;
+          obj.fields = ["fields." + key + ".value"]; //[]; //[key]
+          obj.myFilterId = "myFilterOn" + key;
+          customFiltersOnFields.push(obj);
+        }
+    }
+    RKCore.log(customFiltersOnFields);
+    return customFiltersOnFields;
   },
   hasDocs: function () {
     return Docs.find({

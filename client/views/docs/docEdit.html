@@ -27,6 +27,8 @@
 									</div>
 									{{#each viewFields}}
 					            {{> field dataForKey }}
+									{{else}}
+										<p>You first need to <a href="{{pathFor 'categoryEdit' _id=categoryId}}">create some fields</a></p>
 					        {{/each}}
 
 							{{#if displaySearchScore}}
@@ -58,16 +60,18 @@
 						        {{/if}}
 					        {{/if}}
 					        {{#if someCategorySelected}}
-									<h4>This document is useful for the following roles</h4>
-									<div class="form-group" id="usefulForRolesCheckboxes">
-										{{#each usefulForRolesCheckbox}}
-											<div class="checkbox">
-									      <label>
-									      <input type="checkbox" value="" name="{{slug}}" checked="{{thisDocumentisUsefulForThisRole}}"> {{name}}
-									      </label>
-									    </div>
-										{{/each}}
-									</div>
+										{{#if usefulForRolesCheckbox}}
+											<h4>This document is useful for the following roles</h4>
+											<div class="form-group" id="usefulForRolesCheckboxes">
+												{{#each usefulForRolesCheckbox}}
+													<div class="checkbox">
+											      <label>
+											      <input type="checkbox" value="" name="{{slug}}" checked="{{thisDocumentisUsefulForThisRole}}"> {{name}}
+											      </label>
+											    </div>
+												{{/each}}
+											</div>
+										{{/if}}
 
 					        <hr>
 					        <div class="form-group">

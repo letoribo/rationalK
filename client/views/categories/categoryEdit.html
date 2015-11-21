@@ -17,6 +17,16 @@
 				            <label for="name">Information</label>
 										<textarea name="info" placeholder="Some usefull information about this category" class="form-control" rows="3">{{info}}</textarea>
 				        </div>
+								<div class="checkbox">
+							    <label>
+							      <input type="checkbox" name="globalFilterOnTableView" checked="{{globalFilterOnTableView}}"> {{_ "Add global filter on the table view"}}
+							    </label>
+							  </div>
+								<div class="checkbox">
+							    <label>
+							      <input type="checkbox" name="showColumnTogglesOnTableView" checked="{{showColumnTogglesOnTableView}}"> {{_ "Add columns button on the table view"}}
+							    </label>
+							  </div>
 				        <div class="form-group">
 				            {{> viewEdit viewData}}
 				        </div>

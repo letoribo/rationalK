@@ -4,29 +4,32 @@ Meteor.methods({
   viewDelete: function (viewId) {
 	  // method to delete a view through its _id
 	  // viewId: _id of the view to delete
-    var user, view;
+    var user;
+    var view;
     user = Meteor.user();
     if (!user) {
       throw new Meteor.Error(401, "You need to login to delete this view");
     }
     view = Views.findOne({
-      _id: viewId
+      _id: viewId,
     });
     Views.remove({
-      _id: viewId
+      _id: viewId,
     });
   },
   deleteViewByCategoryId: function (categoryId) {
-    var user, view, viewId;
+    var user;
+    var view;
+    var viewId;
     user = Meteor.user();
     if (!user) {
       throw new Meteor.Error(401, "You need to login to delete this view");
     }
     viewId = Categories.findOne({
-      _id: categoryId
+      _id: categoryId,
     }).viewId;
     view = Views.remove({
-      _id: viewId
+      _id: viewId,
     });
   },
   viewNew: function (att) {
@@ -35,7 +38,9 @@ Meteor.methods({
 	  //  att:
 	  //   name: name of the view
 	  //   attributes: attributes of the view
-    var orgId, user, viewId;
+    var orgId;
+    var user;
+    var viewId;
     if (Meteor.isClient) {
       user = Meteor.user();
       if (!user) {
@@ -114,6 +119,10 @@ Meteor.methods({
     return viewId;
   },
   viewAddField: function (att) {
+    var obj;
+    var ref;
+    var user;
+    var view;
 	   // method to add a new field to a view
   // a user must be logged in
   //  att:
@@ -127,17 +136,15 @@ Meteor.methods({
   //
   // the new field appears last in the order array
   check(att, {
-    viewId : String,
+    viewId: String,
     newField: String,
     newFieldType: String,
     mandatory: Boolean,
     unique: Match.Optional(Boolean),
     hideInSearchResultsDisplay: Match.Optional(Boolean),
-    hideInTable: Match.Optional(Boolean)
-  })
-
-
-    var obj, ref, user, view;
+    hideInTable: Match.Optional(Boolean),
+    customFilterInTableView: Match.Optional(Boolean),
+  });
     if (Meteor.isClient) {
       user = Meteor.user();
       if (!user) {
@@ -157,13 +164,13 @@ Meteor.methods({
       throw new Meteor.Error(422, "Please fill in with a field type");
     }
     view = Views.findOne({
-      _id: att.viewId
+      _id: att.viewId,
     });
     if (!view) {
-      return;
+      return false;
     }
     if ((ref = view.fields) != null ? ref[att.newField] : void 0) {
-      return;
+      return false;
     }
     obj = {};
     obj["fields." + att.newField + ".type"] = att.newFieldType;
@@ -171,22 +178,23 @@ Meteor.methods({
     obj["fields." + att.newField + ".unique"] = att.unique;
     obj["fields." + att.newField + ".hideInSearchResultsDisplay"] = att.hideInSearchResultsDisplay;
     obj["fields." + att.newField + ".hideInTable"] = att.hideInTable;
+    obj["fields." + att.newField + ".hideInTable"] = att.customFilterInTableView;
     Views.update({
-      _id: att.viewId
+      _id: att.viewId,
     }, {
       $addToSet: {
         keys: att.newField,
-        order: att.newField
-      }
+        order: att.newField,
+      },
     });
-    return Views.update({
-      _id: att.viewId
+    Views.update({
+      _id: att.viewId,
     }, {
-      $set: obj
+      $set: obj,
     });
+    return true;
   },
-  viewUpdateField: function (viewId, field, newField, newFieldType, mandatory, unique, hideInTable, hideInSearchResultsDisplay, multipleChoices) {
-
+  viewUpdateField: function (data) {
 	    // method to update an existing field of a view
   // a user must be logged in
   //   viewId: _id of the view to update
@@ -199,15 +207,29 @@ Meteor.methods({
   //   hideInTable : true if newField should be hidden in Table by default
   // the order is not changed if the field is not renamed
   // WARNING: Renaming the field of the view DOES NOT rename of the field of ANY DOCUMENT.
-  check(viewId, String);
-  check(field,String);
-  check(newField, String);
-  check(newFieldType, String);
-  check(mandatory, Boolean);
-  check(unique, Boolean);
-  check(hideInTable, Boolean);
-  check(hideInSearchResultsDisplay, Boolean);
-  check(multipleChoices,String);
+
+  check(data, {
+    viewId: String,
+    field: String,
+    newField: String,
+    newFieldType: String,
+    mandatory: Boolean,
+    unique: Boolean,
+    hideInTable: Boolean,
+    hideInSearchResultsDisplay: Boolean,
+    multipleChoices: String,
+    customFilterInTableView: Boolean,
+  });
+
+  viewId = data.viewId;
+  field = data.field;
+  newField = data.newField;
+  newFieldType = data.newFieldType;
+  mandatory = data.mandatory;
+  unique = data.unique;
+  hideInTable = data.hideInTable;
+  hideInSearchResultsDisplay = data.hideInSearchResultsDisplay;
+  multipleChoices = data.multipleChoices;
 
 
 
@@ -232,21 +254,23 @@ Meteor.methods({
       return;
     }
     if (!view.fields[field]) {
-      console.log(field + " field does not exists");
+      RKCore.log(field + " field does not exists");
       return;
     }
     if (field !== newField) {
       Meteor.call('viewRemoveField', viewId, field);
-      return Meteor.call('viewAddField', {
+      Meteor.call('viewAddField', {
         viewId: viewId,
         newField: newField,
         newFieldType: newFieldType,
         mandatory: mandatory,
         unique: unique,
         hideInSearchResultsDisplay: hideInSearchResultsDisplay,
-        hideInTable: hideInTable //do not add here multiple choices, only on edit
+        hideInTable: hideInTable, //do not add here multiple choices, only on edit
+        customFilterInTableView: data.customFilterInTableView,
       });
-    } else {
+    }
+    else {
       obj = {};
       obj["fields." + newField + ".type"] = newFieldType;
       obj["fields." + newField + ".mandatory"] = mandatory;
@@ -254,12 +278,14 @@ Meteor.methods({
       obj["fields." + newField + ".hideInSearchResultsDisplay"] = hideInSearchResultsDisplay;
       obj["fields." + newField + ".hideInTable"] = hideInTable;
       obj["fields." + newField + ".multipleChoices"] = multipleChoices;
-      return Views.update({
+      obj["fields." + newField + ".customFilterInTableView"] = data.customFilterInTableView;
+      Views.update({
         _id: viewId
       }, {
         $set: obj
       });
     }
+    return true;
   },
   viewRemoveField: function (viewId, field) {
 

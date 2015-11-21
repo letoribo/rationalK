@@ -136,25 +136,28 @@ Template.docEdit.helpers({
     return ((Router.current().route.getName() === "docEdit" ) ? true : false);
   },
   usefulForRolesCheckbox: function () {
-    var Roles = rkSettings.findOne({key: "Roles"}).value;
-    var arrayLength = Roles.length;
-    var i;
-    for (i = 0; i < arrayLength; i++) {
-      if (typeof(this.usefulForRoles) === 'undefined') {
-        Roles[i].thisDocumentisUsefulForThisRole = false;
-      }
-      else {
-        if (this.usefulForRoles.indexOf(Roles[i].slug) >= 0) {
-          Roles[i].thisDocumentisUsefulForThisRole = true;
-        }
-        else {
+    if (typeof(rkSettings.findOne({key: "Roles"})) !== 'undefined') {
+      var Roles = rkSettings.findOne({key: "Roles"}).value;
+      var arrayLength = Roles.length;
+      var i;
+      for (i = 0; i < arrayLength; i++) {
+        if (typeof(this.usefulForRoles) === 'undefined') {
           Roles[i].thisDocumentisUsefulForThisRole = false;
         }
+        else {
+          if (this.usefulForRoles.indexOf(Roles[i].slug) >= 0) {
+            Roles[i].thisDocumentisUsefulForThisRole = true;
+          }
+          else {
+            Roles[i].thisDocumentisUsefulForThisRole = false;
+          }
+        }
       }
+      RKCore.log("Roles for this document : ");
+      RKCore.log(Roles);
+      return Roles;
     }
-    RKCore.log("Roles for this document : ");
-    RKCore.log(Roles);
-    return Roles;
+    return false;
   },
   tags: function () {
     return PredefinedTags.find();
@@ -227,7 +230,7 @@ Template.docEdit.helpers({
         value: value,
         type: this.type,
         mandatory: this.mandatory,
-        multipleChoices : this.multipleChoices
+        multipleChoices: this.multipleChoices,
       }
     };
     return data;

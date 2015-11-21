@@ -8,6 +8,9 @@
         </div>
         <div class="panel-body">
 	            {{#if hasDocs}}
+                {{#each customFiltersOnFields}}
+                  {{> reactiveTableFilter id=myFilterId label=label fields=fields}}
+                {{/each}}
 	            	<div class="tableScroll">
                     {{> reactiveTable collection=docs settings=tableSettings}}
 	            	</div>

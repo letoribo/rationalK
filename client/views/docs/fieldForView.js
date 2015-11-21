@@ -1,4 +1,4 @@
-Template.fieldForView.events({
+(function(){Template.fieldForView.events({
   "click .deleteField": function (e) {
     e.preventDefault();
     if (confirm("Are you sure you want to delete this field ?")) {
@@ -20,24 +20,22 @@ Template.fieldForView.events({
   },
   "click .editField": function (e) {
     var instance;
-    var isChecked;
-    var isHideInSearchResultsDisplayChecked;
-    var isHideInTableChecked;
-    var isUniqueChecked;
-    var newKey;
-    var newType;
-    var multipleChoices;
+    var data = {};
     e.preventDefault();
     instance = Template.instance();
     if (!instance.readonly) {
-      newKey = instance.find('input#newField').value;
-      newType = instance.find('select.form-control').value;
-      multipleChoices = instance.find('input.inputForMultipleChoices').value;
-      isChecked = instance.find('input#fieldAdd_mandatory').checked;
-      isUniqueChecked = instance.find('input#fieldAdd_unique').checked;
-      isHideInSearchResultsDisplayChecked = instance.find('input#fieldAdd_hideInSearchResultsDisplay').checked;
-      isHideInTableChecked = instance.find('input#fieldAdd_hideInTable').checked;
-      Meteor.call('viewUpdateField', Template.parentData(1)._id, this.key, newKey, newType, isChecked, isUniqueChecked, isHideInTableChecked, isHideInSearchResultsDisplayChecked, multipleChoices, function (error) {
+      data.viewId = Template.parentData(1)._id;
+      data.field = this.key;
+      data.newField = instance.find('input#newField').value;
+      data.newFieldType = instance.find('select.form-control').value;
+      data.mandatory = instance.find('input#fieldAdd_mandatory').checked;
+      data.unique = instance.find('input#fieldAdd_unique').checked;
+      data.hideInTable = instance.find('input#fieldAdd_hideInTable').checked;
+      data.hideInSearchResultsDisplay = instance.find('input#fieldAdd_hideInSearchResultsDisplay').checked;
+      data.multipleChoices = instance.find('input.inputForMultipleChoices').value;
+      data.customFilterInTableView = instance.find('input#fieldAdd_customFilterInTableView').checked;
+
+      Meteor.call('viewUpdateField', data, function (error) {
         if (!error) {
           if (typeof(toastr) !== 'undefined') {
       			toastr.success('Field updated');
@@ -53,49 +51,32 @@ Template.fieldForView.events({
     $(instance.find('input#fieldAdd_mandatory')).attr('disabled', instance.readonly);
     $(instance.find('input#fieldAdd_unique')).attr('disabled', instance.readonly);
     $(instance.find('input#fieldAdd_hideInSearchResultsDisplay')).attr('disabled', instance.readonly);
+    $(instance.find('input#fieldAdd_customFilterInTableView')).attr('disabled', instance.readonly);
     $(instance.find('input#fieldAdd_hideInTable')).attr('disabled', instance.readonly);
     return false;
   },
 });
 
 Template.fieldForView.created = function () {
-  return this.readonly = true;
+  this.readonly = true;
+  return true;
 };
 
 Template.fieldForView.rendered = function () {
-  $( ".divMultipleChoice" ).each(function ( i ) {
-    if (Meteor.settings.public.debug){
-      console.log(this);
-    }
-    var divId = $(this).attr('id');
-    if (Meteor.settings.public.debug){
-      console.log(divId);
-    }
-    var key = $(this).data('key');
-    if (Meteor.settings.public.debug){
-      console.log(key);
-    }
-    var type = $(this).data('type');
-    if (Meteor.settings.public.debug){
-      console.log(type);
-    }
-
-    if (type==='select'){
+  var divId;
+  var key;
+  var type;
+  $( ".divMultipleChoice" ).each(function (i) {
+    divId = $(this).attr('id');
+    key = $(this).data('key');
+    type = $(this).data('type');
+    if (type === 'select') {
       document.getElementById(divId).style.display = 'block';
-    }else {
+    }
+    else {
       document.getElementById(divId).style.display = 'none';
     }
-
   });
-
-  /*
-  if (document.getElementById("newFieldType").value==='select'){
-    document.getElementById("divMultipleChoice").style.display = 'block';
-  }else {
-    document.getElementById("divMultipleChoice").style.display = 'none';
-  }
-  return false;
-  */
 };
 
 Template.fieldForView.helpers({
@@ -105,43 +86,41 @@ Template.fieldForView.helpers({
   },
   isSelected: function () {
     parentThis = Template.parentData(1);
-    if (parentThis.value.type === this.value){
+    if (parentThis.value.type === this.value) {
       return "selected";
     }
-    else {
-      return "";
-    }
+    return "";
   },
   checkIfMandatory: function () {
-    if (this.value.mandatory){
+    if (this.value.mandatory) {
       return "checked";
     }
-    else {
-      return "";
-    }
+    return "";
   },
   checkIfUnique: function () {
-    if (this.value.unique){
+    if (this.value.unique) {
       return "checked";
     }
-    else {
-      return "";
-    }
+    return "";
   },
   checkIfHideInTable: function () {
-    if (this.value.hideInTable){
+    if (this.value.hideInTable) {
       return "checked";
     }
-    else {
-      return "";
-    }
+    return "";
   },
   checkIfHideInSearchResultsDisplay: function () {
-    if (this.value.hideInSearchResultsDisplay){
+    if (this.value.hideInSearchResultsDisplay) {
       return "checked";
     }
-    else {
-      return "";
+    return "";
+  },
+  checkIfCustomFilterInTableView: function () {
+    if (this.value.customFilterInTableView) {
+      return "checked";
     }
-  }
+    return "";
+  },
 });
+
+})();
