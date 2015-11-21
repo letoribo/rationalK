@@ -297,7 +297,6 @@ Meteor.methods({
   //   field: name of an existing field
   // the field remained in the order array (but it will not be displayed by the view)
   // it will automatically be removed when a new order is set by the user
-    var doc;
     var obj;
     var user = Meteor.user();
     if (!user) {
