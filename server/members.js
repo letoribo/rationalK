@@ -5,13 +5,13 @@ filterByOrg = function (meteor, collection, userId, strict) {
   if (userId) {
     user = Meteor.users.findOne(userId);
     return collection.find({
-      orgId: user.profile.orgId
+      orgId: user.profile.orgId,
     });
-  } else if (!strict) {
-    return collection.find();
-  } else {
-    return meteor.ready();
   }
+  else if (!strict) {
+    return collection.find();
+  }
+  return meteor.ready();
 };
 
 filterByOrg = function (meteor, collection, userId, strict, options) {
@@ -19,29 +19,29 @@ filterByOrg = function (meteor, collection, userId, strict, options) {
   if (userId) {
     user = Meteor.users.findOne(userId);
     return collection.find({
-      orgId: user.profile.orgId
+      orgId: user.profile.orgId,
     }, options);
-  } else if (!strict) {
-    return collection.find();
-  } else {
-    return meteor.ready();
   }
+  else if (!strict) {
+    return collection.find();
+  }
+  return meteor.ready();
 };
 
 Meteor.publish("members", function (limit) {
   check(limit, Match.Optional(Number));
   return filterByOrg(this, Members.collection, this.userId, true, {
-    limit: limit
+    limit: limit,
   });
 });
 
 Meteor.publish("member", function (memberId) {
-  check(memberId, String);
   var user = Meteor.users.findOne(this.userId);
+  check(memberId, String);
   if (user) {
     return Members.collection.find({
       _id: memberId,
-      orgId: user.profile.orgId
+      orgId: user.profile.orgId,
     });
   }
 });
@@ -53,9 +53,10 @@ Meteor.publish("invitation", function (id) {
 
 Meteor.methods({
   memberAutocomplete: function (name) {
-    var search, user;
+    var search;
+    var user;
     search = {
-      $regex: new RegExp(name, 'i')
+      $regex: new RegExp(name, 'i'),
     };
     if (Meteor.user()) {
       user = Meteor.users.findOne(Meteor.user()._id);
@@ -64,34 +65,34 @@ Meteor.methods({
           {
             $or: [
               {
-                "profile.name": search
+                "profile.name": search,
               }, {
-                "profile.nickname": search
-              }
+                "profile.nickname": search,
+              },
             ],
-            orgId: user.profile.orgId
-          }
-        ]
+            orgId: user.profile.orgId,
+          },
+        ],
       }).fetch().map(function (member) {
         return {
           value: member.profile.name,
           gender: member.gender,
-          memberId: member._id
+          memberId: member._id,
         };
       });
-    } else {
-      return [];
     }
+    return [];
   },
   invitationAccepted: function (invitationId, password, password2) {
+    var accountId;
+    var invitation;
+    var member;
+    var memberId;
+    var ref;
     check(invitationId, String);
     check(password, String);
     check(password2, String);
 
-    console.log(invitationId);
-    console.log(password);
-    console.log(password2);
-    var accountId, invitation, member, memberId, ref;
     if (!password) {
       throw new Meteor.Error(422, "Please type in a password");
     }
@@ -99,14 +100,14 @@ Meteor.methods({
       throw new Meteor.Error(422, "The two passwords are different. Please try again.");
     }
     invitation = Members.invitations.findOne({
-      _id: invitationId
+      _id: invitationId,
     });
     if (!invitation) {
       throw new Meteor.Error(422, "This invitation is not valid anymore. Please contact your administrator.");
     }
     memberId = invitation.memberId;
     member = Members.collection.findOne({
-      _id: memberId
+      _id: memberId,
     });
     if (!member) {
       throw new Meteor.Error(422, "This invitation is not valid anymore (member not valid). Please contact your administrator.");
@@ -115,26 +116,26 @@ Meteor.methods({
       email: invitation.email,
       profile: invitation.profile,
       password: password,
-      verified: true
+      verified: true,
     });
     Meteor.users.update({
-      _id: accountId
+      _id: accountId,
     }, {
       $set: {
         username: invitation.email,
-        profile: invitation.profile
-      }
+        profile: invitation.profile,
+      },
     });
     Members.collection.update({
-      _id: memberId
+      _id: memberId,
     }, {
       $set: {
-        accountId: accountId
-      }
+        accountId: accountId,
+      },
     });
     if (((ref = member.profile.roles) != null ? ref.length : void 0) > 0) {
       Roles.addUsersToRoles(accountId, member.profile.roles);
     }
     return invitationId;
-  }
+  },
 });

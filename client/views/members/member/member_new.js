@@ -1,5 +1,5 @@
 Template.memberNew.events({
-  "submit form": function (e) {
+  "submit form#newMember": function (e) {
     var properties;
     var rd;
     var shareDialogInfo;
@@ -24,6 +24,27 @@ Template.memberNew.events({
     rd.show();
     Meteor.call("memberNew", properties, function (error) {
       rd.hide();
+      if (error) {
+        if (typeof(toastr) !== 'undefined') {
+          toastr.error(error.reason);
+        }
+      }
+      else {
+        Router.go("members");
+      }
+    });
+  },
+  "submit form#newMemberWithoutInvitationEmail": function (e) {
+    var properties;
+    e.preventDefault();
+    properties = {
+      name: $(e.target).find("[name=name]").val(),
+      password: $(e.target).find("[name=password]").val(),
+      email: $(e.target).find("[name=email]").val().toLowerCase(),
+      nickname: $(e.target).find("[name=nickname]").val(),
+      hostname: window.location.hostname,
+    };
+    Meteor.call("memberNewWithoutInvitationEmail", properties, function (error) {
       if (error) {
         if (typeof(toastr) !== 'undefined') {
           toastr.error(error.reason);

@@ -3,21 +3,17 @@ Members = {
 	invitations: new Mongo.Collection('invitations')
 };
 
-Members.userToMember = function () {
-
-};
-
 var purgeMember;
 
 purgeMember = function (id, accountId) {
 	check(id, String);
 	check(accountId, Match.Optional(String));//if the user has not approuved then he has no account id
   Members.collection.remove({
-    _id: id
+    _id: id,
   });
   if (accountId && Meteor.isServer) {
     return Meteor.users.remove({
-      _id: accountId
+      _id: accountId,
     });
   }
 };
@@ -183,7 +179,55 @@ Meteor.methods({
 			*/
     }
     return memberId;
-  }
+  },
+	memberNewWithoutInvitationEmail: function (att) {
+		var invitationId;
+    var user = Meteor.user();
+		var orgId = user.profile.orgId;
+		var memberId;
+		check(att, {
+      name: String,
+      password: String,
+      email: String,
+      nickname: String,
+      hostname: String,
+    });
+    if (!user) {
+      throw new Meteor.Error(401, "You need to login to add new member");
+    }
+    if (!att.name) {
+      throw new Meteor.Error(422, "Please fill in with a name");
+    }
+    memberId = Members.collection.insert({
+      email: att.email,
+      orgId: orgId,
+      profile: {
+        name: att.name,
+        nickname: att.nickname,
+        roles: [],
+      },
+    });
+    if (Meteor.isServer) {
+      invitationId = Members.invitations.insert({
+        memberId: memberId,
+        email: att.email,
+        profile: {
+          name: att.name,
+          nickname: att.nickname,
+					locale: att.locale,
+          roles: att.roles,
+          orgId: orgId,
+        },
+      });
+			Meteor.call("invitationAccepted", invitationId, att.password, att.password, function (error) {
+	      if (error) {
+	  			toastr.error(error.reason);
+	        return false;
+	      }
+	    });
+    }
+    return memberId;
+  },
 });
 
 UI.registerHelper('isAdmin', function () {
@@ -191,12 +235,10 @@ UI.registerHelper('isAdmin', function () {
 });
 
 Members.getHiddenStatusIfNotAdmin = function () {
-	if (Roles.userIsInRole(Meteor.user(), ['admin'])){
-		return ""
+	if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
+		return "";
 	}
-	else {
-		return "hidden";
-	}
+	return "hidden";
 };
 
 // you can use it in template like this : {{displayOnlyForAdmin}}
@@ -205,12 +247,10 @@ UI.registerHelper('displayOnlyForAdmin', function () {
 });
 
 Members.getHiddenStatusIfReadOnly = function () {
-	if (Roles.userIsInRole(Meteor.user(), ['readonly'])){
-		return "hidden"
+	if (Roles.userIsInRole(Meteor.user(), ['readonly'])) {
+		return "hidden";
 	}
-	else {
-		return "";
-	}
+	return "";
 };
 
 // you can use it in template like this : {{dontDisplayIfUserIsReadOnly}}
@@ -222,5 +262,4 @@ UI.registerHelper('userName', function (userId) {
 		check(userId, String);
     member = Members.collection.findOne({accountId: userId});
     return member.profile.name;
-    //member.profile.nickname
 });
