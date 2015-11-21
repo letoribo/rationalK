@@ -71,3 +71,11 @@ Meteor.history = function (txt, data, type, docId) {
 
   return true;
 };
+
+if (Meteor.isServer) {
+  Meteor.methods({
+    clearHistory: function () {
+      History.remove({});
+    },
+  });
+}

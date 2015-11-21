@@ -61,12 +61,20 @@ Template.settingsTemplate.events({
     },
     "click a.walkThruFolders": function (e) {
       e.preventDefault();
-      Meteor.call('walkThruFolders',function (error, result) {
-        console.log(error);
-        console.log(result);
+      Meteor.call('walkThruFolders', function (error, result) {
+        RKCore.log(error);
+        RKCore.log(result);
       });
       return false;
-    }
+    },
+    "click a.clearHistory": function (e) {
+      e.preventDefault();
+      Meteor.call('clearHistory', function (error, result) {
+        RKCore.log(error);
+        RKCore.log(result);
+      });
+      return false;
+    },
 });
 
 
