@@ -1,7 +1,7 @@
 {
 	"public":{
 		"filelink_replace":[
-      {"server":"/Users/thomasdokithonon/Downloads/","client":"J:/"},
+      {"server":"/Users/username/Downloads/","client":"J:/"},
       {"server":"//Company-NetApp01b.xxxx.local/","client":"C:/"},
 			{"server":"//Company-NetApp01b.xxxx.local/Company/","client":"C:\\"}
 		],
@@ -30,7 +30,7 @@
 		"debug" : true
 	},
 	"rationalK_demo_mode" : false,
-	"rationalK_upload_dir" : "~/Dropbox/rationalK/uploads",
+	"rationalK_upload_dir" : "~/path/to/uploads",
 	"scanFolders" : {
 		"do": false,
 		"interval" : "at 03:00 am"
@@ -41,14 +41,7 @@
 	},
 	"periodicBackup" :{
 		"do": true,
-		"outFolder" :"/Users/thomasdokithonon/Downloads/backups"
-	},
-	"rationalK_Git" : {
-		"autoUpdate" : true,
-		"gitPullDir" : "C:/Users/doki/rationalK",
-		"gitExePath" : "C:/Program Files (x86)/Git/bin/git.exe",
-		"mupDeployFolder" : "C:/Users/doki/deploy",
-		"sudoPassword" : "password"
+		"outFolder" :"/Users/username/backups"
 	},
 	"scanFilesContent" : {
 		"do": true,
@@ -63,15 +56,15 @@
 	},
 	"simple_search_behavior" : "and",
 	"forbiddenPaths":[
-		"Users/thomasdokithonon/Dropbox",
+		"Users/username/Dropbox",
 		"mnt/company/anotherfolder",
 		"J:/folder"
 	],
 	"external":{
 		"22IN06" :
 		{
-			"sourceFile" : "/Users/thomasdokithonon/rationalK/private/test.xlsx",
-			"sheet_name" : "Liste_graisses",
+			"sourceFile" : "/Users/username/rationalK/private/test.xlsx",
+			"sheet_name" : "Sheet1",
 		  "table_begin_address_row" : "3",
 		  "table_end_address_row" : "431",
 		  "filter_col" : "AZ",
@@ -81,7 +74,7 @@
 		"22IN47" :
 		{
 				"sourceFile" : "J:/folder/file.xlsx",
-				"sheet_name" : "Choix Matière",
+				"sheet_name" : "Sheet1",
 				"table_begin_address_col" : "A",
 				"table_begin_address_row" : "1",
 				"table_end_address_col" : "AD",
@@ -99,7 +92,7 @@
 		"endpoints" : ["https://en.wikipedia.org/w","http://www.imfdb.org"]
 	},
 	"sql":{
-		"do": true
+		"do": false
 	},
 	"database": {
 		"server"   : "server\\instance",
