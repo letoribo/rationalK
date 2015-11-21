@@ -10,12 +10,12 @@
   "change select.newFieldTypeClass": function (e) {
     e.preventDefault();
     RKCore.log(e.target.value);
-    RKCore.log(e.target.dataset["key"]);
+    RKCore.log(e.target.dataset.key);
     if (e.target.value === 'select') {
-      document.getElementById("divMultipleChoice_"+e.target.dataset["key"]).style.display = 'block';
+      document.getElementById("divMultipleChoice_" + e.target.dataset.key).style.display = 'block';
     }
     else {
-      document.getElementById("divMultipleChoice_"+e.target.dataset["key"]).style.display = 'none';
+      document.getElementById("divMultipleChoice_" + e.target.dataset.key).style.display = 'none';
     }
   },
   "click .editField": function (e) {
@@ -34,6 +34,10 @@
       data.hideInSearchResultsDisplay = instance.find('input#fieldAdd_hideInSearchResultsDisplay').checked;
       data.multipleChoices = instance.find('input.inputForMultipleChoices').value;
       data.customFilterInTableView = instance.find('input#fieldAdd_customFilterInTableView').checked;
+      data.cellClass = instance.find('input#cellClass').value;
+
+      RKCore.log("data :");
+      RKCore.log(data);
 
       Meteor.call('viewUpdateField', data, function (error) {
         if (!error) {
@@ -53,6 +57,7 @@
     $(instance.find('input#fieldAdd_hideInSearchResultsDisplay')).attr('disabled', instance.readonly);
     $(instance.find('input#fieldAdd_customFilterInTableView')).attr('disabled', instance.readonly);
     $(instance.find('input#fieldAdd_hideInTable')).attr('disabled', instance.readonly);
+    $(instance.find('input#cellClass')).attr('readonly', instance.readonly);
     return false;
   },
 });

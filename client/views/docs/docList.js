@@ -41,6 +41,7 @@ Template.docList.helpers({
       return {
         key: "fields." + key + ".value",
         label: key,
+        cellClass: view.fields[key].cellClass,
         sortByValue: true,
         hidden: function () {
           return view.fields[key].hideInTable;

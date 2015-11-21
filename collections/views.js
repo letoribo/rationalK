@@ -144,6 +144,7 @@ Meteor.methods({
     hideInSearchResultsDisplay: Match.Optional(Boolean),
     hideInTable: Match.Optional(Boolean),
     customFilterInTableView: Match.Optional(Boolean),
+    cellClass: Match.Optional(String),
   });
     if (Meteor.isClient) {
       user = Meteor.user();
@@ -178,7 +179,8 @@ Meteor.methods({
     obj["fields." + att.newField + ".unique"] = att.unique;
     obj["fields." + att.newField + ".hideInSearchResultsDisplay"] = att.hideInSearchResultsDisplay;
     obj["fields." + att.newField + ".hideInTable"] = att.hideInTable;
-    obj["fields." + att.newField + ".hideInTable"] = att.customFilterInTableView;
+    obj["fields." + att.newField + ".customFilterInTableView"] = att.customFilterInTableView;
+    obj["fields." + att.newField + ".cellClass"] = att.cellClass;
     Views.update({
       _id: att.viewId,
     }, {
@@ -195,6 +197,9 @@ Meteor.methods({
     return true;
   },
   viewUpdateField: function (data) {
+    var obj;
+    var user = Meteor.user();
+    var view;
 	    // method to update an existing field of a view
   // a user must be logged in
   //   viewId: _id of the view to update
@@ -216,6 +221,7 @@ Meteor.methods({
     mandatory: Boolean,
     unique: Boolean,
     hideInTable: Boolean,
+    cellClass: String,
     hideInSearchResultsDisplay: Boolean,
     multipleChoices: String,
     customFilterInTableView: Boolean,
@@ -230,11 +236,6 @@ Meteor.methods({
   hideInTable = data.hideInTable;
   hideInSearchResultsDisplay = data.hideInSearchResultsDisplay;
   multipleChoices = data.multipleChoices;
-
-
-
-    var obj, user, view;
-    user = Meteor.user();
     if (!user) {
       throw new Meteor.Error(401, "You need to login to update a view");
     }
@@ -248,14 +249,14 @@ Meteor.methods({
       throw new Meteor.Error(422, "Please fill in with a field type");
     }
     view = Views.findOne({
-      _id: viewId
+      _id: viewId,
     });
     if (!(view && view.fields)) {
-      return;
+      return true;
     }
     if (!view.fields[field]) {
       RKCore.log(field + " field does not exists");
-      return;
+      return true;
     }
     if (field !== newField) {
       Meteor.call('viewRemoveField', viewId, field);
@@ -268,6 +269,7 @@ Meteor.methods({
         hideInSearchResultsDisplay: hideInSearchResultsDisplay,
         hideInTable: hideInTable, //do not add here multiple choices, only on edit
         customFilterInTableView: data.customFilterInTableView,
+        cellClass: data.cellClass,
       });
     }
     else {
@@ -279,26 +281,25 @@ Meteor.methods({
       obj["fields." + newField + ".hideInTable"] = hideInTable;
       obj["fields." + newField + ".multipleChoices"] = multipleChoices;
       obj["fields." + newField + ".customFilterInTableView"] = data.customFilterInTableView;
+      obj["fields." + newField + ".cellClass"] = data.cellClass;
       Views.update({
-        _id: viewId
+        _id: viewId,
       }, {
-        $set: obj
+        $set: obj,
       });
     }
     return true;
   },
   viewRemoveField: function (viewId, field) {
-
 	    // method to remove a field from an existing view
   // a user must be logged in
   //   viewId: _id of the view to update
   //   field: name of an existing field
   // the field remained in the order array (but it will not be displayed by the view)
   // it will automatically be removed when a new order is set by the user
-
-
-    var doc, obj, user;
-    user = Meteor.user();
+    var doc;
+    var obj;
+    var user = Meteor.user();
     if (!user) {
       throw new Meteor.Error(401, "You need to login to update a view");
     }
@@ -312,18 +313,18 @@ Meteor.methods({
     obj["fields." + field] = 0;
     doc = Views.findOne(viewId);
     Views.update({
-      _id: viewId
+      _id: viewId,
     }, {
       $pull: {
-        keys: field
-      }
+        keys: field,
+      },
     });
     return Views.update({
-      _id: viewId
+      _id: viewId,
     }, {
-      $unset: obj
+      $unset: obj,
     });
-  }
+  },
 });
 
 Views.getFieldInOrder = function (viewId) {
