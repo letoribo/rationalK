@@ -107,7 +107,6 @@ if (Meteor.isServer) {
                     if (fieldsInThisView[key].type=="tags"){
                       var docs = Docs.find({"categoryId":cat[i]._id}).fetch();
                       var nDocs = docs.length;
-                      //console.log(nDocs);
                       for (var j = 0; j < nDocs; j++) {
                         fields = docs[j].fields;
                         tagObj = fields[key];

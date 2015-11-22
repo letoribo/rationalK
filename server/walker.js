@@ -70,7 +70,6 @@ if (Meteor.isServer) {
 					var previousLastModifiedDate;
 					var currentLastModifiedDate;
 					if (fs.existsSync(folder)) {
-						//console.log(folder +' exists. I will scan inside.');
 						fileContents = fs.readdirSync(folder);
 					  fileTree = [];
 					  stats = {};
@@ -121,21 +120,17 @@ if (Meteor.isServer) {
 
 								if (typeof existingWalkedFile === 'undefined') {
 									//this is a new doc
-									//console.log('We have found a new document : '+folder + '/' + fileName+'. We will add it to the database.');
 									doUpdate = true;
 								}
 								else {
 									//The files already exists, let's now check the size or the mtime
-									//console.log(existingWalkedFile);
 									if (existingWalkedFile.size !== stats.size) {
-										//console.log("The document size has changed. Before : " + existingWalkedFile.size + "kB / Now : "+ stats.size+"kB.");
 										doUpdate = true;
 									}
 
 									previousLastModifiedDate = new Date(existingWalkedFile.mtime).getTime();
 									currentLastModifiedDate = new Date(stats.mtime).getTime();
 									if (previousLastModifiedDate !== currentLastModifiedDate) {
-										//console.log("The document has been modified between two consecutive scans. Before : " + previousLastModifiedDate + " / Now : "+ currentLastModifiedDate);
 										doUpdate = true;
 									}
 								} // end of else i.e. the file already exists
@@ -176,7 +171,6 @@ if (Meteor.isServer) {
 		} //end if not empty
 	}); // end loop over folders
 	// Delete all files that do not exists anymore :
-	//console.log("Cleaning all files that have been deleted between two walks...")
 	lastWalkedFiles = WalkedFiles.find({}).fetch();
 	lastWalkedFiles.forEach(function (entry) {
 		if (typeof TempWalkedFiles.findOne({path: entry.path}) === 'undefined') {

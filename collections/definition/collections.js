@@ -32,16 +32,12 @@ Axapta.allow( {
 
 if (Meteor.isServer) {
 	if (typeof Docs.createIndex === 'function') {
-		if (Meteor.settings.public.debug) {
-			console.log("You are runnning a mongodb version >3.");
-		}
+		RKCore.log("You are runnning a mongodb version >3.");
 		Docs.createIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
 		WalkedFiles.createIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
 	}
 	else {
-		if (Meteor.settings.public.debug) {
-			console.log("You are runnning a mongodb version <3 (probably 2.6.X).");
-		}
+		RKCore.log("You are runnning a mongodb version <3 (probably 2.6.X).");
 		if (typeof Docs._ensureIndex === 'function') {
 			Docs._ensureIndex( { full: "text" }, {name: "MyFullTextSearchIndex"});
 			WalkedFiles._ensureIndex( { path: "text" }, {name: "MyFileFullTextSearchIndex"});
@@ -98,7 +94,6 @@ ProcessDocuments.allow( {
 		update: function (userId) {return !!userId; },
     remove: function (userId) {return !!userId; },
 });
-
 
 WalkedFiles.allow( {
 		insert: function (userId) {return !! userId; },

@@ -134,7 +134,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         if (typeof RKFMEA !== 'undefined') {
           searchResults = searchResults.concat(searchResultsPFMEA);
         }
-        //console.log(searchResults.fetch());
         nResults = nResults
         + searchResultsDocs.count()
         + searchResultsWalkedFiles.count();
@@ -181,7 +180,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
           var searchResultsDocs = Docs.find({$and : arrayOfAndForDocs},{limit : 30});
         }
         else {
-          console.log("There is a filter on a category");
+          RKCore.log("There is a filter on a category");
           searchResultsDocs = Docs.find({
             $and: [
               {$and: arrayOfAndForDocs },
@@ -215,11 +214,9 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         var searchResultsExternal = External.find({$and : arrayOfAndForExperts },{limit : 30});
 
         if (includeWalkedFilesInResults){
-          if (Meteor.settings.public.debug){
-            console.log("Finding walked files on the server...");
-            console.log("arrayOfAndForWalkedFiles : ");
-            console.log(arrayOfAndForWalkedFiles);
-          }
+          RKCore.log("Finding walked files on the server...");
+          RKCore.log("arrayOfAndForWalkedFiles : ");
+          RKCore.log(arrayOfAndForWalkedFiles);
           var searchResultsWalkedFiles = WalkedFiles.find({$and: [{$and : arrayOfAndForWalkedFiles },{$or: [ { belongsToADocumentEntry: { $exists: false } }, { belongsToADocumentEntry: false } ]}]},{limit : 30});
         } else {
           // dummy search that return an empty cursor
@@ -230,13 +227,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
       if (Meteor.settings.simple_search_behavior==="and"){
         //simple_search_behavior === "and"
         // (?=.*word1)(?=.*word2)(?=.*word3)
-
         var parts = searchQuery.trim().split(/[|]+/);
-        if (Meteor.settings.public.debug){
-            console.log("OR parts in your search query :");
-            console.log(parts);
-        }
-
         var len = parts.length;
         var arrayOfOrForDocs = [];
         var arrayOfOrForWalkedFiles = [];
@@ -276,48 +267,29 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               arrayOfAndForExternal.push({full: andPartsRegExp});
             }
 
-            /*
-            if (Meteor.settings.public.debug){
-                console.log("arrayOfAndForDocs : ");
-                console.log(arrayOfAndForDocs);
-                console.log("arrayOfAndForWalkedFiles : ");
-                console.log(arrayOfAndForWalkedFiles);
-                console.log("arrayOfAndForMessages : ");
-                console.log(arrayOfAndForMessages);
-                console.log("arrayOfAndForDiscussions : ");
-                console.log(arrayOfAndForDiscussions);
-                console.log("arrayOfAndForNotes : ");
-                console.log(arrayOfAndForNotes);
-                console.log("arrayOfAndForExperts : ");
-                console.log(arrayOfAndForExperts);
-                console.log("arrayOfAndForExternal : ");
-                console.log(arrayOfAndForExternal);
-            }
-            */
-
-            arrayOfOrForDocs.push({$and : arrayOfAndForDocs})
-            arrayOfOrForWalkedFiles.push({$and : arrayOfAndForWalkedFiles})
-            arrayOfOrForMessages.push({$and : arrayOfAndForMessages})
-            arrayOfOrForDiscussions.push({$and : arrayOfAndForDiscussions})
-            arrayOfOrForNotes.push({$and : arrayOfAndForNotes})
+            arrayOfOrForDocs.push({$and: arrayOfAndForDocs})
+            arrayOfOrForWalkedFiles.push({$and: arrayOfAndForWalkedFiles})
+            arrayOfOrForMessages.push({$and: arrayOfAndForMessages})
+            arrayOfOrForDiscussions.push({$and: arrayOfAndForDiscussions})
+            arrayOfOrForNotes.push({$and: arrayOfAndForNotes})
             if (typeof RKExperts !== 'undefined') {
-              arrayOfOrForExperts.push({$and : arrayOfAndForExperts})
+              arrayOfOrForExperts.push({$and: arrayOfAndForExperts})
             }
-            arrayOfOrForExternal.push({$and : arrayOfAndForExternal})
+            arrayOfOrForExternal.push({$and: arrayOfAndForExternal})
         }
 
 
-        if (catFilter ==="all"){
+        if (catFilter === "all"){
           var searchResultsDocs = Docs.find({
-              $or : arrayOfOrForDocs
+              $or : arrayOfOrForDocs,
             },
             {
-              limit : 30
+              limit : 30,
             }
           );
         }
         else {
-          console.log("There is a filter on a category");
+          RKCore.log("There is a filter on a category");
           var searchResultsDocs = Docs.find({
             $and: [
               {$or : arrayOfOrForDocs},
@@ -349,51 +321,46 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         var searchResultsNotes = Notes.find(
           {
             $and: [
-              {$or : arrayOfOrForNotes },
-              {userId : this.userId}
-              ]
+              {$or: arrayOfOrForNotes },
+              {userId: this.userId},
+            ],
           },
           {
-            limit : 30
+            limit: 30,
           }
         );
 
         if (typeof RKExperts !== 'undefined') {
-          console.log("rationalk-experts is installed, I will search through it");
+          RKCore.log("rationalk-experts is installed, I will search through it");
           var searchResultsExpert = RKExperts.findOr(arrayOfOrForExperts);
         }
-
-
         var searchResultsExternal = External.find(
           {
-            $or : arrayOfOrForExternal
+            $or : arrayOfOrForExternal,
           },
           {
-            limit : 30
+            limit : 30,
           }
         );
-
-        // var searchResultsExternal = External.find({});
-
         if (includeWalkedFilesInResults){
-          console.log("Finding walked files on the server...");
+          RKCore.log("Finding walked files on the server...");
           var searchResultsWalkedFiles = WalkedFiles.find(
             {
               $and: [
                 {
-                  $or : arrayOfOrForWalkedFiles
+                  $or : arrayOfOrForWalkedFiles,
                 },
                 {
                   $or: [
                   { belongsToADocumentEntry: { $exists: false } },
-                  { belongsToADocumentEntry: false }
-                  ]
-                }
-              ]
+                  { belongsToADocumentEntry: false },
+                ],
+              },
+            ],
             }
             ,
             {
-              limit : 30
+              limit : 30,
             }
           );
         } else {
@@ -401,27 +368,24 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
           var searchResultsWalkedFiles = WalkedFiles.find({'path' : 'aDummyPathYouWillNeverFind' });
         }
       }
-      //var searchResults = [searchResultsDocs];
 
-      var searchResults = [
+      searchResults = [
         searchResultsDocs,
         searchResultsMessages,
         searchResultsDiscussions,
         searchResultsNotes,
         searchResultsExternal,
-        searchResultsWalkedFiles
-      ]
+        searchResultsWalkedFiles,
+      ];
 
-      var nResults = 0;
+      nResults = 0;
       if (typeof RKExperts !== 'undefined') {
         searchResults.push(searchResultsExpert);
         nResults = nResults + searchResultsExpert.count();
       }
 
-      //console.log(searchResults.fetch());
 
-      var nResults = searchResultsDocs.count() + searchResultsMessages.count() + searchResultsDiscussions.count() + searchResultsNotes.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
-
+      nResults = searchResultsDocs.count() + searchResultsMessages.count() + searchResultsDiscussions.count() + searchResultsNotes.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
     }
     // for statistiques, store the searches
     SearchQueries.insert({

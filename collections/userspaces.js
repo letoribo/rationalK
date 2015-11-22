@@ -7,9 +7,7 @@ var userSpaceHasDoc = function (userId, docId) {
 
 Meteor.methods({
   updateDocInMySpace: function (docId) {
-    // Check argument types
     check(docId, String);
-
     if (! this.userId) {
       throw new Meteor.Error("not-logged-in","Must be logged in to update a doc in your space.");
     }
