@@ -36,7 +36,7 @@ Meteor.methods({
         slug: att.slug,
         globalFilterOnTableView: att.globalFilterOnTableView,
         showColumnTogglesOnTableView: att.showColumnTogglesOnTableView,
-      }
+      },
     });
   },
   categoryNew: function (att) {
@@ -59,7 +59,7 @@ Meteor.methods({
     orgId = user.profile.orgId;
     viewId = Views.insert({
       orgId: orgId,
-      name: att.name
+      name: att.name,
     });
     return Categories.insert({
       orgId: orgId,
@@ -87,7 +87,7 @@ Meteor.methods({
       throw new Meteor.Error(422, "Please fill in with the tag name");
     }
     Categories.remove({
-      _id: categoryId
+      _id: categoryId,
     });
-  }
+  },
 });

@@ -18,8 +18,6 @@ Meteor.methods({
         "profile.nickname": att.nickname,
       },
     });
-    console.log(att.accountId);
-
     return Roles.setUserRoles(account, att.roles || []);
   },
   accountDelete: function (accountId) {

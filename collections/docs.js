@@ -1,85 +1,108 @@
-var decFieldCount, incFieldCount;
+var incFieldCount;
+var decFieldCount;
 
 incFieldCount = function (field) {
+  var view;
+  var obj = {};
   check(field, Match.Any);
-  var view = Views.findOne({
-    type: "system"
+  view = Views.findOne({
+    type: "system",
   });
   if (!view) {
     Views.insert({
-      type: "system"
+      type: "system",
     });
   }
-  var obj = {};
   obj["fields." + field] = 1;
-  return Views.update({
-    type: "system"
+  Views.update({
+    type: "system",
   }, {
-    $inc: obj
+    $inc: obj,
   });
+  return false;
 };
 
 decFieldCount = function (field) {
-  check(field,Match.Any);
-  var view = Views.findOne({
-    type: "system"
+  var view;
+  var obj = {};
+  check(field, Match.Any);
+  view = Views.findOne({
+    type: "system",
   });
   if (!view) {
-    return;
+    return false;
   }
-  var obj = {};
   obj["fields." + field] = -1;
   Views.update(view._id, {
-    $inc: obj
+    $inc: obj,
   });
   if (view.fields["" + field] <= 1) {
-    return Views.update({
-      _id: view._id
+    Views.update({
+      _id: view._id,
     }, {
-      $unset: obj
+      $unset: obj,
     });
   }
+  return false;
 };
 
 Meteor.methods({
   docDelete: function (docId) {
-    check(docId,String);
-    var doc, key, user;
-    user = Meteor.user();
+    var doc;
+    var key;
+    var user = Meteor.user();
+    check(docId, String);
     if (!user) {
       throw new Meteor.Error(401, "You need to login to delete this doc");
     }
-    if (!user || !Roles.userIsInRole(user,['admin'])) {
+    if (!user || !Roles.userIsInRole(user, ['admin'])) {
       if (typeof(toastr) !== 'undefined') {
         toastr.error("Access denied. Only admin can do this.");
       }
-      throw new Meteor.Error(403, "Access denied. Only admin can do this.")
+      throw new Meteor.Error(403, "Access denied. Only admin can do this.");
     }
-
     doc = Docs.findOne({
-      _id: docId
+      _id: docId,
     });
     Docs.remove({
-      _id: docId
+      _id: docId,
     });
     for (key in doc.fields) {
-      decFieldCount(key);
+      if ({}.hasOwnProperty.call(doc.fields, key)) {
+        decFieldCount(key);
+      }
     }
   },
   deleteAllDocsInACategory: function (categoryId) {
-    check(categoryId,String);
-    if (!Meteor.user()) {
+    var user = Meteor.user();
+    check(categoryId, String);
+    if (!user) {
       throw new Meteor.Error(401, "You need to login to delete this doc");
     }
+    if (!user || !Roles.userIsInRole(user, ['admin'])) {
+      if (typeof(toastr) !== 'undefined') {
+        toastr.error("Access denied. Only admin can do this.");
+      }
+      throw new Meteor.Error(403, "Access denied. Only admin can do this.");
+    }
     Docs.remove({
-      categoryId: categoryId
+      categoryId: categoryId,
     });
   },
   docUpdate: function (att) {
+    var doc;
+    var docId;
+    var fields;
+    var full;
+    var key;
+    var now = new Date();
+    var obj;
+    var ref;
+    var ref1;
+    var user = Meteor.user();
+    var value;
     check(att, Match.Any);
-    var doc, docId, fields, full, key, now, obj, ref, ref1, user, value;
     if (Meteor.isClient) {
-      user = Meteor.user();
       if (!user) {
         throw new Meteor.Error(401, "You need to login to update a doc");
       }
@@ -98,8 +121,8 @@ Meteor.methods({
     }
     fields = Views.findOne({
       _id: Categories.findOne({
-        _id: att.categoryId
-      }).viewId
+        _id: att.categoryId,
+      }).viewId,
     }).fields;
     for (key in fields) {
       if (fields[key].mandatory) {
@@ -111,66 +134,72 @@ Meteor.methods({
         }
       }
     }
-    now = new Date();
     if (att.docId) {
       obj = {
-        categoryId : att.categoryId,
-        searchScore : att.searchScore,
-        usefulForRoles : att.usefulForRoles,
-        modifiedAt : now,
-        docId : docId
+        categoryId: att.categoryId,
+        searchScore: att.searchScore,
+        usefulForRoles: att.usefulForRoles,
+        modifiedAt: now,
+        docId: docId,
       };
       ref = att.fields;
       for (key in ref) {
-        value = ref[key];
-        obj["fields." + key + ".value"] = value;
+        if ({}.hasOwnProperty.call(ref, key)) {
+          value = ref[key];
+          obj["fields." + key + ".value"] = value;
+        }
       }
       Docs.update({
-        _id: att.docId
+        _id: att.docId,
       }, {
-        $set: obj
+        $set: obj,
       });
 
       doc = Docs.findOne({
-        _id: att.docId
+        _id: att.docId,
       });
       full = "";
       for (key in doc.fields) {
-        full = full.concat(doc.fields[key].value).concat(" | ");
+        if ({}.hasOwnProperty.call(doc.fields, key)) {
+          full = full.concat(doc.fields[key].value).concat(" | ");
+        }
       }
       Docs.update({
-        _id: att.docId
+        _id: att.docId,
       }, {
         $set: {
-          full: full
-        }
+          full: full,
+        },
       });
       Docs.update({
-        _id: att.docId
+        _id: att.docId,
       }, {
         $inc: {
-          revisionNumber: 1
-        }
+          revisionNumber: 1,
+        },
       });
       att.docId;
       return att.docId;
-    } else {
+    }
+    else {
       obj = {
-        categoryId : att.categoryId,
-        searchScore : att.searchScore,
-        usefulForRoles : att.usefulForRoles,
-        createdAt : now,
-        modifiedAt : now,
-        fields : {},
-        revisionNumber : 0
+        categoryId: att.categoryId,
+        searchScore: att.searchScore,
+        usefulForRoles: att.usefulForRoles,
+        createdAt: now,
+        modifiedAt: now,
+        fields: {},
+        revisionNumber: 0,
       };
       full = "";
       ref1 = att.fields;
       for (key in ref1) {
-        value = ref1[key];
-        obj.fields["" + key] = {};
-        obj.fields["" + key].value = value;
-        full = full.concat(value).concat(" ");
+        if ({}.hasOwnProperty.call(ref1, key)) {
+          value = ref1[key];
+          obj.fields["" + key] = {};
+          obj.fields["" + key].value = value;
+          full = full.concat(value).concat(" ");
+        }
       }
       obj.full = full;
       if (Meteor.isClient) {
@@ -182,5 +211,5 @@ Meteor.methods({
       docId = Docs.insert(obj);
       return docId;
     }
-  }
+  },
 });
