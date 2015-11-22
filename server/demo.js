@@ -3,7 +3,7 @@ if (typeof(Meteor.settings.rationalK_demo_mode) === 'undefined') {
   Meteor.settings.rationalK_demo_mode = false;
 }
 
-if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode === true) ) {
+if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode === true) && (Meteor.settings.rationalK_demo_password === "1234") ) {
     var removeAllDocuments = function () {
 		Docs.remove({});
 		Revisions.remove({});
@@ -31,8 +31,6 @@ if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode === true) ) {
 	};
 
 	var createProcess = function () {
-		console.log('Your Processes database is empty, I will add a simple diagram...');
-			// Populate with dummy data
 		processId = Processes.insert({
 			title : 'My QR Process',
 			filename : 'diagram.bpmn'
@@ -41,9 +39,7 @@ if ( (Meteor.isServer) && (Meteor.settings.rationalK_demo_mode === true) ) {
 	};
 
 	var createProcessDocuments = function (processId,docId) {
-		console.log('Your Process Documents database is empty, I will add some data...');
 		if (ProcessDocuments.find({}).count() === 0) {
-			// Populate with dummy data
 			ProcessDocuments.insert({
 				processId : processId,
 				taskId : 'SCAN_OK',

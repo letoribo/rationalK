@@ -90,13 +90,11 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               }
             }
           }
-
         } // end of filter on category
 
         // ne marche pas alors que ca marche bien sur le serveur
         if (includeWalkedFilesInResults) {
           RKCore.log("Finding walked files on the server using full text search...");
-
           searchResultsWalkedFiles = WalkedFiles.find(
             {
               $and: [
@@ -151,32 +149,18 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         var len = parts.length;
         var arrayOfAndForDocs = [];
         var arrayOfAndForWalkedFiles = [];
-        var arrayOfAndForMessages = [];
-        var arrayOfAndForDiscussions = [];
-        var arrayOfAndForNotes = [];
-        if (typeof RKExperts !== 'undefined') {
-          var arrayOfAndForExperts = [];
-        }
         var arrayOfAndForExternal = [];
 
         for (var i = 0; i < len; i++) {
             //each part is a OR :
             var orParts = parts[i].trim().split(/[ \-\:]+/);
             var orPartsRegExp = new RegExp("(" + orParts.join('|') + ")", "ig");
-
             arrayOfAndForDocs.push({full: orPartsRegExp});
             arrayOfAndForWalkedFiles.push({path: orPartsRegExp});
-            arrayOfAndForMessages.push({message: orPartsRegExp});
-            arrayOfAndForDiscussions.push({subject: orPartsRegExp});
-            arrayOfAndForNotes.push({content: orPartsRegExp});
-            if (typeof RKExperts !== 'undefined') {
-              arrayOfAndForExperts.push({fieldOfExpertise: orPartsRegExp});
-            }
             arrayOfAndForExternal.push({full: orPartsRegExp});
         }
 
-
-        if (catFilter ==="all"){
+        if (catFilter === "all"){
           var searchResultsDocs = Docs.find({$and : arrayOfAndForDocs},{limit : 30});
         }
         else {
@@ -195,23 +179,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
           );
         }
 
-
-        var searchResultsMessages = Messages.find({$and : arrayOfAndForMessages },{limit : 30});
-        var searchResultsDiscussions = Discussions.find({$and : arrayOfAndForDiscussions },{limit : 30});
-        var searchResultsNotes = Notes.find({
-          $and: [
-            {$and : arrayOfAndForNotes },
-            {userId : this.userId}
-            ]
-        },
-        {
-          limit : 30
-        }
-        );
-        if (typeof RKExperts !== 'undefined') {
-          var searchResultsExpert = RKExperts.findAnd(arrayOfAndForExperts);
-        }
-        var searchResultsExternal = External.find({$and : arrayOfAndForExperts },{limit : 30});
+        var searchResultsExternal = External.find({$and : arrayOfAndForExternal },{limit : 30});
 
         if (includeWalkedFilesInResults){
           RKCore.log("Finding walked files on the server...");
@@ -231,12 +199,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
         var len = parts.length;
         var arrayOfOrForDocs = [];
         var arrayOfOrForWalkedFiles = [];
-        var arrayOfOrForMessages = [];
-        var arrayOfOrForDiscussions = [];
-        var arrayOfOrForNotes = [];
-        if (typeof RKExperts !== 'undefined') {
-          var arrayOfOrForExperts = [];
-        }
         var arrayOfOrForExternal = [];
 
         for (var i = 0; i < len; i++) {
@@ -245,12 +207,6 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
             var lenAndParts = andParts.length;
             var arrayOfAndForDocs = [];
             var arrayOfAndForWalkedFiles = [];
-            var arrayOfAndForMessages = [];
-            var arrayOfAndForDiscussions = [];
-            var arrayOfAndForNotes = [];
-            if (typeof RKExperts !== 'undefined') {
-              var arrayOfAndForExperts = [];
-            }
             var arrayOfAndForExternal = [];
 
             for (var j = 0; j < lenAndParts; j++) {
@@ -258,23 +214,11 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
               var andPartsRegExp = new RegExp(andParts[j], "ig");
               arrayOfAndForDocs.push({full: andPartsRegExp});
               arrayOfAndForWalkedFiles.push({path: andPartsRegExp});
-              arrayOfAndForMessages.push({message: andPartsRegExp});
-              arrayOfAndForDiscussions.push({subject: andPartsRegExp});
-              arrayOfAndForNotes.push({content: andPartsRegExp});
-              if (typeof RKExperts !== 'undefined') {
-                arrayOfAndForExperts.push({fieldOfExpertise: andPartsRegExp});
-              }
               arrayOfAndForExternal.push({full: andPartsRegExp});
             }
 
             arrayOfOrForDocs.push({$and: arrayOfAndForDocs})
             arrayOfOrForWalkedFiles.push({$and: arrayOfAndForWalkedFiles})
-            arrayOfOrForMessages.push({$and: arrayOfAndForMessages})
-            arrayOfOrForDiscussions.push({$and: arrayOfAndForDiscussions})
-            arrayOfOrForNotes.push({$and: arrayOfAndForNotes})
-            if (typeof RKExperts !== 'undefined') {
-              arrayOfOrForExperts.push({$and: arrayOfAndForExperts})
-            }
             arrayOfOrForExternal.push({$and: arrayOfAndForExternal})
         }
 
@@ -292,48 +236,16 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
           RKCore.log("There is a filter on a category");
           var searchResultsDocs = Docs.find({
             $and: [
-              {$or : arrayOfOrForDocs},
-              {categoryId: catFilter}
+              {$or: arrayOfOrForDocs},
+              {categoryId: catFilter},
             ]
             },
             {
-              limit : 30
+              limit : 30,
             }
           );
         }
 
-        var searchResultsMessages = Messages.find(
-          {
-            $or : arrayOfOrForMessages
-          },
-          {
-            limit : 30
-          }
-        );
-        var searchResultsDiscussions = Discussions.find(
-          {
-            $or : arrayOfOrForDiscussions
-          },
-          {
-            limit : 30
-          }
-        );
-        var searchResultsNotes = Notes.find(
-          {
-            $and: [
-              {$or: arrayOfOrForNotes },
-              {userId: this.userId},
-            ],
-          },
-          {
-            limit: 30,
-          }
-        );
-
-        if (typeof RKExperts !== 'undefined') {
-          RKCore.log("rationalk-experts is installed, I will search through it");
-          var searchResultsExpert = RKExperts.findOr(arrayOfOrForExperts);
-        }
         var searchResultsExternal = External.find(
           {
             $or : arrayOfOrForExternal,
@@ -348,7 +260,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
             {
               $and: [
                 {
-                  $or : arrayOfOrForWalkedFiles,
+                  $or: arrayOfOrForWalkedFiles,
                 },
                 {
                   $or: [
@@ -360,7 +272,7 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
             }
             ,
             {
-              limit : 30,
+              limit: 30,
             }
           );
         } else {
@@ -371,21 +283,12 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
 
       searchResults = [
         searchResultsDocs,
-        searchResultsMessages,
-        searchResultsDiscussions,
-        searchResultsNotes,
         searchResultsExternal,
         searchResultsWalkedFiles,
       ];
 
       nResults = 0;
-      if (typeof RKExperts !== 'undefined') {
-        searchResults.push(searchResultsExpert);
-        nResults = nResults + searchResultsExpert.count();
-      }
-
-
-      nResults = searchResultsDocs.count() + searchResultsMessages.count() + searchResultsDiscussions.count() + searchResultsNotes.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
+      nResults = searchResultsDocs.count() + searchResultsExternal.count() + searchResultsWalkedFiles.count();
     }
     // for statistiques, store the searches
     SearchQueries.insert({
