@@ -1,16 +1,14 @@
 Template.fileInSearchResults.helpers({
-	filename: function (){
+	filename: function () {
 			return this.path.replace(/^.*[\\\/]/, '');
 	},
 	fileLinkUrl: function () {
 		var fileLink = this.path.replace(/\"/g, ''); //remove " from filelink ;
+		var fileLinkUrl = '';
 		fileLink = clientFilename(fileLink);
-		if (fileLink){
+		if (fileLink) {
 			fileLink = clientFilename(fileLink);
-			var fileLinkUrl = 'rk:'+fileLink;
-		}
-		else {
-			var fileLinkUrl ='';
+			fileLinkUrl = 'rk:' + fileLink;
 		}
 		return fileLinkUrl;
 	},
@@ -20,24 +18,24 @@ Template.fileInSearchResults.helpers({
 	},
 	pathReplaced: function () {
 		var pathReplaced = this.path.replace(/\"/g, ''); //remove " from filelink ;
-		if (pathReplaced){
+		if (pathReplaced) {
 			pathReplaced = clientFilename(pathReplaced);
 		}
 		else {
-			var pathReplaced ='';
+			pathReplaced = '';
 		}
 		return pathReplaced;
 	},
-	mtime : function (){
-		return moment(this.mtime).format('DD.MM.YYYY HH:mm')
-	}
+	mtime: function () {
+		return moment(this.mtime).format('DD.MM.YYYY HH:mm');
+	},
 });
 
 Template.fileInSearchResults.events({
 	"click .convertIntoDBDoc": function (e) {
   		e.preventDefault();
-			Session.set("currentFilelink",e.currentTarget.dataset.filelink);
+			Session.set("currentFilelink", e.currentTarget.dataset.filelink);
 			Router.go("docCreate");
       return false;
-  	}
+  	},
 });
