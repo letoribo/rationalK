@@ -1,5 +1,5 @@
 Template.categoryEdit.events({
-  "submit form": function (e) {
+  "submit form#categoryEditForm": function (e) {
     var properties;
     e.preventDefault();
     properties = {
@@ -16,6 +16,26 @@ Template.categoryEdit.events({
         Router.go("categoryList");
       }
     });
+  },
+  "submit form#changeNameOfFieldForAllDocs": function (e) {
+    var properties;
+    RKCore.log("clicked");
+    e.preventDefault();
+    properties = {
+      nameCurrent: $(e.target).find("[name=nameCurrent]").val(),
+      nameDestination: $(e.target).find("[name=nameDestination]").val(),
+      categoryId: this._id,
+    };
+    Meteor.call("changeNameOfFieldForAllDocs", properties, function (err) {
+      RKCore.log("test2");
+      if (!err) {
+        if (typeof(toastr) !== 'undefined') {
+          toastr.success("Name changed successfully");
+        }
+        return false;
+      }
+    });
+    return false;
   },
 });
 
