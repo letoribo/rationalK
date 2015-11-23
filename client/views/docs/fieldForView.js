@@ -71,9 +71,8 @@ Template.fieldForView.created = function () {
 
 Template.fieldForView.rendered = function () {
   var divId;
-  var key;
   var type;
-  $( ".divMultipleChoice" ).each(function (i) {
+  $( ".divMultipleChoice" ).each(function () {
     divId = $(this).attr('id');
     key = $(this).data('key');
     type = $(this).data('type');
