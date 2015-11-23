@@ -5,19 +5,19 @@ var previousFields = {}; //important to define here
 var saveFields = function () {
   return $(".dyn-field").each(function (index, element) {
     if (element.classList.contains("dyn-date")) {
-      return previousFields[element.name] = new Date(element.value);
-    } else {
-      return previousFields[element.name] = element.value;
+      previousFields[element.name] = new Date(element.value);
     }
+    else {
+      previousFields[element.name] = element.value;
+    }
+    return false;
   });
 };
 
 Template.docEdit.events({
   "submit form#docEdit": function (e) {
-    var ismodal;
     var categoryId;
     var fields = {}; //need to be defined here
-    var docId = this._id;
     var usefulForRoles = [];
     var doCheckIfFilelinkExists = false;
     var clientPath; //need to be defined here
@@ -25,7 +25,7 @@ Template.docEdit.events({
     var properties;
     e.preventDefault();
     $(".dyn-field").each(function (index, element) {
-      if ($(this).data("fieldtype")==="filelink"){
+      if ($(this).data("fieldtype") === "filelink"){
         RKCore.log("I have found a filelink in your fields.");
         RKCore.log("Lets check if the file exist");
         doCheckIfFilelinkExists = true;
@@ -74,7 +74,7 @@ Template.docEdit.events({
       }
     });
 
-    Router.go("browse",{categorySlug : Categories.findOne({_id : categoryId}).slug});
+    Router.go("browse",{categorySlug : Categories.findOne({_id: categoryId}).slug});
     return false;
   },
   "click .updateDocInMySpace": function (e) {
@@ -82,33 +82,30 @@ Template.docEdit.events({
     Meteor.call('updateDocInMySpace', this._id);
     return false;
   },
-  'dropped #dropzone': function (event, temp) {
+  'dropped #dropzone': function (event) {
     var docId = this._id;
     return FS.Utility.eachFile(event, function (file) {
       var newFile;
       newFile = new FS.File(file);
       newFile.metadata = {
-        document: "doc-" + docId
+        document: "doc-" + docId,
       };
-      return Attachments.insert(newFile, function (err, fileObj) {
-        if (err) {
-          return console.log(err);
-        } else {
-          return console.log(file);
-        }
-      });
+      return Attachments.insert(newFile, function () { });
     });
   },
   "click #deleteDoc": function (e) {
     e.preventDefault();
-    if (confirm("Are you sure you want to delete this doc ?")) {
-      Meteor.call("docDelete", this._id, function (error) {
-        if (!error) {
-          return Router.go("browse");
-        }
-      });
-      return;
-    }
+    bootbox.confirm(TAPi18n.__("Are you sure you want to delete this doc ?"), function (result) {
+		 if (result) {
+       Meteor.call("docDelete", this._id, function (error) {
+         if (!error) {
+           Router.go("browse");
+           return false;
+         }
+       });
+       return false;
+		 }
+		});
     return false;
   },
   'change #selectedCategory': function (e) {

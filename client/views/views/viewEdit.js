@@ -15,14 +15,15 @@ Template.viewEdit.events({
   },
   "click #viewDelete": function (e) {
     e.preventDefault();
-    if (confirm("Are you sure you want to delete this view ?")) {
-      Meteor.call("viewDelete", this._id, function (error) {
-        if (!error) {
-          return Router.go("viewList");
-        }
-      });
-      return false;
-    }
+    bootbox.confirm(TAPi18n.__("Are you sure you want to delete this view ?"), function (result) {
+		 if (result) {
+       Meteor.call("viewDelete", this._id, function (error) {
+         if (!error) {
+           return Router.go("viewList");
+         }
+       });
+		 }
+		});
     return false;
   },
 });

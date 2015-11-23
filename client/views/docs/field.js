@@ -137,13 +137,15 @@ Template.field.helpers({
 Template.field.events({
   "click .deleteField": function (e) {
     e.preventDefault();
-    if (confirm("Are you sure you want to delete this field ?")) {
-      Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function () { });
-      return false;
-    }
+    bootbox.confirm(TAPi18n.__("Are you sure you want to delete this field ?"), function (result) {
+		 if (result) {
+       Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function () { });
+       return false;
+		 }
+		});
     return false;
   },
-  "click a.launchCustomFunction": function (e){
+  "click a.launchCustomFunction": function (e) {
 	  e.preventDefault();
 	  RKCore.log("Launching the custom function : " + e.currentTarget.dataset.customfunction);
 	  Meteor.call(e.currentTarget.dataset.customfunction, function () {});

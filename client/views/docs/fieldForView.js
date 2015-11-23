@@ -1,10 +1,12 @@
-(function(){Template.fieldForView.events({
+Template.fieldForView.events({
   "click .deleteField": function (e) {
     e.preventDefault();
-    if (confirm("Are you sure you want to delete this field ?")) {
-      Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function () {});
-      return false;
-    }
+    bootbox.confirm(TAPi18n.__("Are you sure you want to delete this field ?"), function (result) {
+		 if (result) {
+       Meteor.call("viewRemoveField", Template.parentData(1)._id, this.key, function () {});
+       return false;
+		 }
+		});
     return false;
   },
   "change select.newFieldTypeClass": function (e) {
@@ -128,5 +130,3 @@ Template.fieldForView.helpers({
     return "";
   },
 });
-
-})();

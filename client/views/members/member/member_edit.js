@@ -24,11 +24,7 @@ Template.memberEdit.events({
     return false;
   },
   "click .delete": function (e) {
-    var doDelete = function() {
-
-    };
     e.preventDefault();
-
     BootstrapModalPrompt.prompt({
     title: "Confirmation",
     content: "Do you really want to delete this user ?",
@@ -48,22 +44,6 @@ Template.memberEdit.events({
         return false;
       }
     });
-
-    /*
-    if (confirm("Delete this member?")) {
-      Meteor.call("memberDelete", this._id, function (error) {
-        if (error) {
-          if (typeof(toastr) !== 'undefined') {
-            toastr.error(error.reason);
-          }
-        }
-        else {
-          return Router.go("members");
-        }
-      });
-      return false;
-    }
-    */
     return false;
   },
 });

@@ -44,14 +44,16 @@ Template.categoryList.helpers({
 Template.categoryList.events({
   "click a.delete": function (e) {
     e.preventDefault();
-    if (confirm("Are you sure that you want to delete this category and the associated documents ?")) {
-      Meteor.call('deleteViewByCategoryId', this._id);
-      Meteor.call('categoryDelete', this._id);
-      Meteor.call('deleteAllDocsInACategory', this._id);
-      Meteor.call('deleteAllRevisionsInACategory', this._id);
-      Meteor.call('deleteAllDocFromUserSpaceByCategory', this._id);
-      delete Session.keys.selectedCategory;
-      return false;
-    }
+    bootbox.confirm(TAPi18n.__("Are you sure that you want to delete this category and the associated documents ?"), function (result) {
+		 if (result) {
+       Meteor.call('deleteViewByCategoryId', this._id);
+       Meteor.call('categoryDelete', this._id);
+       Meteor.call('deleteAllDocsInACategory', this._id);
+       Meteor.call('deleteAllRevisionsInACategory', this._id);
+       Meteor.call('deleteAllDocFromUserSpaceByCategory', this._id);
+       delete Session.keys.selectedCategory;
+       return false;
+		 }
+		});
   },
 });
