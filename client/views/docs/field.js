@@ -3,9 +3,6 @@
 //   value.value: value of the field
 //   value.type: type of the field
 
-var memberAutocomplete,
-  indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
 var htmlEncode = function (str) {
     return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 };

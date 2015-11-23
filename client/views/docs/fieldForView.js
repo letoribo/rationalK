@@ -49,7 +49,9 @@
       });
     }
     instance.readonly = !instance.readonly;
-    $(instance.find('input#newField')).attr('readonly', instance.readonly);
+    RKCore.log("instance.readonly :");
+    RKCore.log(instance.readonly);
+    $(instance.find('input#newField')).attr('readonly', true); //alwas let this field read only (changing the name does not work : todo)
     $(instance.find('select.form-control')).attr('readonly', instance.readonly);
     $(instance.find('input.inputForMultipleChoices')).attr('readonly', instance.readonly);
     $(instance.find('input#fieldAdd_mandatory')).attr('disabled', instance.readonly);
