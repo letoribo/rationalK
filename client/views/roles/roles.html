@@ -1,0 +1,32 @@
+<template name="rKRoles">
+  <div class="panel panel-default">
+    <div class="panel-heading" style="position:relative">
+      <h3>Create a role</h3>
+    </div>
+    <div class="panel-body">
+      {{>rolesNew}}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{>rolesList}}
+    </div>
+  </div>
+</template>
+
+<template name="rolesNew">
+    <form class="main" role="form" id="roleForm">
+        <div class="form-group">
+            <label for="roleName">Role Name</label>
+            <input class="form-control" name="roleName" type="text" value="" placeholder="Role Name"/>
+        </div>
+        <hr>
+        <div class="form-group">
+            <input type="submit" value="Create Role" class="btn btn-primary"/>
+        </div>
+    </form>
+</template>
+
+<template name="rolesList">
+    {{> reactiveTable collection=Roles settings=rolesSettings}}
+</template>

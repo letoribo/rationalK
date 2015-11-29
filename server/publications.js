@@ -25,6 +25,9 @@ Meteor.publish("accounts", function () {
   });
 });
 
+Meteor.publish("rKRoles", function () {
+  return rKRoles.find();
+});
 
 Meteor.publish("axapta", function () {
   return Axapta.find();

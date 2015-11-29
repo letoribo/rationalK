@@ -21,7 +21,7 @@ Tags = new Mongo.Collection('tags');
 XMLFiles = new Mongo.Collection('xmlfiles');
 RessourcePlanning = new Mongo.Collection('ressourceplanning');
 Gantts = new Mongo.Collection('gantts');
-
+rKRoles = new Mongo.Collection('rKRoles');
 Axapta = new Mongo.Collection('axapta');
 
 Axapta.allow( {
@@ -45,6 +45,11 @@ if (Meteor.isServer) {
 }
 } //end if Server
 
+rKRoles.allow( {
+		insert: function (userId) {return !! userId; },
+		update: function (userId) {return !!userId; },
+    remove: function (userId) {return !!userId; },
+});
 
 XMLFiles.allow( {
 		insert: function (userId) {return !! userId; },
