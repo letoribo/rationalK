@@ -172,23 +172,19 @@ Meteor.publish("docs", function (data) {
 Meteor.publish("categories", function (data) {
   check(data, Match.Optional(
     {
-      // Optional, but if present must be a string.
       categoryId: Match.Optional(String),
-      revisionId: Match.Optional(String)
+      revisionId: Match.Optional(String),
     }
   ));
-
   if (typeof data === 'undefined') {
     return Categories.find();
   }
-  else {
-    if (typeof data.categoryId !== 'undefined'){
-      return Categories.find({_id: data.categoryId});
-    }
-    else if (typeof data.revisionId !== 'undefined'){
-      categoryId = Revisions.findOne({_id:data.revisionId}).categoryId;
-      return Categories.find({_id: categoryId});
-    }
+  if (typeof data.categoryId !== 'undefined') {
+    return Categories.find({_id: data.categoryId});
+  }
+  if (typeof data.revisionId !== 'undefined') {
+    categoryId = Revisions.findOne({_id: data.revisionId}).categoryId;
+    return Categories.find({_id: categoryId});
   }
 });
 

@@ -4,29 +4,41 @@
       <h3>Create a role</h3>
     </div>
     <div class="panel-body">
-      {{>rolesNew}}
+      <form class="main" role="form" id="roleForm">
+          <div class="form-group">
+              <label for="roleName">Role Name</label>
+              <input class="form-control" name="roleName" type="text" value="" placeholder="Role Name"/>
+          </div>
+          <hr>
+          <div class="form-group">
+              <input type="submit" value="Create Role" class="btn btn-primary"/>
+          </div>
+      </form>
     </div>
   </div>
   <div class="panel panel-default">
     <div class="panel-body">
-      {{>rolesList}}
+      <div class="panel-body">
+        {{#each Roles}}
+        <form class="main editForm" role="form">
+          <input type="hidden" name="roleId" value="{{_id}}">
+          <div class="post">
+            <p>{{roleName}}</p>
+            {{#each cat}}
+              <div class="checkbox">
+                <label>
+                <input type="checkbox" value="{{_id}}" name="categorie" checked="{{thisCategoryIsAllowedForThisRole}}"> {{name}}
+                </label>
+              </div>
+            {{/each}}
+          </div>
+          <div class="form-group">
+              <input type="submit" value="Save Role" class="btn btn-primary"/>
+          </div>
+        </form>
+        {{/each}}
+        {{> reactiveTable collection=Roles settings=rolesSettings}}
+      </div>
     </div>
   </div>
-</template>
-
-<template name="rolesNew">
-    <form class="main" role="form" id="roleForm">
-        <div class="form-group">
-            <label for="roleName">Role Name</label>
-            <input class="form-control" name="roleName" type="text" value="" placeholder="Role Name"/>
-        </div>
-        <hr>
-        <div class="form-group">
-            <input type="submit" value="Create Role" class="btn btn-primary"/>
-        </div>
-    </form>
-</template>
-
-<template name="rolesList">
-    {{> reactiveTable collection=Roles settings=rolesSettings}}
 </template>
