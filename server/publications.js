@@ -188,6 +188,26 @@ Meteor.publish("categories", function (data) {
   }
 });
 
+Meteor.publish("categoriesThatIAmAllowedToBrowse", function () {
+  var categoriesThatIAmAllowedToBrowse = [];
+  RKCore.log("this.userId :");
+  RKCore.log(this.userId);
+  //Look for the roles :
+  catRoles = Members.collection.findOne({accountId: this.userId}).catRoles;
+  RKCore.log("catRoles : ");
+  RKCore.log(catRoles);
+  var nCatRoles = catRoles.length;
+  for (var i = 0; i < nCatRoles; i++) {
+      categoriesThatIAmAllowedToBrowseThanksToThisRole = rKRoles.findOne({_id: catRoles[i]}).allowedCategories;
+      RKCore.log("categoriesThatIAmAllowedToBrowseThanksToThisRole : ");
+      RKCore.log(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+      categoriesThatIAmAllowedToBrowse = categoriesThatIAmAllowedToBrowse.concat(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+  }
+  RKCore.log("categoriesThatIAmAllowedToBrowse : ");
+  RKCore.log(categoriesThatIAmAllowedToBrowse);
+  return Categories.find( { _id: { $in: categoriesThatIAmAllowedToBrowse } } );
+});
+
 Meteor.publish("gantts", function (id) {
   check(id, Match.Optional(String));
   if (typeof id === 'undefined') {

@@ -36,7 +36,6 @@ Template.roles.helpers({
         Roles.push(rolesSettingsVal[i]);
       }
     }
-    console.log(Roles);
     return Roles;
   },
 });

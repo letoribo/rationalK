@@ -38,11 +38,56 @@ Template.rKRoles.events({
       }
     });
   },
+  "submit form.deleteForm": function (e) {
+    var properties;
+    e.preventDefault();
+    properties = {
+      roleId: $(e.target).find("[name=roleId]").val(),
+    };
+    Meteor.call("rolesDelete", properties, function (error) {
+      if (!error) {
+        if (typeof(toastr) !== 'undefined') {
+          toastr.success(TAPi18n.__("Role deleted with success"));
+        }
+      }
+    });
+  },
+  "submit form.editMemberForm": function (e) {
+    var properties;
+    var roles = $(e.target).find("[name=role]");
+    var allowedRoles = [];
+    e.preventDefault();
+    RKCore.log(roles);
+    roles.each(function (i) {
+      if (roles[i].checked) {
+        allowedRoles.push(roles[i].value);
+      }
+    });
+    RKCore.log(allowedRoles);
+
+    properties = {
+      memberId: $(e.target).find("[name=memberId]").val(),
+      allowedRoles: allowedRoles,
+    };
+    Meteor.call("memberRolesUpdate", properties, function (error) {
+      if (!error) {
+        if (typeof(toastr) !== 'undefined') {
+          toastr.success(TAPi18n.__("Member updated with success"));
+        }
+      }
+    });
+  },
 });
 
 Template.rKRoles.helpers({
+  myMembers: function () {
+		return Members.collection.find().fetch();
+	},
   Roles: function () {
-    return rKRoles.find({}).fetch();
+    var roles = rKRoles.find({}).fetch();
+    RKCore.log("roles :");
+    RKCore.log(roles);
+    return roles;
   },
   rolesSettings: function () {
     return {
@@ -54,6 +99,10 @@ Template.rKRoles.helpers({
             {
               key: 'roleName',
               label: 'Role name',
+            },
+            {
+              key: '_id',
+              label: 'Role Id',
             },
         ],
     };
@@ -68,7 +117,7 @@ Template.rKRoles.helpers({
         cat[i].thisCategoryIsAllowedForThisRole = false;
       }
       else {
-        if (this.allowedCategories.indexOf(Roles[i]._id) >= 0) {
+        if (this.allowedCategories.indexOf(cat[i]._id) >= 0) {
           cat[i].thisCategoryIsAllowedForThisRole = true;
         }
         else {
@@ -76,6 +125,30 @@ Template.rKRoles.helpers({
         }
       }
     }
+    RKCore.log("cat :");
+    RKCore.log(cat);
     return cat;
+  },
+  rolesForThisMember: function () {
+    var roles = rKRoles.find({}).fetch();
+    var nRoles = roles.length;
+    var i;
+    RKCore.log(this);
+    for (i = 0; i < nRoles; i++) {
+      if (typeof(this.catRoles) === 'undefined') {
+        roles[i].thisRoleIsAllowedForThisMember = false;
+      }
+      else {
+        if (this.catRoles.indexOf(roles[i]._id) >= 0) {
+          roles[i].thisRoleIsAllowedForThisMember = true;
+        }
+        else {
+          roles[i].thisRoleIsAllowedForThisMember = false;
+        }
+      }
+    }
+    RKCore.log("roles :");
+    RKCore.log(roles);
+    return roles;
   },
 });
