@@ -17,14 +17,25 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
   RKCore.log('Query : ' + searchQuery);
   RKCore.log('Type of search : ' + searchType);
   RKCore.log('Filter on category : ' + catFilter);
-
+  categoriesThatIAmAllowedToBrowse = categoriesThatUserIsAllowedToBrowse(this.userId);
   if (searchType === "fullTextSearch") {
       if (catFilter === "all") {
-        searchResultsDocs = Docs.find( {
-              $text: {
-                $search: searchQuery,
+        searchResultsDocs = Docs.find(
+          { $and:
+            [
+              {
+                categoryId: {
+                  $in: categoriesThatIAmAllowedToBrowse
+                }
               },
-          }, {
+              {
+                $text: {
+                  $search: searchQuery,
+                }
+              }
+            ]
+          }
+          , {
               fields: { score: { $meta: 'textScore' } },
               sort: { score: { $meta: 'textScore' } },
               limit: 30,
@@ -63,6 +74,11 @@ Meteor.publish('searchResults', function (searchQuery, catFilter, searchType, in
                     },
                     {
                       "categoryId": catFilter,
+                    },
+                    {
+                      categoryId: {
+                        $in: categoriesThatIAmAllowedToBrowse
+                      }
                     },
                 ],
             }, {

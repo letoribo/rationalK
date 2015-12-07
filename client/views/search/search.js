@@ -27,7 +27,6 @@ Template.searchTpl.rendered = function () {
 	document.getElementById("includeWalkedFilesInResultsCheckbox").checked = (Session.get('includeWalkedFilesInResults') ? true : false );
 	document.getElementById("includeWebInResultsCheckbox").checked = (Session.get('includeWebInResults') ? true : false );
 
-	//Typeahead
 	Meteor.typeahead.inject();
 
   // Focus (after typeahead)
@@ -44,6 +43,7 @@ Template.searchTpl.helpers({
     return Template[templateName];
   },
 	Categories: function () {
+		// filtered in the route file
 		return Categories.find().fetch();
 	},
 	tags: function () {

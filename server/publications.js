@@ -189,29 +189,11 @@ Meteor.publish("categories", function (data) {
 });
 
 Meteor.publish("categoriesThatIAmAllowedToBrowse", function () {
-  var categoriesThatIAmAllowedToBrowse = [];
   RKCore.log("this.userId :");
   RKCore.log(this.userId);
   //Look for the roles :
-  catRoles = Members.collection.findOne({accountId: this.userId}).catRoles;
-
-  if (typeof catRoles === 'undefined') {
-    return []; //do not show anything if the user has no role.
-  }
-  else {
-    RKCore.log("catRoles : ");
-    RKCore.log(catRoles);
-    var nCatRoles = catRoles.length;
-    for (var i = 0; i < nCatRoles; i++) {
-        categoriesThatIAmAllowedToBrowseThanksToThisRole = rKRoles.findOne({_id: catRoles[i]}).allowedCategories;
-        RKCore.log("categoriesThatIAmAllowedToBrowseThanksToThisRole : ");
-        RKCore.log(categoriesThatIAmAllowedToBrowseThanksToThisRole);
-        categoriesThatIAmAllowedToBrowse = categoriesThatIAmAllowedToBrowse.concat(categoriesThatIAmAllowedToBrowseThanksToThisRole);
-    }
-    RKCore.log("categoriesThatIAmAllowedToBrowse : ");
-    RKCore.log(categoriesThatIAmAllowedToBrowse);
-    return Categories.find( { _id: { $in: categoriesThatIAmAllowedToBrowse } } );
-  }
+  categoriesThatIAmAllowedToBrowse = categoriesThatUserIsAllowedToBrowse(this.userId);
+  return Categories.find( { _id: { $in: categoriesThatIAmAllowedToBrowse } } );
 });
 
 Meteor.publish("gantts", function (id) {
