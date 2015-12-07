@@ -194,18 +194,24 @@ Meteor.publish("categoriesThatIAmAllowedToBrowse", function () {
   RKCore.log(this.userId);
   //Look for the roles :
   catRoles = Members.collection.findOne({accountId: this.userId}).catRoles;
-  RKCore.log("catRoles : ");
-  RKCore.log(catRoles);
-  var nCatRoles = catRoles.length;
-  for (var i = 0; i < nCatRoles; i++) {
-      categoriesThatIAmAllowedToBrowseThanksToThisRole = rKRoles.findOne({_id: catRoles[i]}).allowedCategories;
-      RKCore.log("categoriesThatIAmAllowedToBrowseThanksToThisRole : ");
-      RKCore.log(categoriesThatIAmAllowedToBrowseThanksToThisRole);
-      categoriesThatIAmAllowedToBrowse = categoriesThatIAmAllowedToBrowse.concat(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+
+  if (typeof catRoles === 'undefined') {
+    return []; //do not show anything if the user has no role.
   }
-  RKCore.log("categoriesThatIAmAllowedToBrowse : ");
-  RKCore.log(categoriesThatIAmAllowedToBrowse);
-  return Categories.find( { _id: { $in: categoriesThatIAmAllowedToBrowse } } );
+  else {
+    RKCore.log("catRoles : ");
+    RKCore.log(catRoles);
+    var nCatRoles = catRoles.length;
+    for (var i = 0; i < nCatRoles; i++) {
+        categoriesThatIAmAllowedToBrowseThanksToThisRole = rKRoles.findOne({_id: catRoles[i]}).allowedCategories;
+        RKCore.log("categoriesThatIAmAllowedToBrowseThanksToThisRole : ");
+        RKCore.log(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+        categoriesThatIAmAllowedToBrowse = categoriesThatIAmAllowedToBrowse.concat(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+    }
+    RKCore.log("categoriesThatIAmAllowedToBrowse : ");
+    RKCore.log(categoriesThatIAmAllowedToBrowse);
+    return Categories.find( { _id: { $in: categoriesThatIAmAllowedToBrowse } } );
+  }
 });
 
 Meteor.publish("gantts", function (id) {
