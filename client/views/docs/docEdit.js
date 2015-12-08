@@ -131,25 +131,28 @@ Template.docEdit.rendered = function () {
 Template.docEdit.helpers({
   iAmAllowedToBrowseThisDoc: function () {
     var user = Meteor.user();
-    catId = Docs.findOne({_id: this._id}).categoryId;
-    RKCore.log("current catId :");
-    RKCore.log(catId);
-    Meteor.call("categoriesThatUserIsAllowedToBrowseMethod", user._id, function (error, result) {
-  		if (!error) {
-  			RKCore.log("thomas :");
-  			RKCore.log(result);
-        if (result.indexOf(catId)>=0) {
-          iAmAllowedToBrowseThisDocReactiveVar.set(true);
+    if (Router.current().route.getName() === "docEdit" ){
+      catId = Docs.findOne({_id: this._id}).categoryId;
+      RKCore.log("current catId :");
+      RKCore.log(catId);
+      Meteor.call("categoriesThatUserIsAllowedToBrowseMethod", user._id, function (error, result) {
+    		if (!error) {
+    			RKCore.log("thomas :");
+    			RKCore.log(result);
+          if (result.indexOf(catId)>=0) {
+            iAmAllowedToBrowseThisDocReactiveVar.set(true);
+          }
+          else {
+            iAmAllowedToBrowseThisDocReactiveVar.set(false);
+          }
         }
-        else {
-          iAmAllowedToBrowseThisDocReactiveVar.set(false);
-        }
+    	});
+      if (iAmAllowedToBrowseThisDocReactiveVar.get()){
+        return true;
       }
-  	});
-    if (iAmAllowedToBrowseThisDocReactiveVar.get()){
-      return true;
+      return false;
     }
-    return false;
+    return true;
   },
   onDocEditPage: function () {
     return ((Router.current().route.getName() === "docEdit" ) ? true : false);
@@ -214,6 +217,7 @@ Template.docEdit.helpers({
     return url;
   },
   categories: function () {
+    //the categories allowed have been filtered on the router
     return Categories.find();
   },
   isCategorySelected: function (categoryId) {
