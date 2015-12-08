@@ -38,6 +38,14 @@ Template.attachments.helpers({
 						        label: 'uploadedAt',
 						    },
 								{
+						        key: 'isUploaded',
+						        label: 'isUploaded',
+						    },
+								{
+						        key: 'url',
+						        label: 'url',
+						    },
+								{
 						        key: 'attachedToDocId',
 						        label: 'attachedToDocId',
 						        fn: function (value, object) {

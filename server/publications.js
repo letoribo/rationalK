@@ -302,6 +302,13 @@ Meteor.publish("attachments", function (docId) {
   });
 });
 
+Meteor.publish("attachmentsForThisDoc", function (docId) {
+  check(docId, String);
+  return Attachments.find({
+    "metadata.attachedToDocId": docId
+  });
+});
+
 Meteor.publish("allAttachments", function () {
   return Attachments.find({});
 });

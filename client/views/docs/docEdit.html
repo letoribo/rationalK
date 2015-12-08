@@ -32,6 +32,18 @@
 											<p>You first need to <a href="{{pathFor 'categoryEdit' _id=categoryId}}">create some fields</a></p>
 						        {{/each}}
 
+										{{#if attachments}}
+											<div class="form-group">
+												{{#each attachments}}
+														{{#if this.isUploaded}}
+																<a href="{{this.url download=true}}" target="_blank"  class="btn btn-primary btn-xs">{{_ "Download"}}</a> {{> greenLabel name}}  {{> FS.DeleteButton class="btn btn-danger btn-xs"}}<br>
+														{{else}}
+																{{> FS.UploadProgressBar bootstrap=true}}
+														{{/if}}
+												{{/each}}
+											</div>
+										{{/if}}
+
 								{{#if displaySearchScore}}
 									{{#if someCategorySelected}}
 									<div class="form-group">
@@ -42,35 +54,19 @@
 									{{/if}}
 								{{/if}}
 
-								{{#if displayUpload}}
-							        {{#if someCategorySelected}}
-							            {{#each attachments}}
-							                {{#if this.isUploaded}}
-							                    <a href="{{this.url download=true}}" target="_blank"  class="btn btn-primary btn-xs">{{_ "Download"}}</a> {{> greenLabel name}}  {{> FS.DeleteButton class="btn btn-danger btn-xs"}}<br>
-							                {{else}}
-							                    {{> FS.UploadProgressBar bootstrap=true}}
-							                {{/if}}
-							            {{/each}}
-
-							            <label for="">{{_ "Attachement"}}</label>
-													<div id="dropzone" class="dropzone">
-							                <div style="text-align: center; color: gray;">Drop file to upload</div>
-							            </div>
-							        {{/if}}
-						        {{/if}}
-						        {{#if someCategorySelected}}
-											{{#if usefulForRolesCheckbox}}
-												<h4>This document is useful for the following roles</h4>
-												<div class="form-group" id="usefulForRolesCheckboxes">
-													{{#each usefulForRolesCheckbox}}
-														<div class="checkbox">
-												      <label>
-												      <input type="checkbox" value="" name="{{slug}}" checked="{{thisDocumentisUsefulForThisRole}}"> {{name}}
-												      </label>
-												    </div>
-													{{/each}}
-												</div>
-											{{/if}}
+				        {{#if someCategorySelected}}
+									{{#if usefulForRolesCheckbox}}
+										<h4>This document is useful for the following roles</h4>
+										<div class="form-group" id="usefulForRolesCheckboxes">
+											{{#each usefulForRolesCheckbox}}
+												<div class="checkbox">
+										      <label>
+										      <input type="checkbox" value="" name="{{slug}}" checked="{{thisDocumentisUsefulForThisRole}}"> {{name}}
+										      </label>
+										    </div>
+											{{/each}}
+										</div>
+									{{/if}}
 
 						        <hr>
 						        <div class="form-group">
