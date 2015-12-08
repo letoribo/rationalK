@@ -6,6 +6,7 @@ Template.attachments.helpers({
         return {
             rowsPerPage: 100,
             showFilter: true,
+						showColumnToggles: true,
             class: 'table table-condensed col-sm-12',
 						fields: [
 						    {
