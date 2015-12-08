@@ -2,11 +2,15 @@
     <div class="panel panel-default">
         <div class="panel-heading" style="position:relative">
             <h3 class="panel-title">
-                <a href="{{pathFor 'revisions'}}">Revisions</a>
+                Revisions
             </h3>
         </div>
         <div class="panel-body">
-            {{> reactiveTable collection=revisions settings=tableSettings}}
+            {{#if iAmAllowedToBrowseThisDoc}}
+              {{> reactiveTable collection=revisions settings=tableSettings}}
+            {{else}}
+              <p>You are not allowed to view this page</p>
+            {{/if}}
         </div>
     </div>
 </template>

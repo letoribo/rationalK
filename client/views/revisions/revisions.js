@@ -1,4 +1,28 @@
+var iAmAllowedToBrowseThisDocReactiveVar = new ReactiveVar(false);
+
 Template.revisions.helpers({
+  iAmAllowedToBrowseThisDoc: function () {
+    var user = Meteor.user();
+    catId = Revisions.findOne({}).categoryId;
+    RKCore.log("current catId :");
+    RKCore.log(catId);
+    Meteor.call("categoriesThatUserIsAllowedToBrowseMethod", user._id, function (error, result) {
+  		if (!error) {
+  			RKCore.log("thomas :");
+  			RKCore.log(result);
+        if (result.indexOf(catId)>=0) {
+          iAmAllowedToBrowseThisDocReactiveVar.set(true);
+        }
+        else {
+          iAmAllowedToBrowseThisDocReactiveVar.set(false);
+        }
+      }
+  	});
+    if (iAmAllowedToBrowseThisDocReactiveVar.get()){
+      return true;
+    }
+    return false;
+  },
   revisions: function () {
     return Revisions.find();
   },
