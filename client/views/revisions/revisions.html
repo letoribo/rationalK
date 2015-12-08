@@ -9,7 +9,7 @@
             {{#if iAmAllowedToBrowseThisDoc}}
               {{> reactiveTable collection=revisions settings=tableSettings}}
             {{else}}
-              <p>You are not allowed to view this page</p>
+              <p>{{_ "You are not allowed to view this page"}}</p>
             {{/if}}
         </div>
     </div>

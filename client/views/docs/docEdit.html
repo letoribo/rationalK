@@ -1,95 +1,110 @@
 <template name="docEdit">
-	<div class="panel panel-default">
-	    <div class="panel-heading" style="position:relative">
-	        <h3 class="panel-title">{{#if onDocEditPage}}{{_ "Doc Edit"}}{{else}}{{_ "Doc Creation"}}{{/if}}</h3>
-	    </div>
-			<div class="panel-body">
-				<div class="row">
-			    	<div class="col-md-12">
-					    <form role="form" id="docEdit">
-						    {{#if revisionsUrl}}
-					       	<div class="form-group pull-right">
-                    <span class="label label-info">Rev. {{#if revisionNumber}}{{revisionNumber}}{{else}}0{{/if}}</span>
-										<a href="{{revisionsUrl}}" title="{{_ "View revision list"}}"><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></a>
-                    <a href="#" class="updateDocInMySpace" title="{{userSpaceLinkTitle}}"><span class='glyphicon {{userSpaceIcon}}' aria-hidden='true'></span></a>
-					       	</div>
-					       	{{/if}}
-									<div class="well well-sm">
-						        <div class="form-group">
-							        <label for="selectedCategory">{{_ "Category"}}</label>
-						            <select class="form-control" id="selectedCategory">
-						                <option value="">{{_ "Choose a category"}}</option>
-						                {{#each categories}}
-						                    <option value="{{_id}}" selected={{isCategorySelected ../categoryId}}>{{name}}</option>
-						                {{/each}}
-						            </select>
-						        </div>
-									</div>
-									{{#each viewFields}}
-					            {{> field dataForKey }}
-									{{else}}
-										<p>You first need to <a href="{{pathFor 'categoryEdit' _id=categoryId}}">create some fields</a></p>
-					        {{/each}}
+	{{#if iAmAllowedToBrowseThisDoc}}
+		<div class="panel panel-default">
+		    <div class="panel-heading" style="position:relative">
+		        <h3 class="panel-title">{{#if onDocEditPage}}{{_ "Doc Edit"}}{{else}}{{_ "Doc Creation"}}{{/if}}</h3>
+		    </div>
+				<div class="panel-body">
+					<div class="row">
+				    	<div class="col-md-12">
+						    <form role="form" id="docEdit">
+							    {{#if revisionsUrl}}
+						       	<div class="form-group pull-right">
+	                    <span class="label label-info">Rev. {{#if revisionNumber}}{{revisionNumber}}{{else}}0{{/if}}</span>
+											<a href="{{revisionsUrl}}" title="{{_ "View revision list"}}"><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span></a>
+	                    <a href="#" class="updateDocInMySpace" title="{{userSpaceLinkTitle}}"><span class='glyphicon {{userSpaceIcon}}' aria-hidden='true'></span></a>
+						       	</div>
+						       	{{/if}}
+										<div class="well well-sm">
+							        <div class="form-group">
+								        <label for="selectedCategory">{{_ "Category"}}</label>
+							            <select class="form-control" id="selectedCategory">
+							                <option value="">{{_ "Choose a category"}}</option>
+							                {{#each categories}}
+							                    <option value="{{_id}}" selected={{isCategorySelected ../categoryId}}>{{name}}</option>
+							                {{/each}}
+							            </select>
+							        </div>
+										</div>
+										{{#each viewFields}}
+						            {{> field dataForKey }}
+										{{else}}
+											<p>You first need to <a href="{{pathFor 'categoryEdit' _id=categoryId}}">create some fields</a></p>
+						        {{/each}}
 
-							{{#if displaySearchScore}}
-								{{#if someCategorySelected}}
-								<div class="form-group">
-							        <label for="searchScore">Search score</label>
-						            <input type="text" class="form-control" id="searchScore" placeolder="100" value={{searchScore}}>
-						            <p class="help-block">A document with a high score appears at the top of search results. Give a high score (for example 100) to a document in order to help your colleagues finding the right document.</p>
-						        </div>
+								{{#if displaySearchScore}}
+									{{#if someCategorySelected}}
+									<div class="form-group">
+								        <label for="searchScore">Search score</label>
+							            <input type="text" class="form-control" id="searchScore" placeolder="100" value={{searchScore}}>
+							            <p class="help-block">A document with a high score appears at the top of search results. Give a high score (for example 100) to a document in order to help your colleagues finding the right document.</p>
+							        </div>
+									{{/if}}
 								{{/if}}
-							{{/if}}
 
-							{{#if displayUpload}}
-						        {{#if someCategorySelected}}
-						            {{#each attachments}}
-						                {{#if this.isUploaded}}
-						                    <a href="{{this.url download=true}}" target="_blank"  class="btn btn-primary btn-xs">{{_ "Download"}}</a> {{> greenLabel name}}  {{> FS.DeleteButton class="btn btn-danger btn-xs"}}<br>
-						                {{else}}
-						                    {{> FS.UploadProgressBar bootstrap=true}}
-						                {{/if}}
-						            {{/each}}
+								{{#if displayUpload}}
+							        {{#if someCategorySelected}}
+							            {{#each attachments}}
+							                {{#if this.isUploaded}}
+							                    <a href="{{this.url download=true}}" target="_blank"  class="btn btn-primary btn-xs">{{_ "Download"}}</a> {{> greenLabel name}}  {{> FS.DeleteButton class="btn btn-danger btn-xs"}}<br>
+							                {{else}}
+							                    {{> FS.UploadProgressBar bootstrap=true}}
+							                {{/if}}
+							            {{/each}}
 
-						            <label for="">{{_ "Attachement"}}</label>
-						            <div id="dropzone" class="dropzone">
-						                <div style="text-align: center; color: gray;">Drop file to upload</div>
-						            </div>
-						        {{else}}
-						            <!-- <p class="bg-danger" style="padding:10px;border:1px dotted grey;">Please select a category before editing your fields</p> -->
+							            <label for="">{{_ "Attachement"}}</label>
+							            <div id="dropzone" class="dropzone">
+							                <div style="text-align: center; color: gray;">Drop file to upload</div>
+							            </div>
+							        {{else}}
+							            <!-- <p class="bg-danger" style="padding:10px;border:1px dotted grey;">Please select a category before editing your fields</p> -->
+							        {{/if}}
 						        {{/if}}
-					        {{/if}}
-					        {{#if someCategorySelected}}
-										{{#if usefulForRolesCheckbox}}
-											<h4>This document is useful for the following roles</h4>
-											<div class="form-group" id="usefulForRolesCheckboxes">
-												{{#each usefulForRolesCheckbox}}
-													<div class="checkbox">
-											      <label>
-											      <input type="checkbox" value="" name="{{slug}}" checked="{{thisDocumentisUsefulForThisRole}}"> {{name}}
-											      </label>
-											    </div>
-												{{/each}}
-											</div>
-										{{/if}}
+						        {{#if someCategorySelected}}
+											{{#if usefulForRolesCheckbox}}
+												<h4>This document is useful for the following roles</h4>
+												<div class="form-group" id="usefulForRolesCheckboxes">
+													{{#each usefulForRolesCheckbox}}
+														<div class="checkbox">
+												      <label>
+												      <input type="checkbox" value="" name="{{slug}}" checked="{{thisDocumentisUsefulForThisRole}}"> {{name}}
+												      </label>
+												    </div>
+													{{/each}}
+												</div>
+											{{/if}}
 
-					        <hr>
-					        <div class="form-group">
-					            <input type="submit" value="{{_ 'Save'}}" class="btn btn-primary submit pull-right" id="docEdit_submit"/>
-					            {{#if _id}}
-					                <a class="btn btn-danger delete {{displayOnlyForAdmin}}" id="deleteDoc" href="#">{{_ "Delete DB entry"}}</a>
-					            {{/if}}
-					        </div>
-					        {{/if}}
-					    </form>
+						        <hr>
+						        <div class="form-group">
+						            <input type="submit" value="{{_ 'Save'}}" class="btn btn-primary submit pull-right" id="docEdit_submit"/>
+						            {{#if _id}}
+						                <a class="btn btn-danger delete {{displayOnlyForAdmin}}" id="deleteDoc" href="#">{{_ "Delete DB entry"}}</a>
+						            {{/if}}
+						        </div>
+						        {{/if}}
+						    </form>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		{{#if onDocEditPage}}
-			{{> docApproval}}
-			{{> docAssociation}}
-			{{> docHistory}}
-			{{> qrcode}}
-		{{/if}}
+			{{#if onDocEditPage}}
+				{{> docApproval}}
+				{{> docAssociation}}
+				{{> docHistory}}
+				{{> qrcode}}
+			{{/if}}
+		{{else}} <!-- else not allowed to view this doc -->
+			<div class="panel panel-default">
+			    <div class="panel-heading" style="position:relative">
+			        <h3 class="panel-title">{{#if onDocEditPage}}{{_ "Doc Edit"}}{{else}}{{_ "Doc Creation"}}{{/if}}</h3>
+			    </div>
+					<div class="panel-body">
+						<div class="row">
+					    	<div class="col-md-12">
+									<p>{{_ "You are not allowed to view this page"}}</p>
+								</div>
+							</div>
+						</div>
+			</div>
+		{{/if}} <!-- end if not allowed to view this doc -->
 </template>
