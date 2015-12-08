@@ -100,6 +100,7 @@ Template.docEdit.events({
       newFile.metadata = {
         document: "doc-" + docId,
         attachedToDocId: docId,
+        rKAttachments: rkSettings.findOne({key: "rKAttachments"}).value,
       };
       RKCore.log("newFile :");
       RKCore.log(newFile);

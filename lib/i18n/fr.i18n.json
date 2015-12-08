@@ -202,5 +202,6 @@
   "Add roles to members": "Affecter des rôles aux membres",
   "Update role for this member": "Mettre à jour les rôles pour ce membre",
   "Files" : "Fichiers",
-  "Drop a file to upload" : "Glisser un fichier pour l'uploader"
+  "Drop a file to upload" : "Glisser un fichier pour l'uploader",
+  "Attachments" : "Fichiers attachés"
 }

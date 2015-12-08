@@ -30,7 +30,7 @@
 		"debug" : true
 	},
 	"rationalK_demo_mode" : false,
-	"rationalK_upload_dir" : "~/path/to/uploads",
+	"rKAttachments" : "~/path/to/uploads",
 	"scanFolders" : {
 		"do": false,
 		"interval" : "at 03:00 am"

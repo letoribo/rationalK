@@ -157,12 +157,22 @@ userSpaces.allow( {
     remove: function (userId) {return !!userId; },
 });
 
+if (Meteor.settings.rKAttachments) {
+	Attachments = new FS.Collection("attachments", {
+		stores: [
+			new FS.Store.FileSystem("attachments", {path: Meteor.settings.rKAttachments}),
+		],
+	});
+}
+else {
+	Attachments = new FS.Collection("attachments", {
+		stores: [
+			new FS.Store.FileSystem("attachments"),
+		],
+	});
+}
 
-Attachments = new FS.Collection("attachments", {
-	stores: [
-		new FS.Store.FileSystem("attachments", {path: "/Users/thomasdokithonon/Dropbox/rationalK/uploads"}),
-	],
-});
+
 
 Attachments.allow({
 	insert: function (userId) {return !! userId; },

@@ -2,6 +2,18 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
       rkSettings.update(
         {
+          key: "rKAttachments",
+        },
+        {
+          key: "rKAttachments",
+          value: Meteor.settings.rKAttachments,
+        },
+        {
+          upsert: true,
+        }
+      );
+      rkSettings.update(
+        {
           key: "simple_search_behavior",
         },
         {

@@ -23,6 +23,13 @@ Template.attachments.helpers({
 						        key: 'location',
 						        label: 'Location',
 						        fn: function (value, object) {
+											return object.metadata.rKAttachments;
+							      }
+						    },
+								{
+						        key: 'copieFilename',
+						        label: 'copieFilename',
+						        fn: function (value, object) {
 											return object.copies.attachments.key;
 							      }
 						    },
