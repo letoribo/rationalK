@@ -38,19 +38,26 @@ Template.rKRoles.events({
       }
     });
   },
-  "submit form.deleteForm": function (e) {
-    var properties;
+  "click #deleteRole": function (e) {
     e.preventDefault();
-    properties = {
-      roleId: $(e.target).find("[name=roleId]").val(),
-    };
-    Meteor.call("rolesDelete", properties, function (error) {
-      if (!error) {
-        if (typeof(toastr) !== 'undefined') {
-          toastr.success(TAPi18n.__("Role deleted with success"));
-        }
-      }
-    });
+    bootbox.confirm(TAPi18n.__("Are you sure you want to delete this role ?"), function (result) {
+		 if (result) {
+       properties = {
+         roleId: e.currentTarget.dataset.roleid,
+       };
+       RKCore.log("properties : ");
+       RKCore.log(properties);
+       Meteor.call("rolesDelete", properties, function (error) {
+         if (!error) {
+           if (typeof(toastr) !== 'undefined') {
+             toastr.success(TAPi18n.__("Role deleted with success"));
+           }
+         }
+       });
+       return true;
+		 }
+		});
+    return false;
   },
   "submit form.editMemberForm": function (e) {
     var properties;

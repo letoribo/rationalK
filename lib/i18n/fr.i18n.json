@@ -194,5 +194,11 @@
   "Filter on" : "Filtrer sur",
   "System roles": "Rôles systeme",
   "Access rights": "Droits d'accès",
-  "You are not allowed to view this page": "Vous n'êtes pas autorisé à voir cette page"
+  "You are not allowed to view this page": "Vous n'êtes pas autorisé à voir cette page",
+  "Create a role": "Créer un rôle",
+  "Role name": "Nom du rôle",
+  "Are you sure you want to delete this role ?": "Etes vous sûr de vouloir supprimer ce rôle?",
+  "Edit roles": "Modifier les rôles",
+  "Add roles to members": "Affecter des rôles aux membres",
+  "Update role for this member": "Mettre à jour les rôles pour ce membre"
 }
