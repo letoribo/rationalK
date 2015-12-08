@@ -82,16 +82,36 @@ Template.docEdit.events({
     Meteor.call('updateDocInMySpace', this._id);
     return false;
   },
-  'dropped #dropzone': function (event) {
-    var docId = this._id;
-    return FS.Utility.eachFile(event, function (file) {
+  'dropped #dropzone': function (e) {
+    var docId;
+    e.preventDefault();
+    RKCore.log("this : ");
+    RKCore.log(this);
+    params = Router.current().params;
+    RKCore.log("params : ");
+    RKCore.log(params);
+    docId = params._id;
+    RKCore.log("Fichier deposé pour le docId : " + docId);
+    FS.Utility.eachFile(e, function (file) {
       var newFile;
+      RKCore.log("file :");
+      RKCore.log(file);
       newFile = new FS.File(file);
       newFile.metadata = {
         document: "doc-" + docId,
+        attachedToDocId: docId,
       };
-      return Attachments.insert(newFile, function () { });
+      RKCore.log("newFile :");
+      RKCore.log(newFile);
+      Attachments.insert(newFile, function (err, fileObj) {
+        RKCore.log("err :");
+        RKCore.log(err);
+        RKCore.log("fileObj :");
+        RKCore.log(fileObj);
+      });
+      return true;
     });
+    return true;
   },
   "click #deleteDoc": function (e) {
     e.preventDefault();

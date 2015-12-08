@@ -160,7 +160,7 @@ userSpaces.allow( {
 
 Attachments = new FS.Collection("attachments", {
 	stores: [
-		new FS.Store.FileSystem("attachments"),
+		new FS.Store.FileSystem("attachments", {path: "/Users/thomasdokithonon/Dropbox/rationalK/uploads"}),
 	],
 });
 

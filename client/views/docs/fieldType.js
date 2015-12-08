@@ -21,6 +21,7 @@ getAllFieldsType = function () {
 	{ value: "url", text: TAPi18n.__("Url") },
 	{ value: "filelink", text: TAPi18n.__("Filelink") },
 	{ value: "email", text: "Email"},
+	{ value: "files", text: TAPi18n.__("Files") },
 	];
 
 	if (typeof(RKCore.customFieldsType) !== 'undefined') {

@@ -9,7 +9,6 @@ var htmlEncode = function (str) {
 
 Template.field.helpers({
   onDocCreationPage: function () {
-    //console.log(Router.current().route.getName())
     return ((Router.current().route.getName() === "docCreate" ) ? true : false);
   },
   inputForFieldType: function () {
@@ -123,6 +122,9 @@ Template.field.helpers({
         _id: this.value.value,
       })) !== null ? ref1.profile.name : void 0) || '';
       return "<input class='form-control dyn-field dyn-member' name='" + this.key + "' value='" + this.value.value + "' type='hidden' placeholder='" + this.key + "'/>\n<input class='form-control dyn-member-visible' name='" + this.key + "' value='" + memberValue + "' type='text' placeholder='" + this.key + "'/>";
+    }
+    else if (this.value.type === "files") {
+      return "<div id='dropzone' class='dropzone'><div style='text-align: center; color: gray;'>" + TAPi18n.__("Drop a file to upload") + "</div></div>";
     }
     return this.value.value;
   },

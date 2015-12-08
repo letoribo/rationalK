@@ -2,6 +2,7 @@ categoriesThatUserIsAllowedToBrowse = function (userId) {
   var categoriesThatIAmAllowedToBrowse = [];
   var categoriesThatIAmAllowedToBrowseThanksToThisRole;
   var nCatRoles;
+  var oneRole;
   catRoles = Members.collection.findOne({accountId: userId}).catRoles;
   if (typeof catRoles !== 'undefined') {
     RKCore.log("catRoles : ");
@@ -10,14 +11,13 @@ categoriesThatUserIsAllowedToBrowse = function (userId) {
     for (var i = 0; i < nCatRoles; i++) {
         RKCore.log("catRoles[i] : ");
         RKCore.log(catRoles[i]);
-        aa = rKRoles.findOne({});
-        RKCore.log("aa");
-        RKCore.log(aa);
-
-        categoriesThatIAmAllowedToBrowseThanksToThisRole = rKRoles.findOne({_id: catRoles[i]}).allowedCategories;
-        RKCore.log("categoriesThatIAmAllowedToBrowseThanksToThisRole : ");
-        RKCore.log(categoriesThatIAmAllowedToBrowseThanksToThisRole);
-        categoriesThatIAmAllowedToBrowse = categoriesThatIAmAllowedToBrowse.concat(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+        oneRole = rKRoles.findOne({_id: catRoles[i]});
+        if (typeof oneRole !== 'undefined') {
+          categoriesThatIAmAllowedToBrowseThanksToThisRole = oneRole.allowedCategories;
+          RKCore.log("categoriesThatIAmAllowedToBrowseThanksToThisRole : ");
+          RKCore.log(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+          categoriesThatIAmAllowedToBrowse = categoriesThatIAmAllowedToBrowse.concat(categoriesThatIAmAllowedToBrowseThanksToThisRole);
+        }
     }
     RKCore.log("categoriesThatIAmAllowedToBrowse : ");
     RKCore.log(categoriesThatIAmAllowedToBrowse);

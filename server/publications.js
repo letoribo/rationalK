@@ -301,3 +301,7 @@ Meteor.publish("attachments", function (docId) {
     "metadata.document": docId
   });
 });
+
+Meteor.publish("allAttachments", function () {
+  return Attachments.find({});
+});
