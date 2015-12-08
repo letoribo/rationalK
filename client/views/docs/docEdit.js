@@ -247,9 +247,6 @@ Template.docEdit.helpers({
   someCategorySelected: function () {
     return selectedCategory.get() || this.categoryId;
   },
-  displayUpload: function () {
-    return Meteor.settings.public.show.upload;
-  },
   displaySearchScore: function () {
     return Meteor.settings.public.show.searchScore;
   },

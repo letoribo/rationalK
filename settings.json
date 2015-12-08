@@ -14,7 +14,6 @@
 			"controlplan" : true,
 			"about" : true,
 			"footer" : true,
-			"upload" : false,
 			"searchScore" : false,
 			"followup" : false,
 			"trello" : true,
