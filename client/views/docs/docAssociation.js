@@ -1,32 +1,20 @@
 var linkedDocs = new ReactiveVar(null);
 
 Template.docAssociation.rendered = function () {
-  if (Meteor.settings.public.debug) {
-    console.log("this in rendered");
-    console.log(this);
-    console.log("this.data.association in rendered");
-    console.log(this.data.associations);
-  }
+
+  RKCore.log("this in rendered");
+  RKCore.log(this);
+  RKCore.log("this.data.association in rendered");
+  RKCore.log(this.data.associations);
+
 
   Meteor.call('linkedDocs', this.data.associations, function (error, result) {
-    if (error) {
-      if (Meteor.settings.public.debug) {
-        console.log("error : ");
-        console.log(error);
-      }
-    }
-    else if (result) {
-      if (Meteor.settings.public.debug) {
-        console.log("result : ");
-        console.log(result);
-      }
+    if (!error) {
       linkedDocs.set(result);
     }
   });
-  if (Meteor.settings.public.debug) {
-    console.log("linkedDocs.get() in rendered : ");
-    console.log(linkedDocs.get());
-  }
+  RKCore.log("linkedDocs.get() in rendered : ");
+  console.log(linkedDocs.get());
 };
 
 Template.docAssociation.events({

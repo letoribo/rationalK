@@ -191,5 +191,7 @@
   "Types of files in your project" : "Types de fichier se trouvant dans les projets",
   "Separate them with a vertical bar" : "Séparez les par une barre verticale",
   "Projects" : "Projets",
-  "Filter on" : "Filtrer sur"
+  "Filter on" : "Filtrer sur",
+  "System roles": "Rôles systeme",
+  "Access rights": "Droits d'accès"
 }

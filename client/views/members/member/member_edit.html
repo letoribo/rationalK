@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading" style="position:relative">
         <h3 class="panel-title">
-            <a href="{{pathFor 'members'}}">{{ _"Edit member"}}</a>
+            {{ _"Edit member"}}
         </h3>
     </div>
     <div class="panel-body">
@@ -24,8 +24,10 @@
 
         {{#if isInRole 'admin'}}
         <div class="form-group">
+          <label for="">{{_ "System roles"}}</label>
 			     {{> roles }}
         </div>
+        <a href="{{pathFor 'rKRolesMember' memberId=_id}}">{{_ "Access rights"}}</a>
 		    {{/if}}
 
         <div class="form-group">

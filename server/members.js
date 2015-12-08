@@ -46,6 +46,16 @@ Meteor.publish("member", function (memberId) {
   }
 });
 
+Meteor.publish("oneMember", function (memberId) {
+  RKCore.log("memberId : ");
+  RKCore.log(memberId);
+  check(memberId, String);
+  oneMember = Members.collection.find({_id: memberId});
+  RKCore.log("oneMember :");
+  RKCore.log(oneMember.fetch());
+  return oneMember;
+});
+
 Meteor.publish("invitation", function (id) {
   check(id, Match.Optional(String));
   return Members.invitations.find({_id: id});

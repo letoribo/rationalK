@@ -12,9 +12,7 @@ Template.docApproval.events({
     data.submitterUserId = Meteor.user()._id;
     data.submitterUsername = Meteor.user().username;
     data.submitterEmail = Meteor.user().emails[0].address;
-    if (Meteor.settings.public.debug) {
-      console.log(data);
-    }
+    RKCore.log(data);
     Meteor.call('submitForApproval', data, function (err) {
       if (err) {
         if (typeof(toastr) !== 'undefined') {
