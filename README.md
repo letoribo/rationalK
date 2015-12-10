@@ -60,6 +60,11 @@ rationalk-erp
 ```
 Use forward slash and do not add the trailing slash
 
+## File upload
+
+To use the fileupload fonction you need to give access to a specific folder
+`sudo chown -R meteoruser:meteoruser /opt/rationalK/csf/files/`
+
 ## Login
 
 When login for the first time, the username is ```admin0@rationalk.ch``` and the password is ```admin0```
