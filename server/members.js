@@ -19,7 +19,7 @@ filterByOrg = function (meteor, collection, userId, strict, options) {
   if (userId) {
     user = Meteor.users.findOne(userId);
     return collection.find({
-      orgId: user.profile.orgId,
+      username: user.profile.orgId,
     }, options);
   }
   else if (!strict) {
