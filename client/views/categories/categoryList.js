@@ -14,6 +14,21 @@ Template.categoryList.helpers({
           {
             key: 'name',
             label: TAPi18n.__("Name")},
+              {
+                key: 'roles',
+                label: TAPi18n.__("Roles"),
+                fn: function (value, object) {
+                	var rKR = rKRoles.find().fetch();
+                	var html = '';
+                  _.each(rKR, function(i){
+                  	var allowedCategories = i.allowedCategories;
+                  	var roleName = i.roleName;
+                  	var contains = _.contains(allowedCategories, object._id); 
+                     if (contains) html = html .concat(' <span class="label label-success">' + roleName + '</span>');
+                  })
+                  return  new Spacebars.SafeString(html);
+                },
+              },
 				    {
 				        key: 'actions',
 				        label: 'Actions',
