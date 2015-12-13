@@ -302,7 +302,10 @@ Template.stats.events({
 			Session.set("searchQuery",e.target.dataset.tag);
 			Session.set("searchType","regexpSearch");
       return Router.go("searchTpl");
-  }
+  },
+   "click #clear": function () {
+		Meteor.call('clearSearchQueries');
+   }
 });
 
 /*

@@ -53,12 +53,16 @@
 					<div class="row">
 						<div class="col-md-12">
 							 <div class="panel panel-default">
-							 	<div class="panel-heading" style="position:relative">
-							 		<h3 class="panel-title">Search Queries</h3>
-				        </div>
+							 	<div class="panel-heading">
+							 		<h3 class="panel-title pull-left" style="padding-top: 8px;">Search Queries</h3>
+							 		<div class="btn-group pull-right">            
+                               <button id="clear" type="button" class="btn btn-primary">Clear</button>
+                           </div>
+                           <div class="clearfix"></div>
+				            </div>
 								<div class="panel-body">
 									{{> reactiveTable collection=SearchQueries settings=settingsSearchQueries}}
-				    		</div>
+				    		   </div>
 							</div>
 						</div>
 					</div>
